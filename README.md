@@ -1,27 +1,36 @@
 # Fraganza
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.1.
+## required installations
 
-## Development server
+On the root folder:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+- run `npm install` to install all required dependencies
+- run `npm i cors` to enable local end 2 end communiaction
 
-## Code scaffolding
+On the backend folder:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- run `npm i express` to install express
+- run `npm i pg` to install node-postgres dependencies
+- run `npm i nodemon` to install nodemon console
 
-## Build
+To run the project locally:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+- go to the backend folder and run `npx nodemon server.js` to start the backend server on http://localhost:3000
+- go to the `src/app` folder and run `ng serve`, this will start the angular development server (client) on http://localhost:4200
 
-## Running unit tests
+---
+## Contributors
+- Andrea Mendoza 
+- Andres de Armas 
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+---
+## Technologies used
 
-## Running end-to-end tests
+- Angular v10.0.1
+- nodejs v14.5.0
+- postgres v12.13
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+---
+**Version 1.0.0**
 
-## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
