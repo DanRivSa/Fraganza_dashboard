@@ -241,7 +241,6 @@ INSERT INTO ada_pais VALUES(238, 'DJ', 'Yibuti','Af');
 INSERT INTO ada_pais VALUES(239, 'ZM', 'Zambia','Af');
 INSERT INTO ada_pais VALUES(240, 'ZW', 'Zimbabue','Af');
 
-
 --Familias Olfativas
 
 INSERT INTO ada_familia_olfativa (nombre_familia)
