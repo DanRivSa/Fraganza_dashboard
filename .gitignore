@@ -11,10 +11,7 @@
 /node_modules
 
 # files
-/backend/database/database.config.js
-/backend/database/fraganza.sql
-/backend/database/insert.sql
-/backend/database/alter_tables.sql
+/backend/database/
 
 # profiling files
 chrome-profiler-events*.json
