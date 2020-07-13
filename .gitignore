@@ -9,7 +9,13 @@
 
 # dependencies
 /node_modules
-/backend/database
+
+# files
+/backend/database/database.config.js
+/backend/database/fraganza.sql
+/backend/database/insert.sql
+/backend/database/alter_tables.sql
+
 # profiling files
 chrome-profiler-events*.json
 speed-measure-plugin*.json
