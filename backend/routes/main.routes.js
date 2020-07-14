@@ -2,12 +2,19 @@ const express = require('express');
 const router = express.Router(); //initializing instance of node router
 
 // app controllers
-//import session controller
+
+//controller for providers
+const providersController = require('../controllers/providers.controller'); 
+
+//controller for producers
+const producersController = require('../controllers/producers.controller'); 
 
 // app http routes
-// routes.get('/', SessionController.store);
-// routes.post('/', SessionController.store);
-// routes.put('/', SessionController.store);
-// routes.delete('/', SessionController.store);
+
+//http request for providers
+router.get('/providers',providersController.GetProviders);
+
+//http request for producers
+router.get('producers',producersController.GetProducers);
 
 module.exports = router;
