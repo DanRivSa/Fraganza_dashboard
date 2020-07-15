@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "Fraganza"
+    }
+  },
+  "defaultProject": "Fraganza",
+  "cli": {
+    "analytics": false
+  }
 }
