@@ -7,7 +7,8 @@ export class UserCompanyService
 {
 
   static userCompanyID:number;
-
+  static userCompanyType:number;
+  //1 if it is a producer, 2 if it is a provider
   constructor() {}
 
 }

@@ -7,14 +7,37 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" routerLink="">Home <span class="sr-only">(current)</span></a>
+          <a class="nav-link" routerLink="">Home<span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
           <a class="nav-link">Surprise me!</a>
         </li>
+        <li class="nav-item" *ngIf="(userType == 2 && userID !=null)">
+            <a class="nav-link" >for providers</a>
+          </li>
+          <li class="nav-item" *ngIf = "(userType == 1 && userID !=null)">
+            <a class="nav-link">for producers</a>
+          </li>
       </ul>
       <a routerLink="select_type">
-        <button class="btn btn-outline-primary btn-inline my-2 my-lg-0">Login as</button>
+        <button class="btn btn-outline-primary btn-inline my-2 my-lg-0" *ngIf="(userID == null) && (userType == null)">Login as</button>
+      </a>
+      <a *ngIf="((userType == 1) || (userType == 2)) || userID !=null" (click)="Logout()">
+        <button class="btn btn-outline-danger btn-inline my-2 my-lg-0">Log out</button>
       </a>
     </div>
   </nav>
+
+  <!--
+      quick routes guard solution syntax (always add the ngIf as follows)
+    2 for provider routes 
+    1 for producer routes
+
+    <li class="nav-item" *ngIf="(userType == 2 && userID !=null)">
+            <a class="nav-link" >for providers</a>
+    </li>
+    <li class="nav-item" *ngIf = "(userType == 1 && userID !=null)">
+            <a class="nav-link">for producers</a>
+    </li>
+
+  -->

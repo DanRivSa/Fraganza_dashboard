@@ -1,29 +1,32 @@
+<hr>
 <div class="container">
-    <div class="jumbotron">
-        <h2 class="h2 text-center">Select company</h2>
-        <hr>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <button class="btn btn-outline-primary" disabled>producer</button>
+    <div class="container">
+        <div class="jumbotron">
+            <h2 class="h2 text-center">Select company</h2>
+            <hr>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <button class="btn btn-outline-primary" disabled>provider</button>
+                </div>
+                <select class="custom-select" id="inputGroupSelect01" (change)="SetUser($event)">
+                    <option selected>Choose...</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
             </div>
-            <select class="custom-select" id="inputGroupSelect01">
-                <option selected>Choose...</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-            </select>
-        </div>
-        <hr>
-        <div class="container text-center">
-            <button class="btn btn-primary btn-block">
-                submit
-            </button>
-            <p></p>
-            <a routerLink="">
-                <button class="btn btn-danger btn-block">
-                    return
-                </button>    
-            </a>
+            <hr>
+            <div class="container text-center">
+                <button class="btn btn-primary btn-block" (click)="Login()">
+                    login
+                </button> 
+                <p></p>
+                <a routerLink="">
+                    <button class="btn btn-danger btn-block">
+                        return to home screen
+                    </button>    
+                </a>
+            </div>
         </div>
     </div>
 </div>
