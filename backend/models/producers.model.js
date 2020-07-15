@@ -1,7 +1,7 @@
 //import open db connection pool
 const db = require('../database/database.config');
 
-class ProucersModel
+class ProducersModel
 {
     //async methods
 
