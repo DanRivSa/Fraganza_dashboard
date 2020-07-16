@@ -10,6 +10,7 @@ export class NavbarComponent implements OnInit
 {
   userType:number = UserCompanyService.userCompanyType;
   userID:number = UserCompanyService.userCompanyID;
+  username:string = UserCompanyService.Username;
   
   constructor() { }
 

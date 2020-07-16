@@ -9,10 +9,7 @@
                     <button class="btn btn-outline-primary" disabled>provider</button>
                 </div>
                 <select class="custom-select" id="inputGroupSelect01" (change)="SetUser($event)">
-                    <option selected>Choose...</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    <option *ngFor="let provider of providers" value="{{provider.id_prov}}">{{provider.nombre_prov}}</option>
                 </select>
             </div>
             <hr>
