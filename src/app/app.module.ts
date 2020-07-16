@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 
 //singletones
 import {UserCompanyService} from './services/global/user-company.service';
+import {ReportsService} from './services/reports.service';
 
 //custom components
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -18,6 +19,9 @@ import { SelectProducerCompanyComponent } from './components/select-producer-com
 import { SelectProviderCompanyComponent } from './components/select-provider-company/select-provider-company.component';
 import { SelectCompanyTypeComponent } from './components/select-company-type/select-company-type.component';
 import { HomeComponent } from './components/home/home.component';
+
+//reports
+import {ProviderReportComponent} from './components/pdf_reports/provider-report/provider-report.component';
 
 @NgModule({
 
@@ -29,6 +33,7 @@ import { HomeComponent } from './components/home/home.component';
     SelectProviderCompanyComponent,
     SelectCompanyTypeComponent,
     HomeComponent,
+    ProviderReportComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,7 +42,7 @@ import { HomeComponent } from './components/home/home.component';
     ProducersModule,
     HttpClientModule
   ],
-  providers: [UserCompanyService],
+  providers: [UserCompanyService,ReportsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -4,6 +4,7 @@ import {HomeComponent} from './components/home/home.component'
 import { SelectCompanyTypeComponent } from './components/select-company-type/select-company-type.component';
 import { SelectProducerCompanyComponent } from './components/select-producer-company/select-producer-company.component';
 import { SelectProviderCompanyComponent } from './components/select-provider-company/select-provider-company.component';
+import {InitialTestComponent} from './components/initial-test/initial-test.component'
 
 const routes: Routes =
 [
@@ -11,6 +12,7 @@ const routes: Routes =
   {path:'select_type',component:SelectCompanyTypeComponent},
   {path:'select_type/producer', component:SelectProducerCompanyComponent},
   {path:'select_type/provider',component:SelectProviderCompanyComponent},
+  {path:'test_provider',component:InitialTestComponent},
 ];
 
 @NgModule({
