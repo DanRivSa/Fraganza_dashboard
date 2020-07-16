@@ -15,6 +15,6 @@ const producersController = require('../controllers/producers.controller');
 router.get('/providers',providersController.GetProviders);
 
 //http request for producers
-router.get('producers',producersController.GetProducers);
+router.get('/producers',producersController.GetProducers);
 
 module.exports = router;

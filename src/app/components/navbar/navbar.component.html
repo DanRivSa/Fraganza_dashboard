@@ -19,11 +19,14 @@
             <a class="nav-link">for producers</a>
           </li>
       </ul>
+      
       <a routerLink="select_type">
         <button class="btn btn-outline-primary btn-inline my-2 my-lg-0" *ngIf="(userID == null) && (userType == null)">Login as</button>
       </a>
-      <a *ngIf="((userType == 1) || (userType == 2)) || userID !=null" (click)="Logout()">
-        <button class="btn btn-outline-danger btn-inline my-2 my-lg-0">Log out</button>
+      <a *ngIf="((userType == 1) || (userType == 2)) || userID !=null">
+        <button class="btn btn-outline-danger btn-inline my-2 my-lg-0" (click)="Logout()">Log out</button>
+        <p></p>
+        <p class="text-white text-center">{{username}}</p>
       </a>
     </div>
   </nav>
