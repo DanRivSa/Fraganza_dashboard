@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {HomeComponent} from './components/home/home.component'
-import { SelectCompanyTypeComponent } from './components/select-company-type/select-company-type.component';
-import { SelectProducerCompanyComponent } from './components/select-producer-company/select-producer-company.component';
-import { SelectProviderCompanyComponent } from './components/select-provider-company/select-provider-company.component';
-import {InitialTestComponent} from './components/initial-test/initial-test.component'
+import {SelectCompanyTypeComponent} from './components/login/select-company-type/select-company-type.component';
+import {SelectProducerCompanyComponent} from './components/login/select-producer-company/select-producer-company.component';
+import {SelectProviderCompanyComponent} from './components/login/select-provider-company/select-provider-company.component';
+import {InitialTestComponent} from './components/productores/initial-test/initial-test.component';
 
 const routes: Routes =
 [

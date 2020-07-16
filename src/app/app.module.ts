@@ -3,9 +3,7 @@ import { NgModule } from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
 
 //modules
-import {ProducersModule} from './modules/producers/producers.module';
-import {ProvidersModule} from './modules/providers/providers.module';
-
+import {LoginModule} from './modules/login/login.module'; 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -15,32 +13,34 @@ import {ReportsService} from './services/reports.service';
 
 //custom components
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { SelectProducerCompanyComponent } from './components/select-producer-company/select-producer-company.component';
-import { SelectProviderCompanyComponent } from './components/select-provider-company/select-provider-company.component';
-import { SelectCompanyTypeComponent } from './components/select-company-type/select-company-type.component';
 import { HomeComponent } from './components/home/home.component';
 
 //reports
 import {ProviderReportComponent} from './components/pdf_reports/provider-report/provider-report.component';
+import { InitialTestComponent } from './components/productores/initial-test/initial-test.component';
 
 @NgModule({
 
 
   declarations: [
+    //componentes de la aplicacion
     AppComponent,
     NavbarComponent,
-    SelectProducerCompanyComponent,
-    SelectProviderCompanyComponent,
-    SelectCompanyTypeComponent,
     HomeComponent,
+
+    //componentes de productores
+    InitialTestComponent,
+
+    //componentes de proveedores
+
+    //reportes
     ProviderReportComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ProvidersModule,
-    ProducersModule,
-    HttpClientModule
+    HttpClientModule,
+    LoginModule
   ],
   providers: [UserCompanyService,ReportsService],
   bootstrap: [AppComponent]

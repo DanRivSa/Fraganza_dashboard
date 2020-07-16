@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserCompanyService } from 'src/app/services/global/user-company.service';
-import {LoginService} from '../../services/global/login.service'
+import {LoginService} from 'src/app/services/global/login.service'
 
 @Component({
   selector: 'app-select-producer-company',
