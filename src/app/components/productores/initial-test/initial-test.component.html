@@ -1,31 +1,37 @@
 <app-navbar></app-navbar>
 <!--mostrar lista de proveedores potenciales a ser evaluados inicialmente-->
-<h1 class="display-3 text-center">Lista de proveedores</h1>
+<header class="bg-dark text-white">
+  <div class="container text-center">
+    <br>
+    <h5 class=" silence">Evaluación inicial</h5>
+    <hr>
+    <h3 class="h2">Lista de proveedores</h3>
+    <br>
+  </div>
+</header>
 <hr>
+<table class="table table-hover">
+  <thead class="table-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Email</th>
+      <th scope="col">Teléfono</th>
+      <th scope="col">Operaciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let prov of proveedores">
+      <th scope="row">{{prov.id_prov}}</th>
+      <td>{{prov.nombre_prov}}</td>
+      <td>{{prov.email}}</td>
+      <td>{{prov.telefono}}</td>
+      <td>
+          <a [routerLink]="['/i_test_provider',prov.id_prov]">
+              <button type="button" class="btn btn-dark">PDF</button>
+          </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-<br>
-
-<table class="table table-hover text-center">
-    <thead class="table-dark">
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Nombre</th>
-        <th scope="col">Email</th>
-        <th scope="col">Teléfono</th>
-        <th scope="col">Operaciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let prov of proveedores">
-        <th scope="row">{{prov.id_prov}}</th>
-        <td>{{prov.nombre_prov}}</td>
-        <td>{{prov.email}}</td>
-        <td>{{prov.telefono}}</td>
-        <td>
-            <a [routerLink]="['/i_test_provider',prov.id_prov]">
-                <button type="button" class="btn btn-dark">PDF</button>
-            </a>
-        </td>
-      </tr>
-    </tbody>
-  </table>

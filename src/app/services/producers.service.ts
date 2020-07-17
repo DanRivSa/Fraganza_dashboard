@@ -11,10 +11,10 @@ export class ProducersService
   constructor(private httpClient:HttpClient){}
   
   //methods
-  getProveedoresEvIni() 
+  FiltrarProveedoresIniciales(id_usuario_productor:number) 
   {
     //prueba
-    return this.httpClient.get(`${this.base_URL}/providers`);
+    return this.httpClient.get(`${this.base_URL}/producers/initial_test/${id_usuario_productor}`);
   }
 
 }
