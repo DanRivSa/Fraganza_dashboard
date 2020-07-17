@@ -12,7 +12,13 @@ export class ProviderReportComponent implements OnInit {
 
   id_proveedor:number;
   datos:any [];
-
+  nombre_proveedor:string;
+  email:string;
+  telefono:number;
+  codigo_postal:number;
+  asociacion:string;
+  direccion_fiscal:string;
+  pais:string;
 
   constructor(private route:ActivatedRoute,private reportsService:ReportsService) { }
 
@@ -29,10 +35,20 @@ export class ProviderReportComponent implements OnInit {
       {
         //transferir datos
         this.datos = res as any [];
-        console.log(this.datos);
+        let obj = this.datos[0];
+        this.nombre_proveedor = obj.nombre_prov;
+        this.asociacion = obj.nombre_asoc;
+        this.email = obj.email;
+        this.telefono = obj.telefono;
+        this.pais = obj.nombre_pais;
+        this.codigo_postal = obj.cod_postal;
+        this.direccion_fiscal = obj.direccion_fiscal;
       });
   }
 
-  
+  DescargarPDF()
+  {
+    //implementar
+  }
 
 }
