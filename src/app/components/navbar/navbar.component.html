@@ -48,10 +48,37 @@
         <button class="btn btn-outline-primary btn-inline my-2 my-lg-0" *ngIf="(userID == null) && (userType == null)">Iniciar Sesión</button>
       </a>
       <a *ngIf="((userType == 1) || (userType == 2)) || userID !=null">
-        <button class="btn btn-outline-danger btn-inline my-2 my-lg-0" (click)="Logout()">Cerrar Sesión</button>
+        <button class="btn btn-outline-danger btn-inline my-2 my-lg-0" data-toggle="modal" data-target="#exampleModalCenter">Cerrar Sesión</button>
       </a>
     </div>
   </nav>
+
+  <!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-white bg-danger">
+        <h5 class="modal-title" id="exampleModalLongTitle">Cerrar Sesión</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body bg-dark">
+        <div class="container text-center">
+          <p class="text-white text-center">Seguro que desea cerrar sesión?</p>
+        </div>
+      </div>
+      <div class="modal-footer bg-dark">
+        <div>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+        </div>
+        <div>
+          <button type="button" class="btn btn-primary" (click)="Logout()">Cerrar sesión</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
   <!--
       quick routes guard solution syntax (always add the ngIf as follows)
     2 for provider routes 
