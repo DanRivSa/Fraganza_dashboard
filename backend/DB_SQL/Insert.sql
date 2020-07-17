@@ -404,31 +404,27 @@ INSERT INTO ada_productor (nombre_prod,id_asoc,telefono,direccion_fiscal,calle,c
     'EurofraganceEsp@gmail.in.co'
 );
 
-
 --membresias proveedores
 
 INSERT INTO ada_membresia(fecha_inicio, id_prov,tipo) VALUES
-((SELECT CURRENT_DATE),3,'PRI'
+('2000-07-16',1,'PRI'
+);
+INSERT INTO ada_membresia(fecha_inicio, id_prov,tipo) VALUES
+('2019-09-24',2,'PRI'
+);
+
+INSERT INTO ada_membresia(fecha_inicio, id_prov,tipo) VALUES
+('2006-03-24',3,'SEC'
 );
 
 INSERT INTO ada_membresia(fecha_inicio, id_prov,tipo) VALUES
 (
-    '2019-09-24',2,'SEC'
+    '2013-01-22',4,'ASC'
 );
 
 INSERT INTO ada_membresia(fecha_inicio, id_prov,tipo) VALUES
 (
-    '2019-09-27',3,'SEC'
-);
-
-INSERT INTO ada_membresia(fecha_inicio, id_prov,tipo) VALUES
-(
-    '2020-02-20',4,'ASC'
-);
-
-INSERT INTO ada_membresia(fecha_inicio, id_prov,tipo) VALUES
-(
-    '2020,05,20',5,'ASC'
+    '2013-01-22',5,'ASC'
 );
 
 --membresias para productores
@@ -458,7 +454,14 @@ INSERT INTO ada_membresia(fecha_inicio, id_prod,tipo) VALUES
 
 --LISTAR PAISES A LOS CUALES QUIERE RECIBIR EL PRODUCTOR
 
-INSERT INTO ada_prod_pais (id_prod,id_pais) VALUES (1,208),(2,46),(3,180),(4,73);
+
+INSERT INTO ada_prod_pais (id_prod,id_pais) VALUES
+(1,208),(1,33),(1,52),(1,229),(1,13),(1,173),(1,146),(1,235),(1,82),(1,73),(1,4),(1,24),(1,176),(1,203),
+(1,105),(1,47),(1,114),
+(2,46),
+(3,73),
+(4,180),(4,52),(4,146),(4,203),(4,59),(4,69),(4,105),(4,225),(4,73),(4,200),(4,212),(4,79);
+
 
 --PRODUCTOS DE PROVEEDORES
 
@@ -591,7 +594,6 @@ desc_olfativ,desc_uso,fema_number,retcs_number,einecs_number) VALUES
 
 
 
-
 --PERFUMISTAS
 
 --GIVAUDAN
@@ -704,6 +706,112 @@ INSERT INTO ada_alternativa_envio (id_prov,id_pais,porc_base,tipo_envio) VALUES
 
 
 
---ALTERNATIVAS DE PAGO 
+--ALTERNATIVAS DE PAGO
 INSERT INTO ada_alternativa_pago(id_prov,metodo_pago) VALUES
 (1,'p'),(1,'c'),(2,'p'),(2,'c'),(3,'p'),(4,'p'),(4,'c'),(5,'p');
+
+
+
+
+
+--PRODUCTOS DE productores
+
+CREATE TABLE ada_perfume (
+id_perfume SMALLINT,
+nombre VARCHAR(15) NOT NULL UNIQUE,
+genero CHAR(1) NOT NULL,
+preferencia_uso CHAR(1) NOT NULL,
+fecha_creacion SMALLINT NOT NULL,
+edad VARCHAR(10) NOT NULL,
+id_prod SMALLINT NOT NULL,
+CONSTRAINT PK_perfume PRIMARY KEY (id_perfume),
+CONSTRAINT CK_genero CHECK (genero in ('m','f','u')),
+CONSTRAINT CK_preferencia_uso CHECK (preferencia_uso in ('d','t','s')),
+CONSTRAINT CK_edad CHECK (edad in ('adulto','joven','infantil','atemporal'))
+);
+--INICIO DE GIVAUDAN
+
+--Prada Lhome
+INSERT INTO ada_perfume (id_perfume,nombre,genero,preferencia_uso,fecha_creacion,edad,id_prod)
+VALUES (10,'Prada Lhomme','m','t',2016,'adulto',1);
+
+--Prada Luna Rossa
+INSERT INTO ada_perfume (id_perfume,nombre,genero,preferencia_uso,fecha_creacion,edad,id_prod)
+VALUES (11,'Prada Luna Rossa','m','d',2012,'adulto',1);
+
+--Bvlgari Man in Black
+INSERT INTO ada_perfume (id_perfume,nombre,genero,preferencia_uso,fecha_creacion,edad,id_prod)
+VALUES (12,'Bvlgari Man in Black','m','s',2014,'adulto',1);
+
+--
+
+--ada_creador_perfume
+
+INSERT INTO ada_creador_perfume (id_perfumista,id_perfume)
+VALUES
+(1,10),(1,10),(2,11);
+
+--ada_esencia_perfume
+
+--PRADA LHOME
+INSERT INTO ada_esencia_perfume (cas_ep,nombre,tipo)
+VALUES
+(90045899,'Iris','natural'),
+(8016384,'Neroli','natural'),
+(8002673,'Ambar','natural'),
+(8024086,'Violeta','natural'),
+(80002729,'Cedro ','natural'),
+(8015881,'Semillas de Zanahoria','natural'),
+(68916961,'Yerba Mate','natural'),
+(8000462,'Geranio','natural'),
+(8014093,'Pachuli','natural'),
+(8006879,'Sándalo','natural'),
+(8000666,'Cardomomo','natural'),
+(84929419,'Pimienta Negra','natural');
+
+INSERT INTO ada_perfume_familia (id_perfume,id_familia)
+VALUES (10,7),(10,8);
+
+INSERT INTO ada_perfume_nota (id_perfume,cas_ep,tipo)
+VALUES
+(10,8016384,'s'),(10,8000666,'s'),(10,8015881,'s'),(10,84929419,'s'),
+(10,8000462,'c'),(10,90045899,'c'),(10,68916961,'c'),(10,8024086,'c'),
+(10,8006879,'f'),(10,8002673,'f'),(10,80002729,'f'),(10,8014093,'f');
+
+
+CREATE TABLE ada_intensidad(
+id_int SMALLINT NOT NULL,
+id_perfume SMALLINT NOT NULL,
+tipo CHAR(3) NOT NULL,
+porc_concentracion SMALLINT NOT NULL,
+descripcion VARCHAR(100),
+CONSTRAINT PK_intensidad PRIMARY KEY (id_int,id_perfume),
+CONSTRAINT CK_porc_concentracion CHECK (porc_concentracion > 0 and porc_concentracion <=100),
+CONSTRAINT CK_tipo_p CHECK (tipo in ('p','edp','edt','edc','eds'))
+);
+INSERT INTO ada_intensidad (id_perfume,tipo,porc_concentracion,descripcion)
+VALUES
+(10,'edt',8,'Se trata de un aroma creado a base de contraposiciones, y que representa la dualidad de la identidad masculina. En ella se revela una nueva visión de la masculinidad bajo la visión de Prada.');
+(10,'edp',15,null);
+
+INSERT INTO ada_presentacion_p (id_int,id_perfume,capacidad_ml)
+VALUES
+(1,10,50),(1,10,100),(1,10,150),
+(2,10,50),(2,10,100),(2,10,150);
+
+INSERT INTO ada_ingrediente_p (cas_ip,nombre,tipo)
+VALUES
+(90017,'ALCOHOL','componente'),(7732185,'AQUA (WATER)','componente'),
+(5989275,'LIMONENE','componente'),(5466773,'ETHYLHEXYL METHOXYCINNAMATE','componente'),
+(38078090,'DIETHYLAMINO','componente'),(302776687,'HYDROXYBENZOYL HEXYLBENZOATE','componente'),
+(5392405,'CITRAL','componente'),(104552,'CINAMMAL','componente'),(78706,'LINLOOL','componente'),
+(128370​,'BHT','componente');
+
+
+INSERT INTO ada_perf_ing (id_perfume,cas_ip)
+VALUES
+(10,90017),(10,7732185),(10,5989275),(10,5466773),(10,38078090),
+(10,302776687),(10,104552),(10,78706),(10,128370​);
+
+
+--PRADA LUNA ROSA
