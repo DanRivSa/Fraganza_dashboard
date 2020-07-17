@@ -7,7 +7,7 @@ class ProducersModel
 
     async GetProducers()
     {
-        const db_res = db.query('SELECT * FROM ada_productor');
+        const db_res = await db.query('SELECT * FROM ada_productor');
         return db_res;
     }
 }

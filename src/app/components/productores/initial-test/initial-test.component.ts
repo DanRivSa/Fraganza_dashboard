@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ProducersService } from '../../../services/producers.service';
 
 @Component({
   selector: 'app-initial-test',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InitialTestComponent implements OnInit {
 
-  constructor() { }
+  proveedores:any[];
 
-  ngOnInit(): void {
+  constructor(private producersService:ProducersService) { }
+
+  ngOnInit(): void
+  {
+    this.producersService.getProveedoresEvIni().subscribe(res=>
+      {
+        this.proveedores = res as any[];
+      });
   }
 
 }

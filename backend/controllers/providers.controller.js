@@ -8,6 +8,14 @@ class ProvidersController
         let db_res = await model.GetProviders();
         res.json(db_res.rows);
     }
+
+    GetPDFInfo = async (req,res)=> //reporte de proveedores
+    {
+        let id = req.params.id;
+        let db_res = await model.GetProviderPDF(id);
+        res.json(db_res.rows);
+    }
+    
 }
 
 const controller = new ProvidersController(); //create instance of class

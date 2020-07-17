@@ -13,6 +13,7 @@ const producersController = require('../controllers/producers.controller');
 
 //http request for providers
 router.get('/providers',providersController.GetProviders);
+router.get('/providers/:id',providersController.GetPDFInfo);
 
 //http request for producers
 router.get('/producers',producersController.GetProducers);

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import { ReportsService } from 'src/app/services/reports.service';
 
 @Component({
   selector: 'app-provider-report',
@@ -7,9 +9,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProviderReportComponent implements OnInit {
 
-  constructor() { }
+  id_proveedor:number;
+  datos:any [];
 
-  ngOnInit(): void {
+
+  constructor(private route:ActivatedRoute,private reportsService:ReportsService) { }
+
+  ngOnInit(): void 
+  {
+    //obtener parametros de ruta
+    this.route.paramMap.subscribe(params=>
+      {
+        //obtener id del proveedor
+        this.id_proveedor = +params.get('id');
+      });
+
+    this.reportsService.getProviderReport(this.id_proveedor).subscribe(res=>
+      {
+        //transferir datos
+        this.datos = res as any [];
+        console.log(this.datos);
+      });
   }
+
+  
 
 }

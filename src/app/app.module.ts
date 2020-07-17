@@ -7,9 +7,10 @@ import {LoginModule} from './modules/login/login.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-//singletones
+//services
 import {UserCompanyService} from './services/global/user-company.service';
 import {ReportsService} from './services/reports.service';
+import {ProducersService} from './services/producers.service';
 
 //custom components
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -42,7 +43,7 @@ import { InitialTestComponent } from './components/productores/initial-test/init
     HttpClientModule,
     LoginModule
   ],
-  providers: [UserCompanyService,ReportsService],
+  providers: [UserCompanyService,ReportsService,ProducersService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

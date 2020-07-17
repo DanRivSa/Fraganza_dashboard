@@ -6,8 +6,8 @@
   
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" routerLink="">Pagina principal</a>
+        <li class="nav-item" routerLinkActive="active current" [routerLinkActiveOptions]="{exact: true}">
+          <a class="nav-link" routerLink="/" >Pagina principal</a>
         </li>
         <li class="nav-item" *ngIf="userType == null && userID == null">
           <a class="nav-link">Recomendar</a>
@@ -26,8 +26,8 @@
           <li class="nav-item" *ngIf = "(userType == 1 && userID !=null)">
             <a class="nav-link">Formula Ev.</a>
           </li>
-          <li class="nav-item" *ngIf = "(userType == 1 && userID !=null)">
-            <a class="nav-link" routerLink="test_provider">Ev. Inicial</a>
+          <li class="nav-item" *ngIf = "(userType == 1 && userID !=null)" routerLinkActive="active current">
+            <a class="nav-link" routerLink="/i_test_provider" >Ev. Inicial</a>
           </li>
           <li class="nav-item" *ngIf = "(userType == 1 && userID !=null)">
             <a class="nav-link">Ev. Anual</a>
@@ -40,15 +40,15 @@
           </li>
           <!--USER PROFILE-->
           <li class="nav-item" *ngIf = "(userType != null && userID !=null)">
-            <a class="nav-link">mi perfil</a>
+            <a class="nav-link">usuario: {{username}}</a>
           </li>
       </ul>
       
-      <a routerLink="select_type">
-        <button class="btn btn-outline-primary btn-inline my-2 my-lg-0" *ngIf="(userID == null) && (userType == null)">Login</button>
+      <a routerLink="/select_type">
+        <button class="btn btn-outline-primary btn-inline my-2 my-lg-0" *ngIf="(userID == null) && (userType == null)">Iniciar Sesión</button>
       </a>
       <a *ngIf="((userType == 1) || (userType == 2)) || userID !=null">
-        <button class="btn btn-outline-danger btn-inline my-2 my-lg-0" (click)="Logout()">Logout</button>
+        <button class="btn btn-outline-danger btn-inline my-2 my-lg-0" (click)="Logout()">Cerrar Sesión</button>
       </a>
     </div>
   </nav>
