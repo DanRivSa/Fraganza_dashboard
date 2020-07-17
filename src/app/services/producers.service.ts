@@ -11,7 +11,7 @@ export class ProducersService
   constructor(private httpClient:HttpClient){}
   
   //methods
-  getProveedoresEvIni()
+  getProveedoresEvIni() 
   {
     //prueba
     return this.httpClient.get(`${this.base_URL}/providers`);

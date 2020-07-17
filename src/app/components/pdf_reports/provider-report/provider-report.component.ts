@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import { ReportsService } from 'src/app/services/reports.service';
+//import * as html2pdf from 'html2pdf.js'
 
 @Component({
   selector: 'app-provider-report',
