@@ -150,7 +150,7 @@ CONSTRAINT PK_prov PRIMARY KEY (id_prov)
 
 CREATE TABLE ada_perfume (
 id_perfume SMALLINT,
-nombre VARCHAR(15) NOT NULL UNIQUE,
+nombre VARCHAR(25) NOT NULL UNIQUE,
 genero CHAR(1) NOT NULL,
 preferencia_uso CHAR(1) NOT NULL,
 fecha_creacion SMALLINT NOT NULL,
@@ -169,7 +169,7 @@ id_int SMALLINT NOT NULL,
 id_perfume SMALLINT NOT NULL,
 tipo CHAR(3) NOT NULL,
 porc_concentracion SMALLINT NOT NULL,
-descripcion VARCHAR(100),
+descripcion VARCHAR(254),
 CONSTRAINT PK_intensidad PRIMARY KEY (id_int,id_perfume),
 CONSTRAINT CK_porc_concentracion CHECK (porc_concentracion > 0 and porc_concentracion <=100),
 CONSTRAINT CK_tipo_p CHECK (tipo in ('p','edp','edt','edc','eds'))
