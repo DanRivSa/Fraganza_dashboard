@@ -11,6 +11,13 @@ class ProducersController
         res.json(db_res.rows);
     } 
 
+    ProveedoresEvIni = async (req,res)=>
+    {
+        let id_productor = req.params.id;
+        let db_res = await model.FiltrarProveedoresEvIni(id_productor);
+        res.json(db_res.rows);
+    }
+
 }
 
 const controller = new ProducersController(); //create instance

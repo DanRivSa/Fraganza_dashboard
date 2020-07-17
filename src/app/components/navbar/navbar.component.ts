@@ -18,7 +18,6 @@ export class NavbarComponent implements OnInit
 
   Logout()
   {
-    if(confirm('are you sure you want to quit?'))
-        location.reload();
+    location.replace('/');
   }
 }

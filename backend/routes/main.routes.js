@@ -17,5 +17,6 @@ router.get('/providers/:id',providersController.GetPDFInfo);
 
 //http request for producers
 router.get('/producers',producersController.GetProducers);
+router.get('/producers/initial_test/:id',producersController.ProveedoresEvIni); //se pasa id de usuario productor
 
 module.exports = router;
