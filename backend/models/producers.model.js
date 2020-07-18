@@ -7,7 +7,7 @@ class ProducersModel
 
     async GetProducers()
     {
-        const db_res = await db.query('SELECT * FROM ada_prod_mem_activa');
+        const db_res = await db.query('SELECT id_prod,nombre_prod FROM ada_productor WHERE id_prod IN (SELECT * FROM ada_prod_mem_activa)');
         return db_res;
     }
 

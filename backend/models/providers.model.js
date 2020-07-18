@@ -7,7 +7,7 @@ class ProviderModel
     
     async GetProviders()
     {
-        const db_res = await db.query('SELECT * FROM ada_prov_mem_activa');
+        const db_res = await db.query('SELECT id_prov,nombre_prov FROM ada_proveedor WHERE id_prov IN (SELECT * FROM ada_prov_mem_activa) ');
         return db_res;
     }
 
