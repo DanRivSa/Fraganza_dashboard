@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewEncapsulation } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import { ReportsService } from 'src/app/services/reports.service';
 import * as html2pdf from 'html2pdf.js'
@@ -6,7 +6,8 @@ import * as html2pdf from 'html2pdf.js'
 @Component({
   selector: 'app-provider-report',
   templateUrl: './provider-report.component.html',
-  styleUrls: ['./provider-report.component.scss']
+  styleUrls: ['./provider-report.component.scss'],
+  encapsulation:ViewEncapsulation.None
 })
 export class ProviderReportComponent implements OnInit {
 
