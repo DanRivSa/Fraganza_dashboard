@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import { ReportsService } from 'src/app/services/reports.service';
 import * as html2pdf from 'html2pdf.js'
@@ -7,7 +7,6 @@ import * as html2pdf from 'html2pdf.js'
   selector: 'app-provider-report',
   templateUrl: './provider-report.component.html',
   styleUrls: ['./provider-report.component.scss'],
-  encapsulation:ViewEncapsulation.None
 })
 export class ProviderReportComponent implements OnInit {
 
@@ -20,6 +19,8 @@ export class ProviderReportComponent implements OnInit {
   asociacion:string;
   direccion_fiscal:string;
   pais:string;
+  m_parcial:boolean = false;
+  m_cuotas:boolean = false;
 
   constructor(private route:ActivatedRoute,private reportsService:ReportsService) { }
 
@@ -44,6 +45,21 @@ export class ProviderReportComponent implements OnInit {
         this.pais = obj.nombre_pais;
         this.codigo_postal = obj.cod_postal;
         this.direccion_fiscal = obj.direccion_fiscal;
+        
+        //chequear metodos de pago
+        if(obj.metodo_pago == 'p')
+          this.m_parcial = true;
+        else if(obj.metodo_pago == 'c')
+          this.m_cuotas = true;
+
+        if(this.datos[1] != null)
+        {
+          let obj2 = this.datos[1];
+          if(obj2.metodo_pago == 'p')
+          this.m_parcial = true;
+        else if(obj2.metodo_pago == 'c')
+          this.m_cuotas = true;
+        }
       });
   }
 
@@ -52,10 +68,10 @@ export class ProviderReportComponent implements OnInit {
     //configurar ficha a descargar
     let options = 
     {
-      filename: `proveedor_${this.nombre_proveedor}.pdf`,
+      filename: `prov_${this.nombre_proveedor}.pdf`,
       image: {type:'png'},
       html2canvas:{},
-      jsPDF:{orientation:'landscape'}
+      jsPDF:{orientation:'landscape'},
     }
 
     //obtener ficha html a descargar
@@ -65,7 +81,7 @@ export class ProviderReportComponent implements OnInit {
     html2pdf()
       .from(elemento)
       .set(options)
-      .save()
+      .save();
   }
 
 }

@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 import {UserCompanyService} from './services/global/user-company.service';
 import {ReportsService} from './services/reports.service';
 import {ProducersService} from './services/producers.service';
+import {ProveedoresService} from './services/proveedores.service';
 
 //custom components
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -19,6 +20,7 @@ import { HomeComponent } from './components/home/home.component';
 //reports
 import {ProviderReportComponent} from './components/pdf_reports/provider-report/provider-report.component';
 import { InitialTestComponent } from './components/productores/initial-test/initial-test.component';
+import { CatalogoComponent } from './components/proveedores/catalogo/catalogo.component';
 
 @NgModule({
 
@@ -28,6 +30,7 @@ import { InitialTestComponent } from './components/productores/initial-test/init
     AppComponent,
     NavbarComponent,
     HomeComponent,
+    CatalogoComponent,
 
     //componentes de productores
     InitialTestComponent,
@@ -36,6 +39,7 @@ import { InitialTestComponent } from './components/productores/initial-test/init
 
     //reportes
     ProviderReportComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -43,7 +47,7 @@ import { InitialTestComponent } from './components/productores/initial-test/init
     HttpClientModule,
     LoginModule
   ],
-  providers: [UserCompanyService,ReportsService,ProducersService],
+  providers: [UserCompanyService,ReportsService,ProducersService,ProveedoresService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

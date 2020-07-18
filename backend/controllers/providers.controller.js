@@ -16,6 +16,19 @@ class ProvidersController
         res.json(db_res.rows);
     }
     
+    ObtenerEsenciasDeProveedor=async (req,res)=>
+    {
+        let id = req.params.id;
+        let db_res = await model.ObtenerEsencias(id);
+        res.json(db_res.rows);
+    }
+
+    ObtenerIngredientesDeProveedor=async (req,res)=>
+    {
+        let id = req.params.id;
+        let db_res = await model.ObtenerIngredientes(id);
+        res.json(db_res.rows);
+    }
 }
 
 const controller = new ProvidersController(); //create instance of class

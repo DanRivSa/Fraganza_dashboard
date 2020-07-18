@@ -24,7 +24,9 @@
                               Asociación: {{asociacion}}
                           </h6>
                           <br>
+                          <hr>
                           <h5 class="text-center">Información</h5>
+                          <hr>
                           <!--nav bar de ficha por si las
                   <ul class="nav nav-tabs" id="myTab" role="tablist">
                       <li class="nav-item">
@@ -82,6 +84,17 @@
                                       <p>{{codigo_postal}}</p>
                                   </div>
                               </div>
+                              <div class="row">
+                                <div class="col-md-6">
+                                    <label>Alternativas de pago</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <ul>
+                                      <li *ngIf="m_parcial"><p>Parcial</p></li>
+                                      <li *ngIf ="m_cuotas"><p>Por cuotas</p></li>
+                                    </ul>
+                                </div>
+                            </div>
                   </div>
               </div>
           </div>
