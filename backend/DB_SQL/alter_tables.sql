@@ -1,170 +1,170 @@
 --SECUENCIAS
 
-CREATE SEQUENCE sec_id_proveedor as SMALLINT
+CREATE SEQUENCE ada_sec_id_proveedor as SMALLINT
  MINVALUE 1
  MAXVALUE 50
  NO CYCLE
  OWNED BY ada_proveedor.id_prov;
  ;
 ALTER TABLE ada_proveedor
-ALTER COLUMN id_prov SET DEFAULT nextval('sec_id_proveedor');
+ALTER COLUMN id_prov SET DEFAULT nextval('ada_sec_id_proveedor');
 
-CREATE SEQUENCE sec_id_membresia as SMALLINT
+CREATE SEQUENCE ada_sec_id_membresia as SMALLINT
  MINVALUE 1
  MAXVALUE 50
  NO CYCLE
  OWNED BY ada_membresia.id_m;
  ;
 ALTER TABLE ada_membresia
-ALTER COLUMN id_m SET DEFAULT nextval('sec_id_membresia');
+ALTER COLUMN id_m SET DEFAULT nextval('ada_sec_id_membresia');
 
 
-CREATE SEQUENCE sec_id_otros_ing as SMALLINT
+CREATE SEQUENCE ada_sec_id_otros_ing as SMALLINT
  MINVALUE 1
  MAXVALUE 100
  NO CYCLE
  OWNED BY ada_otros_ing.cas_oi;
 ALTER TABLE ada_otros_ing
-ALTER COLUMN cas_oi SET DEFAULT nextval('sec_id_otros_ing');
+ALTER COLUMN cas_oi SET DEFAULT nextval('ada_sec_id_otros_ing');
 
-CREATE SEQUENCE sec_id_pais as SMALLINT
+CREATE SEQUENCE ada_sec_id_pais as SMALLINT
  MINVALUE 1
  MAXVALUE 240
  NO CYCLE
  OWNED BY ada_pais.id_pais;
 ALTER TABLE ada_pais
-ALTER COLUMN id_pais SET DEFAULT nextval('sec_id_pais');
+ALTER COLUMN id_pais SET DEFAULT nextval('ada_sec_id_pais');
 
-CREATE SEQUENCE sec_id_productor as SMALLINT
+CREATE SEQUENCE ada_sec_id_productor as SMALLINT
  MINVALUE 1
  MAXVALUE 50
  NO CYCLE
  OWNED BY ada_productor.id_prod;
 ALTER TABLE ada_productor
-ALTER COLUMN id_prod SET DEFAULT nextval('sec_id_productor');
+ALTER COLUMN id_prod SET DEFAULT nextval('ada_sec_id_productor');
 
-CREATE SEQUENCE sec_id_perfume as SMALLINT
+CREATE SEQUENCE ada_sec_id_perfume as SMALLINT
 MINVALUE 1
 MAXVALUE 50
 NO CYCLE
 OWNED BY ada_perfume.id_perfume;
 ALTER TABLE ada_perfume
-ALTER COLUMN id_perfume SET DEFAULT nextval('sec_id_perfume');
+ALTER COLUMN id_perfume SET DEFAULT nextval('ada_sec_id_perfume');
 
-CREATE SEQUENCE sec_id_intensidad as SMALLINT
+CREATE SEQUENCE ada_sec_id_intensidad as SMALLINT
 MINVALUE 1
 MAXVALUE 60
 NO CYCLE
 OWNED BY ada_intensidad.id_int;
 ALTER TABLE ada_intensidad
-ALTER COLUMN id_int SET DEFAULT nextval('sec_id_intensidad');
+ALTER COLUMN id_int SET DEFAULT nextval('ada_sec_id_intensidad');
 
-CREATE SEQUENCE sec_id_presentacion_p as SMALLINT
+CREATE SEQUENCE ada_sec_id_presentacion_p as SMALLINT
 MINVALUE 1
 MAXVALUE 60
 NO CYCLE
 OWNED BY ada_presentacion_p.id_present;
 ALTER TABLE ada_presentacion_p
-ALTER COLUMN id_present SET DEFAULT nextval('sec_id_presentacion_p');
+ALTER COLUMN id_present SET DEFAULT nextval('ada_sec_id_presentacion_p');
 
 
-CREATE SEQUENCE sec_id_familia as SMALLINT
+CREATE SEQUENCE ada_sec_id_familia as SMALLINT
 MINVALUE 1
 MAXVALUE 10
 NO CYCLE
 OWNED BY ada_familia_olfativa.id_familia;
 ALTER TABLE ada_familia_olfativa
-ALTER COLUMN id_familia SET DEFAULT nextval('sec_id_familia');
+ALTER COLUMN id_familia SET DEFAULT nextval('ada_sec_id_familia');
 
-CREATE SEQUENCE sec_id_pc as SMALLINT
+CREATE SEQUENCE ada_sec_id_pc as SMALLINT
 MINVALUE 1
 MAXVALUE 10
 NO CYCLE
 OWNED BY ada_familia_olfativa.id_familia;
 ALTER TABLE ada_familia_olfativa
-ALTER COLUMN id_familia SET DEFAULT nextval('sec_id_familia');
+ALTER COLUMN id_familia SET DEFAULT nextval('ada_sec_id_familia');
 
-CREATE SEQUENCE sec_id_criterio as SMALLINT
+CREATE SEQUENCE ada_sec_id_criterio as SMALLINT
 MINVALUE 1
 MAXVALUE 5
 NO CYCLE
 OWNED BY ada_criterio_eval.id_criterio;
 ALTER TABLE ada_criterio_eval
-ALTER COLUMN id_criterio SET DEFAULT nextval('sec_id_criterio');
+ALTER COLUMN id_criterio SET DEFAULT nextval('ada_sec_id_criterio');
 
 
-CREATE SEQUENCE sec_numero_contrato as SMALLINT
+CREATE SEQUENCE ada_sec_numero_contrato as SMALLINT
 INCREMENT BY 5
 MINVALUE 1000
 MAXVALUE 2000
 NO CYCLE
 OWNED by ada_contrato.numero_contrato;
 ALTER TABLE ada_contrato
-ALTER COLUMN numero_contrato SET DEFAULT nextval('sec_numero_contrato');
+ALTER COLUMN numero_contrato SET DEFAULT nextval('ada_sec_numero_contrato');
 
-CREATE SEQUENCE sec_ada_renueva as SMALLINT
+CREATE SEQUENCE ada_sec_ada_renueva as SMALLINT
 MINVALUE 1
 MAXVALUE 50
 NO CYCLE
 OWNED BY ada_renueva.id_ren;
 ALTER TABLE ada_renueva
-ALTER COLUMN id_ren SET DEFAULT nextval('sec_ada_renueva');
+ALTER COLUMN id_ren SET DEFAULT nextval('ada_sec_ada_renueva');
 
 
-CREATE SEQUENCE sec_sku_presentacion_e as SMALLINT
+CREATE SEQUENCE ada_sec_sku_presentacion_e as SMALLINT
 INCREMENT 5
 MINVALUE 100
 MAXVALUE 500
 NO CYCLE
 OWNED BY ada_presentacion_e.sku;
 ALTER TABLE ada_presentacion_e
-ALTER COLUMN sku SET DEFAULT nextval('sec_sku_presentacion_e');
+ALTER COLUMN sku SET DEFAULT nextval('ada_sec_sku_presentacion_e');
 
 
-CREATE SEQUENCE sec_id_modif as SMALLINT
+CREATE SEQUENCE ada_sec_id_modif as SMALLINT
 MINVALUE 1
 MAXVALUE 10
 NO CYCLE
 OWNED BY ada_modificador_envio.id_modif;
 ALTER TABLE ada_modificador_envio
-ALTER COLUMN id_modif SET DEFAULT nextval('sec_id_modif');
+ALTER COLUMN id_modif SET DEFAULT nextval('ada_sec_id_modif');
 
 
-CREATE SEQUENCE sec_id_pedido as SMALLINT
+CREATE SEQUENCE ada_sec_id_pedido as SMALLINT
 MINVALUE 1
 MAXVALUE 100
 NO CYCLE
 OWNED BY ada_pedido.id_pedido;
 ALTER TABLE ada_pedido
-ALTER COLUMN id_pedido SET DEFAULT nextval('sec_id_pedido');
+ALTER COLUMN id_pedido SET DEFAULT nextval('ada_sec_id_pedido');
 
 
-CREATE SEQUENCE sec_nro_factura as SMALLINT
+CREATE SEQUENCE ada_sec_nro_factura as SMALLINT
 INCREMENT 5
 MINVALUE 1000
 MAXVALUE 2500
 NO CYCLE
 OWNED BY ada_pedido.nro_factura;
 ALTER TABLE ada_pedido
-ALTER COLUMN nro_factura SET DEFAULT nextval('sec_nro_factura');
+ALTER COLUMN nro_factura SET DEFAULT nextval('ada_sec_nro_factura');
 
 
-CREATE SEQUENCE sec_id_asoc as SMALLINT
+CREATE SEQUENCE ada_sec_id_asoc as SMALLINT
 MINVALUE 1
 MAXVALUE 5
 NO CYCLE
 OWNED BY ada_asoc_nacional.id_asoc;
 ALTER TABLE ada_asoc_nacional
-ALTER COLUMN id_asoc SET DEFAULT nextval('sec_id_asoc');
+ALTER COLUMN id_asoc SET DEFAULT nextval('ada_sec_id_asoc');
 
 
-CREATE SEQUENCE sec_id_perfumista as SMALLINT
+CREATE SEQUENCE ada_sec_id_perfumista as SMALLINT
 MINVALUE 1
 MAXVALUE 20
 NO CYCLE
 OWNED BY ada_perfumista.id_perfumista;
 ALTER TABLE ada_perfumista
-ALTER COLUMN id_perfumista SET DEFAULT nextval('sec_id_perfumista');
+ALTER COLUMN id_perfumista SET DEFAULT nextval('ada_sec_id_perfumista');
 
 
 
