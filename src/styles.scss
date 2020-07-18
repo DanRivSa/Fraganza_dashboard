@@ -6,7 +6,14 @@
 //whole app body
 body 
 {
-    font-family: "Raleway",sans-serif !important;;
+    font-family: "Raleway",sans-serif !important;
+    
+        background: url(assets/Fondo.jpg);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+    
+    
     
 }
 
@@ -47,3 +54,4 @@ body
     color:#ffff;
     background-color: #2c2c54 !important;
 }
+
