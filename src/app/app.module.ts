@@ -21,6 +21,8 @@ import { HomeComponent } from './components/home/home.component';
 import {ProviderReportComponent} from './components/pdf_reports/provider-report/provider-report.component';
 import { InitialTestComponent } from './components/productores/initial-test/initial-test.component';
 import { CatalogoComponent } from './components/proveedores/catalogo/catalogo.component';
+import { DetalleProvedorComponent } from './components/proveedores/detalle-provedor/detalle-provedor.component';
+import { AlternativasEnviosComponent } from './components/proveedores/alternativas-envios/alternativas-envios.component';
 
 @NgModule({
 
@@ -39,6 +41,10 @@ import { CatalogoComponent } from './components/proveedores/catalogo/catalogo.co
 
     //reportes
     ProviderReportComponent,
+
+    DetalleProvedorComponent,
+
+    AlternativasEnviosComponent,
     
   ],
   imports: [

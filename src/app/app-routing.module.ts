@@ -6,7 +6,7 @@ import {SelectProducerCompanyComponent} from './components/login/select-producer
 import {SelectProviderCompanyComponent} from './components/login/select-provider-company/select-provider-company.component';
 import {InitialTestComponent} from './components/productores/initial-test/initial-test.component';
 import {ProviderReportComponent} from './components/pdf_reports/provider-report/provider-report.component';
-import {CatalogoComponent} from './components/proveedores/catalogo/catalogo.component';
+import {DetalleProvedorComponent} from './components/proveedores/detalle-provedor/detalle-provedor.component';
 
 const routes: Routes =
 [
@@ -14,7 +14,7 @@ const routes: Routes =
   {path:'select_type',component:SelectCompanyTypeComponent},
   {path:'select_type/producer', component:SelectProducerCompanyComponent},
   {path:'select_type/provider',component:SelectProviderCompanyComponent},
-  {path:'i_test_provider/catalogo/:id',component:CatalogoComponent},
+  {path:'i_test_provider/detalle/:id',component:DetalleProvedorComponent},
   {path:'i_test_provider/:id',component:ProviderReportComponent},
   {path:'i_test_provider',component:InitialTestComponent},
 ];

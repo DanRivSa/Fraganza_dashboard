@@ -11,9 +11,9 @@ export class CatalogoComponent implements OnInit {
 
   //atributos
   id_prov:number;
-  esencias:any[];
   ingredientes:any[];
-  nombre_prov:string;
+  esencias:any[];
+  nombre_prov;
 
   constructor(private route:ActivatedRoute,private servicio:ProveedoresService) { }
 
