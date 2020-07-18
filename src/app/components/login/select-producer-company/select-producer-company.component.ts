@@ -38,9 +38,9 @@ export class SelectProducerCompanyComponent implements OnInit {
       UserCompanyService.userCompanyType = 1;
       UserCompanyService.userCompanyID = this.ID;
       UserCompanyService.Username = this.GetUsername();
-      alert('user has been identified, please return to home screen');
+      alert('usuario encontrado,regrese a pagina principal');
     }
-    else alert('please, select a company');
+    else alert('porfavor, seleccione empresa');
   }
 
   GetUsername():string
