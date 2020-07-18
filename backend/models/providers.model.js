@@ -7,7 +7,7 @@ class ProviderModel
     
     async GetProviders()
     {
-        const db_res = await db.query('SELECT * FROM ada_proveedor');
+        const db_res = await db.query('SELECT * FROM ada_prov_mem_activa');
         return db_res;
     }
 
