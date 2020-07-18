@@ -1,0 +1,64 @@
+<app-navbar></app-navbar>
+<header class="bg-dark text-white">
+    <div class="container text-center">
+      
+      <h3 class=" display-4">Catálogo</h3>
+      <hr>
+      <h5 class=" silence  display-5 ">{{nombre_prov}}</h5>
+      
+      
+      <br>
+    </div>
+</header>
+<hr>
+<div *ngIf="esencias[0] != null ">
+    <h1 class="text-center">Esencias</h1>
+<br>
+<div class="container text-center table-responsive">
+    <table class="table table-hover">
+      <thead class="table-dark">
+        <tr>
+          <th scope="col">cas</th>
+          <th scope="col">Nombre comercial</th>
+          <th scope="col">nombre quimico</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let es of esencias">
+          <th scope="row">{{es.cas}}</th>
+          <td>{{es.nombre_comercial}}</td>
+          <td>{{es.nombre_quimico}}</td>
+        </tr>
+      </tbody>
+    </table>
+    
+  </div>
+  <hr>
+</div>
+  
+  
+<div *ngIf="ingredientes[0] != null">
+    <h1 class="text-center">Ingredientes</h1>
+    <br>
+    <div class="container text-center table-responsive">
+        <table class="table table-hover">
+          <thead class="table-dark">
+            <tr>
+              <th scope="col">cas</th>
+              <th scope="col">Nombre comercial</th>
+              <th scope="col">nombre quimico</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let ing of ingredientes">
+              <th scope="row">{{ing.cas_oi}}</th>
+              <td>{{ing.nombre_comercial}}</td>
+              <td>{{ing.nombre_quimico}}</td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+  
+</div>    
+  

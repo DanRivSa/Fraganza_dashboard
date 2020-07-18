@@ -14,6 +14,8 @@ const producersController = require('../controllers/producers.controller');
 //http request for providers
 router.get('/providers',providersController.GetProviders);
 router.get('/providers/:id',providersController.GetPDFInfo);
+router.get('/providers/esencias/:id',providersController.ObtenerEsenciasDeProveedor);
+router.get('/providers/ingredientes/:id',providersController.ObtenerIngredientesDeProveedor);
 
 //http request for producers
 router.get('/producers',producersController.GetProducers);
