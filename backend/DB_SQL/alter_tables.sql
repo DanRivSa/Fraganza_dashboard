@@ -173,240 +173,307 @@ ALTER COLUMN id_perfumista SET DEFAULT nextval('ada_sec_id_perfumista');
 ALTER TABLE ada_esencia
 ADD CONSTRAINT FK_id_prov FOREIGN KEY (id_prov)
 REFERENCES ada_proveedor (id_prov);
+CREATE INDEX ada_I_FK_id_prov on ada_esencia (id_prov);
 
 
 ALTER TABLE ada_perfumista
 ADD CONSTRAINT FK_id_pais FOREIGN KEY (id_pais)
 REFERENCES ada_pais (id_pais);
+CREATE INDEX ada_I_FK_id_pais on ada_perfumista (id_pais);
 
 
 ALTER TABLE ada_productor
 ADD CONSTRAINT FK_id_asoc FOREIGN KEY (id_asoc)
 REFERENCES ada_asoc_nacional (id_asoc);
-
+CREATE INDEX ada_I_FK_id_asoc on ada_productor (id_asoc);
 
 ALTER TABLE ada_proveedor
 ADD CONSTRAINT FK_id_pais FOREIGN KEY (id_pais)
 REFERENCES ada_pais (id_pais);
+CREATE INDEX ada_I_FK_id_pais_p on ada_proveedor (id_pais);
 ALTER TABLE ada_proveedor
 ADD CONSTRAINT FK_id_asoc FOREIGN KEY (id_asoc)
 REFERENCES ada_asoc_nacional (id_asoc);
+CREATE INDEX ada_I_FK_id_asoc_p on ada_proveedor (id_asoc);
 
 
 ALTER TABLE ada_perfume
 ADD CONSTRAINT FK_id_prod FOREIGN KEY (id_prod)
 REFERENCES ada_productor (id_prod);
+CREATE INDEX ada_I_FK_id_prod_perf on ada_perfume (id_prod);
+
 
 
 ALTER TABLE ada_intensidad
 ADD CONSTRAINT FK_id_perfume FOREIGN KEY (id_perfume)
 REFERENCES ada_perfume (id_perfume);
+CREATE INDEX ada_I_FK_id_perfume_int on ada_intensidad (id_perfume);
 
 
 ALTER TABLE ada_presentacion_p
 ADD CONSTRAINT FK_id_perfume_int FOREIGN KEY (id_perfume,id_int)
 REFERENCES ada_intensidad (id_perfume,id_int);
+CREATE INDEX ada_I_FK_id_perfume_intP on ada_presentacion_p (id_perfume,id_int);
 
 
 ALTER TABLE ada_resutado_eval
 ADD CONSTRAINT FK_id_prod FOREIGN KEY (id_prod)
-REFERENCES ada_perfume (id_perfume);
+REFERENCES ada_productor (id_prod);
+CREATE INDEX ada_I_FK_id_prod_result on ada_resutado_eval (id_prod);
 ALTER TABLE ada_resutado_eval
 ADD CONSTRAINT FK_id_prov FOREIGN KEY (id_prov)
 REFERENCES ada_proveedor (id_prov);
+CREATE INDEX ada_I_FK_id_prov_result on ada_resutado_eval (id_prov);
 
 
 ALTER TABLE ada_origen
 ADD CONSTRAINT FK_id_pais FOREIGN KEY (id_pais)
 REFERENCES ada_pais (id_pais);
+CREATE INDEX ada_I_FK_id_pais_o on ada_origen (id_pais);
 ALTER TABLE ada_origen
 ADD CONSTRAINT FK_cas FOREIGN KEY (cas)
 REFERENCES ada_esencia (cas);
+CREATE INDEX ada_I_FK_cas_o on ada_origen (cas);
 
 
 ALTER TABLE ada_monolitico
 ADD CONSTRAINT FK_cas_ep FOREIGN KEY (cas_ep)
 REFERENCES ada_esencia_perfume (cas_ep);
+CREATE INDEX ada_I_FK_cas_ep_m on ada_monolitico (cas_ep);
 ALTER TABLE ada_monolitico
 ADD CONSTRAINT FK_id_perfume FOREIGN KEY (id_perfume)
 REFERENCES ada_perfume (id_perfume);
+CREATE INDEX ada_I_FK_id_perfume_m on ada_monolitico (id_perfume);
 
 
 ALTER TABLE ada_familia_esencia
 ADD CONSTRAINT FK_id_familia FOREIGN KEY (id_familia)
 REFERENCES ada_familia_olfativa (id_familia);
+CREATE INDEX ada_I_FK_id_failia_e on ada_familia_esencia (id_familia);
 ALTER TABLE ada_familia_esencia
 ADD CONSTRAINT FK_cas FOREIGN KEY (cas)
 REFERENCES ada_esencia (cas);
+CREATE INDEX ada_I_FK_id_cas_e on ada_familia_esencia (cas);
 
 
 ALTER TABLE ada_perfume_familia
 ADD CONSTRAINT FK_id_familia FOREIGN KEY (id_familia)
 REFERENCES ada_familia_olfativa (id_familia);
+CREATE INDEX ada_I_FK_id_familia_olf on ada_perfume_familia (id_familia);
 ALTER TABLE ada_perfume_familia
 ADD CONSTRAINT FK_id_perfume FOREIGN KEY (id_perfume)
 REFERENCES ada_perfume (id_perfume);
+CREATE INDEX ada_I_FK_id_perfume_olf on ada_perfume_familia (id_perfume);
 
 
 ALTER TABLE ada_perfume_nota
 ADD CONSTRAINT FK_id_perfume FOREIGN KEY (id_perfume)
 REFERENCES ada_perfume (id_perfume);
+CREATE INDEX ada_I_FK_id_perfume_nota on ada_perfume_nota (id_perfume);
 ALTER TABLE ada_perfume_nota
 ADD CONSTRAINT FK_cas_ep FOREIGN KEY (cas_ep)
 REFERENCES ada_esencia_perfume (cas_ep);
+CREATE INDEX ada_I_FK_id_cas_nota on ada_perfume_nota (cas_ep);
 
 
 ALTER TABLE ada_perf_ing
 ADD CONSTRAINT FK_id_perfume FOREIGN KEY (id_perfume)
 REFERENCES ada_perfume (id_perfume);
+CREATE INDEX ada_I_FK_id_perf_ing on ada_perf_ing (id_perfume);
 ALTER TABLE ada_perf_ing
 ADD CONSTRAINT FK_cas_ip FOREIGN KEY (cas_ip)
 REFERENCES ada_ingrediente_p (cas_ip);
+CREATE INDEX ada_I_FK_id_cas_ip_perf_ing on ada_perf_ing (cas_ip);
 
 
 ALTER TABLE ada_prod_pais
 ADD CONSTRAINT FK_id_pais FOREIGN KEY (id_pais)
 REFERENCES ada_pais (id_pais);
+CREATE INDEX ada_I_FK_id_pais_prod on ada_prod_pais (id_pais);
 ALTER TABLE ada_prod_pais
 ADD CONSTRAINT FK_id_prod FOREIGN KEY (id_prod)
 REFERENCES ada_productor (id_prod);
+CREATE INDEX ada_I_FK_id_prod_pais on ada_prod_pais (id_prod);
 
 
 ALTER TABLE ada_contrato
 ADD CONSTRAINT FK_id_prod FOREIGN KEY (id_prod)
 REFERENCES ada_productor (id_prod);
+CREATE INDEX ada_I_FK_id_prod_contrato on ada_contrato (id_prod);
 ALTER TABLE ada_contrato
 ADD CONSTRAINT FK_id_prov FOREIGN KEY (id_prov)
 REFERENCES ada_proveedor (id_prov);
+CREATE INDEX ada_I_FK_id_prov_contrato on ada_contrato (id_prov);
 
 
 ALTER TABLE ada_renueva
 ADD CONSTRAINT FK_renov FOREIGN KEY(id_prod,id_prov,numero_contrato)
 REFERENCES ada_contrato (id_prod,id_prov,numero_contrato)
 ON DELETE CASCADE;
+CREATE INDEX ada_I_FK_reno_prod_contrato on ada_renueva (id_prod,id_prov,numero_contrato);
+
 
 
 ALTER TABLE ada_creador_perfume
 ADD CONSTRAINT FK_id_perfume FOREIGN KEY (id_perfume)
 REFERENCES ada_perfume (id_perfume);
+CREATE INDEX ada_I_FK_id_perfume_creador on ada_creador_perfume (id_perfume);
 ALTER TABLE ada_creador_perfume
 ADD CONSTRAINT FK_perfumista FOREIGN KEY (id_perfumista)
 REFERENCES ada_perfumista (id_perfumista);
+CREATE INDEX ada_I_FK_id_creador on ada_creador_perfume (id_perfumista);
 
 
 ALTER TABLE ada_membresia
 ADD CONSTRAINT FK_id_prod FOREIGN KEY (id_prod)
 REFERENCES ada_productor (id_prod);
+CREATE INDEX ada_I_FK_id_prod_mem on ada_membresia (id_prod);
 ALTER TABLE ada_membresia
 ADD CONSTRAINT FK_id_prov FOREIGN KEY (id_prov)
 REFERENCES ada_proveedor (id_prov);
+CREATE INDEX ada_I_FK_id_prov_mem on ada_membresia (id_prov);
+
 
 
 ALTER TABLE ada_alternativa_pago
 ADD CONSTRAINT FK_id_prov FOREIGN KEY (id_prov)
 REFERENCES ada_proveedor (id_prov);
+CREATE INDEX ada_I_FK_id_prov_alt on ada_alternativa_pago (id_prov);
 
 
 ALTER TABLE ada_cuota
 ADD CONSTRAINT FK_cuota FOREIGN KEY (id_prov,metodo_pago)
 REFERENCES ada_alternativa_pago (id_prov,metodo_pago);
+CREATE INDEX ada_I_FK_id_cuota on ada_cuota (id_prov,metodo_pago);
 
 
 ALTER TABLE ada_presentacion_e
 ADD CONSTRAINT FK_cas FOREIGN KEY (cas)
 REFERENCES ada_esencia (cas);
+CREATE INDEX ada_I_FK_id_esencia_p on ada_presentacion_e (cas);
 ALTER TABLE ada_presentacion_e
 ADD CONSTRAINT FK_cas_oi FOREIGN KEY (cas_oi)
 REFERENCES ada_otros_ing (cas_oi);
+CREATE INDEX ada_I_FK_id_otro_ing_p on ada_presentacion_e (cas_oi);
 
 
 ALTER TABLE ada_alternativa_envio
 ADD CONSTRAINT FK_id_pais FOREIGN KEY (id_pais)
 REFERENCES ada_pais (id_pais);
+CREATE INDEX ada_I_FK_id_pais_env on ada_alternativa_envio (id_pais);
 ALTER TABLE ada_alternativa_envio
 ADD CONSTRAINT FK_id_prov FOREIGN KEY (id_prov)
 REFERENCES ada_proveedor (id_prov);
+CREATE INDEX ada_I_FK_id_prov_env on ada_alternativa_envio (id_prov);
 
 
 ALTER TABLE ada_modificador_envio
 ADD CONSTRAINT FK_modif_e FOREIGN KEY(id_prov,id_pais,tipo_envio)
 REFERENCES ada_alternativa_envio (id_prov,id_pais,tipo_envio);
+CREATE INDEX ada_I_FK_id_modif_env on ada_modificador_envio (id_prov,id_pais,tipo_envio);
+
 
 
 ALTER TABLE ada_contratacion_prod
 ADD CONSTRAINT FK_contrac_p FOREIGN KEY (id_prod,id_prov,numero_contrato)
 REFERENCES ada_contrato (id_prod,id_prov,numero_contrato);
+CREATE INDEX ada_I_FK_contrato_pc on ada_contratacion_prod (id_prod,id_prov,numero_contrato);
 ALTER TABLE ada_contratacion_prod
 ADD CONSTRAINT FK_cas_contract FOREIGN KEY (cas)
 REFERENCES ada_esencia (cas);
+CREATE INDEX ada_I_FK_esencia_contra on ada_contratacion_prod (cas);
 ALTER TABLE ada_contratacion_prod
 ADD CONSTRAINT FK_cas_oi FOREIGN KEY (cas_oi)
 REFERENCES ada_otros_ing (cas_oi);
+CREATE INDEX ada_I_FK_contrato_oipc on ada_contratacion_prod (cas_oi);
 
 
 ALTER TABLE ada_contratacion_ap
 ADD CONSTRAINT FK_contrac_ap FOREIGN KEY (id_prod,id_prov,numero_contrato)
 REFERENCES ada_contrato (id_prod,id_prov,numero_contrato);
+CREATE INDEX ada_I_FK_contrato_ac on ada_contratacion_ap (id_prod,id_prov,numero_contrato);
 ALTER TABLE ada_contratacion_ap
 ADD CONSTRAINT FK_prov_pago FOREIGN KEY (id_prov2,metodo_pago)
 REFERENCES ada_alternativa_pago (id_prov,metodo_pago);
+CREATE INDEX ada_I_FK_prov_pago_ac on ada_contratacion_ap (id_prov2,metodo_pago);
+
 
 
 ALTER TABLE ada_contratacion_me
 ADD CONSTRAINT FK_contrac_me FOREIGN KEY (id_prod,id_prov,numero_contrato)
 REFERENCES ada_contrato (id_prod,id_prov,numero_contrato);
+CREATE INDEX ada_I_FK_contract_me on ada_contratacion_me (id_prod,id_prov,numero_contrato);
 ALTER TABLE ada_contratacion_me
 ADD CONSTRAINT FK_prov_pais FOREIGN KEY (id_prov2,id_pais,tipo_envio)
 REFERENCES ada_alternativa_envio (id_prov,id_pais,tipo_envio);
+CREATE INDEX ada_I_FK_prov_pais_me on ada_contratacion_me (id_prov2,id_pais,tipo_envio);
 
 
 ALTER TABLE ada_escala
 ADD CONSTRAINT FK_id_prod FOREIGN KEY (id_prov)
 REFERENCES ada_proveedor (id_prov);
+CREATE INDEX ada_I_FK_prov_escala on ada_escala (id_prov);
+
 
 
 ALTER TABLE ada_eval_criterio
 ADD CONSTRAINT FK_id_prov FOREIGN KEY (id_prov)
 REFERENCES ada_proveedor (id_prov);
+CREATE INDEX ada_I_FK_prov_eval_cri on ada_eval_criterio (id_prov);
 ALTER TABLE ada_eval_criterio
 ADD CONSTRAINT FK_id_criterio FOREIGN KEY (id_criterio)
 REFERENCES ada_criterio_eval (id_criterio);
+CREATE INDEX ada_I_FK_criterio_eval on ada_eval_criterio (id_criterio);
+
 
 
 ALTER TABLE ada_pedido
 ADD CONSTRAINT FK_contrac_p
 FOREIGN KEY (id_prod1,id_prov1,numero_contrato1,id_prov2,metodo_pago)
 REFERENCES ada_contratacion_ap (id_prod,id_prov,numero_contrato,id_prov2,metodo_pago);
+CREATE INDEX ada_I_FK_contrato_pedido on ada_pedido (id_prod1,id_prov1,numero_contrato1,id_prov2,metodo_pago);
 ALTER TABLE ada_pedido
 ADD CONSTRAINT FK_contrac_me
 FOREIGN KEY(id_prod3,id_prov3,numero_contrato2,id_prov4,id_pais,tipo_envio)
 REFERENCES ada_contratacion_me (id_prod,id_prov,numero_contrato,id_prov2,id_pais,tipo_envio);
+CREATE INDEX ada_I_FK_me_pedido on ada_pedido (id_prod3,id_prov3,numero_contrato2,id_prov4,id_pais,tipo_envio);
+
 
 
 ALTER TABLE ada_det_pedido
 ADD CONSTRAINT FK_id_pedido FOREIGN KEY (id_pedido)
 REFERENCES ada_pedido (id_pedido);
+CREATE INDEX ada_I_FK_id_det_pedido on ada_det_pedido (id_pedido);
 ALTER TABLE ada_det_pedido
 ADD CONSTRAINT FK_sku FOREIGN KEY (sku)
 REFERENCES ada_presentacion_e (sku);
+CREATE INDEX ada_I_FK_sku_det_pedido on ada_det_pedido (sku);
+
 
 
 ALTER TABLE ada_pago
 ADD CONSTRAINT FK_id_pedido FOREIGN KEY (id_pedido)
 REFERENCES ada_pedido (id_pedido);
+CREATE INDEX ada_I_FK_pago on ada_pago (id_pedido);
+
 
 
 ALTER TABLE ada_familia_palabra
 ADD CONSTRAINT FK_id_familia FOREIGN KEY (id_familia)
 REFERENCES ada_familia_olfativa (id_familia);
+CREATE INDEX ada_I_FK_id_familia_palabra on ada_familia_palabra (id_familia);
 ALTER TABLE ada_familia_palabra
 ADD CONSTRAINT FK_id_pc FOREIGN KEY (id_pc)
 REFERENCES ada_palabra_clave (id_pc);
+CREATE INDEX ada_I_FK_id_palabra_familia on ada_familia_palabra (id_pc);
+
 
 
 ALTER TABLE ada_otros_esencia
 ADD CONSTRAINT FK_cas_oi FOREIGN KEY (cas_oi)
 REFERENCES ada_otros_ing (cas_oi);
+CREATE INDEX ada_I_FK_cas_oi_otros on ada_otros_esencia (cas_oi);
 ALTER TABLE ada_otros_esencia
 ADD CONSTRAINT FK_cas FOREIGN KEY (cas)
 REFERENCES ada_esencia (cas);
+CREATE INDEX ada_I_FK_cas_esencia_otros on ada_otros_esencia (cas);
