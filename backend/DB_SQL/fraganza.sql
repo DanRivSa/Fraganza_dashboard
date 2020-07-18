@@ -313,21 +313,20 @@ CONSTRAINT CK_periodo_vigencia CHECK (periodo_vigencia > 0)
 
 CREATE TABLE ada_presentacion_e(
 sku SMALLINT,
-nombre_etiqueta VARCHAR(30) NOT NULL,
-precio numeric(5,2) NOT NULL,
+nombre_etiqueta VARCHAR(50) NOT NULL,
+precio numeric(7,2) NOT NULL,
 cantidad_perpack numeric(2) NOT NULL,
-fecha_elab DATE NOT NULL,
 unidad_medida CHAR(2) NOT NULL,
 contenido_neto SMALLINT NOT NULL,
-fecha_caducidad DATE NOT NULL,
-detalles VARCHAR(100),
+tipo_empaque CHAR(3) NOT NULL,
 cas INTEGER,
 cas_oi INTEGER,
 CONSTRAINT PK_presentacion_e PRIMARY KEY (sku),
 CONSTRAINT CK_precio_pe CHECK (precio > 0),
 CONSTRAINT CK_cantidadpk CHECK (cantidad_perpack > 0),
+CONSTRAINT CK_tipo_empaque CHECK (tipo_empaque in('IBC','GRG','KTC')),
 CONSTRAINT CK_contenido CHECK (contenido_neto > 0),
-CONSTRAINT CK_unidad CHECK (unidad_medida in ('g','mg','ml','l')),
+CONSTRAINT CK_unidad CHECK (unidad_medida in ('kg','g','mg','ml','l')),
 CONSTRAINT CK_cas CHECK (cas > 0)
 );
 

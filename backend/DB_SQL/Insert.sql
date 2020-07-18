@@ -242,14 +242,15 @@ INSERT INTO ada_pais VALUES(239, 'ZM', 'Zambia','Af');
 INSERT INTO ada_pais VALUES(240, 'ZW', 'Zimbabue','Af');
 
 
---Familias Olfativas
 
+--Familias Olfativas
 INSERT INTO ada_familia_olfativa (nombre_familia)
 VALUES('Verde'),('Cítrico'),('Flores'),('Frutas'),('Aromáticos'),('Helechos'),
 ('Chipe'),('Maderas'),('Orientales'),('Otros');
 
---Insertar asociaciones
 
+
+--Insertar asociaciones
 INSERT INTO ada_asoc_nacional(nombre_asoc,region,descripcion) VALUES
 (
     'ACHISAF',
@@ -289,8 +290,8 @@ INSERT INTO ada_asoc_nacional(nombre_asoc,region,descripcion) VALUES
 );
 
 
---Insertar proveedores
 
+--Insertar proveedores
 INSERT INTO ada_proveedor (nombre_prov,id_pais,telefono,direccion_fiscal,calle,cod_postal,avenida,email) VALUES
 (
     'Firmenich',
@@ -356,7 +357,6 @@ INSERT INTO ada_proveedor (nombre_prov,id_pais,id_asoc,telefono,direccion_fiscal
 
 
 --Inserciones productores
-
 INSERT INTO ada_productor (nombre_prod,telefono,direccion_fiscal,calle,cod_postal,avenida,email) VALUES
 (
     'Givuduan',
@@ -404,8 +404,8 @@ INSERT INTO ada_productor (nombre_prod,id_asoc,telefono,direccion_fiscal,calle,c
     'EurofraganceEsp@gmail.in.co'
 );
 
---membresias proveedores
 
+--membresias proveedores
 INSERT INTO ada_membresia(fecha_inicio, id_prov,tipo) VALUES
 ('2000-07-16',1,'PRI'
 );
@@ -422,9 +422,9 @@ INSERT INTO ada_membresia(fecha_inicio, id_prov,tipo) VALUES
     '2013-01-22',4,'ASC'
 );
 
-INSERT INTO ada_membresia(fecha_inicio, id_prov,tipo) VALUES
+INSERT INTO ada_membresia(fecha_inicio, id_prov,tipo,fecha_fin) VALUES
 (
-    '2013-01-22',5,'ASC'
+    '2013-01-22',5,'ASC','2015-01-01'
 );
 
 --membresias para productores
@@ -453,20 +453,21 @@ INSERT INTO ada_membresia(fecha_inicio, id_prod,tipo) VALUES
 
 
 --LISTAR PAISES A LOS CUALES QUIERE RECIBIR EL PRODUCTOR
-
-
 INSERT INTO ada_prod_pais (id_prod,id_pais) VALUES
+--GIVAUDAN
 (1,208),(1,33),(1,52),(1,229),(1,13),(1,173),(1,146),(1,235),(1,82),(1,73),(1,4),(1,24),(1,176),(1,203),
 (1,105),(1,47),(1,114),
+--FLORAMATIC
 (2,46),
+--AuraFragance
 (3,73),
+--Eurofragance
 (4,180),(4,52),(4,146),(4,203),(4,59),(4,69),(4,105),(4,225),(4,73),(4,200),(4,212),(4,79);
 
 
+
 --PRODUCTOS DE PROVEEDORES
-
 --INICIO DE FIRMENICH
-
 --Lorysia
 INSERT INTO ada_otros_ing (cas_oi,nombre_comercial,nombre_quimico,id_prov,tipo,
 desc_olfativ,desc_uso,fema_number,retcs_number,einecs_number) VALUES
@@ -481,7 +482,6 @@ fema_number,retcs_number,einecs_number,proc_extraccion) VALUES
 'Arbusto deciduo, espinoso y vigoroso',2989,null,2689783,'f');
 INSERT INTO ada_familia_esencia (id_familia,cas) VALUES (3,0008007010);
 INSERT INTO ada_origen (id_pais,cas) VALUES (35,0008007010),(225,0008007010);
-
 
 --Vetiver Sfe
 INSERT INTO ada_esencia (cas,nombre_comercial,nombre_quimico,id_prov,estado_fisico,solubilidad,flashpoint,duracion,apariencia,
@@ -541,6 +541,7 @@ apariencia,fema_number,retcs_number,einecs_number,proc_extraccion) VALUES
 INSERT INTO ada_familia_esencia(id_familia,cas) VALUES(2,84929317);
 INSERT INTO ada_origen (id_pais,cas) VALUES (47,84929317);
 
+
 --Alpha Aromatics
 
 -- Grapefruit & Sea Salt
@@ -573,7 +574,7 @@ INSERT INTO ada_origen (id_pais,cas) VALUES (75,91770886),(42,91770886);
 --Cumarina
 INSERT INTO ada_otros_ing (cas_oi,nombre_comercial,nombre_quimico,id_prov,tipo,
 desc_olfativ,desc_uso,fema_number,retcs_number,einecs_number) VALUES
-(9165,'Cumarina','1,2-Benzopyrone',3,
+(91645,'Cumarina','1,2-Benzopyrone',3,
 'componente','Heno dulce, tonka nuevo heno cortado.',
 'Crear aceites esenciales artificiales de Haba Tonka',null,null,2020867);
 
@@ -590,6 +591,132 @@ desc_olfativ,desc_uso,fema_number,retcs_number,einecs_number) VALUES
 (118581,'Salicilato de Bencilo','Benzyl 2-Hydroxybenzoate',3,
 'componente','Débil, dulce, floral, ligeramente balsámico.',
 'Fragancias principales en el cuidado de telas,perfumes y jabones',2151,null,2042629);
+
+
+
+
+--PRESENTACIONES DE TIPO OTRO_INGREDIENTE (MOLECULAS)
+
+--Lorysia
+INSERT INTO ada_presentacion_e
+(nombre_etiqueta,precio,cantidad_perpack,unidad_medida,contenido_neto,tipo_empaque,cas,cas_oi)
+VALUES
+('Lorysia',18000.99, 1,'kg',100,'IBC',null,10411924),
+('Lorysia',5900.50, 1,'kg',15,'IBC',null,10411924),
+('Lorysia',3000,1,'kg',5,'IBC',null,10411924);
+
+
+--Amber Gamma
+
+INSERT INTO ada_presentacion_e
+(nombre_etiqueta,precio,cantidad_perpack,unidad_medida,contenido_neto,tipo_empaque,cas,cas_oi)
+VALUES
+('Amber Gamma',46999.99, 1,'kg',200,'IBC',null,54464572),
+('Amber Gamma',20000.50, 1,'kg',25,'IBC',null,54464572),
+('Amber Gamma',5999.99,1,'kg',5,'IBC',null,54464572);
+
+--Nimberol
+INSERT INTO ada_presentacion_e
+(nombre_etiqueta,precio,cantidad_perpack,unidad_medida,contenido_neto,tipo_empaque,cas,cas_oi)
+VALUES
+('Nimberol',26999.99, 1,'kg',180,'IBC',null,70788306),
+('Nimberol',7000, 1,'kg',25,'IBC',null,70788306),
+('Nimberol',1350.99,1,'kg',5,'IBC',null,70788306);
+
+--ACETATO DE GENARILO
+INSERT INTO ada_presentacion_e
+(nombre_etiqueta,precio,cantidad_perpack,unidad_medida,contenido_neto,tipo_empaque,cas,cas_oi)
+VALUES
+('Acetato de Genarilo',26999.99, 1,'kg',180,'IBC',null,105873),
+('Acetato de Genarilo',7000, 1,'kg',25,'IBC',null,105873),
+('Acetato de Genarilo',1350.99,1,'kg',5,'IBC',null,105873);
+
+
+--Cumarina
+INSERT INTO ada_presentacion_e
+(nombre_etiqueta,precio,cantidad_perpack,unidad_medida,contenido_neto,tipo_empaque,cas,cas_oi)
+VALUES
+('Cumarina',7600.99, 1,'kg',50,'IBC',null,91645),
+('Cumarina',3400.99, 1,'kg',25,'IBC',null,91645);
+
+
+-- Salicilato de Bencilo
+INSERT INTO ada_presentacion_e
+(nombre_etiqueta,precio,cantidad_perpack,unidad_medida,contenido_neto,tipo_empaque,cas,cas_oi)
+VALUES
+('Salicilato de Bencilo',7600.99, 1,'kg',50,'IBC',null,118581),
+('Salicilato de Bencilo',3400.99, 1,'kg',25,'IBC',null,118581);
+
+--Hexil Cinamaldehído
+
+INSERT INTO ada_presentacion_e
+(nombre_etiqueta,precio,cantidad_perpack,unidad_medida,contenido_neto,tipo_empaque,cas,cas_oi)
+VALUES
+('Hexil Cinamaldehído',7600.99, 1,'kg',50,'IBC',null,165184985),
+('Hexil Cinamaldehído',3400.99, 1,'kg',25,'IBC',null,165184985);
+
+
+
+
+--PRESENTACIONES DE TIPO ESENCIA
+
+--FIRMENICH
+--Rose Eo
+INSERT INTO ada_presentacion_e(nombre_etiqueta,precio,cantidad_perpack,unidad_medida,contenido_neto,
+tipo_empaque,cas,cas_oi) VALUES
+('Rose Eo',388.46,20,'ml',250,'IBC',8007010,NULL),
+('Rose Eo',720,20,'ml',500,'IBC',8007010,NULL),
+('Rose Eo',10067.66,20,'l',4,'IBC',8007010,NULL),
+('Rose Eo',46089.78,1,'l',200,'IBC',8007010,NULL);
+
+
+
+--PT Sensient Technologies Indonesia
+--Extracto de Vainilla
+INSERT INTO ada_presentacion_e(nombre_etiqueta,precio,cantidad_perpack,unidad_medida,contenido_neto,
+tipo_empaque,cas,cas_oi) VALUES
+('Extracto de vainilla',700.46,20,'ml',250,'IBC',94167143,NULL),
+('Extracto de vainilla',1230.00,20,'ml',500,'IBC',94167143,NULL),
+('Extracto de vainilla',10067.66,20,'l',4,'IBC',94167143,NULL),
+('Extracto de vainilla',46089.78,1,'l',200,'IBC',94167143,NULL);
+
+--Extracto de Cardomomo
+INSERT INTO ada_presentacion_e(nombre_etiqueta,precio,cantidad_perpack,unidad_medida,contenido_neto,
+tipo_empaque,cas,cas_oi) VALUES
+('Extracto de Cardamomo',878.99,30,'ml',200,'IBC',8000666,NULL),
+('Extracto de Cardamomo',416.30,42,'ml',60,'IBC',8000666,NULL);
+
+--Extracto de Limón
+INSERT INTO ada_presentacion_e(nombre_etiqueta,precio,cantidad_perpack,unidad_medida,contenido_neto,
+tipo_empaque,cas,cas_oi) VALUES
+('Extracto de limón',642.60,42,'ml',250,'IBC',84929317,NULL),
+('Extracto de limón',2197.38,42,'l',1,'IBC',84929317,NULL),
+('Extracto de limón',4197.38,42,'l',2,'IBC',84929317,NULL);
+
+
+
+-- ALPHA AROMATIC
+--Extracto de Pomelo
+INSERT INTO ada_presentacion_e(nombre_etiqueta,precio,cantidad_perpack,unidad_medida,contenido_neto,
+tipo_empaque,cas,cas_oi) VALUES
+('Extracto de pomelo',8685.33,50,'ml',500,'IBC',67674468,NULL),
+('Extracto de pomelo',25540.88,20,'l',2,'IBC',67674468,NULL),
+('Extracto de pomelo',48540.26,20,'l',4,'IBC',67674468,NULL);
+
+--Extracto de flor de la mascula de orquis
+INSERT INTO ada_presentacion_e(nombre_etiqueta,precio,cantidad_perpack,unidad_medida,contenido_neto,
+tipo_empaque,cas,cas_oi) VALUES
+('Extracto de flor de la mascula de orquis',60340.26,1,'l',6,'IBC',90082249,NULL),
+('Extracto de flor de la mascula de orquis',80340.26,1,'l',8,'IBC',90082249,NULL);
+
+--Cranberry Fragance Oil
+INSERT INTO ada_presentacion_e(nombre_etiqueta,precio,cantidad_perpack,unidad_medida,contenido_neto,
+tipo_empaque,cas,cas_oi) VALUES
+('Cranberry Fragrance Oil',34340.26,1,'l',4,'IBC',91770886,NULL),
+('Cranberry Fragrance Oil',56340.26,1,'l',6,'IBC',91770886,NULL);
+
+
+
 
 
 
@@ -670,7 +797,6 @@ VALUES ('Antoine',null,'Maisondieu',null,82);
 
 
 --ALTERNATIVAS DE ENVIO
-
 --FIRMENICH
 INSERT INTO ada_alternativa_envio (id_prov,id_pais,porc_base,tipo_envio) VALUES
 (1,47,25,'m'),(1,47,10,'a'),(1,81,25,'m'),(1,108,35,'a'),(1,73,20,'m'),
@@ -686,7 +812,8 @@ INSERT INTO ada_alternativa_envio (id_prov,id_pais,porc_base,tipo_envio) VALUES
 (2,117,14,'m'),(2,117,17,'a'),(2,208,0,'t'),(2,208,5,'a'),(2,208,5,'m'),
 (2,105,0,'m'),(2,105,5,'a'),(2,106,3,'m'),(2,106,10,'a'),(2,200,12,'m'),
 (2,200,10,'a'),(2,13,28,'a'),(2,13,12,'m'),(2,40,15,'m'),(2,46,30,'a');
-select * from ada_pais where id_pais = 80;
+
+
 --Eternis
 INSERT INTO ada_alternativa_envio (id_prov,id_pais,porc_base,tipo_envio) VALUES
 (3,46,15,'m'),(3,47,30,'a'),(3,81,15,'m'),(3,111,5,'a'),(3,111,2,'m'),
@@ -715,22 +842,7 @@ INSERT INTO ada_alternativa_pago(id_prov,metodo_pago) VALUES
 
 
 --PRODUCTOS DE productores
-
-CREATE TABLE ada_perfume (
-id_perfume SMALLINT,
-nombre VARCHAR(15) NOT NULL UNIQUE,
-genero CHAR(1) NOT NULL,
-preferencia_uso CHAR(1) NOT NULL,
-fecha_creacion SMALLINT NOT NULL,
-edad VARCHAR(10) NOT NULL,
-id_prod SMALLINT NOT NULL,
-CONSTRAINT PK_perfume PRIMARY KEY (id_perfume),
-CONSTRAINT CK_genero CHECK (genero in ('m','f','u')),
-CONSTRAINT CK_preferencia_uso CHECK (preferencia_uso in ('d','t','s')),
-CONSTRAINT CK_edad CHECK (edad in ('adulto','joven','infantil','atemporal'))
-);
 --INICIO DE GIVAUDAN
-
 --Prada Lhome
 INSERT INTO ada_perfume (id_perfume,nombre,genero,preferencia_uso,fecha_creacion,edad,id_prod)
 VALUES (10,'Prada Lhomme','m','t',2016,'adulto',1);
@@ -749,10 +861,11 @@ VALUES (12,'Bvlgari Man in Black','m','s',2014,'adulto',1);
 
 INSERT INTO ada_creador_perfume (id_perfumista,id_perfume)
 VALUES
-(1,10),(1,10),(2,11);
+(1,10),(1,11),(2,12);
+
+
 
 --ada_esencia_perfume
-
 --PRADA LHOME
 INSERT INTO ada_esencia_perfume (cas_ep,nombre,tipo)
 VALUES
@@ -769,49 +882,156 @@ VALUES
 (8000666,'Cardomomo','natural'),
 (84929419,'Pimienta Negra','natural');
 
+--Familia Olfativas
 INSERT INTO ada_perfume_familia (id_perfume,id_familia)
 VALUES (10,7),(10,8);
 
+--Notas
 INSERT INTO ada_perfume_nota (id_perfume,cas_ep,tipo)
 VALUES
 (10,8016384,'s'),(10,8000666,'s'),(10,8015881,'s'),(10,84929419,'s'),
 (10,8000462,'c'),(10,90045899,'c'),(10,68916961,'c'),(10,8024086,'c'),
 (10,8006879,'f'),(10,8002673,'f'),(10,80002729,'f'),(10,8014093,'f');
 
-
-CREATE TABLE ada_intensidad(
-id_int SMALLINT NOT NULL,
-id_perfume SMALLINT NOT NULL,
-tipo CHAR(3) NOT NULL,
-porc_concentracion SMALLINT NOT NULL,
-descripcion VARCHAR(100),
-CONSTRAINT PK_intensidad PRIMARY KEY (id_int,id_perfume),
-CONSTRAINT CK_porc_concentracion CHECK (porc_concentracion > 0 and porc_concentracion <=100),
-CONSTRAINT CK_tipo_p CHECK (tipo in ('p','edp','edt','edc','eds'))
-);
+--Intensidades disponibles
 INSERT INTO ada_intensidad (id_perfume,tipo,porc_concentracion,descripcion)
 VALUES
-(10,'edt',8,'Se trata de un aroma creado a base de contraposiciones, y que representa la dualidad de la identidad masculina. En ella se revela una nueva visión de la masculinidad bajo la visión de Prada.');
+(10,'edt',8,'Se trata de un aroma creado a base de contraposiciones, y que representa la dualidad de la identidad masculina. En ella se revela una nueva visión de la masculinidad bajo la visión de Prada.'),
 (10,'edp',15,null);
 
+--Presentaciones
 INSERT INTO ada_presentacion_p (id_int,id_perfume,capacidad_ml)
 VALUES
 (1,10,50),(1,10,100),(1,10,150),
 (2,10,50),(2,10,100),(2,10,150);
 
+--Ingredientes
 INSERT INTO ada_ingrediente_p (cas_ip,nombre,tipo)
 VALUES
 (90017,'ALCOHOL','componente'),(7732185,'AQUA (WATER)','componente'),
 (5989275,'LIMONENE','componente'),(5466773,'ETHYLHEXYL METHOXYCINNAMATE','componente'),
 (38078090,'DIETHYLAMINO','componente'),(302776687,'HYDROXYBENZOYL HEXYLBENZOATE','componente'),
 (5392405,'CITRAL','componente'),(104552,'CINAMMAL','componente'),(78706,'LINLOOL','componente'),
-(128370​,'BHT','componente');
+(128370​,'BHT','componente'),(1,'Parfum (FRAGANCE)','otro');
 
-
+--Ingredientres presentes en el perfume
 INSERT INTO ada_perf_ing (id_perfume,cas_ip)
 VALUES
 (10,90017),(10,7732185),(10,5989275),(10,5466773),(10,38078090),
-(10,302776687),(10,104552),(10,78706),(10,128370​);
+(10,302776687),(10,104552),(10,78706),(10,128370​),(10,1);
+
+--Fin de Prada Lhome
+
 
 
 --PRADA LUNA ROSA
+
+
+--PRADA LUNA ROSA
+
+--ada_esencia_perfume
+--PRADA LHOME
+INSERT INTO ada_esencia_perfume (cas_ep,nombre,tipo)
+VALUES
+(72968504,'Naranja Amarga','natural'),
+(8006904,'Menta','natural'),
+(8000280,'Lavanda','natural'),
+(6790585,'Ambroxan','natural'),
+(8016635,'Esclarea ','natural'),
+(8015621,'Almizcle Ambreta','natural');
+--Familia Olfativas
+INSERT INTO ada_perfume_familia (id_perfume,id_familia)
+VALUES
+(11,2),(11,5);
+
+
+
+--Notas
+INSERT INTO ada_perfume_nota (id_perfume,cas_ep,tipo)
+VALUES
+(11,72968504,'s'),(11,8000280,'s'),
+(11,8006904,'c'),(11,8016635,'c'),
+(11,8015621,'f'),(11,6790585,'f');
+
+
+--Intensidades disponibles
+INSERT INTO ada_intensidad (id_perfume,tipo,porc_concentracion,descripcion)
+VALUES
+
+(11,'edp',12,'El nuevo perfume masculino Prada está construido sobre la búsqueda de la excelencia.');
+
+--Presentaciones
+INSERT INTO ada_presentacion_p (id_int,id_perfume,capacidad_ml)
+VALUES
+(3,11,100),(3,11,150),(3,11,50);
+
+--Ingredientes
+INSERT INTO ada_ingrediente_p (cas_ip,nombre,tipo)
+VALUES
+(7540514,'CITRONELLOL','componente'),(91645,'COUMARIN','componente'),
+(80546,'BUTYLPHENYL METHYLPROPIONAL','componente'),(127515,'ALPHA-ISOMETHYL IONONE','componente'),
+(118605,'ETHYLHEXYL SALICYLATE','componente'),(106241,'GERANIOL','componente');
+
+
+--Ingredientres presentes en el perfume
+INSERT INTO ada_perf_ing (id_perfume,cas_ip)
+VALUES
+(11,7540514),(11,91645),(11,80546),(11,127515),(11,118605),(11,106241),
+(11,1),(11,90017),(11,7732185),(11,5989275),(11,5392405),(11,128370),
+(11,78706);
+
+--Fin de PRADA LUNA ROSA
+
+--Inicio de Bvlgari Man In Black
+
+INSERT INTO ada_esencia_perfume (cas_ep,nombre,tipo)
+VALUES
+(8013103,'Extracto de Cuero','natural'),
+(90604301,'Extracto de Ron','natural'),
+(68915855,'Especias','natural'),
+(9000720,'Benjuí','natural'),
+(8016237,'Madera de Gaiac ','natural'),
+(8037192,'Tabaco','natural'),
+(8046228,'Haba Tonka','natural'),
+(8024053,'Nardos','natural');
+--Familia Olfativas
+INSERT INTO ada_perfume_familia (id_perfume,id_familia)
+VALUES
+(12,9),(12,3);
+--Notas
+INSERT INTO ada_perfume_nota (id_perfume,cas_ep,tipo)
+VALUES
+(12,90604301,'s'),(12,68915855,'s'),(12,8037192,'s'),
+(12,90045899,'c'),(12,8013103,'c'),(12,8024053,'s'),
+(12,8046228,'f'),(12,9000720,'f'),(12,8016237,'s');
+
+
+--Intensidades disponibles
+INSERT INTO ada_intensidad (id_perfume,tipo,porc_concentracion,descripcion)
+VALUES
+
+(12,'edp',15,'Man in Black de Bvlgari es un perfume intenso, masculino; compuesto por ámbar, cuero y especias. Una fragancia que no deja indiferente a nadie.');
+
+--Presentaciones
+INSERT INTO ada_presentacion_p (id_int,id_perfume,capacidad_ml)
+VALUES
+(4,12,100),(4,12,60),(4,12,30),(4,12,150);
+
+--Ingredientes
+INSERT INTO ada_ingrediente_p (cas_ip,nombre,tipo)
+VALUES
+(97530,'Eugenol','componente'),(120514,'Benzyl Benzoate','componente'),
+(100516,'Benzyl Alcohol','componente'),(4602840,'Farnesol','componente');
+
+
+--Ingredientres presentes en el perfume
+INSERT INTO ada_perf_ing (id_perfume,cas_ip)
+VALUES
+(12,1),(12,90017),(12,7732185),(12,78706),(12,5466773),(12,5989275),
+(12,91645),(12,80546),(12,118605),(12,97530),(12,7540514),(12,104552),
+(12,120514),(12,5392405),(12,106241),(12,100516),(12,4602840),(12,128370);
+
+
+--FIN Bvlgari MAN IN BLACK
+
+--Filtro Proveedores Potenciales
