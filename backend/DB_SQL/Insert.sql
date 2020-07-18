@@ -1,5 +1,4 @@
 --PAISES
-
 INSERT INTO ada_pais VALUES(1, 'AF', 'Afganistán','As');
 INSERT INTO ada_pais VALUES(2, 'AX', 'Islas Aland','Eu');
 INSERT INTO ada_pais VALUES(3, 'AL', 'Albania','Eu');
