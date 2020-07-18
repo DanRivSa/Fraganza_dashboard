@@ -700,20 +700,20 @@ tipo_empaque,cas,cas_oi) VALUES
 INSERT INTO ada_presentacion_e(nombre_etiqueta,precio,cantidad_perpack,unidad_medida,contenido_neto,
 tipo_empaque,cas,cas_oi) VALUES
 ('Extracto de pomelo',8685.33,50,'ml',500,'IBC',67674468,NULL),
-('Extracto de pomelo',25540.88,20,'l',2,'IBC',67674468,NULL),
-('Extracto de pomelo',48540.26,20,'l',4,'IBC',67674468,NULL);
+('Extracto de pomelo',25540.88,100,'l',2,'IBC',67674468,NULL),
+('Extracto de pomelo',48540.26,350,'l',4,'IBC',67674468,NULL);
 
 --Extracto de flor de la mascula de orquis
 INSERT INTO ada_presentacion_e(nombre_etiqueta,precio,cantidad_perpack,unidad_medida,contenido_neto,
 tipo_empaque,cas,cas_oi) VALUES
-('Extracto de flor de la mascula de orquis',60340.26,1,'l',6,'IBC',90082249,NULL),
-('Extracto de flor de la mascula de orquis',80340.26,1,'l',8,'IBC',90082249,NULL);
+('Extracto de flor de la mascula de orquis',60340.26,350,'l',6,'IBC',90082249,NULL),
+('Extracto de flor de la mascula de orquis',80340.26,450,'l',8,'IBC',90082249,NULL);
 
 --Cranberry Fragance Oil
 INSERT INTO ada_presentacion_e(nombre_etiqueta,precio,cantidad_perpack,unidad_medida,contenido_neto,
 tipo_empaque,cas,cas_oi) VALUES
-('Cranberry Fragrance Oil',34340.26,1,'l',4,'IBC',91770886,NULL),
-('Cranberry Fragrance Oil',56340.26,1,'l',6,'IBC',91770886,NULL);
+('Cranberry Fragrance Oil',3434.26,24,'l',4,'IBC',91770886,NULL),
+('Cranberry Fragrance Oil',5634.26,48,'l',6,'IBC',91770886,NULL);
 
 
 
@@ -1035,3 +1035,17 @@ VALUES
 --FIN Bvlgari MAN IN BLACK
 
 --Filtro Proveedores Potenciales
+
+
+--Palabras CLAVE familias olfastivas
+INSERT INTO ada_palabra_clave (palabra_unica)
+VALUES ('Romanticismo'),('Naturalidad'),('Calidez'),('Sensualidad'),
+('Versátil'),('Frescura'),('Pureza'),('Delicadez'),('Feminidad'),('Masculinidad'),
+('Unisex'),('Intensidad'),('Dulzura'),('Elegancia'),('Unisex'),(''),(''),(''),('Unisex'),(''),(''),(''),('Unisex'),(''),(''),(''),
+
+
+
+
+
+INSERT INTO ada_familia_palabra (id_pc,id_familia)
+VALUES (,),(,),(,),(,),(,),(,),(,),(,),(,),(,),;

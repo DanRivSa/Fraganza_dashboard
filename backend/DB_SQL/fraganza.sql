@@ -315,7 +315,7 @@ CREATE TABLE ada_presentacion_e(
 sku SMALLINT,
 nombre_etiqueta VARCHAR(50) NOT NULL,
 precio numeric(7,2) NOT NULL,
-cantidad_perpack numeric(2) NOT NULL,
+cantidad_perpack numeric(3) NOT NULL,
 unidad_medida CHAR(2) NOT NULL,
 contenido_neto SMALLINT NOT NULL,
 tipo_empaque CHAR(3) NOT NULL,
