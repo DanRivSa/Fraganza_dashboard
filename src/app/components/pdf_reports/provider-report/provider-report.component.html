@@ -1,36 +1,38 @@
-
+<app-navbar></app-navbar>
+<hr>
 <div class="container emp-profile">
-  <div class="jumbotron ">
-  <form method="post">
+  <div class="text-center">
+    <button class="btn btn-outline-dark btn-block" (click)="DescargarPDF()">
+      <h4 class="h5">Descargar PDF</h4>
+    </button>
+  </div>
+  <p></p>
+  <div class="jumbotron" id="ficha">
+  <form>
       <div class="row">
           <div class="col-md-4">
               <div class="profile-img">
-                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/>
-                  <div class="file btn btn-lg btn-primary">
-                      Change Photo
-                      <input type="file" name="file"/>
-                  </div>
+                  <img  src="../../../../assets/preveedor_pdf.jpg" alt="Responsive image"/>
               </div>
           </div>
           <div class="col-md-6">
               <div class="profile-head">
                           <h5 display-2>
-                              Nombre de la empresa
+                              Detalles de Proveedor
                           </h5>
-                          <h6 display-4>
-                              Asociación
+                          <h6 display-4 *ngIf="asociacion != null">
+                              Asociación: {{asociacion}}
                           </h6>
                           <br>
+                          <h5 class="text-center">Información</h5>
+                          <!--nav bar de ficha por si las
                   <ul class="nav nav-tabs" id="myTab" role="tablist">
                       <li class="nav-item">
                           <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Información</a>
                       </li>
                       
-                  </ul>
+                  </ul>-->
               </div>
-          </div>
-          <div class="col-md-2">
-              <input type="submit" class="btn btn-dark" name="btnAddMore" value="Generar PDF"/>
           </div>
       </div>
       <div class="row">
@@ -45,7 +47,7 @@
                                       <label>Nombre</label>
                                   </div>
                                   <div class="col-md-6">
-                                      <p>Kshiti123</p>
+                                      <p>{{nombre_proveedor}}</p>
                                   </div>
                               </div>
                               <div class="row">
@@ -53,7 +55,7 @@
                                       <label>Telefono</label>
                                   </div>
                                   <div class="col-md-6">
-                                      <p>Kshiti Ghelani</p>
+                                      <p>{{telefono}}</p>
                                   </div>
                               </div>
                               <div class="row">
@@ -61,7 +63,7 @@
                                       <label>Email</label>
                                   </div>
                                   <div class="col-md-6">
-                                      <p>kshitighelani@gmail.com</p>
+                                      <p>{{email}}</p>
                                   </div>
                               </div>
                               <div class="row">
@@ -69,7 +71,7 @@
                                       <label>Direccion fiscal</label>
                                   </div>
                                   <div class="col-md-6">
-                                      <p>123 456 7890</p>
+                                      <p>{{direccion_fiscal}}</p>
                                   </div>
                               </div>
                               <div class="row">
@@ -77,57 +79,9 @@
                                       <label>Codigo fiscal</label>
                                   </div>
                                   <div class="col-md-6">
-                                      <p>Web Developer and Designer</p>
+                                      <p>{{codigo_postal}}</p>
                                   </div>
                               </div>
-                  </div>
-                  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                              <div class="row">
-                                  <div class="col-md-6">
-                                      <label>Experience</label>
-                                  </div>
-                                  <div class="col-md-6">
-                                      <p>Expert</p>
-                                  </div>
-                              </div>
-                              <div class="row">
-                                  <div class="col-md-6">
-                                      <label>Hourly Rate</label>
-                                  </div>
-                                  <div class="col-md-6">
-                                      <p>10$/hr</p>
-                                  </div>
-                              </div>
-                              <div class="row">
-                                  <div class="col-md-6">
-                                      <label>Total Projects</label>
-                                  </div>
-                                  <div class="col-md-6">
-                                      <p>230</p>
-                                  </div>
-                              </div>
-                              <div class="row">
-                                  <div class="col-md-6">
-                                      <label>English Level</label>
-                                  </div>
-                                  <div class="col-md-6">
-                                      <p>Expert</p>
-                                  </div>
-                              </div>
-                              <div class="row">
-                                  <div class="col-md-6">
-                                      <label>Availability</label>
-                                  </div>
-                                  <div class="col-md-6">
-                                      <p>6 months</p>
-                                  </div>
-                              </div>
-                      <div class="row">
-                          <div class="col-md-12">
-                              <label>Your Bio</label><br/>
-                              <p>Your detail description</p>
-                          </div>
-                      </div>
                   </div>
               </div>
           </div>
@@ -135,3 +89,4 @@
   </form> 
   </div>          
 </div>
+

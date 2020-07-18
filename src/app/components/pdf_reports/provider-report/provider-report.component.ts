@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import { ReportsService } from 'src/app/services/reports.service';
-//import * as html2pdf from 'html2pdf.js'
+import * as html2pdf from 'html2pdf.js'
 
 @Component({
   selector: 'app-provider-report',
@@ -48,7 +48,23 @@ export class ProviderReportComponent implements OnInit {
 
   DescargarPDF()
   {
-    //implementar
+    //configurar ficha a descargar
+    let options = 
+    {
+      filename: `proveedor_${this.nombre_proveedor}.pdf`,
+      image: {type:'png'},
+      html2canvas:{},
+      jsPDF:{orientation:'landscape'}
+    }
+
+    //obtener ficha html a descargar
+    let elemento = document.getElementById('ficha');
+
+    //genera y descarga pdf
+    html2pdf()
+      .from(elemento)
+      .set(options)
+      .save()
   }
 
 }
