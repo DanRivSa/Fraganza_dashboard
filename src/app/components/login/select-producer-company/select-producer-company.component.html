@@ -1,11 +1,11 @@
 <br>
 <div class="container">
     <div class="container">
-        <div class="jumbotron text-center">
-            <img width="400" height="200" src="../../../assets/Imagen1.png"  role="img" >
+        <div class="jumbotron text-center shadow">
+            
+            <h2 class="h2 text-center display-4 ">Select company</h2>
             <br>
             <br>
-            <h2 class="h2 text-center">Select company</h2>
             <hr>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
@@ -16,16 +16,22 @@
                 </select>
             </div>
             <hr>
-            <div class="container text-center">
-                <button class="btn btn-primary btn-block" (click)="Login()">
-                    login
-                </button>
-                <p></p>
-                <a routerLink="">
-                    <button class="btn btn-danger btn-block">
-                        return to home screen
-                    </button>    
-                </a>
+            <br>
+            <br>
+            <div class="container ">
+                
+                    <button type="button" class="btn btn-primary btn-lg " (click)="Login()">
+                        login
+                    </button>
+                    <a routerLink="">
+                        <button type="button" class="btn btn-dark btn-lg " >
+                            return to home screen
+                        </button>    
+                    </a>
+
+                
+
+                
             </div>
         </div>
     </div>
