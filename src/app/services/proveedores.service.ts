@@ -8,11 +8,18 @@ export class ProveedoresService
 {
 
   //atributos
-  url_base:string = 'http://localhost:3000'
+  url_base:string = 'http://localhost:3000';
 
-  constructor(private cliente:HttpClient) { }
+  constructor(private cliente:HttpClient)
+  {
+  }
 
   //metodos
+  ObtenerNombre(id:number)
+  {
+    return this.cliente.get(`${this.url_base}/providers/nombre/${id}`);
+  }
+
   ObtenerEsencias(id:number)
   {
     return this.cliente.get(`${this.url_base}/providers/esencias/${id}`);
@@ -21,5 +28,10 @@ export class ProveedoresService
   ObtenerIngredietes(id:number)
   {
     return this.cliente.get(`${this.url_base}/providers/ingredientes/${id}`);
+  }
+
+  ObtenerAlternativasDeEnvio(id:number)
+  {
+    return this.cliente.get(`${this.url_base}/providers/alt_envio/${id}`);
   }
 }

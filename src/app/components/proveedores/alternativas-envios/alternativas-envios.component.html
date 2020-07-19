@@ -12,15 +12,15 @@
         <thead class="table-dark">
           <tr>
             <th scope="col">Pais</th>
-            <th scope="col">Porcentaje</th>
             <th scope="col">Via</th>
+            <th scope="col">Porcentaje base</th>
           </tr>
         </thead>
         <tbody>
-          <tr >
-            <th scope="row">tets</th>
-            <td>kds</td>
-            <td>jkahdj</td>
+          <tr *ngFor="let env of alt_envio" >
+            <th scope="row">{{env.nombre_pais}}</th>
+            <td>{{env.tipo_envio}}</td>
+            <td>{{env.porc_base}} %</td>
           </tr>
         </tbody>
       </table>

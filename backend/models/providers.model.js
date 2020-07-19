@@ -29,6 +29,17 @@ class ProviderModel
         return db_res;
     }
 
+    async ObtenerAlternativasEnvio(id)
+    {
+        const db_res = await db.query('SELECT nombre_pais,tipo_envio,porc_base FROM ada_pais ps INNER JOIN ada_alternativa_envio env  ON ps.id_pais = env.id_pais WHERE env.id_prov = $1',[id]);
+        return db_res;
+    }
+
+    async ObtenerNombreProveedor(id)
+    {
+        const db_res = await db.query('SELECT nombre_prov FROM ada_proveedor WHERE id_prov = $1',[id]);
+        return db_res
+    }
 }
 
 const model = new ProviderModel() //create instance

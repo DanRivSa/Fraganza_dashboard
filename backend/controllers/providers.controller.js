@@ -15,6 +15,13 @@ class ProvidersController
         let db_res = await model.GetProviderPDF(id);
         res.json(db_res.rows);
     }
+
+    ObtenerNombre = async (req,res)=>
+    {
+        let id = req.params.id;
+        let db_res = await model.ObtenerNombreProveedor(id);
+        res.json(db_res.rows); 
+    }
     
     ObtenerEsenciasDeProveedor=async (req,res)=>
     {
@@ -27,6 +34,13 @@ class ProvidersController
     {
         let id = req.params.id;
         let db_res = await model.ObtenerIngredientes(id);
+        res.json(db_res.rows);
+    }
+
+    ObtenerAlternativasEnvio = async (req,res)=>
+    {
+        let id = req.params.id;
+        let db_res = await model.ObtenerAlternativasEnvio(id);
         res.json(db_res.rows);
     }
 }

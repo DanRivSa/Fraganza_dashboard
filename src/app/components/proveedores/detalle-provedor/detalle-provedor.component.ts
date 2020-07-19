@@ -10,6 +10,8 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class DetalleProvedorComponent implements OnInit {
 
+  id:number;
+  nombre:string;
 
   constructor(private route:ActivatedRoute, private servicio:ProveedoresService) 
   {
@@ -18,8 +20,15 @@ export class DetalleProvedorComponent implements OnInit {
 
   ngOnInit(): void
   {
-        
-    
+    this.route.paramMap.subscribe(paramas=>
+      {
+        this.id = +paramas.get('id');
+      });    
+    this.servicio.ObtenerNombre(this.id).subscribe(res=>
+      {
+        let data:any[] = res as any[];
+        this.nombre = data[0].nombre_prov;
+      });
   }
 
 }
