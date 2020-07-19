@@ -43,7 +43,7 @@ CONSTRAINT PK_pc PRIMARY KEY (id_pc)
 
 CREATE TABLE ada_criterio_eval(
 id_criterio SMALLINT,
-nombre_criterio VARCHAR(20) NOT NULL UNIQUE,
+nombre_criterio VARCHAR(30) NOT NULL UNIQUE,
 tipo_uso CHAR(1) NOT NULL,
 CONSTRAINT pk_criterio_eval PRIMARY KEY (id_criterio),
 CONSTRAINT CK_tipo_uso CHECK (tipo_uso in ('a','i'))

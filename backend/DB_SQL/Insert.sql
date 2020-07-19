@@ -245,7 +245,7 @@ INSERT INTO ada_pais VALUES(240, 'ZW', 'Zimbabue','Af');
 --Familias Olfativas
 INSERT INTO ada_familia_olfativa (nombre_familia)
 VALUES('Verde'),('Cítrico'),('Flores'),('Frutas'),('Aromáticos'),('Helechos'),
-('Chipe'),('Maderas'),('Orientales'),('Otros');
+('Chipe'),('Amaderada'),('Orientales'),('Otros');
 
 
 
@@ -601,8 +601,8 @@ INSERT INTO ada_presentacion_e
 (nombre_etiqueta,precio,cantidad_perpack,unidad_medida,contenido_neto,tipo_empaque,cas,cas_oi)
 VALUES
 ('Lorysia',18000.99, 1,'kg',100,'IBC',null,10411924),
-('Lorysia',5900.50, 1,'kg',15,'IBC',null,10411924),
-('Lorysia',3000,1,'kg',5,'IBC',null,10411924);
+('Lorysia',25900.50, 1,'kg',150,'IBC',null,10411924),
+('Lorysia',44000,1,'kg',200,'IBC',null,10411924);
 
 
 --Amber Gamma
@@ -668,7 +668,13 @@ tipo_empaque,cas,cas_oi) VALUES
 ('Rose Eo',10067.66,20,'l',4,'IBC',8007010,NULL),
 ('Rose Eo',46089.78,1,'l',200,'IBC',8007010,NULL);
 
-
+--Vetiver Sfe
+INSERT INTO ada_presentacion_e(nombre_etiqueta,precio,cantidad_perpack,unidad_medida,contenido_neto,
+tipo_empaque,cas,cas_oi) VALUES
+('Vetiver Sfe',1000.99, 24,'ml',250,'IBC',0008016964,NULL),
+('Vetiver Sfe',4000.48,48,'ml',500,'IBC',0008016964,NULL),
+('Vetiver Sfe',10067.66,62,'l',500,'IBC',0008016964,NULL),
+('Vetiver Sfe',26089.78,1,'l',240,'IBC',0008016964,NULL);
 
 --PT Sensient Technologies Indonesia
 --Extracto de Vainilla
@@ -712,7 +718,7 @@ tipo_empaque,cas,cas_oi) VALUES
 INSERT INTO ada_presentacion_e(nombre_etiqueta,precio,cantidad_perpack,unidad_medida,contenido_neto,
 tipo_empaque,cas,cas_oi) VALUES
 ('Cranberry Fragrance Oil',3434.26,24,'l',4,'IBC',91770886,NULL),
-('Cranberry Fragrance Oil',5634.26,48,'l',6,'IBC',91770886,NULL);
+('Cranberry Fragrance Oil',5634.99,48,'l',6,'IBC',91770886,NULL);
 
 
 
@@ -911,13 +917,13 @@ VALUES
 (5989275,'LIMONENE','componente'),(5466773,'ETHYLHEXYL METHOXYCINNAMATE','componente'),
 (38078090,'DIETHYLAMINO','componente'),(302776687,'HYDROXYBENZOYL HEXYLBENZOATE','componente'),
 (5392405,'CITRAL','componente'),(104552,'CINAMMAL','componente'),(78706,'LINLOOL','componente'),
-(128370​,'BHT','componente'),(1,'Parfum (FRAGANCE)','otro');
+(128370,'BHT','componente'),(1,'Parfum (FRAGANCE)','otro');
 
 --Ingredientres presentes en el perfume
 INSERT INTO ada_perf_ing (id_perfume,cas_ip)
 VALUES
 (10,90017),(10,7732185),(10,5989275),(10,5466773),(10,38078090),
-(10,302776687),(10,104552),(10,78706),(10,128370​),(10,1);
+(10,302776687),(10,104552),(10,78706),(10,128370),(10,1);
 
 --Fin de Prada Lhome
 
@@ -1036,15 +1042,30 @@ VALUES
 --Filtro Proveedores Potenciales
 
 
+
 --Palabras CLAVE familias olfastivas
 INSERT INTO ada_palabra_clave (palabra_unica)
 VALUES ('Romanticismo'),('Naturalidad'),('Calidez'),('Sensualidad'),
 ('Versátil'),('Frescura'),('Pureza'),('Delicadez'),('Feminidad'),('Masculinidad'),
-('Unisex'),('Intensidad'),('Dulzura'),('Elegancia'),('Unisex'),(''),(''),(''),('Unisex'),(''),(''),(''),('Unisex'),(''),(''),(''),
+('Unisex'),('Intensidad'),('Dulzura'),('Elegancia'),('Durabilidad'),('Alegría'),
+('Juventud'),('Vitalidad'),('Lucidez'),('Familiaridad'),('Tenacidad'),('Confianza'),('Seguridad');
 
+--Familias con sus ada_palabra_clave
+INSERT INTO ada_familia_palabra (id_familia,id_pc)
+VALUES
+(1,6),(1,5),(1,16),
+(2,6),(2,17),(2,11),(2,13),(2,16),(2,7),
+(3,9),(3,1),(3,8),(3,2),(3,6),
+(4,17),(4,16),(4,2),(4,5),(4,6),
+(5,10),(5,18),(5,19),(5,20),(5,21),
+(6,16),(6,22),(6,2),(6,7),
+(7,12),(7,11),(7,23),(7,15),
+(8,10),(8,14),(8,11),
+(9,3),(9,4),(9,13),(9,14);
 
-
-
-
-INSERT INTO ada_familia_palabra (id_pc,id_familia)
-VALUES (,),(,),(,),(,),(,),(,),(,),(,),(,),(,),;
+INSERT INTO ada_criterio_eval (nombre_criterio,tipo_uso)
+VALUES
+('Ubicación Geográfica','i'),
+('Alternativas de Envío','i'),
+('Alternativas de Pago','i'),
+('Cumplimiento con los Pedidos','a');
