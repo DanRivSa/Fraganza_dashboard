@@ -13,6 +13,7 @@ export class CatalogoComponent implements OnInit {
   id_prov:number;
   ingredientes:any[];
   esencias:any[];
+  presentaciones:any[];
   nombre_prov;
 
   constructor(private route:ActivatedRoute,private servicio:ProveedoresService) { }
@@ -41,6 +42,28 @@ export class CatalogoComponent implements OnInit {
           console.log(this.ingredientes);
           this.nombre_prov = this.ingredientes[0].nombre_prov;
         });
+  }
+
+  ObtenerPresentaciones(codigo:number,opcion:number)
+  {
+    switch (opcion) {
+      case 1: //esencias
+        this.servicio.ObtenerPresentacionesEsencia(codigo).subscribe(res=>
+          {
+            this.presentaciones = res as any[];
+          });
+      break;
+
+      case 2: //ingredientes
+        this.servicio.ObtenerPresentacionesingrediente(codigo).subscribe(res=>
+          {
+            this.presentaciones = res as any[];
+          });
+       break;
+    
+      default:
+        break;
+    }
   }
 
 }

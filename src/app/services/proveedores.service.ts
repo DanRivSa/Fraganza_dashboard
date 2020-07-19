@@ -34,4 +34,14 @@ export class ProveedoresService
   {
     return this.cliente.get(`${this.url_base}/providers/alt_envio/${id}`);
   }
+
+  ObtenerPresentacionesEsencia(cas:number)
+  {
+    return this.cliente.get(`${this.url_base}/providers/esencia/${cas}`);
+  }
+
+  ObtenerPresentacionesingrediente(cas_oi:number)
+  {
+    return this.cliente.get(`${this.url_base}/providers/ingrediente/${cas_oi}`);
+  }
 }

@@ -40,6 +40,18 @@ class ProviderModel
         const db_res = await db.query('SELECT nombre_prov FROM ada_proveedor WHERE id_prov = $1',[id]);
         return db_res
     }
+
+    async ObtenerPresentacionesEsencia(cas)
+    {
+        const db_res = await db.query('SELECT sku,nombre_etiqueta,precio,cantidad_perpack,unidad_medida,contenido_neto,tipo_empaque FROM ada_presentacion_e WHERE cas_oi IS NULL AND cas = $1',[cas]);
+        return db_res;
+    }
+
+    async ObtenerPresentacionesIngrediente(cas_oi)
+    {
+        const db_res = await db.query('SELECT sku,nombre_etiqueta,precio,cantidad_perpack,unidad_medida,contenido_neto,tipo_empaque FROM ada_presentacion_e WHERE cas IS NULL AND cas_oi=$1',[cas_oi]);
+        return db_res;
+    }
 }
 
 const model = new ProviderModel() //create instance

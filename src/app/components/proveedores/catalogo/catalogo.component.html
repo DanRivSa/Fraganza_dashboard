@@ -21,9 +21,13 @@
       </thead>
       <tbody>
         <tr *ngFor="let es of esencias">
-          <th scope="row">{{es.cas}}</th>
-          <td>{{es.nombre_comercial}}</td>
-          <td>{{es.nombre_quimico}}</td>
+          <th scope="row">
+              <button class="btn btn-primary" data-toggle="modal" data-target="#esencias" (click)="ObtenerPresentaciones(es.cas,1)">
+                {{es.cas}}
+              </button>
+            </th>
+            <td>{{es.nombre_comercial}}</td>
+            <td>{{es.nombre_quimico}}</td>
         </tr>
       </tbody>
     </table>
@@ -32,6 +36,47 @@
   <hr>
 </div>
   
+<!-- Modal presentaciones esencias-->
+<div class="modal fade" id="esencias" tabindex="-1" role="dialog" aria-labelledby="esencias" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Presentaciones</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-striped">
+          <thead class="table-dark">
+            <tr>
+              <th scope="col">sku</th>
+              <th scope="col">Nombre etiqueta</th>
+              <th scope="col">paquete</th>
+              <th scope="col">contenido neto</th>
+              <th scope="col">precio</th>
+              <th scope="col">tipo de empaque</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let es of presentaciones">
+              <th scope="row">
+                  <span class="badge badge-pill badge-primary">
+                    {{es.sku}}
+                  </span>
+                </th>
+                <td>{{es.nombre_etiqueta}}</td>
+                <td>{{es.cantidad_perpack}}{{es.unidad_medida}}</td>
+                <td>{{es.contenido_neto}}</td>
+                <td>{{es.precio}}</td>
+                <td>{{es.tipo_empaque}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
   
 <div *ngIf="ingredientes[0] != null">
     <h1 class="text-center">Ingredientes</h1>
@@ -47,7 +92,11 @@
           </thead>
           <tbody>
             <tr *ngFor="let ing of ingredientes">
-              <th scope="row">{{ing.cas_oi}}</th>
+              <th scope="row">
+                <button class="btn btn-primary" data-toggle="modal" data-target="#ingredientes" (click)="ObtenerPresentaciones(ing.cas_oi,2)">
+                  {{ing.cas_oi}}
+                </button>
+              </th>
               <td>{{ing.nombre_comercial}}</td>
               <td>{{ing.nombre_quimico}}</td>
             </tr>
@@ -58,3 +107,44 @@
   
 </div>    
   
+<!--modal presentaciones ingredientes-->
+<div class="modal fade" id="ingredientes" tabindex="-1" role="dialog" aria-labelledby="Ingredientes" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Presentaciones</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-striped">
+          <thead class="table-dark">
+            <tr>
+              <th scope="col">sku</th>
+              <th scope="col">Nombre etiqueta</th>
+              <th scope="col">paquete</th>
+              <th scope="col">contenido neto</th>
+              <th scope="col">precio</th>
+              <th scope="col">tipo de empaque</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let es of presentaciones">
+              <th scope="row">
+                  <span class="badge badge-pill badge-primary">
+                    {{es.sku}}
+                  </span>
+                </th>
+                <td>{{es.nombre_etiqueta}}</td>
+                <td>{{es.cantidad_perpack}}{{es.unidad_medida}}</td>
+                <td>{{es.contenido_neto}}</td>
+                <td>{{es.precio}}</td>
+                <td>{{es.tipo_empaque}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
