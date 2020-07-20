@@ -256,11 +256,13 @@ id_prov SMALLINT NOT NULL,
 numero_contrato SMALLINT NOT NULL,
 fecha_emision DATE NOT NULL default CURRENT_DATE,
 exclusivo BOOLEAN,
-descuento BOOLEAN,
+descuento SMALLINT,
+acuerdo BOOLEAN NOT NULL DEFAULT FALSE,
 cancelado BOOLEAN,
 fecha_cancelac DATE,
 motivo_cancelac VARCHAR(200),
-CONSTRAINT PK_contrato PRIMARY KEY(id_prod,id_prov,numero_contrato)
+CONSTRAINT PK_contrato PRIMARY KEY(id_prod,id_prov,numero_contrato),
+CONSTRAINT CK_descuento CHECK (descuento >= 1 and descuento <=100)
 );
 
 CREATE TABLE ada_renueva(

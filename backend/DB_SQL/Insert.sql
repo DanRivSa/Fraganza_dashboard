@@ -1069,3 +1069,36 @@ VALUES
 ('Alternativas de Envío','i'),
 ('Alternativas de Pago','i'),
 ('Cumplimiento con los Pedidos','a');
+
+
+
+--CREACION DE CONTRATOS DE PRUEBA
+INSERT INTO ada_contrato (id_prod,id_prov,exclusivo,descuento,acuerdo)
+VALUES
+(3,2,true,null,true),(1,1,false,10,true);
+
+INSERT INTO ada_contrato (id_prod,id_prov,fecha_emision,exclusivo,descuento,acuerdo)
+VALUES
+(3,1,'2009-01-01',false,12,true);
+
+
+INSERT INTO ada_contrato (id_prod,id_prov,fecha_emision,exclusivo,descuento,acuerdo)
+VALUES
+(1,3,'2020-03-01',false,null,false);
+
+
+INSERT INTO ada_contrato (id_prod,id_prov,fecha_emision,exclusivo,descuento,acuerdo,cancelado)
+VALUES
+(1,4,'2020-03-01',false,5,true,true);
+
+INSERT INTO ada_contrato (id_prod,id_prov,fecha_emision,exclusivo,descuento,acuerdo,cancelado)
+VALUES
+(1,2,'2010-03-01',false,5,true,true);
+
+
+INSERT INTO ada_renueva (id_prod,id_prov,numero_contrato,fecha)
+VALUES (3,1,1020,'2020-04-16');
+
+
+INSERT INTO ada_renueva (id_prod,id_prov,numero_contrato,fecha)
+VALUES (3,1,1020,'2020-04-16');
