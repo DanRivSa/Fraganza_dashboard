@@ -11,11 +11,6 @@ class ProviderModel
         return db_res;
     }
 
-    async GetProviderPDF(id)
-    {
-        const db_res = await db.query('SELECT nombre_prov,telefono,email,direccion_fiscal,cod_postal,nombre_pais,nombre_asoc,metodo_pago FROM ada_asoc_nacional asoc RIGHT JOIN ada_proveedor prov ON asoc.id_asoc = prov.id_asoc  INNER JOIN ada_pais pais  ON prov.id_pais = pais.id_pais INNER JOIN ada_alternativa_pago alt ON alt.id_prov = prov.id_prov  WHERE prov.id_prov = $1',[id]);
-        return db_res;
-    }
 
     async ObtenerEsencias(id)
     {

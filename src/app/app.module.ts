@@ -9,7 +9,6 @@ import { AppComponent } from './app.component';
 
 //services
 import {UserCompanyService} from './services/global/user-company.service';
-import {ReportsService} from './services/reports.service';
 import {ProducersService} from './services/producers.service';
 import {ProveedoresService} from './services/proveedores.service';
 
@@ -18,7 +17,6 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
 
 //reports
-import {ProviderReportComponent} from './components/pdf_reports/provider-report/provider-report.component';
 import { InitialTestComponent } from './components/productores/initial-test/initial-test.component';
 import { CatalogoComponent } from './components/proveedores/catalogo/catalogo.component';
 import { DetalleProvedorComponent } from './components/proveedores/detalle-provedor/detalle-provedor.component';
@@ -39,9 +37,6 @@ import { AlternativasEnviosComponent } from './components/proveedores/alternativ
 
     //componentes de proveedores
 
-    //reportes
-    ProviderReportComponent,
-
     DetalleProvedorComponent,
 
     AlternativasEnviosComponent,
@@ -53,7 +48,7 @@ import { AlternativasEnviosComponent } from './components/proveedores/alternativ
     HttpClientModule,
     LoginModule
   ],
-  providers: [UserCompanyService,ReportsService,ProducersService,ProveedoresService],
+  providers: [UserCompanyService,ProducersService,ProveedoresService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
