@@ -25,6 +25,19 @@ SELECT m.id_prod, p.nombre_prod, m.fecha_inicio, m.fecha_fin
 FROM ada_membresia m, ada_productor p
 WHERE p.id_prod = m.id_prod;
 
+
+CREATE VIEW ada_contratos_en_regla AS
+SELECT id_prov,id_prod,numero_contrato FROM ada_contrato
+WHERE (CURRENT_DATE) < (fecha_emision + INTERVAL '365 day')
+AND acuerdo IS TRUE
+AND (cancelado IS FALSE OR cancelado IS NULL)
+AND id_prov IN (SELECT id_prov FROM ada_prov_mem_activa)
+UNION
+SELECT DISTINCT id_prov,id_prod,numero_contrato FROM ada_renueva
+WHERE (CURRENT_DATE) < (fecha + INTERVAL '365 day')
+AND id_prov IN (SELECT id_prov FROM ada_prov_mem_activa)
+ORDER BY id_prov, id_prod;
+
 --A: vista bonita de las presentaciones de tipo ingrediente
 CREATE VIEW ada_pres_i_e AS
 SELECT p.nombre_etiqueta NOMBRE,

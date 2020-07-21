@@ -1096,9 +1096,14 @@ VALUES
 (1,2,'2010-03-01',false,5,true,true);
 
 
+
+
+
 INSERT INTO ada_renueva (id_prod,id_prov,numero_contrato,fecha)
-VALUES (3,1,1020,'2020-04-16');
+VALUES (3,1,1010,'2020-04-16');
+
+
 
 
 INSERT INTO ada_renueva (id_prod,id_prov,numero_contrato,fecha)
-VALUES (3,1,1020,'2020-04-16');
+VALUES (1,2,1025,'2020-04-16');
