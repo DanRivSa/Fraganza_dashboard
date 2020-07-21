@@ -14,13 +14,13 @@ class ProviderModel
 
     async ObtenerEsencias(id)
     {
-        const db_res = await db.query('SELECT prov.id_prov,prov.nombre_prov,es.cas,es.nombre_comercial,es.nombre_quimico FROM ada_proveedor prov INNER JOIN ada_esencia es ON prov.id_prov = es.id_provWHERE prov.id_prov =$1 EXCEPT SELECT cp.id_prov,prov.nombre_prov,cp.cas,es.nombre_comercial,es.nombre_quimico from ada_productos_exclusivos cpINNER JOIN ada_proveedor provON cp.id_prov = prov.id_provINNER JOIN ada_esencia esON es.cas = cp.casWHERE cp.id_prov = $1',[id]);
+        const db_res = await db.query('SELECT prov.id_prov,prov.nombre_prov,es.cas,es.nombre_comercial,es.nombre_quimico FROM ada_proveedor prov  INNER JOIN ada_esencia es  ON prov.id_prov = es.id_prov WHERE prov.id_prov =$1 EXCEPT  SELECT cp.id_prov,prov.nombre_prov,cp.cas,es.nombre_comercial,es.nombre_quimico from ada_productos_exclusivos cp INNER JOIN ada_proveedor prov ON cp.id_prov = prov.id_prov INNER JOIN ada_esencia es ON es.cas = cp.cas WHERE cp.id_prov = $1',[id]);
         return db_res;
     }
 
     async ObtenerIngredientes(id)
     {
-        const db_res = await db.query('SELECT prov.id_prov,prov.nombre_prov,ing.cas_oi,ing.nombre_comercial,ing.nombre_quimico FROM ada_proveedor prov INNER JOIN ada_otros_ing ing ON prov.id_prov = ing.id_provWHERE prov.id_prov =$1 EXCEPT SELECT cp.id_prov,prov.nombre_prov,cp.cas_oi,ing.nombre_comercial,ing.nombre_quimico from ada_productos_exclusivos cpINNER JOIN ada_proveedor provON cp.id_prov = prov.id_provINNER JOIN ada_otros_ing ingON ing.cas_oi = cp.cas_oiWHERE cp.id_prov = $1',[id]);
+        const db_res = await db.query('SELECT prov.id_prov,prov.nombre_prov,ing.cas_oi,ing.nombre_comercial,ing.nombre_quimico FROM ada_proveedor prov  INNER JOIN ada_otros_ing ing  ON prov.id_prov = ing.id_prov WHERE prov.id_prov =$1 EXCEPT  SELECT cp.id_prov,prov.nombre_prov,cp.cas_oi,ing.nombre_comercial,ing.nombre_quimico from ada_productos_exclusivos cp INNER JOIN ada_proveedor prov ON cp.id_prov = prov.id_prov INNER JOIN ada_otros_ing ing ON ing.cas_oi = cp.cas_oi WHERE cp.id_prov = $1',[id]);
         return db_res;
     }
 
