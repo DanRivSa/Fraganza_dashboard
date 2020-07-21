@@ -9,6 +9,16 @@ CREATE SEQUENCE ada_sec_id_proveedor as SMALLINT
 ALTER TABLE ada_proveedor
 ALTER COLUMN id_prov SET DEFAULT nextval('ada_sec_id_proveedor');
 
+
+CREATE SEQUENCE ada_sec_id_prod_contr as SMALLINT
+ MINVALUE 1
+ MAXVALUE 50
+ NO CYCLE
+ OWNED BY ada_contratacion_prod.id_pcont;
+ ;
+ALTER TABLE ada_contratacion_prod
+ALTER COLUMN id_pcont SET DEFAULT nextval('ada_sec_id_prod_contr');
+
 CREATE SEQUENCE ada_sec_id_membresia as SMALLINT
  MINVALUE 1
  MAXVALUE 50

@@ -359,13 +359,15 @@ CONSTRAINT CK_porcext CHECK (porc_extra >0 AND porc_extra <=100)
 
 
 CREATE TABLE ada_contratacion_prod(
+id_pcont SMALLINT,
 id_prod SMALLINT NOT NULL,
 id_prov SMALLINT NOT NULL,
 numero_contrato SMALLINT NOT NULL,
 cas INTEGER,
 cas_oi INTEGER,
-CONSTRAINT PK_contrac_pro PRIMARY KEY(id_prod,id_prov,numero_contrato),
-CONSTRAINT CK_cas CHECK (cas > 0)
+CONSTRAINT PK_contrac_pro PRIMARY KEY(id_prod,id_prov,numero_contrato,id_pcont),
+CONSTRAINT CK_cas CHECK (cas > 0),
+CONSTRAINT CK_cas_oi CHECK (cas_oi > 0)
 );
 
 
