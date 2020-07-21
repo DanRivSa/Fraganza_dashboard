@@ -1079,7 +1079,7 @@ VALUES
 
 INSERT INTO ada_contrato (id_prod,id_prov,fecha_emision,exclusivo,descuento,acuerdo)
 VALUES
-(3,1,'2009-01-01',false,12,true);
+(3,1,'2009-01-01',true,12,true);
 
 
 INSERT INTO ada_contrato (id_prod,id_prov,fecha_emision,exclusivo,descuento,acuerdo)
@@ -1107,3 +1107,40 @@ VALUES (3,1,1010,'2020-04-16');
 
 INSERT INTO ada_renueva (id_prod,id_prov,numero_contrato,fecha)
 VALUES (1,2,1025,'2020-04-16');
+
+
+
+INSERT INTO ada_contrato (id_prod,id_prov,fecha_emision,exclusivo,descuento,acuerdo,cancelado)
+VALUES
+(2,2,'2010-03-01',true,5,true,null);
+
+INSERT INTO ada_contrato (id_prod,id_prov,fecha_emision,exclusivo,descuento,acuerdo,cancelado)
+VALUES
+(3,2,'2020-03-01',true,5,true,null);
+
+
+INSERT INTO ada_contrato (id_prod,id_prov,fecha_emision,exclusivo,descuento,acuerdo,cancelado)
+VALUES
+(4,2,'2020-03-01',true,5,true,null);
+
+
+
+
+INSERT INTO ada_contrato (id_prod,id_prov,fecha_emision,exclusivo,descuento,acuerdo,cancelado)
+VALUES
+(2,4,'2020-05-21',true,5,true,null);
+
+
+
+INSERT INTO ada_contratacion_prod (id_prod,id_prov,numero_contrato,cas,cas_oi)
+VALUES
+(3,2,1000,NULL,54464572);
+
+INSERT INTO ada_contratacion_prod (id_prod,id_prov,numero_contrato,cas,cas_oi)
+VALUES
+(3,2,1000,NULL,70788306);
+
+
+INSERT INTO ada_contratacion_prod (id_prod,id_prov,numero_contrato,cas,cas_oi)
+VALUES
+(3,1,1010,8007010,NULL);
