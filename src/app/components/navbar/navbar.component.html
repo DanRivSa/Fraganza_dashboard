@@ -1,9 +1,9 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <img src="../../../assets/Imagen111.png" width="70" height="80" alt="Resonsive image" loading="lazy">
+    <img src="../../../assets/Imagen111.png" width="70" height="80" alt="Resonsive image"  loading="lazy">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-  
+
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item" routerLinkActive="active current" [routerLinkActiveOptions]="{exact: true}">
@@ -40,10 +40,10 @@
           </li>
           <!--USER PROFILE-->
           <li class="nav-item" *ngIf = "(userType != null && userID !=null)">
-            <a class="nav-link">usuario: {{username}}</a>
+            <a class="nav-link">Usuario: {{username}}</a>
           </li>
       </ul>
-      
+
       <a routerLink="/select_type">
         <button class="btn btn-outline-primary btn-inline my-2 my-lg-0" *ngIf="(userID == null) && (userType == null)">Iniciar Sesión</button>
       </a>
@@ -81,7 +81,7 @@
 </div>
   <!--
       quick routes guard solution syntax (always add the ngIf as follows)
-    2 for provider routes 
+    2 for provider routes
     1 for producer routes
 
     <li class="nav-item" *ngIf="(userType == 2 && userID !=null)">

@@ -1,7 +1,7 @@
 <header class="bg-dark text-white">
   <div class="container text-center">
-    
-    <h3 class=" display-4">Catalogo</h3>
+
+    <h3 class=" display-4">Catálogo</h3>
     <hr>
     <br>
   </div>
@@ -15,9 +15,9 @@
     <table class="table table-hover ">
       <thead class="table-dark">
         <tr>
-          <th scope="col">cas</th>
+          <th scope="col">CAS</th>
           <th scope="col">Nombre comercial</th>
-          <th scope="col">nombre quimico</th>
+          <th scope="col">Nombre quimico</th>
         </tr>
       </thead>
       <tbody>
@@ -32,11 +32,11 @@
         </tr>
       </tbody>
     </table>
-    
+
   </div>
   <hr>
 </div>
-  
+
 <!-- Modal presentaciones esencias-->
 <div class="modal fade" id="esencias" tabindex="-1" role="dialog" aria-labelledby="esencias" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -51,12 +51,12 @@
         <table class="table table-striped">
           <thead class="table-dark">
             <tr>
-              <th scope="col">sku</th>
+              <th scope="col">SKU</th>
               <th scope="col">Nombre etiqueta</th>
-              <th scope="col">paquete</th>
-              <th scope="col">contenido neto</th>
-              <th scope="col">precio</th>
-              <th scope="col">tipo de empaque</th>
+              <th scope="col">Unidades</th>
+              <th scope="col">Contenido Neto</th>
+              <th scope="col">Precio USD</th>
+              <th scope="col">Tipo de Empaque</th>
             </tr>
           </thead>
           <tbody>
@@ -67,8 +67,8 @@
                   </span>
                 </th>
                 <td>{{es.nombre_etiqueta}}</td>
-                <td>{{es.cantidad_perpack}}{{es.unidad_medida}}</td>
-                <td>{{es.contenido_neto}}</td>
+                <td>{{es.cantidad_perpack}}</td>
+                <td>{{es.contenido_neto}} {{es.unidad_medida}}</td>
                 <td>$ {{es.precio}} </td>
                 <td>{{es.tipo_empaque}}</td>
             </tr>
@@ -78,7 +78,7 @@
     </div>
   </div>
 </div>
-  
+
 <div *ngIf="ingredientes[0] != null">
     <h1 class="text-center">Ingredientes</h1>
     <br>
@@ -86,9 +86,9 @@
         <table class="table table-hover">
           <thead class="table-dark">
             <tr>
-              <th scope="col">cas</th>
-              <th scope="col">Nombre comercial</th>
-              <th scope="col">nombre quimico</th>
+              <th scope="col">CAS</th>
+              <th scope="col">Nombre Comercial</th>
+              <th scope="col">Nombre Químico</th>
             </tr>
           </thead>
           <tbody>
@@ -103,11 +103,11 @@
             </tr>
           </tbody>
         </table>
-        
+
       </div>
-  
-</div>    
-  
+
+</div>
+
 <!--modal presentaciones ingredientes-->
 <div class="modal fade" id="ingredientes" tabindex="-1" role="dialog" aria-labelledby="Ingredientes" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -122,12 +122,12 @@
         <table class="table table-striped">
           <thead class="table-dark">
             <tr>
-              <th scope="col">sku</th>
-              <th scope="col">Nombre etiqueta</th>
-              <th scope="col">paquete</th>
-              <th scope="col">contenido neto</th>
-              <th scope="col">precio</th>
-              <th scope="col">tipo de empaque</th>
+              <th scope="col">SKU</th>
+              <th scope="col">Nombre Etiqueta</th>
+              <th scope="col">Unidades</th>
+              <th scope="col">Contenido Neto</th>
+              <th scope="col">Precio USD</th>
+              <th scope="col">Tipo de Empaque</th>
             </tr>
           </thead>
           <tbody>
@@ -138,8 +138,8 @@
                   </span>
                 </th>
                 <td>{{es.nombre_etiqueta}}</td>
-                <td>{{es.cantidad_perpack}}{{es.unidad_medida}}</td>
-                <td>{{es.contenido_neto}}</td>
+                <td>{{es.cantidad_perpack}}</td>
+                <td>{{es.contenido_neto}} {{es.unidad_medida}}</td>
                 <td>$ {{es.precio}}</td>
                 <td>{{es.tipo_empaque}}</td>
             </tr>

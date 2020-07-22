@@ -4,7 +4,7 @@ const db = require('../database/database.config');
 class ProviderModel
 {
     //async methods
-    
+
     async GetProviders()
     {
         const db_res = await db.query('SELECT id_prov,nombre_prov FROM ada_proveedor WHERE id_prov IN (SELECT * FROM ada_prov_mem_activa) ');
@@ -51,4 +51,3 @@ class ProviderModel
 
 const model = new ProviderModel() //create instance
 module.exports = model; //export instance
-

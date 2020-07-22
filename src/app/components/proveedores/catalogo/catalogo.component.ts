@@ -60,7 +60,7 @@ export class CatalogoComponent implements OnInit {
             this.presentaciones = res as any[];
           });
        break;
-    
+
       default:
         break;
     }
