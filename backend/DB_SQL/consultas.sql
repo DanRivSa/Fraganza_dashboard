@@ -54,3 +54,65 @@ SELECT cont.id_prov, nombre_prov,telefono,email from ada_contratos_en_regla cont
 INNER JOIN ada_proveedor prov
 ON prov.id_prov = cont.id_prov
 WHERE cont.id_prod = 1;
+
+
+--SELECT PARA INGREDIENTES ESENCIAS DISPONIBLES PARA CONTRATAR
+SELECT prov.id_prov,prov.nombre_prov,es.cas,es.nombre_comercial,es.nombre_quimico FROM ada_proveedor prov
+INNER JOIN ada_esencia es
+ON prov.id_prov = es.id_prov
+WHERE prov.id_prov =$1
+EXCEPT
+SELECT cp.id_prov,prov.nombre_prov,cp.cas,es.nombre_comercial,es.nombre_quimico from ada_productos_exclusivos cp
+INNER JOIN ada_proveedor prov
+ON cp.id_prov = prov.id_prov
+INNER JOIN ada_esencia es
+ON es.cas = cp.cas
+WHERE cp.id_prov = $1;
+
+
+--SELECT PARA INGREDIENTES DISPONIBLES PARA CONTRATAR
+SELECT prov.id_prov,prov.nombre_prov,ing.cas_oi,ing.nombre_comercial,ing.nombre_quimico FROM ada_proveedor prov
+INNER JOIN ada_otros_ing ing
+ON prov.id_prov = ing.id_prov
+WHERE prov.id_prov =$1
+EXCEPT
+SELECT cp.id_prov,prov.nombre_prov,cp.cas_oi,ing.nombre_comercial,ing.nombre_quimico from ada_productos_exclusivos cp
+INNER JOIN ada_proveedor prov
+ON cp.id_prov = prov.id_prov
+INNER JOIN ada_otros_ing ing
+ON ing.cas_oi = cp.cas_oi
+WHERE cp.id_prov = $1;
+
+
+--CONSULTAR DETALLES DE ENVIO DE UN PROVEEDOR EN ESPECIAL
+
+select p.nombre_pais,
+	case p.continente
+	when 'As' then 'ASIA'
+	when 'Ams' then 'AMÉRICA DEL SUR'
+	when 'Oc' then 'OCEANÍA'
+	when 'Af' then 'ÁFRICA'
+	when 'Ca' then 'CENTROAMÉRICA'
+	when 'Eu' then 'EUROPA'
+	when 'Amn' then 'AMÉRICA DEL NORTE'
+	end CONTINENTE,
+  case t.tipo_envio
+    when  'm' then 'MARTÍTIMO'
+	when 'a' then 'AÉREO'
+	when 't' then 'TERRESTRE'
+  end  TIPO_DE_ENVÍO,t.porc_base
+from ada_alternativa_envio t,ada_pais p
+where p.id_pais=t.id_pais and t.id_prov= $1  ORDER BY p.nombre_pais;
+
+
+--CONSULTA PARA CONOCER LOS CLIENTES ACTIVOS DE UN PROVEEDORESSELECT p.nombre_prod, c.fecha_emision, p.email from ada_productor p
+INNER JOIN ada_contrato c on c.id_prod = p.id_prod
+where (CURRENT_DATE) < (c.fecha_emision + INTERVAL '365 day')
+										  and c.id_prov=1
+AND acuerdo IS TRUE
+AND (cancelado IS FALSE OR cancelado IS NULL)
+
+ UNION
+ select p.nombre_prod,r.fecha,p.email from ada_productor p
+INNER JOIN ada_renueva r on r.id_prod = p.id_prod
+where (CURRENT_DATE) < (r.fecha + INTERVAL '365 day') and r.id_prov=1;

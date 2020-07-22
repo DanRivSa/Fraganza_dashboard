@@ -303,15 +303,17 @@ CONSTRAINT CK_metodo_pago check (metodo_pago in ('p','c'))
 
 
 CREATE TABLE ada_cuota(
+id_cuota SMALLINT,
 id_prov SMALLINT NOT NULL,
 porc_cuota decimal(3) NOT NULL,
 metodo_pago CHAR(1) NOT NULL,
 periodo_vigencia numeric(3) NOT NULL,
-CONSTRAINT PK_ada_cuota PRIMARY KEY (id_prov,metodo_pago),
+CONSTRAINT PK_ada_cuota PRIMARY KEY (id_prov,id_cuota,metodo_pago),
 CONSTRAINT CK_metodo_pago check (metodo_pago in ('p','c')),
 CONSTRAINT CK_porc_cuota CHECK (porc_cuota >= 0 and porc_cuota <= 100),
 CONSTRAINT CK_periodo_vigencia CHECK (periodo_vigencia > 0)
 );
+
 
 CREATE TABLE ada_presentacion_e(
 sku SMALLINT,
