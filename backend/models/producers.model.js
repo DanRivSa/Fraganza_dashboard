@@ -18,7 +18,7 @@ class ProducersModel
     }
 
 
-    //Formula
+    //Formula: Aqui empezo Andres
     async ObtenerEscalaInicialVigente(id)
     {
         const db_res = await db.query('SELECT e.fecha_inicio,e.id_prod, e.rango_inicial,e.rango_final, e.rango_aprob from ada_escala e where e.id_prod=$1 and e.fecha_fin is null and e.tipo_uso =$2',[id,'i']);
