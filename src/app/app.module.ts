@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
+import {FormsModule} from '@angular/forms';
 
 //modules
 import {LoginModule} from './modules/login/login.module'; 
@@ -53,7 +54,8 @@ import { FormulaInicialComponent } from './components/productores/formula-inicia
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    LoginModule
+    LoginModule,
+    FormsModule
   ],
   providers: [UserCompanyService,ProducersService,ProveedoresService],
   bootstrap: [AppComponent]
