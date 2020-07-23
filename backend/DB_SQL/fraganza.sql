@@ -52,7 +52,7 @@ CONSTRAINT CK_tipo_uso CHECK (tipo_uso in ('a','i'))
 
 CREATE TABLE ada_prohibidas(
 cas_ph INTEGER,
-nombre_ph VARCHAR(40) NOT NULL,
+nombre_ph VARCHAR(60) NOT NULL,
 CONSTRAINT PK_cas_ph PRIMARY KEY (cas_ph)
 );
 

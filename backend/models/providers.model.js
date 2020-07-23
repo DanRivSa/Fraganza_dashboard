@@ -30,6 +30,12 @@ class ProviderModel
         return db_res;
     }
 
+    async ObtenerAlternativasPago(id)
+    {
+        const db_res = await db.query('SELECT case m.metodo_pago when $2 then $3 when $4 then $5 END FROM ada_alternativa_pago m where m.id_prov=$1',[id,'p','PARCIAL','c','CUOTAS']);
+        return db_res;
+    }
+
     async ObtenerNombreProveedor(id)
     {
         const db_res = await db.query('SELECT nombre_prov FROM ada_proveedor WHERE id_prov = $1',[id]);

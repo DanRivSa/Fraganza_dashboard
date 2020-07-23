@@ -20,9 +20,15 @@ class ProducersController
 
     ObtenerEscalaInicialVigente = async (req,res)=>
     {
-        let id_productor = req.params.id
+        let id_productor = req.params.id;
         let db_res = await model.ObtenerEscalaInicialVigente(id_productor);
         res.json(db_res.rows);
+    }
+
+    ObtenerEscalaAnualVigente = async (req,res)=>{
+      let id_productor = req.params.id;
+      let db_res = await model.ObtenerEscalaAnualVigente;
+      res.json(db_res.rows);
     }
 
     PostEscalaInicial = async (req,res)=>
@@ -40,6 +46,12 @@ class ProducersController
     }
 
     PostEnvio = async (req,res)=>
+    {
+      const {id,id_criterio,peso,tipo_uso} = req.body;
+      let db_res = await model.PostPago(id,id_criterio,peso,tipo_uso);
+      res.json(db_res.rows);
+    }
+    PostPago = async (req,res)=>
     {
       const {id,id_criterio,peso,tipo_uso} = req.body;
       let db_res = await model.PostPago(id,id_criterio,peso,tipo_uso);

@@ -1,3 +1,1082 @@
+--EQUIPO 4
+
+--1. Apartado: Creacion de las tablas, con todos sus CONSTRAINT excepto los FK's
+
+CREATE TABLE ada_pais(
+id_pais SMALLINT,
+iso CHAR(2) NOT NULL,
+nombre_pais VARCHAR(60) NOT NULL UNIQUE,
+continente  VARCHAR(10) NOT NULL,
+CONSTRAINT PK_id_pais PRIMARY KEY (id_pais),
+CONSTRAINT CK_continente CHECK (continente in('Ams','Amn','Af','Eu','As','Oc','Ca'))
+);
+
+
+CREATE TABLE ada_esencia_perfume(
+cas_ep INTEGER,
+nombre VARCHAR(75) NOT NULL UNIQUE,
+tipo VARCHAR(10) NOT NULL,
+CONSTRAINT PK_esencia_p PRIMARY KEY (cas_ep),
+CONSTRAINT CK_cas_ep CHECK (cas_ep > 0),
+CONSTRAINT CK_tipo_ep CHECK (tipo in('natural','sintetico'))
+);
+
+
+CREATE TABLE ada_ingrediente_p(
+cas_ip INTEGER,
+nombre VARCHAR(50) NOT NULL UNIQUE,
+tipo VARCHAR(10) NOT NULL,
+CONSTRAINT PK_cas_ip PRIMARY KEY (cas_ip),
+CONSTRAINT CK_cas_ep CHECK (cas_ip > 0),
+CONSTRAINT CK_tipo_ep CHECK (tipo in('componente','otro'))
+);
+
+
+
+CREATE TABLE ada_familia_olfativa(
+id_familia SMALLINT,
+nombre_familia VARCHAR(10) NOT NULL UNIQUE,
+CONSTRAINT PK_fo PRIMARY KEY (id_familia)
+);
+
+CREATE TABLE ada_palabra_clave(
+id_pc SMALLINT,
+palabra_unica VARCHAR(12) NOT NULL UNIQUE,
+CONSTRAINT PK_pc PRIMARY KEY (id_pc)
+);
+
+CREATE TABLE ada_criterio_eval(
+id_criterio SMALLINT,
+nombre_criterio VARCHAR(30) NOT NULL UNIQUE,
+tipo_uso CHAR(1) NOT NULL,
+CONSTRAINT pk_criterio_eval PRIMARY KEY (id_criterio),
+CONSTRAINT CK_tipo_uso CHECK (tipo_uso in ('a','i'))
+);
+
+
+CREATE TABLE ada_prohibidas(
+cas_ph INTEGER,
+nombre_ph VARCHAR(60) NOT NULL,
+CONSTRAINT PK_cas_ph PRIMARY KEY (cas_ph)
+);
+
+
+CREATE TABLE ada_asoc_nacional(
+id_asoc SMALLINT,
+nombre_asoc VARCHAR(50) NOT NULL,
+region CHAR(2) NOT NULL,
+descripcion VARCHAR(150),
+CONSTRAINT PK_asoc_nac PRIMARY KEY (id_asoc),
+CONSTRAINT CK_region CHECK (region in ('Ap','Eu','Al','Na'))
+);
+
+
+
+
+
+--Tablas con FK
+
+CREATE TABLE ada_esencia (
+  cas INTEGER,
+  nombre_comercial VARCHAR(45) NOT NULL UNIQUE,
+  nombre_quimico VARCHAR (75) NOT NULL,
+  id_prov SMALLINT,
+  estado_fisico CHAR(1),
+  solubilidad VARCHAR(20),
+  flashpoint SMALLINT,
+  duracion SMALLINT,
+  apariencia VARCHAR(70),
+  fema_number INTEGER,
+  retcs_number INTEGER,
+  einecs_number INTEGER,
+  proc_extraccion CHAR(1),
+  CONSTRAINT PK_esencia PRIMARY KEY (cas),
+  CONSTRAINT CK_estado_fisico CHECK (estado_fisico in('l','s')),
+  CONSTRAINT CK_proc_extraccion CHECK (proc_extraccion in('m','e','d','f')),
+  CONSTRAINT CK_cas CHECK (cas >=0),
+  CONSTRAINT CK_duracion CHECK (duracion > 0)
+);
+
+CREATE TABLE ada_otros_ing(
+  cas_oi INTEGER,
+  nombre_comercial VARCHAR(30) NOT NULL UNIQUE,
+  nombre_quimico VARCHAR(75) NOT NULL,
+  id_prov SMALLINT NOT NULL,
+  tipo VARCHAR(10) NOT NULL,
+  desc_olfativ VARCHAR(254),
+  desc_uso VARCHAR (254),
+  fema_number INTEGER,
+  retcs_number INTEGER,
+  einecs_number INTEGER,
+  CONSTRAINT PK_oi PRIMARY KEY (cas_oi),
+  CONSTRAINT CK_tipo CHECK (tipo in('componente','otro'))
+);
+
+
+CREATE TABLE ada_perfumista(
+  id_perfumista SMALLINT,
+  primer_nombre VARCHAR(15) NOT NULL,
+  segundo_nombre VARCHAR(15),
+  primer_apellido VARCHAR(15) NOT NULL,
+  segundo_apellido VARCHAR(15),
+  id_pais SMALLINT NOT NULL,
+  CONSTRAINT PK_perfumista PRIMARY KEY (id_perfumista)
+);
+
+
+CREATE TABLE ada_productor(
+id_prod SMALLINT,
+nombre_prod VARCHAR(70) NOT NULL,
+id_asoc SMALLINT,
+telefono INTEGER NOT NULL,
+direccion_fiscal VARCHAR(70) NOT NULL,
+calle VARCHAR(50) NOT NULL,
+cod_postal SMALLINT NOT NULL,
+avenida VARCHAR(50) NOT NULL,
+email VARCHAR(254) UNIQUE,
+CONSTRAINT PK_prod PRIMARY KEY (id_prod)
+);
+
+CREATE TABLE ada_proveedor(
+id_prov SMALLINT,
+nombre_prov VARCHAR(70) NOT NULL,
+id_pais SMALLINT NOT NULL,
+id_asoc SMALLINT,
+telefono INTEGER NOT NULL,
+direccion_fiscal VARCHAR(70) NOT NULL,
+calle VARCHAR(50) NOT NULL,
+cod_postal SMALLINT NOT NULL,
+avenida VARCHAR(50) NOT NULL,
+email VARCHAR(254) UNIQUE,
+CONSTRAINT PK_prov PRIMARY KEY (id_prov)
+);
+
+
+CREATE TABLE ada_perfume (
+id_perfume SMALLINT,
+nombre VARCHAR(25) NOT NULL UNIQUE,
+genero CHAR(1) NOT NULL,
+preferencia_uso CHAR(1) NOT NULL,
+fecha_creacion SMALLINT NOT NULL,
+edad VARCHAR(10) NOT NULL,
+id_prod SMALLINT NOT NULL,
+CONSTRAINT PK_perfume PRIMARY KEY (id_perfume),
+CONSTRAINT CK_genero CHECK (genero in ('m','f','u')),
+CONSTRAINT CK_preferencia_uso CHECK (preferencia_uso in ('d','t','s')),
+CONSTRAINT CK_edad CHECK (edad in ('adulto','joven','infantil','atemporal'))
+);
+
+
+
+CREATE TABLE ada_intensidad(
+id_int SMALLINT NOT NULL,
+id_perfume SMALLINT NOT NULL,
+tipo CHAR(3) NOT NULL,
+porc_concentracion SMALLINT NOT NULL,
+descripcion VARCHAR(254),
+CONSTRAINT PK_intensidad PRIMARY KEY (id_int,id_perfume),
+CONSTRAINT CK_porc_concentracion CHECK (porc_concentracion > 0 and porc_concentracion <=100),
+CONSTRAINT CK_tipo_p CHECK (tipo in ('p','edp','edt','edc','eds'))
+);
+
+
+CREATE TABLE ada_presentacion_p(
+id_present SMALLINT NOT NULL,
+id_int SMALLINT NOT NULL,
+id_perfume SMALLINT NOT NULL,
+capacidad_ml SMALLINT NOT NULL,
+CONSTRAINT PK_pre_p PRIMARY KEY (id_present,id_int,id_perfume),
+CONSTRAINT CK_capacidad_ml CHECK (capacidad_ml > 0)
+);
+
+
+
+CREATE TABLE ada_resutado_eval(
+fecha DATE NOT NULL default CURRENT_DATE,
+id_prod SMALLINT NOT NULL,
+id_prov SMALLINT NOT NULL,
+resultado SMALLINT NOT NULL,
+tipo_eval CHAR(1) NOT NULL,
+CONSTRAINT PK_resultado_eval PRIMARY KEY (fecha,id_prod,id_prov),
+CONSTRAINT CK_result CHECK (resultado >= 0),
+CONSTRAINT CK_tipo_eval CHECK (tipo_eval in ('a','i'))
+);
+
+
+CREATE TABLE ada_origen(
+id_pais SMALLINT NOT NULL,
+cas INTEGER NOT NULL,
+CONSTRAINT PK_origen PRIMARY KEY (id_pais,cas)
+);
+
+
+CREATE TABLE ada_monolitico(
+id_perfume SMALLINT NOT NULL,
+cas_ep INTEGER NOT NULL,
+CONSTRAINT PK_monolitico PRIMARY KEY (id_perfume,cas_ep)
+);
+
+
+CREATE TABLE ada_familia_esencia(
+id_familia SMALLINT NOT NULL,
+cas INTEGER NOT NULL,
+CONSTRAINT PK_flia_esencia PRIMARY KEY (id_familia,cas)
+);
+
+
+CREATE TABLE ada_perfume_familia(
+id_perfume SMALLINT NOT NULL,
+id_familia SMALLINT NOT NULL,
+CONSTRAINT PK_perflia PRIMARY KEY (id_perfume,id_familia)
+);
+
+
+CREATE TABLE ada_perfume_nota(
+id_perfume SMALLINT NOT NULL,
+cas_ep INTEGER NOT NULL,
+tipo CHAR(1) NOT NULL,
+CONSTRAINT PK_perfnota PRIMARY KEY (id_perfume,cas_ep),
+CONSTRAINT CK_tipo_pn CHECK (tipo in ('s','c','f'))
+);
+
+
+CREATE TABLE ada_perf_ing(
+id_perfume SMALLINT NOT NULL,
+cas_ip INTEGER NOT NULL,
+CONSTRAINT PK_otrosp PRIMARY KEY (id_perfume,cas_ip)
+);
+
+
+CREATE TABLE ada_prod_pais(
+id_prod SMALLINT NOT NULL,
+id_pais SMALLINT NOT NULL,
+CONSTRAINT FK_prod_pais PRIMARY KEY (id_prod,id_pais)
+);
+
+
+CREATE TABLE ada_contrato(
+id_prod SMALLINT NOT NULL,
+id_prov SMALLINT NOT NULL,
+numero_contrato SMALLINT NOT NULL,
+fecha_emision DATE NOT NULL default CURRENT_DATE,
+exclusivo BOOLEAN,
+descuento SMALLINT,
+acuerdo BOOLEAN NOT NULL DEFAULT FALSE,
+cancelado BOOLEAN,
+fecha_cancelac DATE,
+motivo_cancelac VARCHAR(200),
+CONSTRAINT PK_contrato PRIMARY KEY(id_prod,id_prov,numero_contrato),
+CONSTRAINT CK_descuento CHECK (descuento >= 1 and descuento <=100)
+);
+
+CREATE TABLE ada_renueva(
+id_ren SMALLINT NOT NULL,
+id_prod SMALLINT NOT NULL,
+id_prov SMALLINT NOT NULL,
+numero_contrato SMALLINT NOT NULL,
+fecha date NOT NULL default CURRENT_DATE,
+CONSTRAINT PK_renueva PRIMARY KEY (id_ren,id_prod,id_prov,numero_contrato)
+);
+
+CREATE TABLE ada_creador_perfume(
+id_perfumista SMALLINT NOT NULL,
+id_perfume SMALLINT NOT NULL,
+CONSTRAINT PK_creador_p PRIMARY KEY (id_perfumista,id_perfume)
+);
+
+
+CREATE TABLE ada_membresia(
+id_m SMALLINT,
+fecha_inicio DATE NOT NULL,
+fecha_fin DATE,
+id_prov SMALLINT,
+id_prod SMALLINT,
+tipo CHAR(3) NOT NULL,
+CONSTRAINT CK_tipo_m CHECK (tipo in ('PRI','SEC','ASC')),
+CONSTRAINT PK_membresia PRIMARY KEY (id_m),
+CONSTRAINT CK_fecha_fin CHECK (fecha_fin > fecha_inicio)
+);
+
+
+CREATE TABLE ada_alternativa_pago(
+id_prov SMALLINT NOT NULL,
+metodo_pago CHAR(1) NOT NULL,
+CONSTRAINT PK_apago PRIMARY KEY (id_prov,metodo_pago),
+CONSTRAINT CK_metodo_pago check (metodo_pago in ('p','c'))
+);
+
+
+CREATE TABLE ada_cuota(
+id_cuota SMALLINT,
+id_prov SMALLINT NOT NULL,
+porc_cuota decimal(3) NOT NULL,
+metodo_pago CHAR(1) NOT NULL,
+periodo_vigencia numeric(3) NOT NULL,
+CONSTRAINT PK_ada_cuota PRIMARY KEY (id_prov,id_cuota,metodo_pago),
+CONSTRAINT CK_metodo_pago check (metodo_pago in ('p','c')),
+CONSTRAINT CK_porc_cuota CHECK (porc_cuota >= 0 and porc_cuota <= 100),
+CONSTRAINT CK_periodo_vigencia CHECK (periodo_vigencia > 0)
+);
+
+
+CREATE TABLE ada_presentacion_e(
+sku SMALLINT,
+nombre_etiqueta VARCHAR(50) NOT NULL,
+precio numeric(7,2) NOT NULL,
+cantidad_perpack numeric(3) NOT NULL,
+unidad_medida CHAR(2) NOT NULL,
+contenido_neto SMALLINT NOT NULL,
+tipo_empaque CHAR(3) NOT NULL,
+cas INTEGER,
+cas_oi INTEGER,
+CONSTRAINT PK_presentacion_e PRIMARY KEY (sku),
+CONSTRAINT CK_precio_pe CHECK (precio > 0),
+CONSTRAINT CK_cantidadpk CHECK (cantidad_perpack > 0),
+CONSTRAINT CK_tipo_empaque CHECK (tipo_empaque in('IBC','GRG','KTC')),
+CONSTRAINT CK_contenido CHECK (contenido_neto > 0),
+CONSTRAINT CK_unidad CHECK (unidad_medida in ('kg','g','mg','ml','l')),
+CONSTRAINT CK_cas CHECK (cas > 0)
+);
+
+
+
+CREATE TABLE ada_alternativa_envio(
+id_prov SMALLINT NOT NULL,
+id_pais SMALLINT NOT NULL,
+porc_base decimal(3) NOT NULL,
+tipo_envio CHAR(1) NOT NULL,
+CONSTRAINT PK_altenvio PRIMARY KEY (id_prov,id_pais,tipo_envio),
+CONSTRAINT CK_porc_base CHECK (porc_base >= 0 and porc_base <= 100),
+CONSTRAINT CK_tipo_envio CHECK (tipo_envio in ('a','m','t'))
+);
+
+
+CREATE TABLE ada_modificador_envio(
+id_prov SMALLINT NOT NULL,
+id_pais SMALLINT NOT NULL,
+id_modif SMALLINT NOT NULL,
+tipo_envio CHAR (1) NOT NULL,
+nombre_carac VARCHAR (20) NOT NULL,
+porc_extra decimal(3) NOT NULL,
+CONSTRAINT PK_modif_e PRIMARY KEY (id_prov,id_pais,id_modif,tipo_envio),
+CONSTRAINT CK_tipo_envio_mf CHECK (tipo_envio in ('a','m','t')),
+CONSTRAINT CK_porcext CHECK (porc_extra >0 AND porc_extra <=100)
+);
+
+
+CREATE TABLE ada_contratacion_prod(
+id_pcont SMALLINT,
+id_prod SMALLINT NOT NULL,
+id_prov SMALLINT NOT NULL,
+numero_contrato SMALLINT NOT NULL,
+cas INTEGER,
+cas_oi INTEGER,
+CONSTRAINT PK_contrac_pro PRIMARY KEY(id_prod,id_prov,numero_contrato,id_pcont),
+CONSTRAINT CK_cas CHECK (cas > 0),
+CONSTRAINT CK_cas_oi CHECK (cas_oi > 0)
+);
+
+
+CREATE TABLE ada_contratacion_ap(
+id_prod SMALLINT NOT NULL,
+id_prov SMALLINT NOT NULL,
+numero_contrato SMALLINT NOT NULL,
+id_prov2 SMALLINT NOT NULL,
+metodo_pago CHAR(1) NOT NULL,
+CONSTRAINT CK_metodo_pago check (metodo_pago in ('p','c')),
+CONSTRAINT PK_contrac_ap PRIMARY KEY (id_prod,id_prov,numero_contrato,id_prov2,metodo_pago)
+);
+
+
+CREATE TABLE ada_contratacion_me(
+id_prod SMALLINT NOT NULL,
+id_prov SMALLINT NOT NULL,
+tipo_envio CHAR(1) NOT NULL,
+numero_contrato SMALLINT NOT NULL,
+id_prov2 SMALLINT NOT NULL,
+id_pais SMALLINT NOT NULL,
+porc_contratado decimal(3) NOT NULL,
+CONSTRAINT PK_contrac_me PRIMARY KEY (id_prod,id_prov,numero_contrato,id_prov2,id_pais,tipo_envio),
+CONSTRAINT CK_tipo_envio CHECK (tipo_envio in ('a','m','t')),
+CONSTRAINT CK_porc_contrac CHECK (porc_contratado > 0)
+);
+
+
+CREATE TABLE ada_escala(
+fecha_inicio DATE NOT NULL DEFAULT CURRENT_DATE,
+id_prod SMALLINT NOT NULL,
+rango_inicial decimal(3) NOT NULL,
+rango_final decimal(3) NOT NULL,
+fecha_fin DATE,
+tipo_uso CHAR(1),
+rango_aprob SMALLINT NOT NULL,
+CONSTRAINT pk_escala PRIMARY KEY (fecha_inicio,id_prod),
+CONSTRAINT CK_rangoi CHECK (rango_inicial >= 0),
+CONSTRAINT CK_tipo_uso_escala CHECK (tipo_uso in ('a','i')),
+CONSTRAINT CK_rango_aprob CHECK (rango_aprob > 0 and rango_aprob <=100),
+CONSTRAINT CK_rangof CHECK (rango_final > rango_inicial)
+);
+
+
+CREATE TABLE ada_eval_criterio(
+fecha_inicio DATE NOT NULL DEFAULT CURRENT_DATE,
+id_prod SMALLINT NOT NULL,
+id_criterio SMALLINT NOT NULL,
+tipo_uso CHAR(1) NOT NULL,
+peso decimal(3) NOT NULL,
+fecha_fin DATE,
+CONSTRAINT PK_eval_criterio PRIMARY KEY (fecha_inicio,id_prod,id_criterio),
+CONSTRAINT CK_peso CHECK (peso >= 0 and peso <=100),
+CONSTRAINT CK_tipo_uso CHECK (tipo_uso in ('a','i'))
+);
+
+
+CREATE TABLE ada_pedido(
+id_pedido SMALLINT,
+--FK Contratacion Metodo de Pago
+id_prov1 SMALLINT NOT NULL,
+id_prod1 SMALLINT NOT NULL,
+numero_contrato1 SMALLINT NOT NULL,
+id_prov2 SMALLINT NOT NULL,
+metodo_pago CHAR(1) NOT NULL,
+--FK Contratacion Metodo de Envio
+id_prod3 SMALLINT NOT NULL,
+id_prov3 SMALLINT NOT NULL,
+numero_contrato2 SMALLINT NOT NULL,
+id_prov4 SMALLINT NOT NULL,
+id_pais SMALLINT NOT NULL,
+tipo_envio CHAR(1) NOT NULL,
+--Atributos propios de pedido
+fecha_emision DATE NOT NULL,
+estatus VARCHAR(10) NOT NULL,
+descripcion VARCHAR(255),
+fecha_confirmacion DATE,
+nro_factura SMALLINT,
+total decimal(7,2),
+CONSTRAINT PK_pedido PRIMARY KEY (id_pedido),
+CONSTRAINT CK_estatus_p
+CHECK (estatus in ('pendiente','rechazado','enviado','recibido')),
+CONSTRAINT CK_metodo_pago check (metodo_pago in ('p','c')),
+CONSTRAINT CK_tipo_envio CHECK (tipo_envio in ('a','m','t')),
+CONSTRAINT CK_total_p CHECK (total >= 0)
+);
+
+
+CREATE TABLE ada_det_pedido(
+id_renglon SMALLINT,
+id_pedido SMALLINT NOT NULL,
+cantidad numeric(2) NOT NULL,
+sku SMALLINT NOT NULL,
+CONSTRAINT PK_det_pedido PRIMARY KEY (id_renglon,id_pedido),
+CONSTRAINT CK_cantidad_p CHECK (cantidad > 0 and cantidad < 100)
+);
+
+
+CREATE TABLE ada_pago(
+nro_recibo SMALLINT,
+id_pedido SMALLINT NOT NULL,
+fecha_emision DATE NOT NULL,
+monto_total decimal(7,2) NOT NULL,
+CONSTRAINT PK_pago PRIMARY KEY (nro_recibo,id_pedido),
+CONSTRAINT CK_monto_total CHECK (monto_total >= 0)
+);
+
+
+
+CREATE TABLE ada_familia_palabra(
+id_familia SMALLINT NOT NULL,
+id_pc SMALLINT NOT NULL,
+CONSTRAINT PK_flia_palabra PRIMARY KEY (id_familia,id_pc)
+);
+
+
+CREATE TABLE ada_otros_esencia(
+cas_oi INTEGER NOT NULL,
+cas INTEGER,
+CONSTRAINT PK_otro_e PRIMARY KEY (cas_oi,cas)
+);
+
+-- Fin apartado 1
+
+
+
+
+--Apartado 2: Creación de las secuencias, ALTER TABLE para FK's y creación de índices.
+
+--SECUENCIAS
+
+CREATE SEQUENCE ada_sec_id_proveedor as SMALLINT
+ MINVALUE 1
+ MAXVALUE 50
+ NO CYCLE
+ OWNED BY ada_proveedor.id_prov;
+ALTER TABLE ada_proveedor
+ALTER COLUMN id_prov SET DEFAULT nextval('ada_sec_id_proveedor');
+
+
+CREATE SEQUENCE ada_sec_id_prod_contr as SMALLINT
+ MINVALUE 1
+ MAXVALUE 50
+ NO CYCLE
+ OWNED BY ada_contratacion_prod.id_pcont;
+ALTER TABLE ada_contratacion_prod
+ALTER COLUMN id_pcont SET DEFAULT nextval('ada_sec_id_prod_contr');
+
+
+CREATE SEQUENCE ada_sec_id_CUOTA as SMALLINT
+ MINVALUE 1
+ MAXVALUE 20
+ NO CYCLE
+ OWNED BY ada_cuota.id_cuota;
+ALTER TABLE ada_cuota
+ALTER COLUMN id_cuota SET DEFAULT nextval('ada_sec_id_CUOTA');
+
+
+
+CREATE SEQUENCE ada_sec_id_membresia as SMALLINT
+ MINVALUE 1
+ MAXVALUE 50
+ NO CYCLE
+ OWNED BY ada_membresia.id_m;
+ALTER TABLE ada_membresia
+ALTER COLUMN id_m SET DEFAULT nextval('ada_sec_id_membresia');
+
+
+CREATE SEQUENCE ada_sec_id_otros_ing as SMALLINT
+ MINVALUE 1
+ MAXVALUE 100
+ NO CYCLE
+ OWNED BY ada_otros_ing.cas_oi;
+ALTER TABLE ada_otros_ing
+ALTER COLUMN cas_oi SET DEFAULT nextval('ada_sec_id_otros_ing');
+
+CREATE SEQUENCE ada_sec_id_pais as SMALLINT
+ MINVALUE 1
+ MAXVALUE 240
+ NO CYCLE
+ OWNED BY ada_pais.id_pais;
+ALTER TABLE ada_pais
+ALTER COLUMN id_pais SET DEFAULT nextval('ada_sec_id_pais');
+
+CREATE SEQUENCE ada_sec_id_productor as SMALLINT
+ MINVALUE 1
+ MAXVALUE 50
+ NO CYCLE
+ OWNED BY ada_productor.id_prod;
+ALTER TABLE ada_productor
+ALTER COLUMN id_prod SET DEFAULT nextval('ada_sec_id_productor');
+
+CREATE SEQUENCE ada_sec_id_perfume as SMALLINT
+MINVALUE 1
+MAXVALUE 50
+NO CYCLE
+OWNED BY ada_perfume.id_perfume;
+ALTER TABLE ada_perfume
+ALTER COLUMN id_perfume SET DEFAULT nextval('ada_sec_id_perfume');
+
+CREATE SEQUENCE ada_sec_id_intensidad as SMALLINT
+MINVALUE 1
+MAXVALUE 60
+NO CYCLE
+OWNED BY ada_intensidad.id_int;
+ALTER TABLE ada_intensidad
+ALTER COLUMN id_int SET DEFAULT nextval('ada_sec_id_intensidad');
+
+CREATE SEQUENCE ada_sec_id_presentacion_p as SMALLINT
+MINVALUE 1
+MAXVALUE 60
+NO CYCLE
+OWNED BY ada_presentacion_p.id_present;
+ALTER TABLE ada_presentacion_p
+ALTER COLUMN id_present SET DEFAULT nextval('ada_sec_id_presentacion_p');
+
+
+CREATE SEQUENCE ada_sec_id_familia as SMALLINT
+MINVALUE 1
+MAXVALUE 10
+NO CYCLE
+OWNED BY ada_familia_olfativa.id_familia;
+ALTER TABLE ada_familia_olfativa
+ALTER COLUMN id_familia SET DEFAULT nextval('ada_sec_id_familia');
+
+CREATE SEQUENCE ada_sec_id_pc as SMALLINT
+MINVALUE 1
+MAXVALUE 35
+NO CYCLE
+OWNED BY ada_palabra_clave.id_pc;
+ALTER TABLE ada_palabra_clave
+ALTER COLUMN id_pc SET DEFAULT nextval('ada_sec_id_pc');
+
+CREATE SEQUENCE ada_sec_id_criterio as SMALLINT
+MINVALUE 1
+MAXVALUE 5
+NO CYCLE
+OWNED BY ada_criterio_eval.id_criterio;
+ALTER TABLE ada_criterio_eval
+ALTER COLUMN id_criterio SET DEFAULT nextval('ada_sec_id_criterio');
+
+
+CREATE SEQUENCE ada_sec_numero_contrato as SMALLINT
+INCREMENT BY 5
+MINVALUE 1000
+MAXVALUE 2000
+NO CYCLE
+OWNED by ada_contrato.numero_contrato;
+ALTER TABLE ada_contrato
+ALTER COLUMN numero_contrato SET DEFAULT nextval('ada_sec_numero_contrato');
+
+CREATE SEQUENCE ada_sec_ada_renueva as SMALLINT
+MINVALUE 1
+MAXVALUE 50
+NO CYCLE
+OWNED BY ada_renueva.id_ren;
+ALTER TABLE ada_renueva
+ALTER COLUMN id_ren SET DEFAULT nextval('ada_sec_ada_renueva');
+
+
+CREATE SEQUENCE ada_sec_sku_presentacion_e as SMALLINT
+INCREMENT 5
+MINVALUE 100
+MAXVALUE 500
+NO CYCLE
+OWNED BY ada_presentacion_e.sku;
+ALTER TABLE ada_presentacion_e
+ALTER COLUMN sku SET DEFAULT nextval('ada_sec_sku_presentacion_e');
+
+
+CREATE SEQUENCE ada_sec_id_modif as SMALLINT
+MINVALUE 1
+MAXVALUE 10
+NO CYCLE
+OWNED BY ada_modificador_envio.id_modif;
+ALTER TABLE ada_modificador_envio
+ALTER COLUMN id_modif SET DEFAULT nextval('ada_sec_id_modif');
+
+
+CREATE SEQUENCE ada_sec_id_pedido as SMALLINT
+MINVALUE 1
+MAXVALUE 100
+NO CYCLE
+OWNED BY ada_pedido.id_pedido;
+ALTER TABLE ada_pedido
+ALTER COLUMN id_pedido SET DEFAULT nextval('ada_sec_id_pedido');
+
+
+CREATE SEQUENCE ada_sec_nro_factura as SMALLINT
+INCREMENT 5
+MINVALUE 1000
+MAXVALUE 2500
+NO CYCLE
+OWNED BY ada_pedido.nro_factura;
+ALTER TABLE ada_pedido
+ALTER COLUMN nro_factura SET DEFAULT nextval('ada_sec_nro_factura');
+
+
+CREATE SEQUENCE ada_sec_id_asoc as SMALLINT
+MINVALUE 1
+MAXVALUE 5
+NO CYCLE
+OWNED BY ada_asoc_nacional.id_asoc;
+ALTER TABLE ada_asoc_nacional
+ALTER COLUMN id_asoc SET DEFAULT nextval('ada_sec_id_asoc');
+
+
+CREATE SEQUENCE ada_sec_id_perfumista as SMALLINT
+MINVALUE 1
+MAXVALUE 20
+NO CYCLE
+OWNED BY ada_perfumista.id_perfumista;
+ALTER TABLE ada_perfumista
+ALTER COLUMN id_perfumista SET DEFAULT nextval('ada_sec_id_perfumista');
+
+
+
+--ALTER TABLE
+
+ALTER TABLE ada_esencia
+ADD CONSTRAINT FK_id_prov FOREIGN KEY (id_prov)
+REFERENCES ada_proveedor (id_prov);
+CREATE INDEX ada_I_FK_id_prov on ada_esencia (id_prov);
+
+
+ALTER TABLE ada_perfumista
+ADD CONSTRAINT FK_id_pais FOREIGN KEY (id_pais)
+REFERENCES ada_pais (id_pais);
+CREATE INDEX ada_I_FK_id_pais on ada_perfumista (id_pais);
+
+
+ALTER TABLE ada_productor
+ADD CONSTRAINT FK_id_asoc FOREIGN KEY (id_asoc)
+REFERENCES ada_asoc_nacional (id_asoc);
+CREATE INDEX ada_I_FK_id_asoc on ada_productor (id_asoc);
+
+ALTER TABLE ada_proveedor
+ADD CONSTRAINT FK_id_pais FOREIGN KEY (id_pais)
+REFERENCES ada_pais (id_pais);
+CREATE INDEX ada_I_FK_id_pais_p on ada_proveedor (id_pais);
+ALTER TABLE ada_proveedor
+ADD CONSTRAINT FK_id_asoc FOREIGN KEY (id_asoc)
+REFERENCES ada_asoc_nacional (id_asoc);
+CREATE INDEX ada_I_FK_id_asoc_p on ada_proveedor (id_asoc);
+
+
+ALTER TABLE ada_perfume
+ADD CONSTRAINT FK_id_prod FOREIGN KEY (id_prod)
+REFERENCES ada_productor (id_prod);
+CREATE INDEX ada_I_FK_id_prod_perf on ada_perfume (id_prod);
+
+
+
+ALTER TABLE ada_intensidad
+ADD CONSTRAINT FK_id_perfume FOREIGN KEY (id_perfume)
+REFERENCES ada_perfume (id_perfume);
+
+
+ALTER TABLE ada_presentacion_p
+ADD CONSTRAINT FK_id_perfume_int FOREIGN KEY (id_perfume,id_int)
+REFERENCES ada_intensidad (id_perfume,id_int);
+
+
+ALTER TABLE ada_resutado_eval
+ADD CONSTRAINT FK_id_prod FOREIGN KEY (id_prod)
+REFERENCES ada_productor (id_prod);
+ALTER TABLE ada_resutado_eval
+ADD CONSTRAINT FK_id_prov FOREIGN KEY (id_prov)
+REFERENCES ada_proveedor (id_prov);
+
+
+ALTER TABLE ada_origen
+ADD CONSTRAINT FK_id_pais FOREIGN KEY (id_pais)
+REFERENCES ada_pais (id_pais);
+ALTER TABLE ada_origen
+ADD CONSTRAINT FK_cas FOREIGN KEY (cas)
+REFERENCES ada_esencia (cas);
+
+
+ALTER TABLE ada_monolitico
+ADD CONSTRAINT FK_cas_ep FOREIGN KEY (cas_ep)
+REFERENCES ada_esencia_perfume (cas_ep);
+ALTER TABLE ada_monolitico
+ADD CONSTRAINT FK_id_perfume FOREIGN KEY (id_perfume)
+REFERENCES ada_perfume (id_perfume);
+
+
+ALTER TABLE ada_familia_esencia
+ADD CONSTRAINT FK_id_familia FOREIGN KEY (id_familia)
+REFERENCES ada_familia_olfativa (id_familia);
+ALTER TABLE ada_familia_esencia
+ADD CONSTRAINT FK_cas FOREIGN KEY (cas)
+REFERENCES ada_esencia (cas);
+
+
+ALTER TABLE ada_perfume_familia
+ADD CONSTRAINT FK_id_familia FOREIGN KEY (id_familia)
+REFERENCES ada_familia_olfativa (id_familia);
+ALTER TABLE ada_perfume_familia
+ADD CONSTRAINT FK_id_perfume FOREIGN KEY (id_perfume)
+REFERENCES ada_perfume (id_perfume);
+
+
+ALTER TABLE ada_perfume_nota
+ADD CONSTRAINT FK_id_perfume FOREIGN KEY (id_perfume)
+REFERENCES ada_perfume (id_perfume);
+ALTER TABLE ada_perfume_nota
+ADD CONSTRAINT FK_cas_ep FOREIGN KEY (cas_ep)
+REFERENCES ada_esencia_perfume (cas_ep);
+
+
+ALTER TABLE ada_perf_ing
+ADD CONSTRAINT FK_id_perfume FOREIGN KEY (id_perfume)
+REFERENCES ada_perfume (id_perfume);
+ALTER TABLE ada_perf_ing
+ADD CONSTRAINT FK_cas_ip FOREIGN KEY (cas_ip)
+REFERENCES ada_ingrediente_p (cas_ip);
+
+
+ALTER TABLE ada_prod_pais
+ADD CONSTRAINT FK_id_pais FOREIGN KEY (id_pais)
+REFERENCES ada_pais (id_pais);
+ALTER TABLE ada_prod_pais
+ADD CONSTRAINT FK_id_prod FOREIGN KEY (id_prod)
+REFERENCES ada_productor (id_prod);
+
+
+ALTER TABLE ada_contrato
+ADD CONSTRAINT FK_id_prod FOREIGN KEY (id_prod)
+REFERENCES ada_productor (id_prod);
+ALTER TABLE ada_contrato
+ADD CONSTRAINT FK_id_prov FOREIGN KEY (id_prov)
+REFERENCES ada_proveedor (id_prov);
+
+
+ALTER TABLE ada_renueva
+ADD CONSTRAINT FK_renov FOREIGN KEY(id_prod,id_prov,numero_contrato)
+REFERENCES ada_contrato (id_prod,id_prov,numero_contrato)
+ON DELETE CASCADE;
+
+
+
+ALTER TABLE ada_creador_perfume
+ADD CONSTRAINT FK_id_perfume FOREIGN KEY (id_perfume)
+REFERENCES ada_perfume (id_perfume);
+ALTER TABLE ada_creador_perfume
+ADD CONSTRAINT FK_perfumista FOREIGN KEY (id_perfumista)
+REFERENCES ada_perfumista (id_perfumista);
+
+
+ALTER TABLE ada_membresia
+ADD CONSTRAINT FK_id_prod FOREIGN KEY (id_prod)
+REFERENCES ada_productor (id_prod);
+CREATE INDEX ada_I_FK_id_prod_mem on ada_membresia (id_prod);
+ALTER TABLE ada_membresia
+ADD CONSTRAINT FK_id_prov FOREIGN KEY (id_prov)
+REFERENCES ada_proveedor (id_prov);
+CREATE INDEX ada_I_FK_id_prov_mem on ada_membresia (id_prov);
+
+
+
+ALTER TABLE ada_alternativa_pago
+ADD CONSTRAINT FK_id_prov FOREIGN KEY (id_prov)
+REFERENCES ada_proveedor (id_prov);
+CREATE INDEX ada_I_FK_id_prov_alt on ada_alternativa_pago (id_prov);
+
+
+ALTER TABLE ada_cuota
+ADD CONSTRAINT FK_cuota FOREIGN KEY (id_prov,metodo_pago)
+REFERENCES ada_alternativa_pago (id_prov,metodo_pago);
+
+
+ALTER TABLE ada_presentacion_e
+ADD CONSTRAINT FK_cas FOREIGN KEY (cas)
+REFERENCES ada_esencia (cas);
+CREATE INDEX ada_I_FK_id_esencia_p on ada_presentacion_e (cas);
+ALTER TABLE ada_presentacion_e
+ADD CONSTRAINT FK_cas_oi FOREIGN KEY (cas_oi)
+REFERENCES ada_otros_ing (cas_oi);
+CREATE INDEX ada_I_FK_id_otro_ing_p on ada_presentacion_e (cas_oi);
+
+
+ALTER TABLE ada_alternativa_envio
+ADD CONSTRAINT FK_id_pais FOREIGN KEY (id_pais)
+REFERENCES ada_pais (id_pais);
+ALTER TABLE ada_alternativa_envio
+ADD CONSTRAINT FK_id_prov FOREIGN KEY (id_prov)
+REFERENCES ada_proveedor (id_prov);
+
+
+ALTER TABLE ada_modificador_envio
+ADD CONSTRAINT FK_modif_e FOREIGN KEY(id_prov,id_pais,tipo_envio)
+REFERENCES ada_alternativa_envio (id_prov,id_pais,tipo_envio);
+
+
+
+ALTER TABLE ada_contratacion_prod
+ADD CONSTRAINT FK_contrac_p FOREIGN KEY (id_prod,id_prov,numero_contrato)
+REFERENCES ada_contrato (id_prod,id_prov,numero_contrato);
+ALTER TABLE ada_contratacion_prod
+ADD CONSTRAINT FK_cas_contract FOREIGN KEY (cas)
+REFERENCES ada_esencia (cas);
+ALTER TABLE ada_contratacion_prod
+ADD CONSTRAINT FK_cas_oi FOREIGN KEY (cas_oi)
+REFERENCES ada_otros_ing (cas_oi);
+
+
+ALTER TABLE ada_contratacion_ap
+ADD CONSTRAINT FK_contrac_ap FOREIGN KEY (id_prod,id_prov,numero_contrato)
+REFERENCES ada_contrato (id_prod,id_prov,numero_contrato);
+ALTER TABLE ada_contratacion_ap
+ADD CONSTRAINT FK_prov_pago FOREIGN KEY (id_prov2,metodo_pago)
+REFERENCES ada_alternativa_pago (id_prov,metodo_pago);
+
+
+ALTER TABLE ada_contratacion_me
+ADD CONSTRAINT FK_contrac_me FOREIGN KEY (id_prod,id_prov,numero_contrato)
+REFERENCES ada_contrato (id_prod,id_prov,numero_contrato);
+ALTER TABLE ada_contratacion_me
+ADD CONSTRAINT FK_prov_pais FOREIGN KEY (id_prov2,id_pais,tipo_envio)
+REFERENCES ada_alternativa_envio (id_prov,id_pais,tipo_envio);
+
+
+ALTER TABLE ada_escala
+ADD CONSTRAINT FK_id_prod FOREIGN KEY (id_prod)
+REFERENCES ada_productor (id_prod);
+
+
+
+ALTER TABLE ada_eval_criterio
+ADD CONSTRAINT FK_id_prod FOREIGN KEY (id_prod)
+REFERENCES ada_productor (id_prod);
+ALTER TABLE ada_eval_criterio
+ADD CONSTRAINT FK_id_criterio FOREIGN KEY (id_criterio)
+REFERENCES ada_criterio_eval (id_criterio);
+
+
+
+ALTER TABLE ada_pedido
+ADD CONSTRAINT FK_contrac_p
+FOREIGN KEY (id_prod1,id_prov1,numero_contrato1,id_prov2,metodo_pago)
+REFERENCES ada_contratacion_ap (id_prod,id_prov,numero_contrato,id_prov2,metodo_pago);
+CREATE INDEX ada_I_FK_contrato_pedido on ada_pedido (id_prod1,id_prov1,numero_contrato1,id_prov2,metodo_pago);
+ALTER TABLE ada_pedido
+ADD CONSTRAINT FK_contrac_me
+FOREIGN KEY(id_prod3,id_prov3,numero_contrato2,id_prov4,id_pais,tipo_envio)
+REFERENCES ada_contratacion_me (id_prod,id_prov,numero_contrato,id_prov2,id_pais,tipo_envio);
+CREATE INDEX ada_I_FK_me_pedido on ada_pedido (id_prod3,id_prov3,numero_contrato2,id_prov4,id_pais,tipo_envio);
+
+
+
+ALTER TABLE ada_det_pedido
+ADD CONSTRAINT FK_id_pedido FOREIGN KEY (id_pedido)
+REFERENCES ada_pedido (id_pedido);
+ALTER TABLE ada_det_pedido
+ADD CONSTRAINT FK_sku FOREIGN KEY (sku)
+REFERENCES ada_presentacion_e (sku);
+CREATE INDEX ada_I_FK_sku_det_pedido on ada_det_pedido (sku);
+
+
+
+ALTER TABLE ada_pago
+ADD CONSTRAINT FK_id_pedido FOREIGN KEY (id_pedido)
+REFERENCES ada_pedido (id_pedido);
+CREATE INDEX ada_I_FK_pago on ada_pago (id_pedido);
+
+
+
+ALTER TABLE ada_familia_palabra
+ADD CONSTRAINT FK_id_familia FOREIGN KEY (id_familia)
+REFERENCES ada_familia_olfativa (id_familia);
+ALTER TABLE ada_familia_palabra
+ADD CONSTRAINT FK_id_pc FOREIGN KEY (id_pc)
+REFERENCES ada_palabra_clave (id_pc);
+
+
+
+ALTER TABLE ada_otros_esencia
+ADD CONSTRAINT FK_cas_oi FOREIGN KEY (cas_oi)
+REFERENCES ada_otros_ing (cas_oi);
+ALTER TABLE ada_otros_esencia
+ADD CONSTRAINT FK_cas FOREIGN KEY (cas)
+REFERENCES ada_esencia (cas);
+
+
+--Fin apartado 2
+
+--Apartado 4: Creación de vistas necesarias
+
+--seleccionar proveedores con membresia activa
+CREATE VIEW ada_prov_mem_activa AS --crear vista para proveedores con mem activa
+SELECT id_prov from ada_membresia
+WHERE fecha_fin is null and id_prov is not null;
+
+--VISTA DE PRODUCTORES CON MEMBRESIA
+CREATE VIEW ada_prod_mem_activa AS
+SELECT id_prod FROM ada_membresia
+WHERE fecha_fin IS NULL AND id_prod IS NOT NULL;
+
+--VER LA MEMBRESIA DE LOS PROVEEDORES EN GENERAL
+CREATE VIEW ada_prov_mem_general AS
+SELECT m.id_prov ID, p.nombre_prov EMPRESA_PROVEEDORA, m.fecha_inicio FECHA_INICIO, m.fecha_fin
+FROM ada_membresia m, ada_proveedor p
+WHERE p.id_prov = m.id_prov;
+
+--VER LA MEMBRESIA DE LOS PRODUCTORES EN GENERAL
+CREATE VIEW ada_prod_mem_general AS
+SELECT m.id_prod, p.nombre_prod, m.fecha_inicio, m.fecha_fin
+FROM ada_membresia m, ada_productor p
+WHERE p.id_prod = m.id_prod;
+
+--VER CONTRATOS EN REGLA: vigentes, no cancelados
+CREATE VIEW ada_contratos_en_regla AS
+SELECT id_prov,id_prod,numero_contrato FROM ada_contrato
+WHERE (CURRENT_DATE) < (fecha_emision + INTERVAL '365 day')
+AND acuerdo IS TRUE
+AND (cancelado IS FALSE OR cancelado IS NULL)
+AND id_prov IN (SELECT id_prov FROM ada_prov_mem_activa)
+UNION
+SELECT DISTINCT id_prov,id_prod,numero_contrato FROM ada_renueva
+WHERE (CURRENT_DATE) < (fecha + INTERVAL '365 day')
+AND id_prov IN (SELECT id_prov FROM ada_prov_mem_activa)
+ORDER BY id_prov, id_prod;
+
+--Vista bonita de las presentaciones de tipo ingrediente
+CREATE VIEW ada_pres_i_e AS
+SELECT p.nombre_etiqueta NOMBRE,
+to_char(p.precio, '$99990.00') PRECIO,
+p.contenido_neto ||''|| p.unidad_medida AS contenido, p.cantidad_perpack
+from ada_presentacion_e p where cas is null;
+--Vista bonita de las presentaciones de tipo esencia
+CREATE VIEW ada_pres_e_e AS
+SELECT p.nombre_etiqueta NOMBRE,
+to_char(p.precio, '$99990.00') PRECIO,
+p.contenido_neto ||''|| p.unidad_medida AS contenido, p.cantidad_perpack
+from ada_presentacion_e p where cas_oi is null;
+
+--Listra de productos exclusivos
+CREATE VIEW ada_productos_exclusivos AS
+SELECT cp.id_prov,cp.id_prod,cp.numero_contrato, cas,cas_oi,exclusivo FROM ada_contratacion_prod cp
+INNER JOIN ada_contrato cont
+ON cont.numero_contrato = cp.numero_contrato
+WHERE cas IS NOT NULL AND exclusivo IS true
+UNION
+SELECT cp.id_prov,cp.id_prod,cp.numero_contrato,cas,cas_oi,exclusivo FROM ada_contratacion_prod cp
+INNER JOIN ada_contrato cont
+ON cont.numero_contrato = cp.numero_contrato
+WHERE cas_oi IS NOT NULL AND exclusivo IS true
+ORDER BY numero_contrato;
+
+
+--Lista de ingredientes tipo esencias disponibles de todos los proveedores (no exclusivos)
+CREATE VIEW ada_esencias_disponibles AS
+SELECT es.id_prov,nombre_prov,cas,nombre_comercial from ada_esencia es
+INNER JOIN ada_proveedor prov ON es.id_prov = prov.id_prov
+EXCEPT
+SELECT exc.id_prov,nombre_prov,exc.cas,nombre_comercial FROM ada_productos_exclusivos exc
+INNER JOIN ada_esencia es ON es.id_prov = exc.id_prov
+INNER JOIN ada_proveedor prov ON exc.id_prov = prov.id_prov
+ORDER BY id_prov;
+
+
+--Lista de ingredientes tipo otro_ingrediente disponibles de todos los proveedores (no exclusivos)
+CREATE VIEW ada_ingredientes_disponibles AS
+SELECT ing.id_prov,nombre_prov,cas_oi,nombre_comercial from ada_otros_ing ing
+INNER JOIN ada_proveedor prov ON ing.id_prov = prov.id_prov
+EXCEPT
+SELECT exc.id_prov,nombre_prov,exc.cas_oi,nombre_comercial FROM ada_productos_exclusivos exc
+INNER JOIN ada_otros_ing ing ON ing.id_prov = exc.id_prov
+INNER JOIN ada_proveedor prov ON exc.id_prov = prov.id_prov
+ORDER BY id_prov;
+
+--Todos los proveedores con productos para ofrecer en evaluaciones iniciales
+CREATE VIEW ada_proveedores_con_productos AS
+SELECT edis.id_prov,edis.nombre_prov FROM ada_esencias_disponibles edis
+UNION
+SELECT idis.id_prov,nombre_prov FROM ada_ingredientes_disponibles idis
+ORDER BY id_prov;
+
+--Chequear las cuotas
+CREATE VIEW ada_prov_cuotas AS
+SELECT c.porc_cuota, c.metodo_pago, p.nombre_prov, p.id_prov from ada_cuota c
+INNER JOIN ada_proveedor p on p.id_prov=c.id_prov;
+
+
+--Conocer tipo de membresia
+CREATE VIEW ada_tipo_miembro_prov AS
+SELECT e.nombre_prov,COALESCE(a.nombre_asoc,'No pertenece') as Asoc,
+e.direccion_fiscal, e.telefono, e.calle, e.cod_postal, e.avenida, e.email, p.nombre_pais,
+case m.tipo
+when 'PRI' then 'PRINCIPAL'
+when 'SEC' then 'SECUNDARIO'
+when 'ASC' then 'ASOCIACIÓN NACIONAL'
+end MEMBRESIA
+from ada_proveedor e
+LEFT OUTER JOIN ada_asoc_nacional a on a.id_asoc=e.id_asoc
+INNER JOIN ada_pais p on p.id_pais = e.id_pais
+INNER JOIN ada_membresia m on m.id_prov = e.id_prov;
+
+--Fin apartado 3
+
+--Apartado 4: Todos los insert de la aplicación Fraganza
+
 --PAISES
 INSERT INTO ada_pais VALUES(1, 'AF', 'Afganistán','As');
 INSERT INTO ada_pais VALUES(2, 'AX', 'Islas Aland','Eu');

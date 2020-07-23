@@ -1,20 +1,7 @@
 
 INSERT INTO ada_prohibidas (cas_ph,nombre_ph)
 VALUES
-(103640,'Bromostyrene'),(,'Phenyl acetone'),(,'αMethyl anisylidene acetone'),
-(,'Toluene'),(109864,'Ethylene glycol monomethyl ether'),(110496,'Ethylene glycol monomethyl acetate'),
-(110805,'Ethylene glycol monoethyl ether'),(111159,'Ethylene glycol monoethyl acetate'),(,''),(,''),
-
-(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),
-(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),
-(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),
-(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),
-(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),
-(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),
-(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),
-(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),
-(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),
-(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),
-(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),
-(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),
-(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),(,''),
+(103640,'Bromostyrene'),(103797,'Phenyl acetone'),(104278,'αMethyl anisylidene acetone'),
+(108883,'Toluene'),(109864,'Ethylene glycol monomethyl ether'),(110496,'Ethylene glycol monomethyl acetate'),
+(110805,'Ethylene glycol monoethyl ether'),(111159,'Ethylene glycol monoethyl acetate'),(111284,'2,4-Hexadien-1-ol'),(116665,'Musk moskene'),(122394,'Diphenylamine'),(122576,'Benzylidene acetone'),(13393936,'Hydroabietyl alcohol'),(1333897,'Dihydroabietyl alcohol'),(13706860,'Acetyl isovaleryl'),(140885,'Ethyl acrylate'),(140294,'Benzyl cyanide'),(141059,'Diethyl maleate'),(141106,'Pseudoionone'),(145391,'Musk tibetene'),(150765
+,'Hydroquinone monomethyl ether'),(17874349,'4,6-Dimethyl-8-tert-butylcoumarin'),(18318837,'trans-2-Hexenal dimethyl acetal'),(18485386,'2,4-Dodecadien-1-ol, (2E, 4E)'),(18829555,'trans-2-Heptenal'),(2445832,'7-Methylcoumarin'),(25564221,'Amylcyclopentenone'),(25677401,'2-Pentylidene cyclohexanone'),(26651967,'Pseudo methylionones'),(33204749,'Carvone oxide'),(34131992,'6-Isopropyl-2-decalol'),(3591422,'2,2-Dichloro-1-methylcyclopropylbenzene'),(40607485,'3,7-Dimethyl-2-octen-1-ol'),(4173448,'Cinnamylidene acetone'),(4756198,'Cyclamen alcohol'),(494406,'trans-Asarone'),(5146667,'Geranyl nitrile'),(531599,'7-Methoxycoumarin'),(53153665,'3-Methyl-2(3)-nonenenitrile'),(5406122,'p-Methylhydrocinnamic aldehyde'),(54814641,'Massoia lactone'),(57067,'Allyl isothiocyanate'),(617549,'Dimethyl citraconate'),(622628,'Hydroquinone monoethyl ether'),(62265990,'Musk KS'),(623154,'Furfurylidene acetone');

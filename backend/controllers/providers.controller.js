@@ -14,9 +14,9 @@ class ProvidersController
     {
         let id = req.params.id;
         let db_res = await model.ObtenerNombreProveedor(id);
-        res.json(db_res.rows); 
+        res.json(db_res.rows);
     }
-    
+
     ObtenerEsenciasDeProveedor=async (req,res)=>
     {
         let id = req.params.id;
@@ -34,9 +34,19 @@ class ProvidersController
     ObtenerAlternativasEnvio = async (req,res)=>
     {
         let id = req.params.id;
+      //  let id_prov = req.params.id_prov;
         let db_res = await model.ObtenerAlternativasEnvio(id);
         res.json(db_res.rows);
     }
+
+    ObtenerAlternativasPago = async (req,res)=>
+    {
+        let id = req.params.id;
+      //  let id_prov = req.params.id_prov;
+        let db_res = await model.ObtenerAlternativasPago(id);
+        res.json(db_res.rows);
+    }
+
 
     ObtenerPresentacionesEsencia = async (req,res)=>
     {
