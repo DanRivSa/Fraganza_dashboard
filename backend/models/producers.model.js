@@ -52,46 +52,59 @@ class ProducersModel
         return db_res;
     }
 
-    async PostEscalaInicial(id,rango_min,rango_max,rango_aprob,tipo_uso){
+    async PostEscalaInicial(id,rango_min,rango_max,rango_aprob){
 
-        const db_res = await db.query('INSERT INTO ada_escala (id_prod,rango_inicial,rango_final,rango_aprob,tipo_uso)  VALUES ($1,$2,$3,$4,$5)',[rango_min,rango_max,rango_aprob,tipo_uso,id]);
+        const db_res = await db.query('INSERT INTO ada_escala (id_prod,rango_inicial,rango_final,rango_aprob,tipo_uso)  VALUES ($1,$2,$3,$4,$5)',[id,rango_min,rango_max,rango_aprob,'i']);
         return db_res;
     }
 
 
-    async PostUbicacion(id,id_criterio,peso,tipo_uso){
+    async PostEscalaAnual(id,rango_min,rango_max,rango_aprob){
 
-        const db_res = await db.query('INSERT INTO ada_eval_criterio (id_prod,id_criterio,peso,tipo_uso)  VALUES ($1,$2,$3,$4)',[id,id_criterio,peso,tipo_uso,id]);
+      const db_res = await db.query('INSERT INTO ada_escala (id_prod,rango_inicial,rango_final,rango_aprob,tipo_uso)  VALUES ($1,$2,$3,$4,$5)',[id,rango_min,rango_max,rango_aprob,'a']);
+      return db_res;
+  }
+
+
+
+
+    async PostUbicacion(id,id_criterio,peso){
+
+        const db_res = await db.query('INSERT INTO ada_eval_criterio (id_prod,id_criterio,peso,tipo_uso)  VALUES ($1,$2,$3,$4)',[id,id_criterio,peso,'i']);
         return db_res;
     }
 
-    async PostEnvio(id,id_criterio,peso,tipo_uso){
+    async PostEnvio(id,id_criterio,peso){
 
-        const db_res = await db.query('INSERT INTO ada_eval_criterio (id_prod,id_criterio,peso,tipo_uso)  VALUES ($1,$2,$3,$4)',[id,id_criterio,peso,tipo_uso,id]);
+        const db_res = await db.query('INSERT INTO ada_eval_criterio (id_prod,id_criterio,peso,tipo_uso)  VALUES ($1,$2,$3,$4)',[id,id_criterio,peso,'i']);
         return db_res;
     }
 
-    async PostPago(id,id_criterio,peso,tipo_uso)
+    async PostPago(id,id_criterio,peso)
     {
 
-        const db_res = await db.query('INSERT INTO ada_eval_criterio (id_prod,id_criterio,peso,tipo_uso)  VALUES ($1,$2,$3,$4)',[id,id_criterio,peso,tipo_uso,id]);
+        const db_res = await db.query('INSERT INTO ada_eval_criterio (id_prod,id_criterio,peso,tipo_uso)  VALUES ($1,$2,$3,$4)',[id,id_criterio,peso,'i']);
         return db_res;
      }
     //Cerrar los historicos que constituyen la formula (escala y criterios)
-    async PutFormulaInicialVigencia(id){
+    async PutEscalaInicialVigencia(id){
         const db_res = await db.query('UPDATE ada_escala SET fecha_fin=CURRENT_DATE where id_prod = $1 and tipo_uso=$2',[id,'i']);
+        return db_res;
     }
 
-    async PutMetodoUbicacionVigente(id){
-        const db_res = await db.query('UPDATE ada_eval_criterio SET fecha_fin=CURRENT_DATE where id_prod = $1 and tipo_uso=$2 and id_criterio=1',[id,'i']);
+     async PutEscalaAnualVigencia(id)
+     {
+      const db_res = await db.query('UPDATE ada_escala SET fecha_fin=CURRENT_DATE where id_prod = $1 and tipo_uso=$2',[id,'a']);
+      return db_res;
+     }
+
+    async PutCriteriosInicial(id){
+        const db_res = await db.query('UPDATE ada_eval_criterio SET fecha_fin=CURRENT_DATE where id_prod = $1 and tipo_uso=$2',[id,'i']);
+        return db_res;
     }
 
-    async PutMetodoEnvioVigente(id){
-        const db_res = await db.query('UPDATE ada_eval_criterio SET fecha_fin=CURRENT_DATE where id_prod = $1 and tipo_uso=$2 and id_criterio=2',[id,'i']);
-    }
-
-    async PutMetodoPagoVigente(id){
-        const db_res = await db.query('UPDATE ada_eval_criterio SET fecha_fin=CURRENT_DATE where id_prod = $1 and tipo_uso=$2 and id_criterio=3',[id,'i']);
+    async PutCriteriosAnual(id){
+        const db_res = await db.query('UPDATE ada_eval_criterio SET fecha_fin=CURRENT_DATE where id_prod = $1 and tipo_uso=$2',[id,'a']);
      }
 
 }

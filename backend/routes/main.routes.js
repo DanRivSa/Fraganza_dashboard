@@ -32,12 +32,21 @@ router.get('/producers/initial_test/:id',producersController.ProveedoresEvIni); 
 router.get('/producers/escala_inicial/:id',producersController.ObtenerEscalaInicialVigente);
 
 router.get('/producers/escala_anual/:id',producersController.ObtenerEscalaAnualVigente);
-
-router.post('/producers/escala_anual',producersController.PostEscalaInicial);
-//Criterios de tipo Inicial
-
+//Crear Escala Inicial
+router.post('/producers/escala_inicial',producersController.PostEscalaInicial);
+//Crear Escala Anual
+router.post('/producers/escala_anual',producersController.PostEscalaAnual);
+//Crear historicos de criterios de tipo Inicial
 router.post('/producers/met_ubicacion',producersController.PostUbicacion);
 router.post('/producers/met_envio',producersController.PostEnvio);
 router.post('/producers/met_pago',producersController.PostPago);
 
+//Cerrar Escala Inicial
+router.put('/producers/escala_inicial/:id',producersController.PutEscalaInicialVigente);
+//Cerrar Escala Anual
+router.put('/producers/escala_anual/:id',producersController.PutEscalaAnualVigente);
+//Cerrar Historicos Tipo Inicial
+router.put('/producers/inicial/:id',producersController.PutCriteriosInicial);
+//Cerrar historicos tipo Anual
+router.put('/producers/anual/:id',producersController.PutCriteriosAnual);
 module.exports = router;

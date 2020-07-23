@@ -34,6 +34,11 @@ export class ProducersService
     return this.httpClient.post(`${this.base_URL}/producers/escala_inicial`,escala);
   }
 
+  PostEscalaAnual (escala:EscalaModel)
+  {
+    return this.httpClient.post(`${this.base_URL}/producers/escala_anual`,escala);
+  }
+
   PostUbicacion (criterio:CriterioModel)
   {
     return this.httpClient.post(`${this.base_URL}/producers/met_ubicacion`,criterio);
@@ -48,4 +53,23 @@ export class ProducersService
   {
     return this.httpClient.post(`${this.base_URL}/producers/met_pago`,criterio);
   }
+
+  PutCerrarEscalaInicial (id_productor:number,escala:EscalaModel)
+  {
+    return this.httpClient.put(`${this.base_URL}/producers/escala_inicial/${id_productor}`,escala);
+  }
+  PutCerrarEscalaAnual (id_productor:number,escala:EscalaModel)
+  {
+    return this.httpClient.put(`${this.base_URL}/escala_anual/${id_productor}`,escala);
+  }
+  PutCerrarCriteriosInicial (id_productor:number,criterio:CriterioModel)
+  {
+    return this.httpClient.put(`${this.base_URL}/producers/inicial/${id_productor}`,criterio);
+  }
+
+  PutCerrarCriteriosAnual (id_productor:number,criterio:CriterioModel)
+  {
+    return this.httpClient.put(`${this.base_URL}/producers/anual/${id_productor}`,criterio);
+  }
+
 }
