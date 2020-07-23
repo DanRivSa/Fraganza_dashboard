@@ -30,7 +30,10 @@
         <td>{{prov.email}}</td>
         <td>{{prov.telefono}}</td>
         <td>
-          <button type="button" class="btn btn-grape" [routerLink]="['/i_test_provider/detalle',prov.id_prov]">Ver más</button>
+          <div class="btn-group mr-2" role="group">
+            <button type="button" class="btn btn-grape" [routerLink]="['/i_test_provider/detalle',prov.id_prov]">Ver más</button>
+            <button type="button" class="btn btn-success" [routerLink]="['/i_test_provider/detalle',prov.id_prov]">Evaluar</button>
+          </div>
         </td>
       </tr>
     </tbody>
