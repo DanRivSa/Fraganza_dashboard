@@ -31,7 +31,7 @@ router.get('/producers/escala_inicial:id',producersController.ObtenerEscalaInici
 router.get('/producers/escala_anual/:id',producersController.ObtenerEscalaAnualVigente);
 router.post('/producers/escala_anual',producersController.PostEscalaInicial);
 //Criterios de tipo Inicial
-router.post('/producers/met_envio',producersController.PostUbicacion);
-
-
+router.post('/producers/met_ubicacion',producersController.PostUbicacion);
+router.post('/producers/met_envio',producersController.PostEnvio);
+router.post('/producers/met_pago',producersController.PostPago);
 module.exports = router;

@@ -39,6 +39,13 @@ class ProducersController
       res.json(db_res.rows);
     }
 
+    PostEnvio = async (req,res)=>
+    {
+      const {id,id_criterio,peso,tipo_uso} = req.body;
+      let db_res = await model.PostPago(id,id_criterio,peso,tipo_uso);
+      res.json(db_res.rows);
+    }
+
 }
 
 const controller = new ProducersController(); //create instance

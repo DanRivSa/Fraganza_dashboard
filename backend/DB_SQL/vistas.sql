@@ -87,7 +87,7 @@ CREATE VIEW ada_proveedores_con_productos AS
 SELECT edis.id_prov,edis.nombre_prov FROM ada_esencias_disponibles edis
 UNION
 SELECT idis.id_prov,nombre_prov FROM ada_ingredientes_disponibles idis
-ORDER BY id_prov
+ORDER BY id_prov;
 
 
 CREATE VIEW ada_prov_cuotas AS

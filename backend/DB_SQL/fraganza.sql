@@ -410,7 +410,7 @@ CONSTRAINT pk_escala PRIMARY KEY (fecha_inicio,id_prod),
 CONSTRAINT CK_rangoi CHECK (rango_inicial >= 0),
 CONSTRAINT CK_tipo_uso_escala CHECK (tipo_uso in ('a','i')),
 CONSTRAINT CK_rango_aprob CHECK (rango_aprob > 0 and rango_aprob <=100),
-CONSTRAINT CK_rangof CHECK (ranfo_final > rango_inicial)
+CONSTRAINT CK_rangof CHECK (rango_final > rango_inicial)
 );
 
 

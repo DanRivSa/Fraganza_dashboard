@@ -36,6 +36,16 @@ export class ProducersService
 
   PostUbicacion (criterio:CriterioModel)
   {
-    return this.httpClient.post(`${this.base_URL}/producers/met_envio`,CriterioModel);
+    return this.httpClient.post(`${this.base_URL}/producers/met_ubicacion`,criterio);
+  }
+
+  PostEnvio (criterio:CriterioModel)
+  {
+    return this.httpClient.post(`${this.base_URL}/producers/met_envio`,criterio);
+  }
+
+  PostPago (criterio: CriterioModel)
+  {
+    return this.httpClient.post(`${this.base_URL}/producers/met_pago`,criterio);
   }
 }

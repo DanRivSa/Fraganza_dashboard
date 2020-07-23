@@ -394,7 +394,7 @@ REFERENCES ada_alternativa_envio (id_prov,id_pais,tipo_envio);
 
 ALTER TABLE ada_escala
 ADD CONSTRAINT FK_id_prod FOREIGN KEY (id_prod)
-REFERENCES ada_proveedor (id_prod);
+REFERENCES ada_productor (id_prod);
 
 
 
