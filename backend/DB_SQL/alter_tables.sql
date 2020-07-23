@@ -393,14 +393,14 @@ REFERENCES ada_alternativa_envio (id_prov,id_pais,tipo_envio);
 
 
 ALTER TABLE ada_escala
-ADD CONSTRAINT FK_id_prod FOREIGN KEY (id_prov)
-REFERENCES ada_proveedor (id_prov);
+ADD CONSTRAINT FK_id_prod FOREIGN KEY (id_prod)
+REFERENCES ada_proveedor (id_prod);
 
 
 
 ALTER TABLE ada_eval_criterio
-ADD CONSTRAINT FK_id_prov FOREIGN KEY (id_prov)
-REFERENCES ada_proveedor (id_prov);
+ADD CONSTRAINT FK_id_prod FOREIGN KEY (id_prod)
+REFERENCES ada_productor (id_prod);
 ALTER TABLE ada_eval_criterio
 ADD CONSTRAINT FK_id_criterio FOREIGN KEY (id_criterio)
 REFERENCES ada_criterio_eval (id_criterio);

@@ -1163,3 +1163,11 @@ INSERT INTO ada_cuota (id_prov,porc_cuota,metodo_pago,periodo_vigencia)
 VALUES
  (1,25,'c',180),(1,10,'c',30),
 (2,25,'c',180),(4,25,'c',180);
+
+
+--Formula de evaluacion inicial de prueba para el productor 1
+
+INSERT INTO ada_escala (id_prod,rango_inicial,rango_final,rango_aprob,tipo_uso)
+VALUES (1,0,20,50,'i');
+INSERT INTO ada_eval_criterio (id_prod,id_criterio,peso,tipo_uso)
+VALUES (1,1,40,'i');

@@ -4,10 +4,10 @@ const router = express.Router(); //initializing instance of node router
 // app controllers
 
 //controller for providers
-const providersController = require('../controllers/providers.controller'); 
+const providersController = require('../controllers/providers.controller');
 
 //controller for producers
-const producersController = require('../controllers/producers.controller'); 
+const producersController = require('../controllers/producers.controller');
 
 // app http routes
 
@@ -25,5 +25,13 @@ router.get('/providers/ingrediente/:id',providersController.ObtenerPresentacione
 //http request for producers
 router.get('/producers',producersController.GetProducers);
 router.get('/producers/initial_test/:id',producersController.ProveedoresEvIni); //se pasa id de usuario productor
+
+//Escalas
+router.get('/producers/escala_inicial:id',producersController.ObtenerEscalaInicialVigente);
+router.get('/producers/escala_anual/:id',producersController.ObtenerEscalaAnualVigente);
+router.post('/producers/escala_anual',producersController.PostEscalaInicial);
+//Criterios de tipo Inicial
+router.post('/producers/met_envio',producersController.PostUbicacion);
+
 
 module.exports = router;
