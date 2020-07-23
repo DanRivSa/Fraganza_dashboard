@@ -6,6 +6,7 @@ import {SelectProducerCompanyComponent} from './components/login/select-producer
 import {SelectProviderCompanyComponent} from './components/login/select-provider-company/select-provider-company.component';
 import {InitialTestComponent} from './components/productores/initial-test/initial-test.component';
 import {DetalleProvedorComponent} from './components/proveedores/detalle-provedor/detalle-provedor.component';
+import { FormulaInicialComponent } from './components/productores/formula-inicial/formula-inicial.component';
 
 const routes: Routes =
 [
@@ -15,6 +16,7 @@ const routes: Routes =
   {path:'select_type/provider',component:SelectProviderCompanyComponent},
   {path:'i_test_provider/detalle/:id',component:DetalleProvedorComponent},
   {path:'i_test_provider',component:InitialTestComponent},
+  {path:'formula_inicial', component:FormulaInicialComponent}
 ];
 
 @NgModule({
