@@ -24,7 +24,7 @@
           </li>
           <!--LINKS FOR PRODUCERS-->
           <li class="nav-item" *ngIf = "(userType == 1 && userID !=null)">
-            <a class="nav-link">Formula Ev.</a>
+            <a class="nav-link"routerLink="/formula_inicial">Formula Ev.</a>
           </li>
           <li class="nav-item" *ngIf = "(userType == 1 && userID !=null)" routerLinkActive="active current">
             <a class="nav-link" routerLink="/i_test_provider" >Ev. Inicial</a>

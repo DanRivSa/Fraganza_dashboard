@@ -21,6 +21,8 @@ import { InitialTestComponent } from './components/productores/initial-test/init
 import { CatalogoComponent } from './components/proveedores/catalogo/catalogo.component';
 import { DetalleProvedorComponent } from './components/proveedores/detalle-provedor/detalle-provedor.component';
 import { AlternativasEnviosComponent } from './components/proveedores/alternativas-envios/alternativas-envios.component';
+import { FormulaInicialComponent } from './components/productores/formula-inicial/formula-inicial.component';
+
 
 @NgModule({
 
@@ -40,6 +42,11 @@ import { AlternativasEnviosComponent } from './components/proveedores/alternativ
     DetalleProvedorComponent,
 
     AlternativasEnviosComponent,
+
+    FormulaInicialComponent,
+
+
+    
     
   ],
   imports: [
