@@ -33,7 +33,14 @@ router.get('/producers/initial_test/:id',producersController.ProveedoresEvIni); 
 
 router.get('/producers/escala_inicial/:id',producersController.ObtenerEscalaInicialVigente);
 
+router.get('/producers/escala_anual/renovacion/ubicacion/:id',producersController.ObtenerUbicacionGeoVigente);
+
+router.get('/producers/escala_anual/renovacion/pagos/:id',producersController.ObtenerPagoGeoVigente);
+
+router.get('/producers/escala_anual/renovacion/envios/:id',producersController.ObtenerAltEnvioVigente);
+
 router.get('/producers/escala_anual/:id',producersController.ObtenerEscalaAnualVigente);
+
 //Crear Escala Inicial
 router.post('/producers/escala_inicial',producersController.PostEscalaInicial);
 //Crear Escala Anual
@@ -54,6 +61,9 @@ router.put('/producers/inicial/:id',producersController.PutCriteriosInicial);
 //Cerrar historicos tipo Anual
 router.put('/producers/anual/:id',producersController.PutCriteriosAnual);
 router.get('/producers/renovar_contratos/:id',producersController.GetContratosPorVencer);
+
+//Pedidos
+router.get('/producers/compras/pedidos/:id/enlace/:contrato',producersController.GetProductosContratados);
 
 //Rutas modulo compras
 

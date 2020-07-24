@@ -19,7 +19,7 @@ const routes: Routes =
   {path:'i_test_provider',component:InitialTestComponent},
   {path:'formula_inicial', component:FormulaInicialComponent},
   {path:'compras',component:ContratoComponent},
-  {path:'compras/generar_pedido/:id', component:PedidoComponent}
+  {path:'compras/generar_pedido/:id/contrato/:contrato', component:PedidoComponent}
 ];
 
 @NgModule({

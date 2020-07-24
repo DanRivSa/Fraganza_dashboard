@@ -29,6 +29,19 @@ export class ProducersService
     return this.httpClient.get(`${this.base_URL}/producers/escala_anual/${id_usuario_productor}`);
   }
 
+  ObtenerUbicacionGeoVigente (id_usuario_productor:number)
+  {
+    return this.httpClient.get(`${this.base_URL}/producers/escala_anual/renovacion/ubicacion/${id_usuario_productor}`);
+  }
+  ObtenerPagoGeoVigente (id_usuario_productor:number)
+  {
+    return this.httpClient.get(`${this.base_URL}/producers/escala_anual/renovacion/pagos/${id_usuario_productor}`);
+  }
+  ObtenerAltEnvioVigente (id_usuario_productor:number)
+  {
+    return this.httpClient.get(`${this.base_URL}/producers/escala_anual/renovacion/envios/${id_usuario_productor}`);
+  }
+
   PostEscalaInicial (escala:EscalaModel)
   {
     return this.httpClient.post(`${this.base_URL}/producers/escala_inicial`,escala);
@@ -84,10 +97,15 @@ export class ProducersService
     return this.httpClient.get(`${this.base_URL}/producers/renovar_contratos/${id_productor}`);
   }
 
-  //
+  //Modulo Compras
   GetContratosVigentes (id_productor:number)
   {
     return this.httpClient.get(`${this.base_URL}/producers/compras/${id_productor}`);
+  }
+
+  GetProductosContratados (id_productor:number, numero_contrato:number)
+  {
+    return this.httpClient.get(`${this}/producers/compras/pedidos/${id_productor}/enlace/${numero_contrato}`);
   }
 
 //  PostGenerarPedido (pedido:Pedido)

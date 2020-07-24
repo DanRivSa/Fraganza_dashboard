@@ -1,5 +1,6 @@
 //import model
 const model = require('../models/producers.model');
+const { async } = require('@angular/core/testing');
 
 class ProducersController
 {
@@ -31,6 +32,29 @@ class ProducersController
       let db_res = await model.ObtenerEscalaAnualVigente(id_productor);
       res.json(db_res.rows);
     }
+
+    ObtenerUbicacionGeoVigente = async ()=>
+    {
+      let id_productor = req.params.id;
+      let db_res = await model.ObtenerUbicacionGeoVigente(id_productor);
+      res.json(db_res.rows);
+    }
+
+    ObtenerAltEnvioVigente = async ()=>
+    {
+      let id_productor = req.params.id;
+      let db_res = await model.ObtenerAltEnvioVigente(id_productor);
+      res.json(db_res.rows);
+    }
+
+    ObtenerPagoGeoVigente = async ()=>
+    {
+      let id_productor = req.params.id;
+      let db_res = await model.ObtenerPagoGeoVigente(id_productor);
+      res.json(db_res.rows);
+    }
+
+    //Metodos Post
 
     PostEscalaInicial = async (req,res)=>
     {
@@ -114,6 +138,14 @@ class ProducersController
       let id_productor = req.params.id;
       let db_res = await model.GetContratosVigentes(id_productor);
       res.json(db_res.rows)
+    }
+
+    GetProductosContratados = async (req,res)=>
+    {
+      let id_productor = req.params.id;
+      let numero_contrato = req.params.contrato;
+      let db_res = await model.GetProductosContratados(id_productor,numero_contrato);
+      res.json(db_res.rows);
     }
 
 }
