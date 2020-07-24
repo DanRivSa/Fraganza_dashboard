@@ -46,6 +46,14 @@ class ProvidersController
         let db_res = await model.ObtenerAlternativasPago(id);
         res.json(db_res.rows);
     }
+    ObtenerInfoPagoCuotas = async (req,res)=>
+    {
+        let id = req.params.id;
+      //  let id_prov = req.params.id_prov;
+        let db_res = await model.ObtenerInfoPagoCuotas(id);
+        res.json(db_res.rows);
+        
+    }
 
 
     ObtenerPresentacionesEsencia = async (req,res)=>
