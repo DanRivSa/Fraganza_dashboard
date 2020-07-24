@@ -18,7 +18,7 @@ router.get('/providers/nombre/:id',providersController.ObtenerNombre);
 router.get('/providers/esencias/:id',providersController.ObtenerEsenciasDeProveedor);
 router.get('/providers/ingredientes/:id',providersController.ObtenerIngredientesDeProveedor);
 router.get('/providers/alt_envio/:id',providersController.ObtenerAlternativasEnvio);
-router.get('/providers/alt_pago/',providersController.ObtenerAlternativasPago);
+router.get('/providers/alt_pago/:id',providersController.ObtenerAlternativasPago);
 router.get('/providers/cuotas/:id',providersController.ObtenerInfoPagoCuotas);
 
 //presentaciones

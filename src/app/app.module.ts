@@ -29,6 +29,7 @@ import { DetalleContratoComponent } from './components/productores/Compras/Detal
 import { EvaluacionAnualComponent } from './components/proveedores/evaluacion-anual/evaluacion-anual.component';
 import { ContratosProvComponent } from './components/proveedores/contratos-prov/contratos-prov.component';
 import { EvAnualProvComponent } from './components/proveedores/ev-anual-prov/ev-anual-prov.component';
+import { ContratoProdComponent } from './components/productores/contrato-prod/contrato-prod.component';
 import { CrearPedidoComponent } from './components/productores/Compras/crear-pedido/crear-pedido.component';
 
 
@@ -72,6 +73,7 @@ import { CrearPedidoComponent } from './components/productores/Compras/crear-ped
 
     DetalleContratoComponent,
 
+    ContratoProdComponent,
     CrearPedidoComponent,
 
 

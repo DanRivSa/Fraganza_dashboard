@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ProvEvAnualComponent } from './prov-ev-anual.component';
+import { ContratoProdComponent } from './contrato-prod.component';
 
-describe('ProvEvAnualComponent', () => {
-  let component: ProvEvAnualComponent;
-  let fixture: ComponentFixture<ProvEvAnualComponent>;
+describe('ContratoProdComponent', () => {
+  let component: ContratoProdComponent;
+  let fixture: ComponentFixture<ContratoProdComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProvEvAnualComponent ]
+      declarations: [ ContratoProdComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ProvEvAnualComponent);
+    fixture = TestBed.createComponent(ContratoProdComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

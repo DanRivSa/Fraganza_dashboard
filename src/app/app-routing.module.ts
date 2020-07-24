@@ -26,10 +26,20 @@ const routes: Routes =
   {path:'formula_inicial', component:FormulaInicialComponent},
   {path: 'contrato/provider',component:ContratosProvComponent},
   {path: 'e_anual_prov',component:EvAnualProvComponent},
-  {path: 'evaluar_Anual', component:EvaluacionAnualComponent},
+  {path: 'evaluar_Anual/:id', component:EvaluacionAnualComponent},
   {path:'compras',component:ContratoComponent},
+<<<<<<< HEAD
   {path:'compras/contratos/:id_proveedor/detalle/:contrato', component:DetalleContratoComponent},
   {path:'compras/contratos/detalle/:contrato/generar_pedido/:id_proveedor', component: CrearPedidoComponent}
+=======
+<<<<<<< HEAD
+  {path:'compras/generar_pedido/:id/contrato/:contrato', component:PedidoComponent},
+  {path:'contrato/producer', component:ContratoProdComponent}
+=======
+  {path:'compras/contratos/:id/detalle/:contrato', component:DetalleContratoComponent},
+  {path:'compras/contratos/:id/detalle/:contrato/generar_pedido', component: CrearPedidoComponent}
+>>>>>>> andres
+>>>>>>> development
 ];
 
 @NgModule({

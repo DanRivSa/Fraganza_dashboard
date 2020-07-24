@@ -11,12 +11,12 @@
 
   <br>
 
-<div >
+<div *ngIf= "metodo_pago.metodo_pago == 'p' ">
     <h1 class="text-left">Pago parcial</h1>
     <br>
 </div>
 
-<div>
+<div *ngIf= "metodo_pago.metodo_pago == 'c' " >
         <h1 class="text-left">Pago por cuotas </h1>
         <br>
 
@@ -25,16 +25,13 @@
     <table class="table table-hover ">
       <thead class="table-dark">
         <tr>
-          <th scope="col">Nro de Cuotas</th>
           <th scope="col">Periodo de pago</th>
           <th scope="col">Porcentaje</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let met of metodo_pago" >
-          <th scope="row">
-            </th>
-            <td></td>
+        <tr *ngFor="let m of metodo_pago" >
+          <th scope="row">/th>
             <td></td>
         </tr>
       </tbody>

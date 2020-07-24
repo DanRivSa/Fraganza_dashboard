@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ProducersService } from '../../../services/producers.service';
+import { UserCompanyService } from 'src/app/services/global/user-company.service';
 
 @Component({
   selector: 'app-contratos-prov',
@@ -7,9 +9,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContratosProvComponent implements OnInit {
 
-  constructor() { }
+  constructor(private producersService:ProducersService) { }
+  proveedores:any[];
+
+  id_usuario:number = UserCompanyService.userCompanyID; //id de usuario 
 
   ngOnInit(): void {
+
+
+  
+
+      this.producersService.GetContratosVigentes(this.id_usuario).subscribe(res=>
+        {
+          this.proveedores = res as any[];
+        });
+    
+
+
+
   }
 
 }
