@@ -7,10 +7,13 @@ import {SelectProviderCompanyComponent} from './components/login/select-provider
 import {InitialTestComponent} from './components/productores/initial-test/initial-test.component';
 import {DetalleProvedorComponent} from './components/proveedores/detalle-provedor/detalle-provedor.component';
 import { FormulaInicialComponent } from './components/productores/formula-inicial/formula-inicial.component';
-import { EvaluacionAnualComponent } from './components/proveedores/evaluacion-anual/evaluacion-anual.component';
 import { ContratosProvComponent } from './components/proveedores/contratos-prov/contratos-prov.component';
+import { EvAnualProvComponent } from './components/proveedores/ev-anual-prov/ev-anual-prov.component';
+import { EvaluacionAnualComponent } from './components/proveedores/evaluacion-anual/evaluacion-anual.component';
 
 
+import {ContratoComponent} from './components/productores/Compras/contrato/contrato.component';
+import {PedidoComponent} from './components/productores/Compras/pedido/pedido.component'
 const routes: Routes =
 [
   {path:'',component:HomeComponent},
@@ -20,8 +23,11 @@ const routes: Routes =
   {path:'i_test_provider/detalle/:id',component:DetalleProvedorComponent},
   {path:'i_test_provider',component:InitialTestComponent},
   {path:'formula_inicial', component:FormulaInicialComponent},
-  {path: 'evaluacion_anual',component:EvaluacionAnualComponent},
-  {path: 'contrato/provider',component:ContratosProvComponent}
+  {path: 'contrato/provider',component:ContratosProvComponent},
+  {path: 'e_anual_prov',component:EvAnualProvComponent},
+  {path: 'evaluar_Anual', component:EvaluacionAnualComponent}
+  {path:'compras',component:ContratoComponent},
+  {path:'compras/generar_pedido/:id/contrato/:contrato', component:PedidoComponent}
 ];
 
 @NgModule({

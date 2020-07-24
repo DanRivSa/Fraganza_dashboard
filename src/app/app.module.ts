@@ -24,10 +24,21 @@ import { DetalleProvedorComponent } from './components/proveedores/detalle-prove
 import { AlternativasEnviosComponent } from './components/proveedores/alternativas-envios/alternativas-envios.component';
 import { FormulaInicialComponent } from './components/productores/formula-inicial/formula-inicial.component';
 import { AlternativasPagoComponent } from './components/proveedores/alternativas-pago/alternativas-pago.component';
+<<<<<<< HEAD
+import { EvaluacionInicialComponent } from './components/proveedores/evaluacion-inicial/evaluacion-inicial.component';
+import { SeleccionProveedoresComponent } from './components/productores/Compras/seleccion-proveedores/seleccion-proveedores.component';
+import { ContratoComponent } from './components/productores/Compras/contrato/contrato.component';
+import { PedidoComponent } from './components/productores/Compras/pedido/pedido.component';
+=======
 import { EvaluacionAnualComponent } from './components/proveedores/evaluacion-anual/evaluacion-anual.component';
 import { ContratosProvComponent } from './components/proveedores/contratos-prov/contratos-prov.component';
+<<<<<<< HEAD
 import { ProvEvAnualComponent } from './components/proveedores/prov-ev-anual/prov-ev-anual.component';
+=======
+import { EvAnualProvComponent } from './components/proveedores/ev-anual-prov/ev-anual-prov.component';
+>>>>>>> development
 
+>>>>>>> development
 
 
 
@@ -58,11 +69,22 @@ import { ProvEvAnualComponent } from './components/proveedores/prov-ev-anual/pro
 
     ContratosProvComponent,
 
+<<<<<<< HEAD
     ProvEvAnualComponent,
 
+=======
+    EvAnualProvComponent,
+>>>>>>> development
 
 
 
+
+
+    SeleccionProveedoresComponent,
+
+    ContratoComponent,
+
+    PedidoComponent,
 
 
 
