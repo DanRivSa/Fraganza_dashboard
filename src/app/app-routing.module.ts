@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {HomeComponent} from './components/home/home.component'
 import {SelectCompanyTypeComponent} from './components/login/select-company-type/select-company-type.component';
@@ -7,6 +7,9 @@ import {SelectProviderCompanyComponent} from './components/login/select-provider
 import {InitialTestComponent} from './components/productores/initial-test/initial-test.component';
 import {DetalleProvedorComponent} from './components/proveedores/detalle-provedor/detalle-provedor.component';
 import { FormulaInicialComponent } from './components/productores/formula-inicial/formula-inicial.component';
+import { EvaluacionAnualComponent } from './components/proveedores/evaluacion-anual/evaluacion-anual.component';
+import { ContratosProvComponent } from './components/proveedores/contratos-prov/contratos-prov.component';
+
 
 const routes: Routes =
 [
@@ -16,7 +19,9 @@ const routes: Routes =
   {path:'select_type/provider',component:SelectProviderCompanyComponent},
   {path:'i_test_provider/detalle/:id',component:DetalleProvedorComponent},
   {path:'i_test_provider',component:InitialTestComponent},
-  {path:'formula_inicial', component:FormulaInicialComponent}
+  {path:'formula_inicial', component:FormulaInicialComponent},
+  {path: 'evaluacion_anual',component:EvaluacionAnualComponent},
+  {path: 'contrato/provider',component:ContratosProvComponent}
 ];
 
 @NgModule({

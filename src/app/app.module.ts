@@ -24,7 +24,9 @@ import { DetalleProvedorComponent } from './components/proveedores/detalle-prove
 import { AlternativasEnviosComponent } from './components/proveedores/alternativas-envios/alternativas-envios.component';
 import { FormulaInicialComponent } from './components/productores/formula-inicial/formula-inicial.component';
 import { AlternativasPagoComponent } from './components/proveedores/alternativas-pago/alternativas-pago.component';
-import { EvaluacionInicialComponent } from './components/proveedores/evaluacion-inicial/evaluacion-inicial.component';
+import { EvaluacionAnualComponent } from './components/proveedores/evaluacion-anual/evaluacion-anual.component';
+import { ContratosProvComponent } from './components/proveedores/contratos-prov/contratos-prov.component';
+
 
 
 
@@ -51,7 +53,13 @@ import { EvaluacionInicialComponent } from './components/proveedores/evaluacion-
 
     AlternativasPagoComponent,
 
-    EvaluacionInicialComponent,
+    EvaluacionAnualComponent,
+
+    ContratosProvComponent,
+
+
+
+
 
 
 
