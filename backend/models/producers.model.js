@@ -86,6 +86,15 @@ class ProducersModel
         const db_res = await db.query('INSERT INTO ada_eval_criterio (id_prod,id_criterio,peso,tipo_uso)  VALUES ($1,$2,$3,$4)',[id,id_criterio,peso,'i']);
         return db_res;
      }
+
+
+     async PostCriterioAnual(id,id_criterio,peso)
+     {
+
+         const db_res = await db.query('INSERT INTO ada_eval_criterio (id_prod,id_criterio,peso,tipo_uso)  VALUES ($1,$2,$3,$4)',[id,id_criterio,peso,'a']);
+         return db_res;
+      }
+
     //Cerrar los historicos que constituyen la formula (escala y criterios)
     async PutEscalaInicialVigencia(id){
         const db_res = await db.query('UPDATE ada_escala SET fecha_fin=CURRENT_DATE where id_prod = $1 and tipo_uso=$2',[id,'i']);

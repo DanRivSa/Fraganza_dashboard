@@ -53,6 +53,22 @@ CREATE SEQUENCE ada_sec_id_pais as SMALLINT
 ALTER TABLE ada_pais
 ALTER COLUMN id_pais SET DEFAULT nextval('ada_sec_id_pais');
 
+CREATE SEQUENCE ada_sec_id_eval_criterio AS SMALLINT
+MINVALUE 1
+MAXVALUE 55
+NO CYCLE
+OWNED BY ada_eval_criterio.id_eval;
+ALTER TABLE ada_eval_criterio
+ALTER COLUMN id_eval SET DEFAULT nextval('ada_sec_id_eval_criterio');
+
+CREATE SEQUENCE ada_sec_id_escala AS SMALLINT
+MINVALUE 1
+MAXVALUE 55
+NO CYCLE
+OWNED BY ada_escala.id_escala;
+ALTER TABLE ada_escala
+ALTER COLUMN id_escala SET DEFAULT nextval('ada_sec_id_escala');
+
 CREATE SEQUENCE ada_sec_id_productor as SMALLINT
  MINVALUE 1
  MAXVALUE 50

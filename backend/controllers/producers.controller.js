@@ -67,6 +67,12 @@ class ProducersController
       res.json(db_res.rows);
     }
 
+    PostCriterioAnual = async (req,res)=>
+    {
+      const {id,id_criterio,peso} = req.body;
+      let db_res = await model.PostCriterioAnual(id,id_criterio,peso);
+      res.json(db_res.rows);
+    }
     //Metodos Put para cerrar historicos
     PutEscalaInicialVigente = async (req,res)=>
     {
@@ -95,6 +101,13 @@ class ProducersController
       res.json(db_res.rows);
     }
 
+    //Métodos modulo de compras
+    GetContratosVigentes = async (req,res)=>
+    {
+      let id_productor = req.params.id;
+      let db_res = await model.GetContratosVigentes(id_productor);
+      res.json(db_res.rows)
+    }
 
 }
 

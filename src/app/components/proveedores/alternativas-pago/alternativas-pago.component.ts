@@ -30,13 +30,13 @@ export class AlternativasPagoComponent implements OnInit {
         {
           this.metodo_pago = res as any[];
           console.log(this.metodo_pago);
-          
+
         });
 
 
-        
 
-        
+
+
 
 
 
