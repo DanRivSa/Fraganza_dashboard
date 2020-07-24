@@ -24,7 +24,7 @@ export class FormulaInicialComponent implements OnInit {
   escala_a_min:number;
   escala_a_max:number;
   escala_a_rango:number;
-
+  peso_anual:number = 100;
 
   constructor(private servicio:ProducersService) { }
 
@@ -44,18 +44,6 @@ export class FormulaInicialComponent implements OnInit {
     }
     else  
       alert('ERROR procure que la suma de los pesos de los criterios sea 100% y llenar los campos solicitados con valores coherentes');
-  }
-
-  AgregarCriterioExito()
-  {
-    if(this.ValidarEscala(this.escala_a_min,this.escala_a_max,this.escala_a_rango))
-    {
-      this.CerrarEscalaYCriteriosIniciales();
-
-      console.log('creado exitosamente');
-    }
-    else
-      alert('ERROR procure llenar la informacion solicitada con valores coherentes');
   }
 
   ValidarPesos(x:number,y:number,z:number):boolean
@@ -124,6 +112,47 @@ export class FormulaInicialComponent implements OnInit {
   }
 
   //EVALUACION ANUAL
+
+  CrearFormulaAnual()
+  {
+    if(this.ValidarEscala(this.escala_a_min,this.escala_a_max,this.escala_a_rango))
+    {
+      this.CerrarEscalaYCriteriosIniciales();
+      this.GuardarNuevaEscalaAnual(this.escala_a_max,this.escala_a_min,this.escala_a_rango);
+      this.GuardarCriterioAnualDeExito(this.peso_anual);
+      console.log('creado exitosamente');
+    }
+    else
+      alert('ERROR procure llenar la informacion solicitada con valores coherentes');
+  }
+
+  CerrarEscalaYCriteriosAnuales()
+  {
+    this.servicio.PutCerrarCriteriosAnual(UserCompanyService.userCompanyID,this.CrearCriterio(0,0)).subscribe(res=>
+      {
+        console.log('criterio de exito cerrado');
+      });
+    this.servicio.PutCerrarEscalaAnual(UserCompanyService.userCompanyID,this.CrearEscala(0,0,0)).subscribe(res=>
+      {
+        console.log('escala anual cerrada');
+      });
+  }
+
+  GuardarNuevaEscalaAnual(max,min,rango)
+  {
+    this.servicio.PostEscalaAnual(this.CrearEscala(max,min,rango)).subscribe(res=>
+      {
+        console.log('escala anual creada');
+      })
+  }
+
+  GuardarCriterioAnualDeExito(peso)
+  {
+    this.servicio.PostCriteriosAnual(this.CrearCriterio(peso,4)).subscribe(res=>
+      {
+        console.log('criterio anual creado exitosamente');
+      });
+  }
 
   //EXTRAS
   CrearEscala(rangoMax:number,rangoMin:number,Aprob:number):EscalaModel

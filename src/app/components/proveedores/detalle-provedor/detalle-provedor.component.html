@@ -16,21 +16,21 @@
         <div class="row">
             <h5>Criterio 1: Evaluación Geográfica</h5>
             <div class="col-md-6">
-              <input type="number" class="form-control" placeholder=" Min" value="" required="">
+              <input type="number" class="form-control" placeholder=" Min" name="eg" #criterio1="ngModel" [(ngModel)]="nota1">
             </div>
         </div>
         <br>
         <div class="row">
             <h5>Criterio 2: Alternativa de pago  </h5>
             <div class="col-md-6">
-              <input type="number" class="form-control" placeholder=" Min" value="" required="">
+              <input type="number" class="form-control" placeholder=" Min" name="ap" #criterio2="ngModel" [(ngModel)]="nota2">
             </div>
         </div>
         <br>
         <div class="row ">
             <h5> Criterio 3: Alternativa de envio   </h5>
             <div class="col-md-6">
-              <input type="number" class="form-control" placeholder=" Min" value="" required="">
+              <input type="number" class="form-control" placeholder=" Min" name="ae" #criterio3="ngModel" [(ngModel)]="nota3">
             </div>
         </div>
 

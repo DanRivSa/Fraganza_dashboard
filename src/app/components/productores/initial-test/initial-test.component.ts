@@ -13,7 +13,10 @@ export class InitialTestComponent implements OnInit {
 
   id_usuario:number = UserCompanyService.userCompanyID; //id de usuario 
 
-  constructor(private producersService:ProducersService) { }
+  constructor(private producersService:ProducersService)
+  {
+    
+  }
 
   ngOnInit(): void
   {

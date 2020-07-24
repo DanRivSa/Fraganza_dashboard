@@ -1,15 +1,53 @@
 import { Component, OnInit } from '@angular/core';
+import {ProducersService} from '../../../services/producers.service';
+import { UserCompanyService } from 'src/app/services/global/user-company.service';
 
 @Component({
   selector: 'app-evaluacion-anual',
   templateUrl: './evaluacion-anual.component.html',
   styleUrls: ['./evaluacion-anual.component.scss']
 })
-export class EvaluacionAnualComponent implements OnInit {
+export class EvaluacionAnualComponent implements OnInit 
+{
 
-  constructor() { }
+  nota:number;
+  min_val:number;
+  max_val:number;
+  porcentajeAprob:number;
+  total:number;
+  
 
-  ngOnInit(): void {
+  calificacionFinal:number;
+
+  constructor(private servicio:ProducersService) 
+  {
+
+  }
+
+  ngOnInit(): void 
+  {
+    this.servicio.ObtenerEscalaAnualVigente(UserCompanyService.userCompanyID).subscribe(res=>
+      {
+        let data:any[]=res as any[];
+        this.min_val = data[0].rango_inicial;
+        this.max_val = data[0].rango_final;
+        this.porcentajeAprob = data[0].rango_aprob;
+        this.total = this.max_val-this.min_val;
+      });
+  }
+
+  Calificar()
+  {
+    let aprob = (this.total*this.porcentajeAprob)/100;
+    let puntaje = this.nota //el criterio siempre tiene un peso de 100% por tanto no hay que sacar cuentas
+    if(puntaje>= aprob)
+    {
+      alert('Proveedor es apto para renovar contrato');
+    }
+    else
+    {
+      alert('Proveedor no es apto para renovar');
+    }
   }
 
 }
