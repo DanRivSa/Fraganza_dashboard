@@ -26,6 +26,11 @@ export class PedidoComponent implements OnInit {
         this.numero_contrato=+params.get('contrato');
       });
 
+    this.productor.GetProductosContratados(this.id_proveedor,this.numero_contrato).subscribe(res=>{
+
+      this.productosContratados = res as any[];
+    });
+
   }
 
 }
