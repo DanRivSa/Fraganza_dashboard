@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+<<<<<<< HEAD
 import {ProducersService} from '../../../services/producers.service';
 import { UserCompanyService } from 'src/app/services/global/user-company.service';
+=======
+import {ProveedoresService} from '../../../services/proveedores.service';
+import {ActivatedRoute} from '@angular/router';
+>>>>>>> 228a3b17f7da2ae6ecc01bb44172ca8b2394e9f4
 
 @Component({
   selector: 'app-evaluacion-anual',
@@ -10,6 +15,7 @@ import { UserCompanyService } from 'src/app/services/global/user-company.service
 export class EvaluacionAnualComponent implements OnInit 
 {
 
+<<<<<<< HEAD
   nota:number;
   min_val:number;
   max_val:number;
@@ -48,6 +54,27 @@ export class EvaluacionAnualComponent implements OnInit
     {
       alert('Proveedor no es apto para renovar');
     }
+=======
+  id:number;
+  nombre:string;
+
+  constructor(private route:ActivatedRoute, private servicio:ProveedoresService) { }
+
+  ngOnInit(): void {
+
+    this.route.paramMap.subscribe(paramas=>
+      {
+        this.id = +paramas.get('id');
+      });    
+    this.servicio.ObtenerNombre(this.id).subscribe(res=>
+      {
+        let data:any[] = res as any[];
+        this.nombre = data[0].nombre_prov;
+      });
+
+
+
+>>>>>>> 228a3b17f7da2ae6ecc01bb44172ca8b2394e9f4
   }
 
 }

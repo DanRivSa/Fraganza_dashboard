@@ -28,6 +28,7 @@ import { ContratoComponent } from './components/productores/Compras/contrato/con
 import { PedidoComponent } from './components/productores/Compras/pedido/pedido.component';
 import { EvaluacionAnualComponent } from './components/proveedores/evaluacion-anual/evaluacion-anual.component';
 import { ContratosProvComponent } from './components/proveedores/contratos-prov/contratos-prov.component';
+import { EvAnualProvComponent } from './components/proveedores/ev-anual-prov/ev-anual-prov.component';
 
 
 
@@ -58,6 +59,8 @@ import { ContratosProvComponent } from './components/proveedores/contratos-prov/
     EvaluacionAnualComponent,
 
     ContratosProvComponent,
+
+    EvAnualProvComponent,
 
 
 
