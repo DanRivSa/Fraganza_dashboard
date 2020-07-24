@@ -54,6 +54,13 @@ export class ProducersService
     return this.httpClient.post(`${this.base_URL}/producers/met_pago`,criterio);
   }
 
+  PostCriteriosAnual (criterio: CriterioModel)
+  {
+    return this.httpClient.post(`${this.base_URL}/producers/renovacion`,criterio);
+  }
+
+
+
   PutCerrarEscalaInicial (id_productor:number,escala:EscalaModel)
   {
     return this.httpClient.put(`${this.base_URL}/producers/escala_inicial/${id_productor}`,escala);
@@ -70,6 +77,11 @@ export class ProducersService
   PutCerrarCriteriosAnual (id_productor:number,criterio:CriterioModel)
   {
     return this.httpClient.put(`${this.base_URL}/producers/anual/${id_productor}`,criterio);
+  }
+
+  GetContratosVigentes (id_productor:number)
+  {
+    return this.httpClient.get(`${this.base_URL}/producers/compras/providers/${id_productor}`);
   }
 
 }
