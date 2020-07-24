@@ -14,7 +14,7 @@ export class MostrarContratosComponent implements OnInit {
   id_productor:number = UserCompanyService.userCompanyID;
 
   constructor(private servicio:ProducersService) { }
-
+//prueba
   ngOnInit(): void
   {
     this.servicio.GetContratosVigentes(this.id_productor).subscribe(res=>
