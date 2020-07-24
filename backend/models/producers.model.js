@@ -121,8 +121,6 @@ class ProducersModel
         const db_res = await db.query('UPDATE ada_eval_criterio SET fecha_fin=CURRENT_DATE where id_prod = $1 and tipo_uso=$2',[id,'a']);
         return db_res;
      }
-
-
      async GetContratosPorVencer(id){
        const db_res = await db.query('SELECT days, numero_contrato, id_prov,nombre_prov from ada_contratos_por_renovar where id_prod = $1',[id]);
        return db_res;
@@ -131,27 +129,31 @@ class ProducersModel
 
     async GetContratosVigentes(id)
     {
-      const db_res = await db.query('SELECT p.id_prod,r.id_prov,x.nombre_prov, r.numero_contrato from ada_productor p INNER JOIN ada_contratos_en_regla r on r.id_prod=p.id_prod  INNER JOIN ada_proveedor x on x.id_prov = r.id_prov where p.id_prod =$1',[id]);
+      const db_res = await db.query('select * from ada_contratos_productor_vigente where id_prod=$1',[id]);
       return db_res;
     }
 
     async GetEsenciasContratadas(id_proveedor,numero_contrato)
     {
-      const db_res = await db.query('SELECT p.nombre_comercial, p.nombre_quimico, p.cas from ada_contratacion_prod where p.id_prov=$1 and p.numero_contrato=$2 and p.cas_oi is null',[id_proveedor,numero_contrato]);
+      const db_res = await db.query('SELECT e.nombre_comercial, e.nombre_quimico, p.cas from ada_contratacion_prod p INNER JOIN ada_esencia e on e.cas = p.cas where p.id_prov=$1 and p.numero_contrato=$2 and p.cas_oi is null',[id_proveedor,numero_contrato]);
+      return db_res;
     }
 
     async GetIngredientesContratados(id_proveedor,numero_contrato)
     {
-      const db_res = await db.query('SELECT p.nombre_comercial, p.nombre_quimico, p.cas_oi from ada_contratacion_prod where p.id_prov=$1 and p.numero_contrato=$2 and p.cas is null',[id_proveedor,numero_contrato]);
+      const db_res = await db.query('SELECT e.nombre_comercial, e.nombre_quimico, p.cas_oi from ada_contratacion_prod p INNER JOIN ada_otros_ing e on e.cas_oi = p.cas_oi where p.id_prov=$1 and p.numero_contrato=$2 and p.cas is null',[id_proveedor,numero_contrato]);
+      return db_res;
     }
      async metodoPagoContratados(id_proveedor,numero_contrato)
      {
-       const db_res = await db.query('SELECT case metodo_pago when $3 then $4 when $5 then $6 end from ada_contratacion_ap where id_prov = $1 and numero_contrato=$2',[id_proveedor,numero_contrato,'c','Pago por Cuotas','p','Parcial']);
+       const db_res = await db.query('SELECT case metodo_pago when $3 then $4 when $5 then $6 end from ada_contratacion_ap where id_prov = $1 and numero_contrato=$2',[id_proveedor,numero_contrato,'c','Pago por Cuotas','p','Pago Parcial']);
+       return db_res;
      }
 
      async metodoEnvioContratados(id_proveedor,numero_contrato)
      {
-       const db_res = await db.query('SELECT tipo_envio from ada_contratacion_me where id_prov=$1 and numero_contrato=$2',[id_proveedor,numero_contrato]);
+       const db_res = await db.query('select p.nombre_pais,case m.tipo_envio when $3 then $4 when $5 then $6 when $7 then $8 end, m.porc_contratado from ada_contratacion_me m INNER JOIN ada_pais p on p.id_pais = m.id_pais WHERE m.id_prov=$1 and m.numero_contrato=$2',[id_proveedor,numero_contrato,'m','MARÍTIMO','a','AÉREO','t','TERRESTRE']);
+       return db_res;
      }
 
 }

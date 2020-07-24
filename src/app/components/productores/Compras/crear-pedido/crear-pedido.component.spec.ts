@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PedidoComponent } from './pedido.component';
+import { CrearPedidoComponent } from './crear-pedido.component';
 
-describe('PedidoComponent', () => {
-  let component: PedidoComponent;
-  let fixture: ComponentFixture<PedidoComponent>;
+describe('CrearPedidoComponent', () => {
+  let component: CrearPedidoComponent;
+  let fixture: ComponentFixture<CrearPedidoComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PedidoComponent ]
+      declarations: [ CrearPedidoComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PedidoComponent);
+    fixture = TestBed.createComponent(CrearPedidoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -4,11 +4,11 @@ import {ProveedoresService} from '../../../../services/proveedores.service';
 import {ProducersService} from '../../../../services/producers.service';
 
 @Component({
-  selector: 'app-pedido',
-  templateUrl: './pedido.component.html',
-  styleUrls: ['./pedido.component.scss']
+  selector: 'app-detalle-contrato',
+  templateUrl: './DetalleContrato.component.html',
+  styleUrls: ['./DetalleContrato.component.scss']
 })
-export class PedidoComponent implements OnInit {
+export class DetalleContratoComponent implements OnInit {
 
   EsenciasContratadas:any[];
   IngredientesContratados:any[];

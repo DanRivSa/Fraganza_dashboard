@@ -25,6 +25,9 @@ router.get('/providers/cuotas/:id',providersController.ObtenerInfoPagoCuotas);
 router.get('/providers/esencia/:id',providersController.ObtenerPresentacionesEsencia);
 router.get('/providers/ingrediente/:id',providersController.ObtenerPresentacionesIngrediente);
 
+//ConratosVigentes
+router.get('/providers/contratos/:id',providersController.GetContratosVigentes);
+
 //http request for producers
 router.get('/producers',producersController.GetProducers);
 router.get('/producers/initial_test/:id',producersController.ProveedoresEvIni); //se pasa id de usuario productor
@@ -64,15 +67,15 @@ router.get('/producers/renovar_contratos/:id',producersController.GetContratosPo
 
 //RutasModuloCompras
 //Obtener contratos vigentes
-router.get('/producers/compras/:id',producersController.GetContratosVigentes);
+router.get('/producers/contratos/:id',producersController.GetContratosVigentes);
 module.exports = router;
 
 //Pedidos
-router.get('/producers/compras/pedidos/:id/esencias/:contrato',producersController.GetEsenciasContratadas);
+router.get('/producers/contratos/detalle_contrato/:id/esencias/:contrato',producersController.GetEsenciasContratadas);
 
-router.get('/producers/compras/pedidos/:id/ingredientes/:contrato',producersController.GetIngredientesContratados);
+router.get('/producers/contratos/detalle_contrato/:id/ingredientes/:contrato',producersController.GetIngredientesContratados);
 
-router.get('/producers/compras/pedidos/:id/pagos/:contrato',producersController.metodoPagoContratados);
+router.get('/producers/contratos/detalle_contrato/:id/pagos/:contrato',producersController.metodoPagoContratados);
 
-router.get('/producers/compras/pedidos/:id/envios/:contrato',producersController.metodoEnvioContratados);
+router.get('/producers/contratos/detalle_contrato/:id/envios/:contrato',producersController.metodoEnvioContratados);
 

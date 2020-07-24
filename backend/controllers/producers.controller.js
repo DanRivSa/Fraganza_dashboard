@@ -135,8 +135,8 @@ class ProducersController
     //Métodos modulo de compras
     GetContratosVigentes = async (req,res)=>
     {
-      let id_proveedor = req.params.id;
-      let db_res = await model.GetContratosVigentes(id_proveedor);
+      let id_productor = req.params.id;
+      let db_res = await model.GetContratosVigentes(id_productor);
       res.json(db_res.rows)
     }
 
