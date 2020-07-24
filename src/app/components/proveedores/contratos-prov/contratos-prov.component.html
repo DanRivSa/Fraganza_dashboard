@@ -16,26 +16,17 @@
     <table class="table table-hover ">
       <thead class="table-dark">
         <tr>
-          <th scope="col">Nro de contrato</th>
-          <th scope="col">Fecha de emisión</th>
-          <th scope="col">Exclusividad</th>
-          <th scope="col">Descuento</th>
-          <th scope="col">fecha de cancelación</th>
-          <th scope="col">Motivo</th>
+          <th scope="col">#</th>
+          <th scope="col">Id Proveedor</th>
+          <th scope="col">Nombre Proveedor</th>
         </tr>
       </thead>
       <tbody>
-        <tr >
-          <th scope="row">
-            
-                
-           </th>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+        <tr *ngFor="let prov of proveedores">
+          <th scope="row">{{prov.numero_contrato}}</th>
+          <td>{{prov.id_prov}}</td>
+          <td>{{prov.nombre_prov}}</td>
+          
         </tr>
       </tbody>
     </table>
