@@ -30,13 +30,17 @@ export class FormulaInicialComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  AgregarCriterios()
+  CrearFormulaInicial()
   {
     if(this.ValidarPesos(this.peso_c1,this.peso_c2,this.peso_c3) && this.ValidarEscala(this.escala_v_min,this.escala_v_max,this.escala_rango_porcentual))
     {
-      console.log('successful');
-      console.log(`pesos: ${this.peso_c1},${this.peso_c2},${this.peso_c3}`);
       
+      this.CerrarEscalaYCriteriosIniciales();
+      this.GuardarNuevaEscalaInicial(this.escala_v_max,this.escala_v_min,this.escala_rango_porcentual);
+      this.GuardarNuevoCriterioGeografico(this.peso_c1);
+      this.GuardarNuevoCriterioAlternativaEnvio(this.peso_c2);
+      this.GuardarNuevoCriterioAlternativaPago(this.peso_c3);
+      confirm('formula de evaluacion inicial creada exitosamente');
     }
     else  
       alert('ERROR procure que la suma de los pesos de los criterios sea 100% y llenar los campos solicitados con valores coherentes');
@@ -57,6 +61,7 @@ export class FormulaInicialComponent implements OnInit {
   ValidarPesos(x:number,y:number,z:number):boolean
   {
     let sum = x+y+z;
+    console.log(sum);
     if(sum == 100)
       return true;
     else 
@@ -65,57 +70,78 @@ export class FormulaInicialComponent implements OnInit {
 
   ValidarEscala(rango_min:number,rango_max:number,porcentaje_aprobacion:number):boolean
   {
-    if((rango_min != 0 && rango_max!= 0 && porcentaje_aprobacion!= 0) && (rango_max>rango_min))
+    console.log(rango_min,rango_max,porcentaje_aprobacion);
+    if((rango_min >= 0 && rango_max> 0 && porcentaje_aprobacion> 0) && (rango_max>rango_min))
       return true;
     else
       return false;
   }
 
-  GuardarNuevaEscalaInicial()
+//FORMULA DE EVALUACION INICIAL
+
+  GuardarNuevaEscalaInicial(max,min,rango)
   {
-    
+    this.servicio.PostEscalaInicial(this.CrearEscala(max,min,rango)).subscribe(res=>
+      {
+        console.log('nueva escala creada');
+      })
   }
 
-  GuardarNuevoCriterioGeografico()
+  GuardarNuevoCriterioGeografico(peso)
   {
-
+    this.servicio.PostUbicacion(this.CrearCriterio(peso,1)).subscribe(res=>
+      {
+        console.log('Ubicacion Geografica')
+      });
   }
 
-  GuardarNuevoCriterioAlternativaPago()
+  GuardarNuevoCriterioAlternativaPago(peso)
   {
-
+    this.servicio.PostPago(this.CrearCriterio(peso,3)).subscribe(res=>
+      {
+        console.log('alt_pago')
+      })
   }
 
-  GuardarNuevoCriterioAlternativaEnvio()
+  GuardarNuevoCriterioAlternativaEnvio(peso)
   {
-
+    this.servicio.PostEnvio(this.CrearCriterio(peso,2)).subscribe(res=>
+      {
+        console.log('alt_envio')
+      });
   }
 
   CerrarEscalaYCriteriosIniciales()
   {
    this.servicio.PutCerrarEscalaInicial(UserCompanyService.userCompanyID,this.CrearEscala(0,0,0)).subscribe(res=>
     {
-      console.log('cerrada escala exitosamente');
+      console.log('escala cerrada exitosamente');
     });
-    this.servicio.PutCerrarCriteriosInicial(UserCompanyService.userCompanyID,this.CrearCriterio(0)).subscribe(res=>
+    this.servicio.PutCerrarCriteriosInicial(UserCompanyService.userCompanyID,this.CrearCriterio(0,0)).subscribe(res=>
     {
       console.log('criterios cerrados exitosamente');
     });
   }
 
+  //EVALUACION ANUAL
+
+  //EXTRAS
   CrearEscala(rangoMax:number,rangoMin:number,Aprob:number):EscalaModel
   {
     let e = new EscalaModel();
+    e.id = UserCompanyService.userCompanyID;
     e.rango_aprob = Aprob;
     e.rango_min = rangoMin;
-    e.rnago_max = rangoMax;
+    e.rango_max = rangoMax;
     return e;
   }
 
-  CrearCriterio(peso:number):CriterioModel
+  CrearCriterio(peso:number,id_criterio):CriterioModel
   {
     let c = new CriterioModel();
     c.peso = peso;
+    c.id_criterio = id_criterio;
+    c.id = UserCompanyService.userCompanyID;
     return c;
   }
 

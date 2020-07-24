@@ -25,7 +25,8 @@ class ProducersController
         res.json(db_res.rows);
     }
 
-    ObtenerEscalaAnualVigente = async (req,res)=>{
+    ObtenerEscalaAnualVigente = async (req,res)=>
+    {
       let id_productor = req.params.id;
       let db_res = await model.ObtenerEscalaAnualVigente(id_productor);
       res.json(db_res.rows);
@@ -56,7 +57,7 @@ class ProducersController
     PostEnvio = async (req,res)=>
     {
       const {id,id_criterio,peso} = req.body;
-      let db_res = await model.PostPago(id,id_criterio,peso);
+      let db_res = await model.PostEnvio(id,id_criterio,peso);
       res.json(db_res.rows);
     }
     PostPago = async (req,res)=>
