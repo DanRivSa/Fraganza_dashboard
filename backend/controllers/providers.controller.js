@@ -1,5 +1,6 @@
 //import model
-const model = require('../models/providers.model')
+const model = require('../models/providers.model');
+const { async } = require('rxjs/internal/scheduler/async');
 
 class ProvidersController
 {
@@ -52,7 +53,7 @@ class ProvidersController
       //  let id_prov = req.params.id_prov;
         let db_res = await model.ObtenerInfoPagoCuotas(id);
         res.json(db_res.rows);
-        
+
     }
 
 
@@ -69,6 +70,13 @@ class ProvidersController
         let db_res = await model.ObtenerPresentacionesIngrediente(cas_oi);
         res.json(db_res.rows);
 
+    }
+
+    GetContratosVigentes = async (req,res)=>
+    {
+        let id_proveedor = req.params.id;
+        let db_res = await model.GetContratosVigentes(id_proveedor);
+        res.json(db_res.rows);
     }
 }
 

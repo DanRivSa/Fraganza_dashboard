@@ -105,10 +105,11 @@ from ada_alternativa_envio t,ada_pais p
 where p.id_pais=t.id_pais and t.id_prov= $1  ORDER BY p.nombre_pais;
 
 
---CONSULTA PARA CONOCER LOS CLIENTES ACTIVOS DE UN PROVEEDORESSELECT p.nombre_prod, c.fecha_emision, p.email from ada_productor p
+--CONSULTA PARA CONOCER LOS CLIENTES ACTIVOS DE UN PROVEEDORE
+SSELECT p.nombre_prod, c.fecha_emision, p.email from ada_productor p
 INNER JOIN ada_contrato c on c.id_prod = p.id_prod
 where (CURRENT_DATE) < (c.fecha_emision + INTERVAL '365 day')
-										  and c.id_prov=1
+										  and c.id_prov=$1
 AND acuerdo IS TRUE
 AND (cancelado IS FALSE OR cancelado IS NULL)
 
