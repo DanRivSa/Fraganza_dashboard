@@ -117,6 +117,11 @@ class ProducersModel
         return db_res;
      }
 
+
+     async GetContratosPorVencer(id){
+       const db_res = await db.query('SELECT days, numero_contrato, id_prov,nombre_prov from ada_contratos_por_renovar where id_prod = $1',[id]);
+       return db_res;
+     }
      //Modulo compras
 
     async GetContratosVigentes(id)

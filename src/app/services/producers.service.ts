@@ -79,6 +79,12 @@ export class ProducersService
     return this.httpClient.put(`${this.base_URL}/producers/anual/${id_productor}`,criterio);
   }
 
+  GetContratosPorVencer (id_productor:number)
+  {
+    return this.httpClient.get(`${this.base_URL}/producers/renovar_contratos/${id_productor}`);
+  }
+
+  //
   GetContratosVigentes (id_productor:number)
   {
     return this.httpClient.get(`${this.base_URL}/producers/compras/${id_productor}`);

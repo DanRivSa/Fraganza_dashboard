@@ -101,6 +101,13 @@ class ProducersController
       res.json(db_res.rows);
     }
 
+    GetContratosPorVencer = async (req,res)=>
+    {
+      let id_productor = req.params.id;
+      let db_res = await model.GetContratosPorVencer(id_productor);
+      return res.json(db_res.rows);
+    }
+
     //Métodos modulo de compras
     GetContratosVigentes = async (req,res)=>
     {

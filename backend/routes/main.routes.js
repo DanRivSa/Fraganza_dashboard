@@ -53,6 +53,7 @@ router.put('/producers/escala_anual/:id',producersController.PutEscalaAnualVigen
 router.put('/producers/inicial/:id',producersController.PutCriteriosInicial);
 //Cerrar historicos tipo Anual
 router.put('/producers/anual/:id',producersController.PutCriteriosAnual);
+router.get('/producers/renovar_contratos/:id',producersController.GetContratosPorVencer);
 
 //Rutas modulo compras
 
