@@ -102,12 +102,26 @@ export class ProducersService
   {
     return this.httpClient.get(`${this.base_URL}/producers/compras/${id_productor}`);
   }
-
-  GetProductosContratados (id_productor:number, numero_contrato:number)
+  //Pedidos
+  GetEsenciasContratadas (id_proveedor:number, numero_contrato:number)
   {
-    return this.httpClient.get(`${this}/producers/compras/pedidos/${id_productor}/enlace/${numero_contrato}`);
+    return this.httpClient.get(`${this}/producers/compras/pedidos/${id_proveedor}/esencias/${numero_contrato}`);
   }
 
-//  PostGenerarPedido (pedido:Pedido)
+  GetIngredientesContratados (id_proveedor:number, numero_contrato:number)
+  {
+    return this.httpClient.get(`${this}/producers/compras/pedidos/${id_proveedor}/ingredientes/${numero_contrato}`);
+  }
+
+  metodoPagoContratados (id_proveedor:number, numero_contrato:number)
+  {
+    return this.httpClient.get(`${this.base_URL}/producers/compras/pedidos/${id_proveedor}/pagos/${numero_contrato}`);
+  }
+
+  metodoEnvioContratados (id_proveedor:number, numero_contrato:number)
+  {
+    return this.httpClient.get(`${this.base_URL}/producers/compras/pedidos/${id_proveedor}/envios/${numero_contrato}`);
+  }
+
 
 }

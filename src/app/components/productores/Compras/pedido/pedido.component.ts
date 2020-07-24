@@ -10,7 +10,8 @@ import {ProducersService} from '../../../../services/producers.service';
 })
 export class PedidoComponent implements OnInit {
 
-  productosContratados:any[];
+  EsenciasContratadas:any[];
+  IngredientesContratados:any[];
   metodoPagoContratados:any[];
   metodoEnvioContratados:any[];
   id_proveedor:number;
@@ -26,10 +27,27 @@ export class PedidoComponent implements OnInit {
         this.numero_contrato=+params.get('contrato');
       });
 
-    this.productor.GetProductosContratados(this.id_proveedor,this.numero_contrato).subscribe(res=>{
+    this.productor.GetEsenciasContratadas(this.id_proveedor,this.numero_contrato).subscribe(res=>{
 
-      this.productosContratados = res as any[];
+      this.EsenciasContratadas = res as any[];
     });
+
+
+    this.productor.GetIngredientesContratados(this.id_proveedor,this.numero_contrato).subscribe(res=>{
+
+      this.IngredientesContratados = res as any[];
+    });
+
+    this.productor.metodoPagoContratados(this.id_proveedor,this.numero_contrato).subscribe(res=>{
+
+      this.metodoPagoContratados = res as any[];
+    });
+
+    this.productor.metodoEnvioContratados(this.id_proveedor,this.numero_contrato).subscribe(res=>{
+
+      this.metodoEnvioContratados = res as any[];
+    })
+
 
   }
 

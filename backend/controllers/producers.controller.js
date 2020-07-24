@@ -135,16 +135,41 @@ class ProducersController
     //Métodos modulo de compras
     GetContratosVigentes = async (req,res)=>
     {
-      let id_productor = req.params.id;
-      let db_res = await model.GetContratosVigentes(id_productor);
+      let id_proveedor = req.params.id;
+      let db_res = await model.GetContratosVigentes(id_proveedor);
       res.json(db_res.rows)
     }
 
-    GetProductosContratados = async (req,res)=>
+    GetEsenciasContratadas = async (req,res)=>
     {
-      let id_productor = req.params.id;
+      let id_proveedor = req.params.id;
       let numero_contrato = req.params.contrato;
-      let db_res = await model.GetProductosContratados(id_productor,numero_contrato);
+      let db_res = await model.GetEsenciasContratadas(id_proveedor,numero_contrato);
+      res.json(db_res.rows);
+    }
+
+
+    GetIngredientesContratados = async (req,res)=>
+    {
+      let id_proveedor = req.params.id;
+      let numero_contrato = req.params.contrato;
+      let db_res = await model.GetIngredientesContratados(id_proveedor,numero_contrato);
+      res.json(db_res.rows);
+    }
+
+    metodoPagoContratados = async (req,res)=>
+    {
+      let id_proveedor = req.params.id;
+      let numero_contrato = req.params.contrato;
+      let db_res = await model.metodoPagoContratados(id_proveedor,numero_contrato);
+      res.json(db_res.rows);
+    }
+
+    metodoEnvioContratados = async (req,res)=>
+    {
+      let id_proveedor = req.params.id;
+      let numero_contrato = req.params.contrato;
+      let db_res = await model.metodoEnvioContratados(id_proveedor,numero_contrato);
       res.json(db_res.rows);
     }
 
