@@ -108,3 +108,17 @@ LEFT OUTER JOIN ada_asoc_nacional a on a.id_asoc=e.id_asoc
 INNER JOIN ada_pais p on p.id_pais = e.id_pais
 INNER JOIN ada_membresia m on m.id_prov = e.id_prov;
 
+
+--vista para contratos vigentes de un productor
+CREATE VIEW ada_contratos_productor_vigente AS
+SELECT p.id_prod,r.id_prov,x.nombre_prov, r.numero_contrato
+from ada_productor p
+INNER JOIN ada_contratos_en_regla r on r.id_prod=p.id_prod
+INNER JOIN ada_proveedor x on x.id_prov = r.id_prov;
+
+--vista para contratos vigentes de un proveedor
+CREATE VIEW ada_contratos_proveedor_vigente as
+SELECT p.id_prov,r.id_prod,x.nombre_prod, r.numero_contrato
+from ada_proveedor p
+INNER JOIN ada_contratos_en_regla r on r.id_prov=p.id_prov
+INNER JOIN ada_productor x on x.id_prod = r.id_prod;
