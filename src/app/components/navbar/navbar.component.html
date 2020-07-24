@@ -30,13 +30,13 @@
             <a class="nav-link" routerLink="/i_test_provider" >Ev. Inicial</a>
           </li>
           <li class="nav-item" *ngIf = "(userType == 1 && userID !=null)">
-            <a class="nav-link">Ev. Anual</a>
+            <a class="nav-link " routerLink="/evaluacion_anual">Ev. Anual</a>
           </li>
           <li class="nav-item" *ngIf="(userType == 1 && userID !=null)">
             <a class="nav-link" >Pedidos</a>
           </li>
           <li class="nav-item" *ngIf="(userType == 1 && userID !=null)">
-            <a class="nav-link" >Contratos</a>
+            <a class="nav-link"routerLink= "contrato/provider" >Contratos</a>
           </li>
           <!--USER PROFILE-->
           <li class="nav-item" *ngIf = "(userType != null && userID !=null)">
