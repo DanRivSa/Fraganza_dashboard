@@ -34,7 +34,7 @@ export class FormulaInicialComponent implements OnInit {
   {
     if(this.ValidarPesos(this.peso_c1,this.peso_c2,this.peso_c3) && this.ValidarEscala(this.escala_v_min,this.escala_v_max,this.escala_rango_porcentual))
     {
-      
+
       this.CerrarEscalaYCriteriosIniciales();
       this.GuardarNuevaEscalaInicial(this.escala_v_max,this.escala_v_min,this.escala_rango_porcentual);
       this.GuardarNuevoCriterioGeografico(this.peso_c1);
@@ -42,7 +42,7 @@ export class FormulaInicialComponent implements OnInit {
       this.GuardarNuevoCriterioAlternativaPago(this.peso_c3);
       confirm('formula de evaluacion inicial creada exitosamente');
     }
-    else  
+    else
       alert('ERROR procure que la suma de los pesos de los criterios sea 100% y llenar los campos solicitados con valores coherentes');
   }
 
@@ -52,7 +52,7 @@ export class FormulaInicialComponent implements OnInit {
     console.log(sum);
     if(sum == 100)
       return true;
-    else 
+    else
       return false;
   }
 

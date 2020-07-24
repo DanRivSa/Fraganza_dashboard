@@ -28,8 +28,8 @@ const routes: Routes =
   {path: 'e_anual_prov',component:EvAnualProvComponent},
   {path: 'evaluar_Anual', component:EvaluacionAnualComponent},
   {path:'compras',component:ContratoComponent},
-  {path:'compras/contratos/:id/detalle/:contrato', component:DetalleContratoComponent},
-  {path:'compras/contratos/:id/detalle/:contrato/generar_pedido', component: CrearPedidoComponent}
+  {path:'compras/contratos/:id_proveedor/detalle/:contrato', component:DetalleContratoComponent},
+  {path:'compras/contratos/detalle/:contrato/generar_pedido/:id_proveedor', component: CrearPedidoComponent}
 ];
 
 @NgModule({
