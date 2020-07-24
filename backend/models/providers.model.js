@@ -55,7 +55,7 @@ class ProviderModel
     }
 
     async ObtenerInfoPagoCuotas(id){
-        const db_res = await db.query('select porc_cuota,periodo_vigencia,metodo_pago from ada_cuota where id_prov = $1',[id]);
+        const db_res = await db.query('SELECT porc_cuota,periodo_vigencia,metodo_pago from ada_cuota where id_prov = $1',[id]);
         return db_res;
 
     }
