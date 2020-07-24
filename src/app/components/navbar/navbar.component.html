@@ -20,7 +20,7 @@
             <a class="nav-link" >Pedidos</a>
           </li>
           <li class="nav-item" *ngIf="(userType == 2 && userID !=null)">
-            <a class="nav-link"  >Contratos</a>
+            <a class="nav-link" routerLink= "contrato/producer" >Contratos</a>
           </li>
           <!--LINKS FOR PRODUCERS-->
           <li class="nav-item" *ngIf = "(userType == 1 && userID !=null)">
