@@ -26,6 +26,7 @@ import { FormulaInicialComponent } from './components/productores/formula-inicia
 import { AlternativasPagoComponent } from './components/proveedores/alternativas-pago/alternativas-pago.component';
 import { EvaluacionAnualComponent } from './components/proveedores/evaluacion-anual/evaluacion-anual.component';
 import { ContratosProvComponent } from './components/proveedores/contratos-prov/contratos-prov.component';
+import { ProvEvAnualComponent } from './components/proveedores/prov-ev-anual/prov-ev-anual.component';
 
 
 
@@ -56,6 +57,8 @@ import { ContratosProvComponent } from './components/proveedores/contratos-prov/
     EvaluacionAnualComponent,
 
     ContratosProvComponent,
+
+    ProvEvAnualComponent,
 
 
 
