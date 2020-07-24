@@ -46,6 +46,11 @@ class ProducersModel
         return db_res;
     }
 
+    async ObtenerCriterioSucces(id)
+    {
+
+    }
+
     async ObtenerEscalaAnualVigente(id)
     {
         const db_res = await db.query('SELECT e.fecha_inicio,p.id_prod, e.rango_inicial,e.rango_final, e.rango_aprob from ada_escala e where e.id_prod=$1 and e.fecha_fin is null and e.tipo_uso =$2',[id,'a']);
@@ -129,6 +134,25 @@ class ProducersModel
       const db_res = await db.query('SELECT p.id_prod,r.id_prov,x.nombre_prov, r.numero_contrato from ada_productor p INNER JOIN ada_contratos_en_regla r on r.id_prod=p.id_prod  INNER JOIN ada_proveedor x on x.id_prov = r.id_prov where p.id_prod =$1',[id]);
       return db_res;
     }
+
+    async GetEsenciasContratadas(id_proveedor,numero_contrato)
+    {
+      const db_res = await db.query('SELECT p.nombre_comercial, p.nombre_quimico, p.cas from ada_contratacion_prod where p.id_prov=$1 and p.numero_contrato=$2 and p.cas_oi is null',[id_proveedor,numero_contrato]);
+    }
+
+    async GetIngredientesContratados(id_proveedor,numero_contrato)
+    {
+      const db_res = await db.query('SELECT p.nombre_comercial, p.nombre_quimico, p.cas_oi from ada_contratacion_prod where p.id_prov=$1 and p.numero_contrato=$2 and p.cas is null',[id_proveedor,numero_contrato]);
+    }
+     async metodoPagoContratados(id_proveedor,numero_contrato)
+     {
+       const db_res = await db.query('SELECT case metodo_pago when $3 then $4 when $5 then $6 end from ada_contratacion_ap where id_prov = $1 and numero_contrato=$2',[id_proveedor,numero_contrato,'c','Pago por Cuotas','p','Parcial']);
+     }
+
+     async metodoEnvioContratados(id_proveedor,numero_contrato)
+     {
+       const db_res = await db.query('SELECT tipo_envio from ada_contratacion_me where id_prov=$1 and numero_contrato=$2',[id_proveedor,numero_contrato]);
+     }
 
 }
 

@@ -62,11 +62,17 @@ router.put('/producers/inicial/:id',producersController.PutCriteriosInicial);
 router.put('/producers/anual/:id',producersController.PutCriteriosAnual);
 router.get('/producers/renovar_contratos/:id',producersController.GetContratosPorVencer);
 
-//Pedidos
-router.get('/producers/compras/pedidos/:id/enlace/:contrato',producersController.GetProductosContratados);
-
-//Rutas modulo compras
-
+//RutasModuloCompras
 //Obtener contratos vigentes
 router.get('/producers/compras/:id',producersController.GetContratosVigentes);
 module.exports = router;
+
+//Pedidos
+router.get('/producers/compras/pedidos/:id/esencias/:contrato',producersController.GetEsenciasContratadas);
+
+router.get('/producers/compras/pedidos/:id/ingredientes/:contrato',producersController.GetIngredientesContratados);
+
+router.get('/producers/compras/pedidos/:id/pagos/:contrato',producersController.metodoPagoContratados);
+
+router.get('/producers/compras/pedidos/:id/envios/:contrato',producersController.metodoEnvioContratados);
+
