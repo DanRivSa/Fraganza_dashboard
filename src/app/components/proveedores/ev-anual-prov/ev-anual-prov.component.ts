@@ -16,7 +16,7 @@ export class EvAnualProvComponent implements OnInit {
   constructor(private producersService:ProducersService) { }
 
   ngOnInit(): void {
-    this.producersService.FiltrarProveedoresIniciales(this.id_usuario).subscribe(res=>
+    this.producersService.GetContratosVigentes(this.id_usuario).subscribe(res=>
       {
         this.proveedores = res as any[];
       });
