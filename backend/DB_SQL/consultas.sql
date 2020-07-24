@@ -116,3 +116,16 @@ AND (cancelado IS FALSE OR cancelado IS NULL)
  select p.nombre_prod,r.fecha,p.email from ada_productor p
 INNER JOIN ada_renueva r on r.id_prod = p.id_prod
 where (CURRENT_DATE) < (r.fecha + INTERVAL '365 day') and r.id_prov=1;
+
+--CONSULTA CONTRATOS EN REGLA DE UN PROVEEDOR
+SELECT p.id_prov,r.id_prod,x.nombre_prod, r.numero_contrato from ada_proveedor p
+INNER JOIN ada_contratos_en_regla r on r.id_prov=p.id_prov
+INNER JOIN ada_productor x on x.id_prod = r.id_prod
+where p.id_prov =$1;
+
+--CONSULTA CONTRATOS EN REGLA DE UN PRODUCTOR
+SELECT p.id_prod,r.id_prov,x.nombre_prov, r.numero_contrato from ada_productor p
+INNER JOIN ada_contratos_en_regla r on r.id_prod=p.id_prod
+INNER JOIN ada_proveedor x on x.id_prov = r.id_prov
+where p.id_prod =$1;
+

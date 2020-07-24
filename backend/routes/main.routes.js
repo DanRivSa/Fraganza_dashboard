@@ -57,5 +57,5 @@ router.put('/producers/anual/:id',producersController.PutCriteriosAnual);
 //Rutas modulo compras
 
 //Obtener contratos vigentes
-router.get('/producers/compras/providers/:id',producersController.GetContratosVigentes);
+router.get('/producers/compras/:id',producersController.GetContratosVigentes);
 module.exports = router;

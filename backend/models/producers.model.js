@@ -117,6 +117,14 @@ class ProducersModel
         return db_res;
      }
 
+     //Modulo compras
+
+    async GetContratosVigentes(id)
+    {
+      const db_res = await db.query('SELECT p.id_prod,r.id_prov,x.nombre_prov, r.numero_contrato from ada_productor p INNER JOIN ada_contratos_en_regla r on r.id_prod=p.id_prod  INNER JOIN ada_proveedor x on x.id_prov = r.id_prov where p.id_prod =$1',[id]);
+      return db_res;
+    }
+
 }
 
 

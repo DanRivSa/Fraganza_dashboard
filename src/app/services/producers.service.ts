@@ -81,7 +81,9 @@ export class ProducersService
 
   GetContratosVigentes (id_productor:number)
   {
-    return this.httpClient.get(`${this.base_URL}/producers/compras/providers/${id_productor}`);
+    return this.httpClient.get(`${this.base_URL}/producers/compras/${id_productor}`);
   }
+
+//  PostGenerarPedido (pedido:Pedido)
 
 }
