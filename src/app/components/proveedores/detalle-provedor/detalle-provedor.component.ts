@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ProveedoresService} from '../../../services/proveedores.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, RouterLink} from '@angular/router';
 import {ProducersService } from '../../../services/producers.service';
 import { UserCompanyService } from 'src/app/services/global/user-company.service';
 
@@ -71,9 +71,18 @@ export class DetalleProvedorComponent implements OnInit {
       });
   }
 
+  ValidarNotas(x,y,z):boolean
+  {
+    if(x>=0 && y>=y && z>=0)
+      return true;
+    else 
+      return false;
+  }
+
   Calificar()
   {
-  
+    if(this.ValidarNotas(this.nota1,this.nota2,this.nota3) == false)
+      return;
     let puntaje1 = (this.nota1*this.peso_c1)/100; //puntajes con respecto al peso
     let puntaje2 = (this.nota2*this.peso_c2)/100;
     let puntaje3=(this.nota3*this.peso_c3)/100;
@@ -82,7 +91,7 @@ export class DetalleProvedorComponent implements OnInit {
     if(this.CalificacionFinal>=aprob)
     {
       this.aprobado = true;
-      alert('Proveedor aprobo, ahora se encuentra disponible para contratar');
+      
       //habilitar boton de contratar
     }
     else

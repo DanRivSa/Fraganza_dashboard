@@ -33,21 +33,21 @@ class ProducersController
       res.json(db_res.rows);
     }
 
-    ObtenerUbicacionGeoVigente = async ()=>
+    ObtenerUbicacionGeoVigente = async (req,res)=>
     {
       let id_productor = req.params.id;
       let db_res = await model.ObtenerUbicacionGeoVigente(id_productor);
       res.json(db_res.rows);
     }
 
-    ObtenerAltEnvioVigente = async ()=>
+    ObtenerAltEnvioVigente = async (req,res)=>
     {
       let id_productor = req.params.id;
       let db_res = await model.ObtenerAltEnvioVigente(id_productor);
       res.json(db_res.rows);
     }
 
-    ObtenerPagoGeoVigente = async ()=>
+    ObtenerPagoGeoVigente = async (req,res)=>
     {
       let id_productor = req.params.id;
       let db_res = await model.ObtenerPagoGeoVigente(id_productor);
