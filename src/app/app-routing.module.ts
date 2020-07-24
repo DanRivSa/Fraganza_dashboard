@@ -12,6 +12,8 @@ import { EvAnualProvComponent } from './components/proveedores/ev-anual-prov/ev-
 import { EvaluacionAnualComponent } from './components/proveedores/evaluacion-anual/evaluacion-anual.component';
 
 
+import {ContratoComponent} from './components/productores/Compras/contrato/contrato.component';
+import {PedidoComponent} from './components/productores/Compras/pedido/pedido.component'
 const routes: Routes =
 [
   {path:'',component:HomeComponent},
@@ -24,6 +26,8 @@ const routes: Routes =
   {path: 'contrato/provider',component:ContratosProvComponent},
   {path: 'e_anual_prov',component:EvAnualProvComponent},
   {path: 'evaluar_Anual', component:EvaluacionAnualComponent}
+  {path:'compras',component:ContratoComponent},
+  {path:'compras/generar_pedido/:id/contrato/:contrato', component:PedidoComponent}
 ];
 
 @NgModule({
