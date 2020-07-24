@@ -46,6 +46,8 @@ export class FormulaInicialComponent implements OnInit {
   {
     if(this.ValidarEscala(this.escala_a_min,this.escala_a_max,this.escala_a_rango))
     {
+      this.CerrarEscalaYCriteriosIniciales();
+
       console.log('creado exitosamente');
     }
     else
@@ -69,21 +71,51 @@ export class FormulaInicialComponent implements OnInit {
       return false;
   }
 
-  CerrarEscalaYCriterios()
+  GuardarNuevaEscalaInicial()
   {
-    let 
-    this.servicio.PutCerrarEscalaInicial(UserCompanyService.userCompanyID,)
+    
   }
 
-  CrearEscala():EscalaModel
+  GuardarNuevoCriterioGeografico()
+  {
+
+  }
+
+  GuardarNuevoCriterioAlternativaPago()
+  {
+
+  }
+
+  GuardarNuevoCriterioAlternativaEnvio()
+  {
+
+  }
+
+  CerrarEscalaYCriteriosIniciales()
+  {
+   this.servicio.PutCerrarEscalaInicial(UserCompanyService.userCompanyID,this.CrearEscala(0,0,0)).subscribe(res=>
+    {
+      console.log('cerrada escala exitosamente');
+    });
+    this.servicio.PutCerrarCriteriosInicial(UserCompanyService.userCompanyID,this.CrearCriterio(0)).subscribe(res=>
+    {
+      console.log('criterios cerrados exitosamente');
+    });
+  }
+
+  CrearEscala(rangoMax:number,rangoMin:number,Aprob:number):EscalaModel
   {
     let e = new EscalaModel();
+    e.rango_aprob = Aprob;
+    e.rango_min = rangoMin;
+    e.rnago_max = rangoMax;
     return e;
   }
 
-  CrearCriterio():CriterioModel
+  CrearCriterio(peso:number):CriterioModel
   {
     let c = new CriterioModel();
+    c.peso = peso;
     return c;
   }
 
