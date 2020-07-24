@@ -18,6 +18,7 @@ router.get('/providers/esencias/:id',providersController.ObtenerEsenciasDeProvee
 router.get('/providers/ingredientes/:id',providersController.ObtenerIngredientesDeProveedor);
 router.get('/providers/alt_envio/:id',providersController.ObtenerAlternativasEnvio);
 router.get('/providers/alt_pago/',providersController.ObtenerAlternativasPago);
+router.get('/providers/cuotas/:id',providersController.ObtenerInfoPagoCuotas);
 
 //presentaciones
 router.get('/providers/esencia/:id',providersController.ObtenerPresentacionesEsencia);

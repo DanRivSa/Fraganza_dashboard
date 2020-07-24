@@ -22,6 +22,9 @@ import { CatalogoComponent } from './components/proveedores/catalogo/catalogo.co
 import { DetalleProvedorComponent } from './components/proveedores/detalle-provedor/detalle-provedor.component';
 import { AlternativasEnviosComponent } from './components/proveedores/alternativas-envios/alternativas-envios.component';
 import { FormulaInicialComponent } from './components/productores/formula-inicial/formula-inicial.component';
+import { AlternativasPagoComponent } from './components/proveedores/alternativas-pago/alternativas-pago.component';
+import { EvaluacionInicialComponent } from './components/proveedores/evaluacion-inicial/evaluacion-inicial.component';
+
 
 
 @NgModule({
@@ -44,6 +47,11 @@ import { FormulaInicialComponent } from './components/productores/formula-inicia
     AlternativasEnviosComponent,
 
     FormulaInicialComponent,
+
+    AlternativasPagoComponent,
+
+    EvaluacionInicialComponent,
+
 
 
     

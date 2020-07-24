@@ -40,6 +40,11 @@ export class ProveedoresService
     return this.cliente.get(`${this.url_base}/providers/alt_pago/${id}`);
   }
 
+  ObtenerInfoPagoCuotas(id:number)
+  {
+    return this.cliente.get(`${this.url_base}/providers/cuotas/${id}`);
+  }
+
   ObtenerPresentacionesEsencia(cas:number)
   {
     return this.cliente.get(`${this.url_base}/providers/esencia/${cas}`);
