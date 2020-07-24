@@ -105,6 +105,7 @@ class ProducersModel
 
     async PutCriteriosAnual(id){
         const db_res = await db.query('UPDATE ada_eval_criterio SET fecha_fin=CURRENT_DATE where id_prod = $1 and tipo_uso=$2',[id,'a']);
+        return db_res;
      }
 
 }

@@ -27,15 +27,15 @@
                         <h3 class="register-heading">Fórmula Ev. Inicial</h3>
                         <div class="row register-form">
                             <div class="col-md-12">
-                                <form method="post">
+                                <form method="post" #formulaInicial = "ngForm" ngSubmit ="AgregarCriterios(formulaInicial)">
                                     <div class="form-group">
                                         <div class="row">
                                             <h5>Escala de aprobación</h5>
                                             <div class="col">
-                                              <input type="number" class="form-control" placeholder=" Min" value="" required="">
+                                              <input type="number" class="form-control" placeholder=" Min" name ="escala minima" #escala_min ="ngModel" [(ngModel)] = "escala_v_min">
                                             </div>
                                             <div class="col">
-                                              <input type="number" class="form-control" placeholder=" Max" value="" required="">
+                                              <input type="number" class="form-control" placeholder=" Max" name="escala maxima" #escala_max="ngModel" [(ngModel)] = "escala_v_max">
                                             </div>
                                           </div>
                                         
@@ -44,7 +44,7 @@
                                         <div class="row">
                                             <h5>Rango de aprobación</h5>
                                             <div class="col">
-                                              <input type="number" class="form-control" placeholder=" Porcentaje máx" value="" required="">
+                                              <input type="number" class="form-control" placeholder=" Porcentaje máx" name="rango aprobacion" #rango_aprob="ngModel" [(ngModel)]="escala_rango_porcentual" >
                                             </div>
                                             
                                         </div>
@@ -57,23 +57,22 @@
                                         <br>
                                         <h5>Criterio 1: Ubicación Geográfica</h5>
                                         
-                                        <input type="number" name="LGform1_pwd" class="form-control" placeholder="Introduzca peso" value="" required=""/>
+                                        <input type="number" name="LGform1_pwd" class="form-control" placeholder="Introduzca peso" name="peso1" #pesoUG="ngModel" [(ngModel)]="peso_c1"/>
                                     </div>
                                     <div class="form-group">
                                         <br>
                                         <h5>Criterio 2: Alternativa de pago</h5>
                                         
-                                        <input type="number" name="LGform1_pwd" class="form-control" placeholder="Introduzca peso" value="" required=""/>
+                                        <input type="number" name="LGform1_pwd" class="form-control" placeholder="Introduzca peso" name="peso2" #pesoAP="ngModel" [(ngModel)]="peso_c2" />
                                     </div>
                                     <div class="form-group">
                                         <br>
                                         <h5>Criterio 3: Alternativa de envio</h5>
                                         
-                                        <input type="number" name="LGform1_pwd" class="form-control" placeholder="Introduzca peso" value="" required=""/>
+                                        <input type="number" name="LGform1_pwd" class="form-control" placeholder="Introduzca peso" name="peso3" #pesoAE="ngModel" [(ngModel)]="peso_c3" />
                                     </div>
                                     <div class="form-group text-center">
-                                        <input type="submit" name="LGform1" class="btnContactSubmit" value="Crear Formula" />
-                                        
+                                        <button type="submit" class="btnContactSubmit" (click)="AgregarCriterios()">Crear Formula</button>
                                     </div>
                                 </form>
                             </div>
@@ -88,10 +87,10 @@
                                         <div class="row">
                                             <h5>Escala de aprobación</h5>
                                             <div class="col">
-                                              <input type="number" class="form-control" placeholder=" Min" value="" required="">
+                                              <input type="number" class="form-control" placeholder=" Min" name="escala_min" #escalaAmin="ngModel" [(ngModel)]="escala_a_min" />
                                             </div>
                                             <div class="col">
-                                              <input type="number" class="form-control" placeholder=" Max" value="" required="">
+                                              <input type="number" class="form-control" placeholder=" Max"  name="escala_max" #escalaAmax="ngModel" [(ngModel)]="escala_a_max" />
                                             </div>
                                           </div>
                                         
@@ -100,15 +99,14 @@
                                         <div class="row">
                                             <h5>Rango de aprobación</h5>
                                             <div class="col">
-                                              <input type="number" class="form-control" placeholder=" porcentaje máx" value="" required="">
+                                              <input type="number" class="form-control" placeholder=" porcentaje máx"  name="rango_aprob" #rango="ngModel" [(ngModel)]="escala_a_rango">
                                             </div>
                                             
                                         </div>
                                         
                                     </div>
                                     <div class="form-group text-center">
-                                        <input type="submit" name="LGform2" class="btnContactSubmit" value="Crear Fórmula" />
-                                        
+                                        <button type="submit" class="btnContactSubmit" (click)="AgregarCriterioExito()">Crear Formula</button>                                        
                                     </div>
                                 </form>
                             </div>

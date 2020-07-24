@@ -70,7 +70,7 @@ class ProducersController
     PutEscalaInicialVigente = async (req,res)=>
     {
       let id_productor = req.params.id;
-      let db_res = await model.PostEscalaInicial(id_productor);
+      let db_res = await model.PutEscalaInicialVigencia(id_productor);
       res.json(db_res.rows);
     }
 
