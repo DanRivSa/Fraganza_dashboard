@@ -73,7 +73,7 @@ router.get('/producers/renovar_contratos/:id',producersController.GetContratosPo
 router.put('/cerrar/escala_anual/:id',producersController.CerrarEscalaAnual);
 router.put('/cerrar/criterio_anual/:id',producersController.CerrarCriterioAnual);
 
-router.get('producers/contratos/renovacion/:contrato',producersController.ObtenerCriterioSucces);
+router.get('/producers/contratos/renovacion/:contrato',producersController.ObtenerCriterioSucces);
 //RutasModuloCompras
 //Obtener contratos vigentes
 router.get('/producers/contratos/:id',producersController.GetContratosVigentes);
