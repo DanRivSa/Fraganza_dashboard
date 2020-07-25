@@ -25,7 +25,7 @@ export class DetalleContratoComponent implements OnInit {
 
     this.route.paramMap.subscribe(params=>
       {
-        this.id_proveedor=+params.get('id_proveedor');
+        this.id_proveedor=+params.get('id');
         this.numero_contrato=+params.get('contrato');
       });
 

@@ -31,7 +31,7 @@ export class CrearPedidoComponent implements OnInit {
   MetodoPagoPedido:string;
   PresentacionesEsencias:number[];
   PresentacionesIngredientes:number[];
-   DetPresentacion:DetPresentacionModel[];
+  DetPresentacion:DetPresentacionModel[];
 
   constructor(private route:ActivatedRoute, private productores:ProducersService) { }
 
@@ -92,7 +92,11 @@ export class CrearPedidoComponent implements OnInit {
             let resultado = (this.DetPresentacion[i].cantidad*this.DetPresentacion[i].precio);
             this.precio_pedido=this.precio_pedido+resultado;
            }
+          let RecargoDescuento = this.precio_pedido*this.DescuentoContrato;
+          let RecargoEnvio = this.precio_pedido*this.MetodoEnvioPedido.porc_contratado;
+          this.precio_pedido=this.precio_pedido+RecargoDescuento+RecargoEnvio;
       }
+      else console.log('No ha listado presentaciones');
     }
   DetallarPedido()
   {
