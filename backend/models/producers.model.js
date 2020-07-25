@@ -176,6 +176,19 @@ class ProducersModel
         return db_res;
     }
 
+    //resultado de evaluaciones
+    async GuardarResultadoInicial(id_prod,id_prov,resultado)
+    {
+      const db_res = await db.query('INSERT INTO ada_resutado_eval (fecha,id_prov,id_prod,resultado,tipo_eval) VALUES (CURRENT_DATE,$1,$2,$3,$4)',[id_prov,id_prod,resultado,'i']);
+      return db_res;
+    }
+
+    async GuardarResultadoAnual(id_prod,id_prov,resultado)
+    {
+      const db_res = await db.query('INSERT INTO ada_resutado_eval (fecha,id_prov,id_prod,resultado,tipo_eval) VALUES (CURRENT_DATE,$1,$2,$3,$4)',[id_prov,id_prod,resultado,'a']);
+      return db_res;
+    }
+
      //FUNCIONES DE PRUEBA
      async CerrarInicial(id)
      {

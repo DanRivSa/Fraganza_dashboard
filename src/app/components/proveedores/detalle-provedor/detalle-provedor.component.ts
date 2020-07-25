@@ -27,6 +27,7 @@ export class DetalleProvedorComponent implements OnInit {
   CalificacionFinal:number;
 
   aprobado:boolean = false;
+  holderDeEscala:any[]; //se usara para saber si hay una formula inicial, si no hay escala, no hay formula vigente
 
   constructor(private route:ActivatedRoute, private servicio:ProveedoresService,private servicioProductores:ProducersService) 
   {
@@ -38,7 +39,7 @@ export class DetalleProvedorComponent implements OnInit {
     this.aprobado = false;
     this.route.paramMap.subscribe(paramas=>
       {
-        this.id = +paramas.get('id');
+        this.id = +paramas.get('id');//id proveedor
       });    
     this.servicio.ObtenerNombre(this.id).subscribe(res=>
       {
@@ -47,10 +48,10 @@ export class DetalleProvedorComponent implements OnInit {
       });
     this.servicioProductores.ObtenerEscalaInicialVigente(UserCompanyService.userCompanyID).subscribe(res=>
       {
-        let data:any[] = res as any[];
-        this.porcentaje_aprob = data[0].rango_aprob;
-        this.valor_min = data[0].rango_inicial;
-        this.valor_Max = data[0].rango_final;
+        this.holderDeEscala = res as any[];
+        this.porcentaje_aprob = this.holderDeEscala[0].rango_aprob;
+        this.valor_min = this.holderDeEscala[0].rango_inicial;
+        this.valor_Max = this.holderDeEscala[0].rango_final;
         this.total = this.valor_Max-this.valor_min; //--> 100%
         console.log('Total: ',this.total);
       });
@@ -98,13 +99,12 @@ export class DetalleProvedorComponent implements OnInit {
     if(this.CalificacionFinal>=aprob)
     {
       this.aprobado = true;
-      alert('Proveedor apto para contratar');
+      this.servicioProductores.GuardarResultadoInicial(UserCompanyService.userCompanyID,this.id,this.CalificacionFinal).subscribe(res=>
+        {
+          console.log('resultado guardado');
+        });
       //guardar calificacion en la bd
-
-      //habilitar boton de contratar
     }
-    else
-      alert('Proveedor reprobo');
   }
 
 }

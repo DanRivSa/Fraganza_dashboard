@@ -138,6 +138,17 @@ export class ProducersService
     return this.httpClient.get(`${this.base_URL}/producers/Criterios_vigentes/${id_usuario_productor}`);
   }
 
+  //RESULTADO DE EVALUACIONES
+  GuardarResultadoInicial(id_prod:number,id_prov:number,resultado:number)
+  {
+    return this.httpClient.post(`${this.base_URL}/guardar_resultado/inicial/${id_prod}`,{id_prov,resultado});
+  }
+
+  GuardarResultadoAnual(id_prod:number,id_prov:number,resultado:number)
+  {
+    return this.httpClient.post(`${this.base_URL}/guardar_resultado/anual/${id_prod}`,{id_prov,resultado});
+  }
+
   //PRUEBA
   CerrarAnual(id:number,escala:EscalaModel)
   {

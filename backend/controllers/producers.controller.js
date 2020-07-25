@@ -207,6 +207,26 @@ class ProducersController
         res.json(db_res.rows);
     }
 
+    GuardarResultadoInicial = async (req,res)=>
+    { 
+        let id_prod = req.params.id_prod;
+        console.log(id_prod);
+        let id_prov = req.body.id_prov;
+        let resultado = req.body.resultado;
+        let db_res = await model.GuardarResultadoInicial(id_prod,id_prov,resultado);
+        res.json(db_res.rows);
+    }
+
+    GuardarResultadoAnual = async (req,res)=>
+    {
+        
+        let id_prod = req.params.id_prod;
+        let id_prov = req.body.id_prov;
+        let resultado = req.body.resultado;
+        let db_res = await model.GuardarResultadoAnual(id_prod,id_prov,resultado);
+        res.json(db_res.rows);
+    }
+
 }
 
 const controller = new ProducersController(); //create instance
