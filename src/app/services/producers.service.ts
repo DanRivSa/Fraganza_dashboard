@@ -139,4 +139,15 @@ export class ProducersService
 
   
 
+  //PRUEBA
+  CerrarAnual(id:number,escala:EscalaModel)
+  {
+    return this.httpClient.put(`${this.base_URL}/producers/cerrar_anual/${id}`,escala);
+  }
+
+  CerrarInicial(id:number,escala:EscalaModel)
+  {
+    return this.httpClient.put(`${this.base_URL}/producers/cerrar_inicial/${id}`,escala);
+  }
+
 }

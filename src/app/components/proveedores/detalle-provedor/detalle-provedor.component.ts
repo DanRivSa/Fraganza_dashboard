@@ -52,22 +52,26 @@ export class DetalleProvedorComponent implements OnInit {
         this.valor_min = data[0].rango_inicial;
         this.valor_Max = data[0].rango_final;
         this.total = this.valor_Max-this.valor_min; //--> 100%
+        console.log('Total: ',this.total);
       });
 
     this.servicioProductores.ObtenerUbicacionGeoVigente(UserCompanyService.userCompanyID).subscribe(res=>
       {
         let data:any[] = res as any[];
         this.peso_c1 = data[0].peso;
+        console.log(this.peso_c1);
       });
     this.servicioProductores.ObtenerPagoGeoVigente(UserCompanyService.userCompanyID).subscribe(res=>
       {
         let data:any[] = res as any[];
         this.peso_c2 = data[0].peso;
+        console.log(this.peso_c2);
       });
     this.servicioProductores.ObtenerAltEnvioVigente(UserCompanyService.userCompanyID).subscribe(res=>
       {
         let data:any[] = res as any[];
         this.peso_c3 = data[0].peso;
+        console.log(this.peso_c3);
       });
   }
 
@@ -83,15 +87,20 @@ export class DetalleProvedorComponent implements OnInit {
   {
     if(this.ValidarNotas(this.nota1,this.nota2,this.nota3) == false)
       return;
-    let puntaje1 = (this.nota1*this.peso_c1)/100; //puntajes con respecto al peso
-    let puntaje2 = (this.nota2*this.peso_c2)/100;
-    let puntaje3=(this.nota3*this.peso_c3)/100;
+      console.log('entra en eva');
+    let puntaje1 = this.nota1*(this.peso_c1/100);
+    let puntaje2 = this.nota2*(this.peso_c2/100);
+    let puntaje3= this.nota3*(this.peso_c3/100);
     let aprob = (this.total*this.porcentaje_aprob)/100; //valor minimo para pasar
     this.CalificacionFinal=puntaje1+puntaje2+puntaje3; //suma total
+    console.log(puntaje1,puntaje2,puntaje3,aprob);
+    console.log('calificacion final: ',this.CalificacionFinal);
     if(this.CalificacionFinal>=aprob)
     {
       this.aprobado = true;
-      
+      alert('Proveedor apto para contratar');
+      //guardar calificacion en la bd
+
       //habilitar boton de contratar
     }
     else
