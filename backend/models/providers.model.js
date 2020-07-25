@@ -65,6 +65,9 @@ class ProviderModel
         const db_res = await db.query ('SELECT * from ada_contratos_proveedor_vigente where id_prov =$1',[id]);
         return db_res;
     }
+
+    
+
 }
 
 const model = new ProviderModel() //create instance
