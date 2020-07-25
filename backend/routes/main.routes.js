@@ -71,7 +71,6 @@ router.get('/producers/renovar_contratos/:id',producersController.GetContratosPo
 //rutas Daniel
 router.post('/guardar_resultado/inicial/:id_prod',producersController.GuardarResultadoInicial);
 router.post('/guardar_resultado/anual/:id_prod',producersController.GuardarResultadoAnual);
-
 router.get('/producers/contratos/renovacion/:contrato',producersController.ObtenerCriterioSucces);
 //RutasModuloCompras
 //Obtener contratos vigentes
@@ -81,7 +80,7 @@ module.exports = router;
 //Pedidos
 router.get('/producers/contratos/detalle_contrato/:id/esencias/:contrato',producersController.GetEsenciasContratadas);
 
-router.get('/producers/contratos/detalle_contrato/:id/ingredientes/:contrato',producersController.GetIngredientesContratados);
+//router.get('/producers/contratos/detalle_contrato/:id/ingredientes/:contrato',producersController.GetIngredientesContratados);
 
 router.get('/producers/contratos/detalle_contrato/:id/pagos/:contrato',producersController.metodoPagoContratados);
 
@@ -89,11 +88,10 @@ router.get('/producers/contratos/detalle_contrato/:id/envios/:contrato',producer
 
 //generarPedido
 router.post('/producers/compras/contratos/detalle_contrato/pedido/generar_pedido',producersController.generarPedido);
-router.get('producers/compras/contratos/detalle_contrato/pedido/generar_pedido/p_esencias/:numero_contrato',producersController.PresentacionesEsenciaPedido);
+router.get('/producers/compras/contratos/detalle_contrato/pedido/generar_pedido/p_esencias/:numero_contrato',producersController.PresentacionesEsenciaPedido);
 
-router.get('producers/compras/contratos/detalle_contrato/pedido/generar_pedido/p_ingredientes/:numero_contrato',producersController.PresentacionesIgredientesPedido);
+router.get('/producers/compras/contratos/detalle_contrato/pedido/generar_pedido/p_ingredientes/:numero_contrato',producersController.PresentacionesIgredientesPedido);
 
 router.post('/producers/compras/contratos/detalle_contrato/pedido/generar_pedido/det_pedido',producersController.PostDetPedido);
 
 router.get('/producers/compras/contratos/detalle_contrato/pedido/generar_pedido/det_pedido/:numero_contrato',producersController.DescuentoContrato);
-

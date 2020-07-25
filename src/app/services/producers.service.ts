@@ -154,6 +154,11 @@ export class ProducersService
     return this.httpClient.get(`${this.base_URL}/producers/compras/contratos/detalle_contrato/pedido/generar_pedido/p_esencias/${numero_contrato}`);
   }
 
+  PresentacionesIgredientesPedido(numero_contrato:number)
+  {
+    return this.httpClient.get(`${this.base_URL}producers/compras/contratos/detalle_contrato/pedido/generar_pedido/p_ingredientes/${numero_contrato}`);
+  }
+
   //RESULTADO DE EVALUACIONES
   GuardarResultadoInicial(id_prod:number,id_prov:number,resultado:number)
   {
@@ -183,16 +188,10 @@ export class ProducersService
     return this.httpClient.post(`${this.base_URL}/producers/compras/contratos/detalle_contrato/pedido/generar_pedido/det_pedido`,DetPedido);
   }
 
-<<<<<<< HEAD
   DescuentoContrato (numero_contrato:number)
   {
     return this.httpClient.get(`${this.base_URL}/producers/compras/contratos/detalle_contrato/pedido/generar_pedido/det_pedido/${numero_contrato}`);
   }
-=======
-  //no se que es esta peticion, tienes que volver a hacerla Andres
-  //return this.httpClient.get(`${this.base_URL}/producers/compras/contratos/detalle_contrato/pedido/generar_pedido/p_ingredientes/${numero_contrato}`);
-
->>>>>>> a225690d034467bd88417226afe8bd64c97804b3
 
 
 }

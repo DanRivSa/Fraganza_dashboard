@@ -15,13 +15,10 @@ import { EvaluacionAnualComponent } from './components/proveedores/evaluacion-an
 import {ContratoComponent} from './components/productores/Compras/contrato/contrato.component';
 import {DetalleContratoComponent} from './components/productores/Compras/DetalleContrato/DetalleContrato.component';
 import { CrearPedidoComponent } from './components/productores/Compras/crear-pedido/crear-pedido.component';
-<<<<<<< HEAD
 import { DetallePedidoComponent } from './components/productores/Compras/detalle-pedido/detalle-pedido.component';
-=======
 import { ContratoProduComponent } from './components/productores/contrato-produ/contrato-produ.component';
 import {CrearContratoComponent} from './components/productores/crear-contrato/crear-contrato.component';
 
->>>>>>> a225690d034467bd88417226afe8bd64c97804b3
 const routes: Routes =
 [
   {path:'',component:HomeComponent},
@@ -40,12 +37,9 @@ const routes: Routes =
   {path:'compras/generar_pedido/:id/contrato/:contrato', component:CrearPedidoComponent},
   {path:'compras/contratos/:id/detalle/:contrato', component:DetalleContratoComponent},
   {path:'compras/contratos/:id/detalle/:contrato/generar_pedido', component: CrearPedidoComponent},
-<<<<<<< HEAD
-  {path:'compras/contratos/:id/detalle/:contrato/generar_pedido/id_pedido',component:DetallePedidoComponent}
-=======
+  {path:'compras/contratos/:id/detalle/:contrato/generar_pedido/id_pedido',component:DetallePedidoComponent},
   {path: 'contrato/producer', component:ContratoProduComponent},
   {path:'crear/contrato/con_proveedor/:id', component:CrearContratoComponent}
->>>>>>> a225690d034467bd88417226afe8bd64c97804b3
 ];
 
 @NgModule({
