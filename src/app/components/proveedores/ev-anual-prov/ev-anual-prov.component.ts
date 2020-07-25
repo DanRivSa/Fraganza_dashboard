@@ -20,6 +20,7 @@ export class EvAnualProvComponent implements OnInit {
     this.producersService.GetContratosVigentes(this.id_usuario).subscribe(res=>
       {
         this.proveedores = res as any[];
+        console.log(this.proveedores);
       });
 
       this.producersService.ObtenerEscalaAnualVigente(this.id_usuario).subscribe(res=>

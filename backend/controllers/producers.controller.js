@@ -236,13 +236,12 @@ class ProducersController
       res.json(db_res);
     }
 
-<<<<<<< HEAD
     DescuentoContrato = async (req,res)=>
     {
       let numero_contrato = req.params.numero_contrato;
       db_res = await model.ProducersController.DescuentoContrato(numero_contrato);
       res.json(db_res);
-=======
+    }
     GuardarResultadoInicial = async (req,res)=>
     { 
         let id_prod = req.params.id_prod;
@@ -261,7 +260,6 @@ class ProducersController
         let resultado = req.body.resultado;
         let db_res = await model.GuardarResultadoAnual(id_prod,id_prov,resultado);
         res.json(db_res.rows);
->>>>>>> a225690d034467bd88417226afe8bd64c97804b3
     }
 
 }

@@ -21,6 +21,7 @@ export class EvaluacionAnualComponent implements OnInit
   
 
   calificacionFinal:number;
+  aprobado:boolean = false;
 
   constructor(private servicio:ProducersService) 
   {
@@ -31,6 +32,8 @@ export class EvaluacionAnualComponent implements OnInit
   {
 
 
+    this.servicio.ObtenerCriterioSucces
+
     this.servicio.ObtenerEscalaAnualVigente(UserCompanyService.userCompanyID).subscribe(res=>
       {
         let data:any[]=res as any[];
@@ -38,6 +41,7 @@ export class EvaluacionAnualComponent implements OnInit
         this.max_val = data[0].rango_final;
         this.porcentajeAprob = data[0].rango_aprob;
         this.total = this.max_val-this.min_val;
+        console.log('total: ',this.total);
       });
   }
 
@@ -47,11 +51,11 @@ export class EvaluacionAnualComponent implements OnInit
     let puntaje = this.nota //el criterio siempre tiene un peso de 100% por tanto no hay que sacar cuentas
     if(puntaje>= aprob)
     {
-      alert('Proveedor es apto para renovar contrato');
+      this.aprobado = true;
     }
     else
     {
-      alert('Proveedor no es apto para renovar');
+      this.aprobado = false;
     }
   }
 
