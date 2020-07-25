@@ -30,6 +30,8 @@ import { ContratosProvComponent } from './components/proveedores/contratos-prov/
 import { EvAnualProvComponent } from './components/proveedores/ev-anual-prov/ev-anual-prov.component';
 import { CrearPedidoComponent } from './components/productores/Compras/crear-pedido/crear-pedido.component';
 import { ContratoProduComponent } from './components/productores/contrato-produ/contrato-produ.component';
+import { PedidosComponent } from './components/productores/pedidos/pedidos.component';
+import { ContratoProvDetalleComponent } from './components/proveedores/contrato-prov-detalle/contrato-prov-detalle.component';
 
 
 
@@ -65,6 +67,8 @@ import { ContratoProduComponent } from './components/productores/contrato-produ/
     ContratoComponent,
     CrearPedidoComponent,
     ContratoProduComponent,
+    PedidosComponent,
+    ContratoProvDetalleComponent,
 
 
 

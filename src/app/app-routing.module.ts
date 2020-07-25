@@ -30,9 +30,9 @@ const routes: Routes =
   {path: 'evaluar_Anual/:id', component:EvaluacionAnualComponent},
   {path:'compras',component:ContratoComponent},
 
-  {path:'compras/contratos/:id/detalle/:contrato', component:DetalleContratoComponent},
+  {path:'compras/contratos/detalle/:id/:contrato', component:DetalleContratoComponent},
   {path:'compras/contratos/:id/detalle/:contrato/generar_pedido', component: CrearPedidoComponent},
-  {path: 'contrato/producer', component:ContratoProduComponent}
+  {path: 'contrato/producer', component:ContratoProduComponent},
 ];
 
 @NgModule({
