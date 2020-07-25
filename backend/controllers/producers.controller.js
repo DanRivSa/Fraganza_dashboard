@@ -203,7 +203,7 @@ class ProducersController
     ObtenerPedidos = async (req,res)=>
     {
       let id_proveedor = req.params.id;
-      let numero_contrato = req.params.contrato;
+      let id_productor = req.params.id2;
       let db_res = await model.ObtenerPedidos(id_proveedor,id_productor);
       res.json(db_res.rows);
     }
