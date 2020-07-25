@@ -20,7 +20,8 @@ export class DetallePedidoComponent implements OnInit {
   total:number;
   estatus:string;
   DetPresentacion: any[];
-  InformacionPago:any[]
+  InformacionPago:any[];
+  numero_contrato:number;
 
   constructor(private route:ActivatedRoute, private productores:ProducersService) { }
   ngOnInit(): void {
@@ -28,7 +29,12 @@ export class DetallePedidoComponent implements OnInit {
       this.route.paramMap.subscribe(params=>
         {
           this.id_pedido =+params.get('id_pedido');
-        })
+          this.numero_contrato=+params.get('contrato');
+          this.id_productr=+params.get('id');
+        });
+      this.productores.PresentacionesEsenciaPedido(this.numero_contrato).subscribe(res=>{
+        this.DetPresentacion = res as any;
+      });
 
   }
 

@@ -131,6 +131,16 @@ INNER JOIN ada_contratos_en_regla r on r.id_prov=p.id_prov
 INNER JOIN ada_productor x on x.id_prod = r.id_prod
 where p.id_prov =$1;
 
+--CONSULTA CONTRATOS CANDIDATOS A RENOVAR
+select (select extract
+		  (day from  ((c.fecha_emision + INTERVAL '365 day') - CURRENT_DATE)))
+		  as days, c.numero_contrato, c.id_prov, t.nombre_prov
+		  from ada_contrato c
+		  INNER JOIN ada_proveedor t on t.id_prov = c.id_prov
+		  where (select extract
+		  (day from  ((c.fecha_emision + INTERVAL '365 day') - CURRENT_DATE)))
+		  between 1 and 90 and c.id_prod=$1;
+
 --CONSULTA CONTRATOS EN REGLA DE UN PRODUCTOR
 SELECT p.id_prod,r.id_prov,x.nombre_prov, r.numero_contrato from ada_productor p
 INNER JOIN ada_contratos_en_regla r on r.id_prod=p.id_prod
