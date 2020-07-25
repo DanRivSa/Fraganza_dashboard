@@ -13,6 +13,7 @@ export class InitialTestComponent implements OnInit {
 
   id_usuario:number = UserCompanyService.userCompanyID; //id de usuario 
 
+
   constructor(private producersService:ProducersService)
   {
     
@@ -24,6 +25,10 @@ export class InitialTestComponent implements OnInit {
       {
         this.proveedores = res as any[];
       });
-  }
+  
+  
+  
+  
+    }
 
 }

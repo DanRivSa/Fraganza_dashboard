@@ -74,6 +74,16 @@ export class ProducersService
     return this.httpClient.post(`${this.base_URL}/producers/renovacion`,criterio);
   }
 
+  //peticiones daniel
+  CerrarEscalaAnual(id:number,modelo:EscalaModel)
+  {
+    return this.httpClient.put(`${this.base_URL}/cerrar/escala_anual/${id}`,modelo);
+  }
+
+  CerrarCriterioAnual(id:number,modelo:CriterioModel)
+  {
+    return this.httpClient.put(`${this.base_URL}/cerrar/criterio_anual/${id}`,modelo);
+  }
 
 
   PutCerrarEscalaInicial (id_productor:number,escala:EscalaModel)
@@ -82,7 +92,7 @@ export class ProducersService
   }
   PutCerrarEscalaAnual (id_productor:number,escala:EscalaModel)
   {
-    return this.httpClient.put(`${this.base_URL}/escala_anual/${id_productor}`,escala);
+    return this.httpClient.put(`${this.base_URL}/producers/escala_anual/${id_productor}`,escala);
   }
   PutCerrarCriteriosInicial (id_productor:number,criterio:CriterioModel)
   {

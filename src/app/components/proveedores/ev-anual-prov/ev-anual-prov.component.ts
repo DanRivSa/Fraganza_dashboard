@@ -20,6 +20,7 @@ export class EvAnualProvComponent implements OnInit {
       {
         this.proveedores = res as any[];
       });
+
   }
 
 }
