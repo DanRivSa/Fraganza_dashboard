@@ -113,6 +113,11 @@ export class ProducersService
     return this.httpClient.get(`${this.base_URL}/producers/renovar_contratos/${id_productor}`);
   }
 
+  ObtenerCriterioSucces(numero_contrato:number)
+  {
+    return this.httpClient.get(`${this.base_URL}/producers/contratos/renovacion/${numero_contrato}`)
+  }
+
   //Modulo Compras
   GetContratosVigentes (id_productor:number)
   {
@@ -139,7 +144,6 @@ export class ProducersService
     return this.httpClient.get(`${this.base_URL}/producers/contratos/detalle_contrato/${id_proveedor}/envios/${numero_contrato}`);
   }
 
-<<<<<<< HEAD
   generarPedido(Pedido:PedidoModel)
   {
     return this.httpClient.post(`${this.base_URL}/producers/compras/contratos/detalle_contrato/pedido/generar_pedido`,Pedido);
@@ -161,19 +165,5 @@ export class ProducersService
   }
 
 
-=======
-  
-
-  //PRUEBA
-  CerrarAnual(id:number,escala:EscalaModel)
-  {
-    return this.httpClient.put(`${this.base_URL}/producers/cerrar_anual/${id}`,escala);
-  }
-
-  CerrarInicial(id:number,escala:EscalaModel)
-  {
-    return this.httpClient.put(`${this.base_URL}/producers/cerrar_inicial/${id}`,escala);
-  }
->>>>>>> development
 
 }

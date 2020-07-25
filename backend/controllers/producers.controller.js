@@ -146,24 +146,10 @@ class ProducersController
       res.json(db_res.rows);
     }
 
-<<<<<<< HEAD
     ObtenerCriterioSucces=async (req,res)=>
     {
       let contrato=req.params.contrato;
       let db_res = await model.ObtenerCriterioSucces(contrato);
-=======
-    CerrarAnual = async (req,res)=>
-    {
-      let id= req.params.id;
-      let db_res = await model.CerrarAnual(id);
-      res.json(db_res.rows);
-    }
-
-    CerrarInicial = async (req,res)=>
-    {
-      let id= req.params.id;
-      let db_res = await model.CerrarInicial(id);
->>>>>>> development
       res.json(db_res.rows);
     }
 
