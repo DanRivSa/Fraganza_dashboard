@@ -101,14 +101,10 @@ export class FormulaInicialComponent implements OnInit {
 
   CerrarEscalaYCriteriosIniciales()
   {
-   this.servicio.PutCerrarEscalaInicial(UserCompanyService.userCompanyID,this.CrearEscala(0,0,0)).subscribe(res=>
-    {
-      console.log('escala cerrada exitosamente');
-    });
-    this.servicio.PutCerrarCriteriosInicial(UserCompanyService.userCompanyID,this.CrearCriterio(0,0)).subscribe(res=>
-    {
-      console.log('criterios cerrados exitosamente');
-    });
+    this.servicio.CerrarInicial(UserCompanyService.userCompanyID,new EscalaModel()).subscribe(res=>
+      {
+        console.log('Cerrado con exito inicial');
+      });
   }
 
   //EVALUACION ANUAL
@@ -117,7 +113,7 @@ export class FormulaInicialComponent implements OnInit {
   {
     if(this.ValidarEscala(this.escala_a_min,this.escala_a_max,this.escala_a_rango))
     {
-      this.CerrarEscalaYCriteriosIniciales();
+      this.CerrarEscalaYCriteriosAnuales();
       this.GuardarNuevaEscalaAnual(this.escala_a_max,this.escala_a_min,this.escala_a_rango);
       this.GuardarCriterioAnualDeExito(this.peso_anual);
       alert('Formula Anual Creada Exitosamente');
@@ -128,13 +124,9 @@ export class FormulaInicialComponent implements OnInit {
 
   CerrarEscalaYCriteriosAnuales()
   {
-    this.servicio.CerrarCriterioAnual(UserCompanyService.userCompanyID,this.CrearCriterio(0,0)).subscribe(res=>
+    this.servicio.CerrarAnual(UserCompanyService.userCompanyID,new EscalaModel()).subscribe(res=>
       {
-        console.log('criterio de exito cerrado');
-      });
-    this.servicio.CerrarEscalaAnual(UserCompanyService.userCompanyID,this.CrearEscala(0,0,0)).subscribe(res=>
-      {
-        console.log('escala anual cerrada');
+        console.log('cerrado con exito anual');
       });
   }
 

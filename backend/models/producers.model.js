@@ -170,6 +170,19 @@ class ProducersModel
        return db_res;
      }
 
+     //FUNCIONES DE PRUEBA
+     async CerrarInicial(id)
+     {
+      const db_res = await db.query('select CERRAR_INICIAL($1)',[id]);
+      return db_res;
+     }
+
+     async CerrarAnual(id)
+     {
+       const db_res= await db.query('select cerrar_anual($1)',[id]);
+       return db_res;
+     }
+
 }
 
 
