@@ -119,10 +119,10 @@ class ProducersController
       res.json(db_res.rows);
     }
 
-    PutCriteriosInicial = async (req,res)=>
+    CerrarInicial = async (req,res)=>
     {
       let id_productor = req.params.id;
-      let db_res = await model.PutCriteriosInicial(id_productor);
+      let db_res = await model.CerrarInicial(id_productor);
       res.json(db_res.rows);
     }
     PutCriteriosAnual = async (req,res)=>
@@ -139,10 +139,10 @@ class ProducersController
       res.json(db_res.rows);
     }
 
-    CerrarEscalaAnual= async (req,res)=>
+    CerrarAnual= async (req,res)=>
     {
       let id= req.params.id;
-      let db_res = await model.CerrarEscalaAnual(id);
+      let db_res = await model.CerrarAnual(id);
       res.json(db_res.rows);
     }
 
