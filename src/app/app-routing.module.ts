@@ -27,7 +27,6 @@ const routes: Routes =
   {path: 'e_anual_prov',component:EvAnualProvComponent},
   {path: 'evaluar_Anual/:id', component:EvaluacionAnualComponent},
   {path:'compras',component:ContratoComponent},
-  {path:'compras/generar_pedido/:id/contrato/:contrato', component:PedidoComponent},
   {path:'contrato/producer', component:ContratoProdComponent}
 ];
 
