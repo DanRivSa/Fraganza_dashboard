@@ -46,11 +46,19 @@ class ProducersModel
         return db_res;
     }
 
-    async ObtenerCriterioSucces(id)
+    async ObtenerCriterioSucces(numero_contrato)
     {
-
+        const db_res = await db.query('SELECT (((SELECT count(estatus)::float FROM ada_pedido where estatus =$2 and numero_contrato1=$1)/(SELECT count(estatus)::float FROM ada_pedido where estatus=$2 or estatus=$3 and numero_contrato1=$1))*100)as resultado',[numero_contrato],'enviado','rechazado','pendiente');
+        return db_res;
     }
 
+    async ObtenerCriteriosEvaluacionInicial(id)
+    {
+        const db_res = await db.query('SELECT ada_criterio_eval.nombre_criterio,ada_criterio_eval.tipo_uso,ada_eval_criterio.peso FROM ada_eval_criterio INNER JOIN ada_criterio_eval ON ada_eval_criterio.id_criterio = ada_criterio_eval.id_criterio  WHERE ada_eval_criterio.id_prod= $1 and ada_criterio_eval.tipo_uso= $2 and ada_eval_criterio.fecha_fin is null ',[id,'i']);
+        return db_res;
+    }
+
+    
     async ObtenerEscalaAnualVigente(id)
     {
         const db_res = await db.query('SELECT e.fecha_inicio,e.id_prod, e.rango_inicial,e.rango_final, e.rango_aprob from ada_escala e where e.id_prod=$1 and e.fecha_fin is null and e.tipo_uso =$2',[id,'a']);
@@ -102,7 +110,7 @@ class ProducersModel
 
     //Cerrar los historicos que constituyen la formula (escala y criterios)
     async PutEscalaInicialVigencia(id){
-        const db_res = await db.query('UPDATE ada_escala SET fecha_fin=CURRENT_DATE where id_prod = $1 and tipo_uso=$2',[id,'i']);
+        const db_res = await db.query('UPDATE ada_escala SET fecha_fin=CURRENT_DATE where id_prod = $1 and tipo_uso=$2 and fecha_fin is null',[id,'i']);
         return db_res;
     }
 
@@ -113,24 +121,24 @@ class ProducersModel
      }
 
     async PutCriteriosInicial(id){
-        const db_res = await db.query('UPDATE ada_eval_criterio SET fecha_fin=CURRENT_DATE where id_prod = $1 and tipo_uso=$2',[id,'i']);
+        const db_res = await db.query('UPDATE ada_eval_criterio SET fecha_fin=CURRENT_DATE where id_criterio in(1,2,3) and id_prod=$1 and fecha_fin is null',[id]);
         return db_res;
     }
 
     async PutCriteriosAnual(id){
-        const db_res = await db.query('UPDATE ada_eval_criterio SET fecha_fin=CURRENT_DATE where id_prod = $1 and id_criterio=4',[id]);
+        const db_res = await db.query('UPDATE ada_eval_criterio SET fecha_fin=CURRENT_DATE where id_prod = $1 and id_criterio=4 and fecha_fin is null',[id]);
         return db_res;
      }
 
      async CerrarCriterioAnual(id)
      {
-      const db_res = await db.query('UPDATE ada_eval_criterio SET fecha_fin = CURRENT_DATE WHERE id_criterio = 4 AND id_prod = $1',[id]);
+      const db_res = await db.query('UPDATE ada_eval_criterio SET fecha_fin = CURRENT_DATE WHERE id_criterio = 4 AND id_prod = $1 and fecha_fin is null',[id]);
       return db_res;
      }
 
      async CerrarEscalaAnual(id)
      {
-      const db_res = await db.query('UPDATE ada_escala SET fecha_fin = CURRENT_DATE WHERE tipo_uso=$2 AND id_prod= $1',['a',id]);
+      const db_res = await db.query('UPDATE ada_escala SET fecha_fin = CURRENT_DATE WHERE tipo_uso=$2 AND id_prod= $1 and fecha_fin is null',['a',id]);
       return db_res;
      }
 
@@ -170,11 +178,13 @@ class ProducersModel
        return db_res;
      }    
 
-     async ObtenerCriteriosEvaluacionInicial(id)
-    {
-        const db_res = await db.query ('SELECT ada_criterio_eval.nombre_criterio,ada_criterio_eval.tipo_uso,ada_eval_criterio.peso FROM ada_eval_criterio INNER JOIN ada_criterio_eval ON ada_eval_criterio.id_criterio = ada_criterio_eval.id_criterio  WHERE ada_eval_criterio.id_prod= $1 and ada_criterio_eval.tipo_uso= %2 and ada_eval_criterio.fecha_fin is null ',[id],'i');
-        return db_res;
-    }
+     
+
+     async ObtenerPedidos(id_proveedor,id_productor)
+     {
+       const db_res = await db.query('select * from ada_pedido Where id_prod1 =$1 and id_prov1 =$2',[id_proveedor,id_productor]);
+       return db_res;
+     }
 
     //resultado de evaluaciones
     async GuardarResultadoInicial(id_prod,id_prov,resultado)
@@ -201,6 +211,33 @@ class ProducersModel
        const db_res= await db.query('select cerrar_anual($1)',[id]);
        return db_res;
      }
+
+     async generarPedido(id_proveedor,id_productor,numero_contrato,metodo_pago,id_pais,metodo_envio)
+     {
+        const db_res = await db.query('ada_pedido_new($1,$2,$3,$4,$5,$6) ',[id_proveedor,id_productor,metodo_envio,metodo_pago,numero_contrato,id_pais]);
+        return db_res;
+     }
+
+     async
+
+     async PresentacionesEsenciaPedido(numero_contrato)
+     {
+       const db_res = await db.query('SELECT * from ADA_PRESENTACIONES_ESENCIAS p INNER JOIN esencia_en_contrato e on e.cas=p.cas WHERE e.numero_contrato =$1',[numero_contrato]);
+       return db_res;
+     }
+
+     async PresentacionesIgredientesPedido(numero_contrato)
+     {
+       const db_res = await db.query('SELECT * from ADA_PRESENTACIONES_INGREDIENTE p INNER JOIN ingrediente_en_contrato e on e.cas_oi=p.cas_oi WHERE e.numero_contrato =$1;',[numero_contrato]);
+       return db_res;
+     }
+
+     async PostDetPedido(sku,cantidad){
+       const db_res = await db.query('INSERT INTO ada_det_pedido (id_pedido,sku,cantidad) VALUES (currval($2),$1,$3)',['ada_sec_id_pedido',sku,cantidad]);
+       return db_res;
+     }
+
+
 
 }
 

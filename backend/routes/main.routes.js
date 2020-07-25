@@ -75,6 +75,7 @@ router.put('/cerrar/criterio_anual/:id',producersController.CerrarCriterioAnual)
 router.post('/guardar_resultado/inicial/:id_prod',producersController.GuardarResultadoInicial);
 router.post('/guardar_resultado/anual/:id_prod',producersController.GuardarResultadoAnual);
 
+router.get('/producers/contratos/renovacion/:contrato',producersController.ObtenerCriterioSucces);
 //RutasModuloCompras
 //Obtener contratos vigentes
 router.get('/producers/contratos/:id',producersController.GetContratosVigentes);
@@ -88,4 +89,12 @@ router.get('/producers/contratos/detalle_contrato/:id/ingredientes/:contrato',pr
 router.get('/producers/contratos/detalle_contrato/:id/pagos/:contrato',producersController.metodoPagoContratados);
 
 router.get('/producers/contratos/detalle_contrato/:id/envios/:contrato',producersController.metodoEnvioContratados);
+
+//generarPedido
+router.post('/producers/compras/contratos/detalle_contrato/pedido/generar_pedido',producersController.generarPedido);
+router.get('producers/compras/contratos/detalle_contrato/pedido/generar_pedido/p_esencias/:numero_contrato',producersController.PresentacionesEsenciaPedido);
+
+router.get('producers/compras/contratos/detalle_contrato/pedido/generar_pedido/p_ingredientes/:numero_contrato',producersController.PresentacionesIgredientesPedido);
+
+router.post('/producers/compras/contratos/detalle_contrato/pedido/generar_pedido/det_pedido',producersController.PostDetPedido);
 

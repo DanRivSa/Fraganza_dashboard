@@ -1,4 +1,4 @@
-export class Pedido
+export class PedidoModel
 {
   id_pedido:number;
   id_prov:number;
@@ -8,5 +8,6 @@ export class Pedido
   tipo_envio: string;
   estatus: string;
   nro_factura:number;
+  id_pais:number;
   total:number;
 }

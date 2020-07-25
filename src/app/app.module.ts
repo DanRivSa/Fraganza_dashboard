@@ -4,7 +4,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 
 //modules
-import {LoginModule} from './modules/login/login.module'; 
+import {LoginModule} from './modules/login/login.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -25,19 +25,22 @@ import { AlternativasEnviosComponent } from './components/proveedores/alternativ
 import { FormulaInicialComponent } from './components/productores/formula-inicial/formula-inicial.component';
 import { AlternativasPagoComponent } from './components/proveedores/alternativas-pago/alternativas-pago.component';
 import { ContratoComponent } from './components/productores/Compras/contrato/contrato.component';
+import { DetalleContratoComponent } from './components/productores/Compras/DetalleContrato/DetalleContrato.component';
 import { EvaluacionAnualComponent } from './components/proveedores/evaluacion-anual/evaluacion-anual.component';
 import { ContratosProvComponent } from './components/proveedores/contratos-prov/contratos-prov.component';
 import { EvAnualProvComponent } from './components/proveedores/ev-anual-prov/ev-anual-prov.component';
 import { CrearPedidoComponent } from './components/productores/Compras/crear-pedido/crear-pedido.component';
+<<<<<<< HEAD
 import { ContratoProduComponent } from './components/productores/contrato-produ/contrato-produ.component';
 import { CrearContratoComponent } from './components/productores/crear-contrato/crear-contrato.component';
+=======
+import { DetallePedidoComponent } from './components/productores/Compras/detalle-pedido/detalle-pedido.component';
+>>>>>>> 294b509f7c274dae4c2be379c4945cf69c2fd2d2
 
 
 
 
 @NgModule({
-
-
   declarations: [
     //componentes de la aplicacion
     AppComponent,
@@ -64,6 +67,7 @@ import { CrearContratoComponent } from './components/productores/crear-contrato/
 
     EvAnualProvComponent,
     ContratoComponent,
+<<<<<<< HEAD
     CrearPedidoComponent,
     ContratoProduComponent,
     CrearContratoComponent,
@@ -72,6 +76,10 @@ import { CrearContratoComponent } from './components/productores/crear-contrato/
 
     
     
+=======
+    DetalleContratoComponent,
+    DetallePedidoComponent
+>>>>>>> 294b509f7c274dae4c2be379c4945cf69c2fd2d2
   ],
   imports: [
     BrowserModule,

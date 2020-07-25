@@ -13,11 +13,14 @@ import { EvaluacionAnualComponent } from './components/proveedores/evaluacion-an
 
 
 import {ContratoComponent} from './components/productores/Compras/contrato/contrato.component';
-import {DetalleContratoComponent} from './components/productores/Compras/DetalleContrato/DetalleContrato.component'
+import {DetalleContratoComponent} from './components/productores/Compras/DetalleContrato/DetalleContrato.component';
 import { CrearPedidoComponent } from './components/productores/Compras/crear-pedido/crear-pedido.component';
+<<<<<<< HEAD
 import { ContratoProduComponent } from './components/productores/contrato-produ/contrato-produ.component';
 import {CrearContratoComponent} from './components/productores/crear-contrato/crear-contrato.component';
 
+=======
+>>>>>>> 294b509f7c274dae4c2be379c4945cf69c2fd2d2
 const routes: Routes =
 [
   {path:'',component:HomeComponent},
@@ -31,11 +34,17 @@ const routes: Routes =
   {path: 'e_anual_prov',component:EvAnualProvComponent},
   {path: 'evaluar_Anual/:id', component:EvaluacionAnualComponent},
   {path:'compras',component:ContratoComponent},
-
+  {path:'compras/contratos/:id_proveedor/detalle/:contrato', component:DetalleContratoComponent},
+  {path:'compras/contratos/detalle/:contrato/generar_pedido/:id_proveedor', component: CrearPedidoComponent},
+  {path:'compras/generar_pedido/:id/contrato/:contrato', component:CrearPedidoComponent},
   {path:'compras/contratos/:id/detalle/:contrato', component:DetalleContratoComponent},
+<<<<<<< HEAD
   {path:'compras/contratos/:id/detalle/:contrato/generar_pedido', component: CrearPedidoComponent},
   {path: 'contrato/producer', component:ContratoProduComponent},
   {path:'crear/contrato/con_proveedor/:id', component:CrearContratoComponent}
+=======
+  {path:'compras/contratos/:id/detalle/:contrato/generar_pedido', component: CrearPedidoComponent}
+>>>>>>> 294b509f7c274dae4c2be379c4945cf69c2fd2d2
 ];
 
 @NgModule({

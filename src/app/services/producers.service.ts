@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {EscalaModel} from '../models/EscalaModel';
 import {CriterioModel} from '../models/CriterioModel';
+import {PedidoModel} from '../models/PedidoModel';
+import {DetPresentacionModel} from '../models/DetPresentacionModel';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +29,10 @@ export class ProducersService
   ObtenerEscalaAnualVigente(id_usuario_productor:number)
   {
     return this.httpClient.get(`${this.base_URL}/producers/escala_anual/${id_usuario_productor}`);
+  }
+  ObtenerCriteriosEvaluacionInicial(id_usuario_productor:number)
+  {
+    return this.httpClient.get(`${this.base_URL}/producers/criterios_iniciales/${id_usuario_productor}`);
   }
 
   ObtenerUbicacionGeoVigente (id_usuario_productor:number)
@@ -107,6 +113,11 @@ export class ProducersService
     return this.httpClient.get(`${this.base_URL}/producers/renovar_contratos/${id_productor}`);
   }
 
+  ObtenerCriterioSucces(numero_contrato:number)
+  {
+    return this.httpClient.get(`${this.base_URL}/producers/contratos/renovacion/${numero_contrato}`)
+  }
+
   //Modulo Compras
   GetContratosVigentes (id_productor:number)
   {
@@ -133,11 +144,17 @@ export class ProducersService
     return this.httpClient.get(`${this.base_URL}/producers/contratos/detalle_contrato/${id_proveedor}/envios/${numero_contrato}`);
   }
 
-  ObtenerCriteriosEvaluacionInicial(id_usuario_productor:number)
+  generarPedido(Pedido:PedidoModel)
   {
-    return this.httpClient.get(`${this.base_URL}/producers/Criterios_vigentes/${id_usuario_productor}`);
+    return this.httpClient.post(`${this.base_URL}/producers/compras/contratos/detalle_contrato/pedido/generar_pedido`,Pedido);
   }
 
+  PresentacionesEsenciaPedido(numero_contrato:number)
+  {
+    return this.httpClient.get(`${this.base_URL}/producers/compras/contratos/detalle_contrato/pedido/generar_pedido/p_esencias/${numero_contrato}`);
+  }
+
+<<<<<<< HEAD
   //RESULTADO DE EVALUACIONES
   GuardarResultadoInicial(id_prod:number,id_prov:number,resultado:number)
   {
@@ -151,13 +168,18 @@ export class ProducersService
 
   //PRUEBA
   CerrarAnual(id:number,escala:EscalaModel)
+=======
+  PresentacionesIgredientesPedido(numero_contrato:number)
+>>>>>>> 294b509f7c274dae4c2be379c4945cf69c2fd2d2
   {
-    return this.httpClient.put(`${this.base_URL}/producers/cerrar_anual/${id}`,escala);
+    return this.httpClient.get(`${this.base_URL}/producers/compras/contratos/detalle_contrato/pedido/generar_pedido/p_ingredientes/${numero_contrato}`);
   }
 
-  CerrarInicial(id:number,escala:EscalaModel)
+  PostDetPedido (DetPedido:DetPresentacionModel)
   {
-    return this.httpClient.put(`${this.base_URL}/producers/cerrar_inicial/${id}`,escala);
+    return this.httpClient.post(`${this.base_URL}/producers/compras/contratos/detalle_contrato/pedido/generar_pedido/det_pedido`,DetPedido);
   }
+
+
 
 }
