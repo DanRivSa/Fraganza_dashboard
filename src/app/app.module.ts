@@ -67,12 +67,9 @@ import { ContratoProvDetalleComponent } from './components/proveedores/contrato-
     ContratoComponent,
     CrearPedidoComponent,
     ContratoProduComponent,
-<<<<<<< HEAD
     CrearContratoComponent,
-=======
     PedidosComponent,
     ContratoProvDetalleComponent,
->>>>>>> andrea3
 
 
 

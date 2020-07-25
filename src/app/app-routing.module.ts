@@ -38,7 +38,7 @@ const routes: Routes =
   {path:'compras/contratos/:id/detalle/:contrato/generar_pedido', component: CrearPedidoComponent},
   {path:'compras/contratos/:id/detalle/:contrato/generar_pedido/id_pedido',component:DetallePedidoComponent},
   {path: 'contrato/producer', component:ContratoProduComponent},
-  {path:'crear/contrato/con_proveedor/:id', component:CrearContratoComponent}
+  {path:'crear/contrato/con_proveedor/:id', component:CrearContratoComponent},
 
   {path:'compras/contratos/detalle/:id/:contrato', component:DetalleContratoComponent},
   {path:'compras/contratos/:id/detalle/:contrato/generar_pedido', component: CrearPedidoComponent},
