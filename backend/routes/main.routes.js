@@ -44,6 +44,8 @@ router.get('/producers/escala_anual/renovacion/envios/:id',producersController.O
 
 router.get('/producers/escala_anual/:id',producersController.ObtenerEscalaAnualVigente);
 
+router.get('/producers/criterios_iniciales/:id',producersController.ObtenerCriteriosEvaluacionInicial);
+
 //Crear Escala Inicial
 router.post('/producers/escala_inicial',producersController.PostEscalaInicial);
 //Crear Escala Anual

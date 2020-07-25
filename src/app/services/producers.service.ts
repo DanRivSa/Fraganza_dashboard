@@ -123,5 +123,9 @@ export class ProducersService
     return this.httpClient.get(`${this.base_URL}/producers/contratos/detalle_contrato/${id_proveedor}/envios/${numero_contrato}`);
   }
 
+  ObtenerCriteriosEvaluacionInicial(id_usuario_productor:number)
+  {
+    return this.httpClient.get(`${this.base_URL}/producers/Criterios_vigentes/${id_usuario_productor}`);
+  }
 
 }
