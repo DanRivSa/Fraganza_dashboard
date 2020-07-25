@@ -62,6 +62,10 @@ router.put('/producers/inicial/:id',producersController.PutCriteriosInicial);
 router.put('/producers/anual/:id',producersController.PutCriteriosAnual);
 router.get('/producers/renovar_contratos/:id',producersController.GetContratosPorVencer);
 
+//rutas Daniel
+router.put('/cerrar/escala_anual/:id',producersController.CerrarEscalaAnual);
+router.put('/cerrar/criterio_anual/:id',producersController.CerrarCriterioAnual);
+
 //RutasModuloCompras
 //Obtener contratos vigentes
 router.get('/producers/compras/:id',producersController.GetContratosVigentes);

@@ -125,6 +125,20 @@ class ProducersController
       res.json(db_res.rows);
     }
 
+    CerrarCriterioAnual= async (req,res)=>
+    {
+      let id = req.params.id;
+      let db_res = await model.CerrarCriterioAnual(id);
+      res.json(db_res.rows);
+    }
+
+    CerrarEscalaAnual= async (req,res)=>
+    {
+      let id= req.params.id;
+      let db_res = await model.CerrarEscalaAnual(id);
+      res.json(db_res.rows);
+    }
+
     GetContratosPorVencer = async (req,res)=>
     {
       let id_productor = req.params.id;

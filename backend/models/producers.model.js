@@ -118,8 +118,20 @@ class ProducersModel
     }
 
     async PutCriteriosAnual(id){
-        const db_res = await db.query('UPDATE ada_eval_criterio SET fecha_fin=CURRENT_DATE where id_prod = $1 and tipo_uso=$2',[id,'a']);
+        const db_res = await db.query('UPDATE ada_eval_criterio SET fecha_fin=CURRENT_DATE where id_prod = $1 and id_criterio=4',[id]);
         return db_res;
+     }
+
+     async CerrarCriterioAnual(id)
+     {
+      const db_res = await db.query('UPDATE ada_eval_criterio SET fecha_fin = CURRENT_DATE WHERE id_criterio = 4 AND id_prod = $1',[id]);
+      return db_res;
+     }
+
+     async CerrarEscalaAnual(id)
+     {
+      const db_res = await db.query('UPDATE ada_escala SET fecha_fin = CURRENT_DATE WHERE tipo_uso=$2 AND id_prod= $1',['a',id]);
+      return db_res;
      }
 
 
