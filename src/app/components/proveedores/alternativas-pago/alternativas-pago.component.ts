@@ -13,18 +13,11 @@ export class AlternativasPagoComponent implements OnInit {
   id_prov:number;
   metodo_pago:any[];
 
-
-
-
-  constructor(private route:ActivatedRoute,private servicio:ProveedoresService) { }
+  constructor(private servicio:ProveedoresService) { }
 
   ngOnInit(): void {
 
       //obtener id de proveedor
-    this.route.paramMap.subscribe(params=>
-      {
-        this.id_prov = +params.get('id_prov');
-      });
 
       this.servicio.ObtenerInfoPagoCuotas(this.id_prov).subscribe(res=>
         {

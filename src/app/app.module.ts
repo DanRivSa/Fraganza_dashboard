@@ -25,12 +25,11 @@ import { AlternativasEnviosComponent } from './components/proveedores/alternativ
 import { FormulaInicialComponent } from './components/productores/formula-inicial/formula-inicial.component';
 import { AlternativasPagoComponent } from './components/proveedores/alternativas-pago/alternativas-pago.component';
 import { ContratoComponent } from './components/productores/Compras/contrato/contrato.component';
-import { PedidoComponent } from './components/productores/Compras/pedido/pedido.component';
 import { EvaluacionAnualComponent } from './components/proveedores/evaluacion-anual/evaluacion-anual.component';
 import { ContratosProvComponent } from './components/proveedores/contratos-prov/contratos-prov.component';
 import { EvAnualProvComponent } from './components/proveedores/ev-anual-prov/ev-anual-prov.component';
-import { ContratoProdComponent } from './components/productores/contrato-prod/contrato-prod.component';
 import { CrearPedidoComponent } from './components/productores/Compras/crear-pedido/crear-pedido.component';
+import { ContratoProduComponent } from './components/productores/contrato-produ/contrato-produ.component';
 
 
 
@@ -63,18 +62,9 @@ import { CrearPedidoComponent } from './components/productores/Compras/crear-ped
     ContratosProvComponent,
 
     EvAnualProvComponent,
-
-
-
-
-
-
     ContratoComponent,
-
-    PedidoComponent,
-
-    ContratoProdComponent,
     CrearPedidoComponent,
+    ContratoProduComponent,
 
 
 

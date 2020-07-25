@@ -18,10 +18,10 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let prov of proveedores">
-          <th scope="row"></th>
-          <td></td>
-          <td></td>
+        <tr *ngFor="let prod of productores">
+          <th scope="row">{{prod.numero_contrato}}</th>
+          <td>{{prod.id_prod}}</td>
+          <td>{{prod.nombre_prod}}</td>
           
         </tr>
       </tbody>
