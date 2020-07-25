@@ -30,6 +30,10 @@ export class ProducersService
   {
     return this.httpClient.get(`${this.base_URL}/producers/escala_anual/${id_usuario_productor}`);
   }
+  ObtenerCriteriosEvaluacionInicial(id_usuario_productor:number)
+  {
+    return this.httpClient.get(`${this.base_URL}/producers/criterios_iniciales/${id_usuario_productor}`);
+  }
 
   ObtenerUbicacionGeoVigente (id_usuario_productor:number)
   {
@@ -135,6 +139,7 @@ export class ProducersService
     return this.httpClient.get(`${this.base_URL}/producers/contratos/detalle_contrato/${id_proveedor}/envios/${numero_contrato}`);
   }
 
+<<<<<<< HEAD
   generarPedido(Pedido:PedidoModel)
   {
     return this.httpClient.post(`${this.base_URL}/producers/compras/contratos/detalle_contrato/pedido/generar_pedido`,Pedido);
@@ -156,5 +161,19 @@ export class ProducersService
   }
 
 
+=======
+  
+
+  //PRUEBA
+  CerrarAnual(id:number,escala:EscalaModel)
+  {
+    return this.httpClient.put(`${this.base_URL}/producers/cerrar_anual/${id}`,escala);
+  }
+
+  CerrarInicial(id:number,escala:EscalaModel)
+  {
+    return this.httpClient.put(`${this.base_URL}/producers/cerrar_inicial/${id}`,escala);
+  }
+>>>>>>> development
 
 }

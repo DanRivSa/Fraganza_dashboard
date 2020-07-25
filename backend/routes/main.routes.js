@@ -44,6 +44,8 @@ router.get('/producers/escala_anual/renovacion/envios/:id',producersController.O
 
 router.get('/producers/escala_anual/:id',producersController.ObtenerEscalaAnualVigente);
 
+router.get('/producers/criterios_iniciales/:id',producersController.ObtenerCriteriosEvaluacionInicial);
+
 //Crear Escala Inicial
 router.post('/producers/escala_inicial',producersController.PostEscalaInicial);
 //Crear Escala Anual
@@ -63,6 +65,8 @@ router.put('/producers/escala_anual/:id',producersController.PutEscalaAnualVigen
 router.put('/producers/inicial/:id',producersController.PutCriteriosInicial);
 //Cerrar historicos tipo Anual
 router.put('/producers/anual/:id',producersController.PutCriteriosAnual);
+router.put('/producers/cerrar_anual/:id',producersController.CerrarAnual);
+router.put('/producers/cerrar_inicial/:id',producersController.CerrarInicial);
 router.get('/producers/renovar_contratos/:id',producersController.GetContratosPorVencer);
 
 //rutas Daniel

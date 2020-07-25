@@ -45,38 +45,34 @@
 <header class="bg-dark text-white">
   <div class="container text-center">
     
-    <h3 class=" display-4">Formula de Evaluación Inicial</h3>
+    <h3 class=" display-4">Fórmula de Evaluación Anual</h3>
 
 
   </div>
 </header>
-<hr>
 <br>
 <div >
   <div class="container text-center table-responsive ">
+
+
     <table class="table table-hover ">
       <thead class="table-dark">
         <tr>
-          <th scope="col">Escala Rango minimo </th>
-          <th scope="col">Escala Rango máximo </th>
-          <th scope="col">Peso Criterio 1</th>
-          <th scope="col">Peso Criterio 2</th>
-          <th scope="col">Peso Criterio 3</th>
+          <th scope="col">Escala Inicial</th>
+          <th scope="col">Escala Final</th>
+          <th scope="col">Rango de aprobación</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let prov of proveedores">
-          <th scope="row"></th>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td>
-          </td>
+        <tr *ngFor="let e of escala">
+          <td>{{e.rango_inicial}}</td>
+          <td>{{e.rango_final}}</td>
+          <td>{{e.rango_aprob}} %</td>
         </tr>
       </tbody>
     </table>
-    
+
+
   </div>
 
 

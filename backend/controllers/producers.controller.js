@@ -19,7 +19,14 @@ class ProducersController
         res.json(db_res.rows);
     }
 
-    ObtenerEscalaInicialVigente = async (req,res)=>
+    ObtenerCriteriosEvaluacionInicial= async (req,res)=>
+    {
+        let id_proveedor = req.params.id;
+        let db_res = await model.ObtenerCriteriosEvaluacionInicial(id_proveedor);
+        res.json(db_res.rows);
+    }
+
+    ObtenerEscalaInicialVigente= async (req,res)=>
     {
         let id_productor = req.params.id;
         let db_res = await model.ObtenerEscalaInicialVigente(id_productor);
@@ -139,10 +146,24 @@ class ProducersController
       res.json(db_res.rows);
     }
 
+<<<<<<< HEAD
     ObtenerCriterioSucces=async (req,res)=>
     {
       let contrato=req.params.contrato;
       let db_res = await model.ObtenerCriterioSucces(contrato);
+=======
+    CerrarAnual = async (req,res)=>
+    {
+      let id= req.params.id;
+      let db_res = await model.CerrarAnual(id);
+      res.json(db_res.rows);
+    }
+
+    CerrarInicial = async (req,res)=>
+    {
+      let id= req.params.id;
+      let db_res = await model.CerrarInicial(id);
+>>>>>>> development
       res.json(db_res.rows);
     }
 
@@ -191,6 +212,13 @@ class ProducersController
       let id_proveedor = req.params.id;
       let numero_contrato = req.params.contrato;
       let db_res = await model.metodoEnvioContratados(id_proveedor,numero_contrato);
+      res.json(db_res.rows);
+    }
+    ObtenerPedidos = async (req,res)=>
+    {
+      let id_proveedor = req.params.id;
+      let numero_contrato = req.params.contrato;
+      let db_res = await model.ObtenerPedidos(id_proveedor,id_productor);
       res.json(db_res.rows);
     }
 

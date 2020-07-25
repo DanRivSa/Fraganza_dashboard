@@ -52,6 +52,13 @@ class ProducersModel
         return db_res;
     }
 
+    async ObtenerCriteriosEvaluacionInicial(id)
+    {
+        const db_res = await db.query('SELECT ada_criterio_eval.nombre_criterio,ada_criterio_eval.tipo_uso,ada_eval_criterio.peso FROM ada_eval_criterio INNER JOIN ada_criterio_eval ON ada_eval_criterio.id_criterio = ada_criterio_eval.id_criterio  WHERE ada_eval_criterio.id_prod= $1 and ada_criterio_eval.tipo_uso= $2 and ada_eval_criterio.fecha_fin is null ',[id,'i']);
+        return db_res;
+    }
+
+    
     async ObtenerEscalaAnualVigente(id)
     {
         const db_res = await db.query('SELECT e.fecha_inicio,e.id_prod, e.rango_inicial,e.rango_final, e.rango_aprob from ada_escala e where e.id_prod=$1 and e.fecha_fin is null and e.tipo_uso =$2',[id,'a']);
@@ -168,6 +175,27 @@ class ProducersModel
      async metodoEnvioContratados(id_proveedor,numero_contrato)
      {
        const db_res = await db.query('select p.nombre_pais,case m.tipo_envio when $3 then $4 when $5 then $6 when $7 then $8 end, m.porc_contratado from ada_contratacion_me m INNER JOIN ada_pais p on p.id_pais = m.id_pais WHERE m.id_prov=$1 and m.numero_contrato=$2',[id_proveedor,numero_contrato,'m','MARÍTIMO','a','AÉREO','t','TERRESTRE']);
+       return db_res;
+     }    
+
+     
+
+     async ObtenerPedidos(id_proveedor,id_productor)
+     {
+       const db_res = await db.query('select * from ada_pedido Where id_prod1 =$1 and id_prov1 =$2',[id_proveedor,id_productor]);
+       return db_res;
+     }
+
+     //FUNCIONES DE PRUEBA
+     async CerrarInicial(id)
+     {
+      const db_res = await db.query('select CERRAR_INICIAL($1)',[id]);
+      return db_res;
+     }
+
+     async CerrarAnual(id)
+     {
+       const db_res= await db.query('select cerrar_anual($1)',[id]);
        return db_res;
      }
 
