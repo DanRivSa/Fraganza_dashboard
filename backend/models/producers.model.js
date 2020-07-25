@@ -51,6 +51,13 @@ class ProducersModel
 
     }
 
+    async ObtenerCriteriosEvaluacionInicial(id)
+    {
+        const db_res = await db.query('SELECT ada_criterio_eval.nombre_criterio,ada_criterio_eval.tipo_uso,ada_eval_criterio.peso FROM ada_eval_criterio INNER JOIN ada_criterio_eval ON ada_eval_criterio.id_criterio = ada_criterio_eval.id_criterio  WHERE ada_eval_criterio.id_prod= $1 and ada_criterio_eval.tipo_uso= $2 and ada_eval_criterio.fecha_fin is null ',[id,'i']);
+        return db_res;
+    }
+
+    
     async ObtenerEscalaAnualVigente(id)
     {
         const db_res = await db.query('SELECT e.fecha_inicio,e.id_prod, e.rango_inicial,e.rango_final, e.rango_aprob from ada_escala e where e.id_prod=$1 and e.fecha_fin is null and e.tipo_uso =$2',[id,'a']);
@@ -170,11 +177,7 @@ class ProducersModel
        return db_res;
      }    
 
-     async ObtenerCriteriosEvaluacionInicial(id)
-    {
-        const db_res = await db.query ('SELECT ada_criterio_eval.nombre_criterio,ada_criterio_eval.tipo_uso,ada_eval_criterio.peso FROM ada_eval_criterio INNER JOIN ada_criterio_eval ON ada_eval_criterio.id_criterio = ada_criterio_eval.id_criterio  WHERE ada_eval_criterio.id_prod= $1 and ada_criterio_eval.tipo_uso= %2 and ada_eval_criterio.fecha_fin is null ',[id],'i');
-        return db_res;
-    }
+     
 
 }
 
