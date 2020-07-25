@@ -18,12 +18,15 @@ router.get('/providers/nombre/:id',providersController.ObtenerNombre);
 router.get('/providers/esencias/:id',providersController.ObtenerEsenciasDeProveedor);
 router.get('/providers/ingredientes/:id',providersController.ObtenerIngredientesDeProveedor);
 router.get('/providers/alt_envio/:id',providersController.ObtenerAlternativasEnvio);
-router.get('/providers/alt_pago/',providersController.ObtenerAlternativasPago);
+router.get('/providers/alt_pago/:id',providersController.ObtenerAlternativasPago);
 router.get('/providers/cuotas/:id',providersController.ObtenerInfoPagoCuotas);
 
 //presentaciones
 router.get('/providers/esencia/:id',providersController.ObtenerPresentacionesEsencia);
 router.get('/providers/ingrediente/:id',providersController.ObtenerPresentacionesIngrediente);
+
+//ConratosVigentes
+router.get('/providers/contratos/:id',providersController.GetContratosVigentes);
 
 //http request for producers
 router.get('/producers',producersController.GetProducers);
@@ -68,15 +71,15 @@ router.put('/cerrar/criterio_anual/:id',producersController.CerrarCriterioAnual)
 
 //RutasModuloCompras
 //Obtener contratos vigentes
-router.get('/producers/compras/:id',producersController.GetContratosVigentes);
+router.get('/producers/contratos/:id',producersController.GetContratosVigentes);
 module.exports = router;
 
 //Pedidos
-router.get('/producers/compras/pedidos/:id/esencias/:contrato',producersController.GetEsenciasContratadas);
+router.get('/producers/contratos/detalle_contrato/:id/esencias/:contrato',producersController.GetEsenciasContratadas);
 
-router.get('/producers/compras/pedidos/:id/ingredientes/:contrato',producersController.GetIngredientesContratados);
+router.get('/producers/contratos/detalle_contrato/:id/ingredientes/:contrato',producersController.GetIngredientesContratados);
 
-router.get('/producers/compras/pedidos/:id/pagos/:contrato',producersController.metodoPagoContratados);
+router.get('/producers/contratos/detalle_contrato/:id/pagos/:contrato',producersController.metodoPagoContratados);
 
-router.get('/producers/compras/pedidos/:id/envios/:contrato',producersController.metodoEnvioContratados);
+router.get('/producers/contratos/detalle_contrato/:id/envios/:contrato',producersController.metodoEnvioContratados);
 

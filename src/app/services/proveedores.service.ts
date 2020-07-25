@@ -54,4 +54,9 @@ export class ProveedoresService
   {
     return this.cliente.get(`${this.url_base}/providers/ingrediente/${cas_oi}`);
   }
+
+  GetContratosVigentes(id_proveedor:number)
+  {
+    return this.cliente.get(`${this.url_base}/providers/contratos/${id_proveedor}`);
+  }
 }

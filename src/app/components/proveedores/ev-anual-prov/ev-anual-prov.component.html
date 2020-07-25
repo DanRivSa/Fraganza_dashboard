@@ -27,8 +27,7 @@
         <td>{{prov.nombre_prov}}</td>
         <td>
           <div class="btn-group mr-2" role="group">
-            <button type="button" class="btn btn-grape" routerLink="/evaluar_Anual">Ver más</button>
-            <button type="button" class="btn btn-success" routerLink="/evaluar_Anual">Evaluar</button>
+            <button type="button" class="btn btn-success" [routerLink]="['/evaluar_Anual/',prov.id_prov]">Evaluar</button>
           </div>
         </td>
       </tr>

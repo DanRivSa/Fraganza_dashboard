@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {ProducersService} from '../../../services/producers.service';
 import { UserCompanyService } from 'src/app/services/global/user-company.service';
+import {ActivatedRoute} from '@angular/router';
+
 
 @Component({
   selector: 'app-evaluacion-anual',
@@ -9,7 +11,8 @@ import { UserCompanyService } from 'src/app/services/global/user-company.service
 })
 export class EvaluacionAnualComponent implements OnInit 
 {
-
+  id:number;
+  nombre:string;
   nota:number;
   min_val:number;
   max_val:number;
@@ -26,6 +29,8 @@ export class EvaluacionAnualComponent implements OnInit
 
   ngOnInit(): void 
   {
+
+
     this.servicio.ObtenerEscalaAnualVigente(UserCompanyService.userCompanyID).subscribe(res=>
       {
         let data:any[]=res as any[];

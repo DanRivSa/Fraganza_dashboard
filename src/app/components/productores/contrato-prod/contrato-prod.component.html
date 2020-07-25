@@ -1,1 +1,31 @@
-<p>contrato-prod works!</p>
+<app-navbar></app-navbar>
+
+<header class="bg-dark text-white">
+    <div class="container text-center">
+      
+      <h3 class=" display-4">Contratos</h3>
+      <hr>
+    </div>
+</header>
+<br>
+<div class="container text-center table-responsive ">
+    <table class="table table-hover ">
+      <thead class="table-dark">
+        <tr>
+          <th scope="col"># Contrato </th>
+          <th scope="col">Id productor</th>
+          <th scope="col">Nombre productor</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let prov of proveedores">
+          <th scope="row"></th>
+          <td></td>
+          <td></td>
+          
+        </tr>
+      </tbody>
+    </table>
+
+  <hr>
+</div> 
