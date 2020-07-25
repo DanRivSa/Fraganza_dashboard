@@ -148,3 +148,8 @@ SELECT * from ADA_PRESENTACIONES_ESENCIAS p
 INNER JOIN esencia_en_contrato e on e.cas=p.cas
 WHERE e.numero_contrato =$1
 
+
+
+SELECT (((SELECT count(estatus)::float FROM ada_pedido where estatus ='enviado' and numero_contrato1=1005)/(SELECT count(estatus)::float FROM ada_pedido where estatus='$2' or estatus='$3' and numero_contrato1=$1))*100)as resultado
+
+

@@ -150,3 +150,36 @@ create view ingrediente_en_contrato as
 SELECT e.nombre_comercial, e.nombre_quimico, p.cas_oi, p.numero_contrato
 from ada_contratacion_prod p
 INNER JOIN ADA_OTROS_ING e on e.cas_oi = p.cas_oi;
+
+
+CREATE OR REPLACE FUNCTION CERRAR_ANUAL (id_PROD integer) returns void
+AS
+$$
+UPDATE ADA_ESCALA SET FECHA_FIN=CURRENT_DATE WHERE ID_PROD=ID_PROD AND TIPO_USO='a';
+UPDATE ADA_EVAL_CRITERIO SET FECHA_FIN=CURRENT_DATE WHERE ID_CRITERIO = 4 AND ID_PROD = ID_PROD;
+$$
+language sql
+
+
+
+CREATE OR REPLACE FUNCTION CERRAR_INICIAL (id_PROD integer) returns void
+AS
+$$
+UPDATE ADA_ESCALA SET FECHA_FIN=CURRENT_DATE WHERE ID_PROD=ID_PROD AND TIPO_USO='a';
+UPDATE ADA_EVAL_CRITERIO SET FECHA_FIN=CURRENT_DATE WHERE ID_CRITERIO IN(1,2,3) AND ID_PROD = ID_PROD;
+$$
+language sql
+
+
+
+CREATE  FUNCTION ada_pedido_new(integer,integer,char,char,integer,integer)
+returns BIGINT
+AS
+$$
+INSERT INTO ada_pedido
+(id_prov1,id_prod1,numero_contrato1,id_prov2,metodo_pago,id_prod3,id_prov3,numero_contrato2,id_prov4,id_pais,tipo_envio,fecha_emision)
+VALUES ($1,$2,$5,$1,$4,$2,$1,$5,$1,$6,$3,current_date);
+select last_value from ada_sec_id_pedido
+RETURN
+$$
+language sql

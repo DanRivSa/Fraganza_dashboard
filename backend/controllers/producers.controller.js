@@ -139,6 +139,13 @@ class ProducersController
       res.json(db_res.rows);
     }
 
+    ObtenerCriterioSucces=async (req,res)=>
+    {
+      let contrato=req.params.contrato;
+      let db_res = await model.ObtenerCriterioSucces(contrato);
+      res.json(db_res.rows);
+    }
+
     GetContratosPorVencer = async (req,res)=>
     {
       let id_productor = req.params.id;

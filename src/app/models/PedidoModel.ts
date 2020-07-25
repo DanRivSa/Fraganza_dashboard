@@ -8,5 +8,6 @@ export class PedidoModel
   tipo_envio: string;
   estatus: string;
   nro_factura:number;
+  id_pais:number;
   total:number;
 }

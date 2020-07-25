@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ProducersService } from 'src/app/services/producers.service';
 import {DetPresentacionModel} from '../../../../models/DetPresentacionModel';
 import { PedidoModel } from 'src/app/models/PedidoModel';
+import { MetodoEnvio } from 'src/app/models/MetodoEnvio';
 import { ProveedoresService } from 'src/app/services/proveedores.service';
 @Component({
   selector: 'app-crear-pedido',
@@ -24,8 +25,8 @@ export class CrearPedidoComponent implements OnInit {
   //Proceso de agregación al pedido
   EsenciasPedido:any[];
   IngredientesPedido:any[];
-  MetodosEnvioPedido:any[];
-  MetodosPagoPedido:any[];
+  MetodoEnvioPedido:MetodoEnvio;
+  MetodoPagoPedido:string;
   PresentacionesEsencias:number[];
   PresentacionesIngredientes:number[];
    DetPresentacion:DetPresentacionModel[];
@@ -56,13 +57,16 @@ export class CrearPedidoComponent implements OnInit {
     });
   }
 
-  InsertarMetodosEnvio(metodo:any){
-    this.MetodosEnvioPedido.push[metodo];
+  ListarMetodoEnvio(id_pais:number, tipo_envio:string){
+    let envio = new MetodoEnvio();
+    envio.id_pais=id_pais;
+    envio.tipo_envio=tipo_envio;
+    this.MetodoEnvioPedido=envio;
   };
 
-  InsertarPago(pago:any){
+  InsertarPago(tipo_pago:string){
 
-    this.MetodosPagoPedido.push[pago];
+    this.MetodoPagoPedido=tipo_pago;
   };
 
   ArmarDetPresentacion(sku:number,cantidad:number){
@@ -82,9 +86,17 @@ export class CrearPedidoComponent implements OnInit {
       }
     }
   }
-  CrearPedido(Pedido:PedidoModel){
+  ArmarPedido(){
 
-    this.productores.generarPedido(Pedido).subscribe(res=>{
+    let p = new PedidoModel();
+    p.id_prov=this.id_proveedor;
+    p.id_prod=this.id_productor;
+    p.numero_contrato=this.numero_contrato;
+    p.metodo_pago=this.MetodoPagoPedido;
+    p.tipo_envio=this.MetodoEnvioPedido.tipo_envio;
+    p.id_pais=this.MetodoEnvioPedido.id_pais;
+    this.productores.generarPedido(p).subscribe(res=>{
+      this.id_pedido = res as number;
       console.log('Pedido creado de forma satisfactoria');
     });
     this.DetallarPedido();
