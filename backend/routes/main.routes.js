@@ -62,16 +62,15 @@ router.put('/producers/escala_inicial/:id',producersController.PutEscalaInicialV
 //Cerrar Escala Anual
 router.put('/producers/escala_anual/:id',producersController.PutEscalaAnualVigente);
 //Cerrar Historicos Tipo Inicial
-router.put('/producers/inicial/:id',producersController.PutCriteriosInicial);
-//Cerrar historicos tipo Anual
-router.put('/producers/anual/:id',producersController.PutCriteriosAnual);
-router.put('/producers/cerrar_anual/:id',producersController.CerrarAnual);
 router.put('/producers/cerrar_inicial/:id',producersController.CerrarInicial);
+//Cerrar historicos tipo Anual
+router.put('/producers/cerrar_anual/:id',producersController.CerrarAnual);
+router.put('/producers/anual/:id',producersController.PutCriteriosAnual);
 router.get('/producers/renovar_contratos/:id',producersController.GetContratosPorVencer);
 
 //rutas Daniel
-router.put('/cerrar/escala_anual/:id',producersController.CerrarEscalaAnual);
-router.put('/cerrar/criterio_anual/:id',producersController.CerrarCriterioAnual);
+router.post('/guardar_resultado/inicial/:id_prod',producersController.GuardarResultadoInicial);
+router.post('/guardar_resultado/anual/:id_prod',producersController.GuardarResultadoAnual);
 
 router.get('/producers/contratos/renovacion/:contrato',producersController.ObtenerCriterioSucces);
 //RutasModuloCompras

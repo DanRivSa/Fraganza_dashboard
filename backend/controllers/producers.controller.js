@@ -119,10 +119,10 @@ class ProducersController
       res.json(db_res.rows);
     }
 
-    PutCriteriosInicial = async (req,res)=>
+    CerrarInicial = async (req,res)=>
     {
       let id_productor = req.params.id;
-      let db_res = await model.PutCriteriosInicial(id_productor);
+      let db_res = await model.CerrarInicial(id_productor);
       res.json(db_res.rows);
     }
     PutCriteriosAnual = async (req,res)=>
@@ -139,10 +139,10 @@ class ProducersController
       res.json(db_res.rows);
     }
 
-    CerrarEscalaAnual= async (req,res)=>
+    CerrarAnual= async (req,res)=>
     {
       let id= req.params.id;
-      let db_res = await model.CerrarEscalaAnual(id);
+      let db_res = await model.CerrarAnual(id);
       res.json(db_res.rows);
     }
 
@@ -236,11 +236,32 @@ class ProducersController
       res.json(db_res);
     }
 
+<<<<<<< HEAD
     DescuentoContrato = async (req,res)=>
     {
       let numero_contrato = req.params.numero_contrato;
       db_res = await model.ProducersController.DescuentoContrato(numero_contrato);
       res.json(db_res);
+=======
+    GuardarResultadoInicial = async (req,res)=>
+    { 
+        let id_prod = req.params.id_prod;
+        console.log(id_prod);
+        let id_prov = req.body.id_prov;
+        let resultado = req.body.resultado;
+        let db_res = await model.GuardarResultadoInicial(id_prod,id_prov,resultado);
+        res.json(db_res.rows);
+    }
+
+    GuardarResultadoAnual = async (req,res)=>
+    {
+        
+        let id_prod = req.params.id_prod;
+        let id_prov = req.body.id_prov;
+        let resultado = req.body.resultado;
+        let db_res = await model.GuardarResultadoAnual(id_prod,id_prov,resultado);
+        res.json(db_res.rows);
+>>>>>>> a225690d034467bd88417226afe8bd64c97804b3
     }
 
 }
