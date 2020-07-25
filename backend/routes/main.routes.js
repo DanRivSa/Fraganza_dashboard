@@ -79,3 +79,11 @@ router.get('/producers/contratos/detalle_contrato/:id/pagos/:contrato',producers
 
 router.get('/producers/contratos/detalle_contrato/:id/envios/:contrato',producersController.metodoEnvioContratados);
 
+//generarPedido
+router.post('/producers/compras/contratos/detalle_contrato/pedido/generar_pedido',producersController.generarPedido);
+router.get('producers/compras/contratos/detalle_contrato/pedido/generar_pedido/p_esencias/:numero_contrato',producersController.PresentacionesEsenciaPedido);
+
+router.get('producers/compras/contratos/detalle_contrato/pedido/generar_pedido/p_ingredientes/:numero_contrato',producersController.PresentacionesIgredientesPedido);
+
+router.post('/producers/compras/contratos/detalle_contrato/pedido/generar_pedido/det_pedido',producersController.PostDetPedido);
+

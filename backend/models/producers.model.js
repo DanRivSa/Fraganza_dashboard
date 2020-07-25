@@ -156,6 +156,29 @@ class ProducersModel
        return db_res;
      }
 
+     async generarPedido(id_proveedor,id_productor,numero_contrato,metodo_pago,id_pais,metodo_envio)
+     {
+        const db_res = await db.query('INSERT INTO ada_pedido (id_prov1,id_prod1,numero_contrato1,id_prov2,metodo_pago,id_prod3,id_prov3,numero_contrato2,id_prov4,id_pais,tipo_envio,estatus) VALUES ($1,$2,$3,$1,$4,$2,$1,$3,$1,$5,$6)',[id_proveedor,id_productor,numero_contrato,metodo_pago,id_pais,metodo_envio]);
+        return db_res;
+     }
+
+     async PresentacionesEsenciaPedido(numero_contrato)
+     {
+       const db_res = await db.query('SELECT * from ADA_PRESENTACIONES_ESENCIAS p INNER JOIN esencia_en_contrato e on e.cas=p.cas WHERE e.numero_contrato =$1',[numero_contrato]);
+       return db_res;
+     }
+
+     async PresentacionesIgredientesPedido(numero_contrato)
+     {
+       const db_res = await db.query('SELECT * from ADA_PRESENTACIONES_INGREDIENTE p INNER JOIN ingrediente_en_contrato e on e.cas_oi=p.cas_oi WHERE e.numero_contrato =$1;',[numero_contrato]);
+       return db_res;
+     }
+
+     async PostDetPedido(sku,cantidad){
+       const db_res = await db.query('INSERT INTO ada_det_pedido (id_pedido,sku,cantidad) VALUES (currval($2),$1,$3)',['ada_sec_id_pedido',sku,cantidad]);
+       return db_res;
+     }
+
 }
 
 

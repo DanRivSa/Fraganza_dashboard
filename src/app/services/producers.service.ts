@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {EscalaModel} from '../models/EscalaModel';
 import {CriterioModel} from '../models/CriterioModel';
+import {PedidoModel} from '../models/PedidoModel';
+import {DetPresentacionModel} from '../models/DetPresentacionModel';
 
 @Injectable({
   providedIn: 'root'
@@ -122,6 +124,27 @@ export class ProducersService
   {
     return this.httpClient.get(`${this.base_URL}/producers/contratos/detalle_contrato/${id_proveedor}/envios/${numero_contrato}`);
   }
+
+  generarPedido(Pedido:PedidoModel)
+  {
+    return this.httpClient.post(`${this.base_URL}/producers/compras/contratos/detalle_contrato/pedido/generar_pedido`,Pedido);
+  }
+
+  PresentacionesEsenciaPedido(numero_contrato:number)
+  {
+    return this.httpClient.get(`${this.base_URL}/producers/compras/contratos/detalle_contrato/pedido/generar_pedido/p_esencias/${numero_contrato}`);
+  }
+
+  PresentacionesIgredientesPedido(numero_contrato:number)
+  {
+    return this.httpClient.get(`${this.base_URL}/producers/compras/contratos/detalle_contrato/pedido/generar_pedido/p_ingredientes/${numero_contrato}`);
+  }
+
+  PostDetPedido (DetPedido:DetPresentacionModel)
+  {
+    return this.httpClient.post(`${this.base_URL}/producers/compras/contratos/detalle_contrato/pedido/generar_pedido/det_pedido`,DetPedido);
+  }
+
 
 
 }

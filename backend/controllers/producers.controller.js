@@ -173,6 +173,34 @@ class ProducersController
       res.json(db_res.rows);
     }
 
+    generarPedido = async (req,res)=>
+    {
+      const {id_proveedor,id_productor,numero_contrato,metodo_pago,id_pais,metodo_envio} = req.body;
+      let db_res = await model.generarPedido(id_proveedor,id_productor,numero_contrato,metodo_pago,id_pais,metodo_envio);
+      res.json(db_res);
+    }
+
+    PresentacionesEsenciaPedido = async (req,res)=>
+    {
+      let numero_contrato = req.params.numero_contrato;
+      db_res = await model.PresentacionesEsenciaPedido(numero_contrato);
+      res.json(db_res);
+    }
+
+    PresentacionesIgredientesPedido = async (req,res)=>
+    {
+      let numero_contrato = req.params.numero_contrato;
+      db_res = await model.PresentacionesIgredientesPedido(numero_contrato);
+      res.json(db_res);
+    }
+
+    PostDetPedido = async (req,res)=>
+    {
+      const {sku,cantidad} = req.body;
+      let db_res = await model.PostDetPedido(sku,cantidad);
+      res.json(db_res);
+    }
+
 }
 
 const controller = new ProducersController(); //create instance

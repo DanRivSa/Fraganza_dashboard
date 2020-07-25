@@ -38,6 +38,13 @@ WHERE prov.id_prov = $1
 
 
 
+--CONSULTA PARA PRESENTACIONES GENERACION DE PEDIDOS
+SELECT * from ADA_PRESENTACIONES_ESENCIAS p
+INNER JOIN esencia_en_contrato e on e.cas=p.cas
+WHERE e.numero_contrato =1010
+
+
+
 
 --filtro para proveedores disponibles para evaluacion inicial
 SELECT DISTINCT p.id_prov,nombre_prov,telefono,email from ada_alternativa_envio p
@@ -129,4 +136,15 @@ SELECT p.id_prod,r.id_prov,x.nombre_prov, r.numero_contrato from ada_productor p
 INNER JOIN ada_contratos_en_regla r on r.id_prod=p.id_prod
 INNER JOIN ada_proveedor x on x.id_prov = r.id_prov
 where p.id_prod =$1;
+
+
+--CONSULTA PRESENTACIONES PARA GENERAR PEDIDO TIPO INGREDIENTE:
+SELECT * from ADA_PRESENTACIONES_INGREDIENTE p
+INNER JOIN ingrediente_en_contrato e on e.cas_oi=p.cas_oi
+WHERE e.numero_contrato =$1;
+
+--CONSULTA PRESENTACIONES PARA GENERAR PEDIDO TIPO ESENCIA:
+SELECT * from ADA_PRESENTACIONES_ESENCIAS p
+INNER JOIN esencia_en_contrato e on e.cas=p.cas
+WHERE e.numero_contrato =$1
 

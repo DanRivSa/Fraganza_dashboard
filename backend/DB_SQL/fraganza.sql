@@ -445,7 +445,7 @@ id_pais SMALLINT NOT NULL,
 tipo_envio CHAR(1) NOT NULL,
 --Atributos propios de pedido
 fecha_emision DATE NOT NULL,
-estatus VARCHAR(10) NOT NULL,
+estatus VARCHAR(10) NOT NULL DEFAULT ('pendiente'),
 descripcion VARCHAR(255),
 fecha_confirmacion DATE,
 nro_factura SMALLINT,

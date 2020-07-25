@@ -1,4 +1,4 @@
-export class Pedido
+export class PedidoModel
 {
   id_pedido:number;
   id_prov:number;

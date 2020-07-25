@@ -122,3 +122,31 @@ SELECT p.id_prov,r.id_prod,x.nombre_prod, r.numero_contrato
 from ada_proveedor p
 INNER JOIN ada_contratos_en_regla r on r.id_prov=p.id_prov
 INNER JOIN ada_productor x on x.id_prod = r.id_prod;
+
+
+//Vistas utilices en generacion de pedidos
+
+CREATE VIEW ADA_PRESENTACIONES_ESENCIAS AS
+SELECT p.sku, p.cas, p.nombre_etiqueta NOMBRE,
+to_char(p.precio, '$99990.00') PRECIO,
+p.contenido_neto ||''|| p.unidad_medida AS contenido, p.cantidad_perpack
+from ada_presentacion_e p where cas_oi is null;
+
+
+create view esencia_en_contrato as
+SELECT e.nombre_comercial, e.nombre_quimico, p.cas, p.numero_contrato
+from ada_contratacion_prod p
+INNER JOIN ada_esencia e on e.cas = p.cas;
+
+
+CREATE VIEW ADA_PRESENTACIONES_INGREDIENTE AS
+SELECT p.sku, p.cas_oi, p.nombre_etiqueta NOMBRE,
+to_char(p.precio, '$99990.00') PRECIO,
+p.contenido_neto ||''|| p.unidad_medida AS contenido, p.cantidad_perpack
+from ada_presentacion_e p where cas is null;
+
+
+create view ingrediente_en_contrato as
+SELECT e.nombre_comercial, e.nombre_quimico, p.cas_oi, p.numero_contrato
+from ada_contratacion_prod p
+INNER JOIN ADA_OTROS_ING e on e.cas_oi = p.cas_oi;
