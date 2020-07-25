@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ProducersService } from '../../../services/producers.service';
 import {ProveedoresService} from '../../../services/proveedores.service';
 import {ActivatedRoute} from '@angular/router';
 
@@ -12,17 +13,25 @@ export class AlternativasPagoComponent implements OnInit {
   //atributos
   id_prov:number;
   metodo_pago:any[];
+  cuotas:any[];
 
-  constructor(private servicio:ProveedoresService) { }
+  
+
+  constructor(private route:ActivatedRoute,private servicio:ProveedoresService) { }
 
   ngOnInit(): void {
 
-      //obtener id de proveedor
+    //obtener id de proveedor
+    this.route.paramMap.subscribe(params=>
+      {
+        this.id_prov = +params.get('id');
+      });
+
 
       this.servicio.ObtenerInfoPagoCuotas(this.id_prov).subscribe(res=>
         {
-          this.metodo_pago = res as any[];
-          console.log(this.metodo_pago);
+          this.cuotas = res as any[];
+          console.log(this.cuotas);
 
         });
 

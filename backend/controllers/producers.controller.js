@@ -207,7 +207,13 @@ class ProducersController
       let db_res = await model.metodoEnvioContratados(id_proveedor,numero_contrato);
       res.json(db_res.rows);
     }
-    
+    ObtenerPedidos = async (req,res)=>
+    {
+      let id_proveedor = req.params.id;
+      let numero_contrato = req.params.contrato;
+      let db_res = await model.ObtenerPedidos(id_proveedor,id_productor);
+      res.json(db_res.rows);
+    }
 
 }
 

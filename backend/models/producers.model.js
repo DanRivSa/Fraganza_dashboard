@@ -179,6 +179,12 @@ class ProducersModel
 
      
 
+     async ObtenerPedidos(id_proveedor,id_productor)
+     {
+       const db_res = await db.query('select * from ada_pedido Where id_prod1 =$1 and id_prov1 =$2',[id_proveedor,id_productor]);
+       return db_res;
+     }
+
      //FUNCIONES DE PRUEBA
      async CerrarInicial(id)
      {
