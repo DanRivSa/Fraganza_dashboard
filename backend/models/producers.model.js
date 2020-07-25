@@ -121,7 +121,6 @@ class ProducersModel
         const db_res = await db.query('UPDATE ada_eval_criterio SET fecha_fin=CURRENT_DATE where id_prod = $1 and id_criterio=4',[id]);
         return db_res;
      }
-<<<<<<< HEAD
 
      async CerrarCriterioAnual(id)
      {
@@ -136,8 +135,6 @@ class ProducersModel
      }
 
 
-=======
->>>>>>> c9fb8fab235437ef5911002c976c76d8963c3a50
      async GetContratosPorVencer(id){
        const db_res = await db.query('SELECT days, numero_contrato, id_prov,nombre_prov from ada_contratos_por_renovar where id_prod = $1',[id]);
        return db_res;
