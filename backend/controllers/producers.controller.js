@@ -236,6 +236,13 @@ class ProducersController
       res.json(db_res);
     }
 
+    DescuentoContrato = async (req,res)=>
+    {
+      let numero_contrato = req.params.numero_contrato;
+      db_res = await model.ProducersController.DescuentoContrato(numero_contrato);
+      res.json(db_res);
+    }
+
 }
 
 const controller = new ProducersController(); //create instance

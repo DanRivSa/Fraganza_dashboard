@@ -48,7 +48,7 @@ class ProducersModel
 
     async ObtenerCriterioSucces(numero_contrato)
     {
-        const db_res = await db.query('SELECT (((SELECT count(estatus)::float FROM ada_pedido where estatus =$2 and numero_contrato1=$1)/(SELECT count(estatus)::float FROM ada_pedido where estatus=$2 or estatus=$3 and numero_contrato1=$1))*100)as resultado',[numero_contrato],'enviado','rechazado','pendiente');
+        const db_res = await db.query('SELECT (((SELECT count(estatus)::float FROM ada_pedido where estatus =$2 and numero_contrato1=$1)/(SELECT count(estatus)::float FROM ada_pedido where numero_contrato1=$1))*100)as resultado',[numero_contrato]);
         return db_res;
     }
 
@@ -58,7 +58,7 @@ class ProducersModel
         return db_res;
     }
 
-    
+
     async ObtenerEscalaAnualVigente(id)
     {
         const db_res = await db.query('SELECT e.fecha_inicio,e.id_prod, e.rango_inicial,e.rango_final, e.rango_aprob from ada_escala e where e.id_prod=$1 and e.fecha_fin is null and e.tipo_uso =$2',[id,'a']);
@@ -176,9 +176,16 @@ class ProducersModel
      {
        const db_res = await db.query('select p.nombre_pais,case m.tipo_envio when $3 then $4 when $5 then $6 when $7 then $8 end, m.porc_contratado from ada_contratacion_me m INNER JOIN ada_pais p on p.id_pais = m.id_pais WHERE m.id_prov=$1 and m.numero_contrato=$2',[id_proveedor,numero_contrato,'m','MARÍTIMO','a','AÉREO','t','TERRESTRE']);
        return db_res;
-     }    
+     }
 
-     
+     async DescuentoContrato (numero_contrato)
+     {
+      const db_res = await db.query('select descuento from ada_contrato Where numero_contrato=$1',[numero_contrato]);
+      return db_res;
+
+     }
+
+
 
      async ObtenerPedidos(id_proveedor,id_productor)
      {
@@ -199,9 +206,9 @@ class ProducersModel
        return db_res;
      }
 
-     async generarPedido(id_proveedor,id_productor,numero_contrato,metodo_pago,id_pais,metodo_envio)
+     async generarPedido(id_proveedor,id_productor,numero_contrato,metodo_pago,id_pais,metodo_envio,precio)
      {
-        const db_res = await db.query('ada_pedido_new($1,$2,$3,$4,$5,$6) ',[id_proveedor,id_productor,metodo_envio,metodo_pago,numero_contrato,id_pais]);
+        const db_res = await db.query('ada_pedido_new($1,$2,$3,$4,$5,$6,$7) ',[id_proveedor,id_productor,metodo_envio,metodo_pago,numero_contrato,id_pais,precio]);
         return db_res;
      }
 
@@ -221,6 +228,12 @@ class ProducersModel
 
      async PostDetPedido(sku,cantidad){
        const db_res = await db.query('INSERT INTO ada_det_pedido (id_pedido,sku,cantidad) VALUES (currval($2),$1,$3)',['ada_sec_id_pedido',sku,cantidad]);
+       return db_res;
+     }
+
+     async PresentacionesAdquiridas(id_pedido)
+     {
+       const db_res = await db.query('',[id_pedido]);
        return db_res;
      }
 

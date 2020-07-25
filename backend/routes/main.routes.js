@@ -96,3 +96,5 @@ router.get('producers/compras/contratos/detalle_contrato/pedido/generar_pedido/p
 
 router.post('/producers/compras/contratos/detalle_contrato/pedido/generar_pedido/det_pedido',producersController.PostDetPedido);
 
+router.get('/producers/compras/contratos/detalle_contrato/pedido/generar_pedido/det_pedido/:numero_contrato',producersController.DescuentoContrato);
+

@@ -164,6 +164,10 @@ export class ProducersService
     return this.httpClient.post(`${this.base_URL}/producers/compras/contratos/detalle_contrato/pedido/generar_pedido/det_pedido`,DetPedido);
   }
 
+  DescuentoContrato (numero_contrato:number)
+  {
+    return this.httpClient.get(`${this.base_URL}/producers/compras/contratos/detalle_contrato/pedido/generar_pedido/det_pedido/${numero_contrato}`);
+  }
 
 
 }

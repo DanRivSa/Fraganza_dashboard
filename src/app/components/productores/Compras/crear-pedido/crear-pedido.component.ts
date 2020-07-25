@@ -5,7 +5,7 @@ import { ProducersService } from 'src/app/services/producers.service';
 import {DetPresentacionModel} from '../../../../models/DetPresentacionModel';
 import { PedidoModel } from 'src/app/models/PedidoModel';
 import { MetodoEnvio } from 'src/app/models/MetodoEnvio';
-import { ProveedoresService } from 'src/app/services/proveedores.service';
+
 @Component({
   selector: 'app-crear-pedido',
   templateUrl: './crear-pedido.component.html',
@@ -16,11 +16,13 @@ export class CrearPedidoComponent implements OnInit {
   id_pedido:number;
   id_proveedor:number;
   id_productor:number = UserCompanyService.userCompanyID;
-  ListaPresentacionesEsencias:number[];
-  ListaPresentacionesIngredientes:number[];
+  ListaPresentacionesEsencias:any[];
+  ListaPresentacionesIngredientes:any[];
   ListaMetodosEnvio:any[];
   ListaMetodosPago:any[];
   numero_contrato:number;
+  precio_pedido:number;
+  DescuentoContrato:number;
 
   //Proceso de agregación al pedido
   EsenciasPedido:any[];
@@ -31,7 +33,7 @@ export class CrearPedidoComponent implements OnInit {
   PresentacionesIngredientes:number[];
    DetPresentacion:DetPresentacionModel[];
 
-  constructor(private route:ActivatedRoute, private productores:ProducersService, private proveedores:ProveedoresService) { }
+  constructor(private route:ActivatedRoute, private productores:ProducersService) { }
 
   ngOnInit(): void {
 
@@ -55,12 +57,16 @@ export class CrearPedidoComponent implements OnInit {
     this.productores.metodoPagoContratados(this.id_proveedor,this.numero_contrato).subscribe(res =>{
       this.ListaMetodosPago = res as any[];
     });
+    this.productores.DescuentoContrato(this.numero_contrato).subscribe(res=>{
+      this.DescuentoContrato = res as number;
+    })
   }
 
-  ListarMetodoEnvio(id_pais:number, tipo_envio:string){
+  ListarMetodoEnvio(id_pais:number, porc_contratado:number,tipo_envio:string){
     let envio = new MetodoEnvio();
     envio.id_pais=id_pais;
     envio.tipo_envio=tipo_envio;
+    envio.porc_contratado=porc_contratado
     this.MetodoEnvioPedido=envio;
   };
 
@@ -69,13 +75,25 @@ export class CrearPedidoComponent implements OnInit {
     this.MetodoPagoPedido=tipo_pago;
   };
 
-  ArmarDetPresentacion(sku:number,cantidad:number){
+  ArmarDetPresentacion(sku:number,cantidad:number,precio:number){
     let det = new DetPresentacionModel();
     det.sku = sku;
     det.cantidad = cantidad;
+    det.precio = precio;
      this.DetPresentacion.push(det);
   }
 
+  CotizarPedio()
+  {
+
+    if(this.DetPresentacion.length > 0){
+      for (let i = 0; i < this.DetPresentacion.length; i++){
+
+            let resultado = (this.DetPresentacion[i].cantidad*this.DetPresentacion[i].precio);
+            this.precio_pedido=this.precio_pedido+resultado;
+           }
+      }
+    }
   DetallarPedido()
   {
     if(this.DetPresentacion.length > 0){
@@ -95,6 +113,7 @@ export class CrearPedidoComponent implements OnInit {
     p.metodo_pago=this.MetodoPagoPedido;
     p.tipo_envio=this.MetodoEnvioPedido.tipo_envio;
     p.id_pais=this.MetodoEnvioPedido.id_pais;
+    p.total=this.precio_pedido;
     this.productores.generarPedido(p).subscribe(res=>{
       this.id_pedido = res as number;
       console.log('Pedido creado de forma satisfactoria');

@@ -139,6 +139,15 @@ from ada_contratacion_prod p
 INNER JOIN ada_esencia e on e.cas = p.cas;
 
 
+CREATE VIEW ADA_PRESENTACIONES_ESENCIAS_PEDIDO AS
+SELECT p.sku, p.cas, p.nombre_etiqueta NOMBRE,p.precio,
+p.contenido_neto ||''|| p.unidad_medida AS contenido, p.cantidad_perpack
+from ada_presentacion_e p where cas_oi is null;
+
+
+
+
+
 CREATE VIEW ADA_PRESENTACIONES_INGREDIENTE AS
 SELECT p.sku, p.cas_oi, p.nombre_etiqueta NOMBRE,
 to_char(p.precio, '$99990.00') PRECIO,
@@ -183,3 +192,17 @@ select last_value from ada_sec_id_pedido
 RETURN
 $$
 language sql
+
+
+--Se utiliza en detalle pedido
+CREATE or replace VIEW ADA_PRESENTACIONES_INGREDIENTES_PEDIDO AS
+SELECT p.sku, p.cas_oi, p.nombre_etiqueta NOMBRE,p.precio,
+p.contenido_neto ||''|| p.unidad_medida AS contenido, p.cantidad_perpack
+from ada_presentacion_e p where cas is null;
+
+
+CREATE VIEW ADA_PRESENTACIONES_ESENCIAS_PEDIDO AS
+SELECT p.sku, p.cas, p.nombre_etiqueta NOMBRE,p.precio,
+p.contenido_neto ||''|| p.unidad_medida AS contenido, p.cantidad_perpack
+from ada_presentacion_e p where cas_oi is null;
+

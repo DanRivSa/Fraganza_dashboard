@@ -15,6 +15,7 @@ import { EvaluacionAnualComponent } from './components/proveedores/evaluacion-an
 import {ContratoComponent} from './components/productores/Compras/contrato/contrato.component';
 import {DetalleContratoComponent} from './components/productores/Compras/DetalleContrato/DetalleContrato.component';
 import { CrearPedidoComponent } from './components/productores/Compras/crear-pedido/crear-pedido.component';
+import { DetallePedidoComponent } from './components/productores/Compras/detalle-pedido/detalle-pedido.component';
 const routes: Routes =
 [
   {path:'',component:HomeComponent},
@@ -32,7 +33,8 @@ const routes: Routes =
   {path:'compras/contratos/detalle/:contrato/generar_pedido/:id_proveedor', component: CrearPedidoComponent},
   {path:'compras/generar_pedido/:id/contrato/:contrato', component:CrearPedidoComponent},
   {path:'compras/contratos/:id/detalle/:contrato', component:DetalleContratoComponent},
-  {path:'compras/contratos/:id/detalle/:contrato/generar_pedido', component: CrearPedidoComponent}
+  {path:'compras/contratos/:id/detalle/:contrato/generar_pedido', component: CrearPedidoComponent},
+  {path:'compras/contratos/:id/detalle/:contrato/generar_pedido/id_pedido',component:DetallePedidoComponent}
 ];
 
 @NgModule({

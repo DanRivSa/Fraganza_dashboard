@@ -153,3 +153,22 @@ WHERE e.numero_contrato =$1
 SELECT (((SELECT count(estatus)::float FROM ada_pedido where estatus ='enviado' and numero_contrato1=1005)/(SELECT count(estatus)::float FROM ada_pedido where estatus='$2' or estatus='$3' and numero_contrato1=$1))*100)as resultado
 
 
+--Mostrar presentaciones de tipo esencia presentes en un pedido.
+		SELECT d.id_pedido,p.sku,p.cas,p.nombre,d.cantidad,to_char((p.precio*d.cantidad),'$99999.99') as precio, p.contenido, p.cantidad_perpack
+		from ADA_PRESENTACIONES_ESENCIAS_PEDIDO p
+		INNER JOIN ada_det_pedido d on d.sku = p.sku where d.id_pedido=$1;
+
+--Mostrar presentaciones de tipo ingrediente presentes en un pedido
+
+		SELECT d.id_pedido,p.sku,p.cas_oi,p.nombre,d.cantidad,to_char((p.precio*d.cantidad),'$99999.99') as precio, p.contenido, p.cantidad_perpack
+		from ADA_PRESENTACIONES_INGREDIENTES_PEDIDO p
+		INNER JOIN ada_det_pedido d on d.sku = p.sku where d.id_pedido=$1;
+
+ --Mostrar detalle de tipo envio
+
+		SELECT d.id_pedido,p.sku,p.cas_oi,p.nombre,d.cantidad,to_char((p.precio*d.cantidad),'$99999.99') as precio, p.contenido, p.cantidad_perpack
+		from ADA_PRESENTACIONES_INGREDIENTES_PEDIDO p
+		INNER JOIN ada_det_pedido d on d.sku = p.sku where d.id_pedido=$1;
+
+ --Mostrar Detalle de tipo Pago
+
