@@ -200,6 +200,12 @@ class ProducersController
       let db_res = await model.metodoEnvioContratados(id_proveedor,numero_contrato);
       res.json(db_res.rows);
     }
+    ObtenerCriteriosEvaluacionInicial= async (req,res)=>
+    {
+        let id_proveedor = req.params.id;
+        let db_res = await model.ObtenerCriteriosEvaluacionInicial(id_proveedor);
+        res.json(db_res.rows);
+    }
 
 }
 

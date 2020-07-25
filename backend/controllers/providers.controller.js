@@ -78,6 +78,9 @@ class ProvidersController
         let db_res = await model.GetContratosVigentes(id_proveedor);
         res.json(db_res.rows);
     }
+
+
+
 }
 
 const controller = new ProvidersController(); //create instance of class

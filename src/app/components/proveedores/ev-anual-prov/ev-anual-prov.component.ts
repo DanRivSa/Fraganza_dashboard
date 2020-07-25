@@ -10,6 +10,7 @@ import { UserCompanyService } from 'src/app/services/global/user-company.service
 export class EvAnualProvComponent implements OnInit {
 
   proveedores:any[];
+  escala:any[];
 
   id_usuario:number = UserCompanyService.userCompanyID; //id de usuario 
 
@@ -20,6 +21,11 @@ export class EvAnualProvComponent implements OnInit {
       {
         this.proveedores = res as any[];
       });
+
+      this.producersService.ObtenerEscalaAnualVigente(this.id_usuario).subscribe(res=>
+        {
+          this.escala = res as any[];
+        });
 
   }
 

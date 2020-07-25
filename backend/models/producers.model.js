@@ -168,7 +168,13 @@ class ProducersModel
      {
        const db_res = await db.query('select p.nombre_pais,case m.tipo_envio when $3 then $4 when $5 then $6 when $7 then $8 end, m.porc_contratado from ada_contratacion_me m INNER JOIN ada_pais p on p.id_pais = m.id_pais WHERE m.id_prov=$1 and m.numero_contrato=$2',[id_proveedor,numero_contrato,'m','MARÍTIMO','a','AÉREO','t','TERRESTRE']);
        return db_res;
-     }
+     }    
+
+     async ObtenerCriteriosEvaluacionInicial(id)
+    {
+        const db_res = await db.query ('SELECT ada_criterio_eval.nombre_criterio,ada_criterio_eval.tipo_uso,ada_eval_criterio.peso FROM ada_eval_criterio INNER JOIN ada_criterio_eval ON ada_eval_criterio.id_criterio = ada_criterio_eval.id_criterio  WHERE ada_eval_criterio.id_prod= $1 and ada_criterio_eval.tipo_uso= %2 and ada_eval_criterio.fecha_fin is null ',[id],'i');
+        return db_res;
+    }
 
      //FUNCIONES DE PRUEBA
      async CerrarInicial(id)
