@@ -203,7 +203,7 @@ class ProducersController
     ObtenerPedidos = async (req,res)=>
     {
       let id_proveedor = req.params.id;
-      let numero_contrato = req.params.contrato;
+      let id_productor = req.params.id2;
       let db_res = await model.ObtenerPedidos(id_proveedor,id_productor);
       res.json(db_res.rows);
     }
@@ -242,8 +242,12 @@ class ProducersController
       db_res = await model.ProducersController.DescuentoContrato(numero_contrato);
       res.json(db_res);
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6b1671d33dfb5d1fcc6ab56a5aa5aee96d885779
     GuardarResultadoInicial = async (req,res)=>
-    { 
+    {
         let id_prod = req.params.id_prod;
         console.log(id_prod);
         let id_prov = req.body.id_prov;
@@ -254,7 +258,7 @@ class ProducersController
 
     GuardarResultadoAnual = async (req,res)=>
     {
-        
+
         let id_prod = req.params.id_prod;
         let id_prov = req.body.id_prov;
         let resultado = req.body.resultado;
@@ -262,7 +266,8 @@ class ProducersController
         res.json(db_res.rows);
     }
 
-}
+  }
+
 
 const controller = new ProducersController(); //create instance
 module.exports = controller; //export instance

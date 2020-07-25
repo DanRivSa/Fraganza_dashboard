@@ -154,6 +154,11 @@ export class ProducersService
     return this.httpClient.get(`${this.base_URL}/producers/compras/contratos/detalle_contrato/pedido/generar_pedido/p_esencias/${numero_contrato}`);
   }
 
+  PresentacionesIgredientesPedido(numero_contrato:number)
+  {
+    return this.httpClient.get(`${this.base_URL}producers/compras/contratos/detalle_contrato/pedido/generar_pedido/p_ingredientes/${numero_contrato}`);
+  }
+
   //RESULTADO DE EVALUACIONES
   GuardarResultadoInicial(id_prod:number,id_prov:number,resultado:number)
   {
