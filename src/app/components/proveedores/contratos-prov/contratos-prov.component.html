@@ -18,6 +18,7 @@
           <th scope="col">#</th>
           <th scope="col">Id Proveedor</th>
           <th scope="col">Nombre Proveedor</th>
+          <th scope="col">Detalle</th>
         </tr>
       </thead>
       <tbody>
@@ -25,7 +26,12 @@
           <th scope="row">{{prov.numero_contrato}}</th>
           <td>{{prov.id_prov}}</td>
           <td>{{prov.nombre_prov}}</td>
+<<<<<<< HEAD
 
+=======
+          <button type="button" class="btn btn-success " [routerLink]="['/compras/contratos/detalle/',prov.id_prov,prov.numero_contrato]">Detalle</button>
+          
+>>>>>>> 6b1671d33dfb5d1fcc6ab56a5aa5aee96d885779
         </tr>
       </tbody>
     </table>

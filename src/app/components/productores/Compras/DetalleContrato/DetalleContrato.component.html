@@ -1,1 +1,61 @@
-<p>pedido works!</p>
+
+<header class="bg-dark text-white">
+    <div class="container text-center">
+        <br>
+      <h3 class=" display-4">Contrato Nro {{numero_contrato}}</h3>
+      <hr>     
+      <br>
+    </div>
+  </header>
+<div class="card">
+
+
+
+<div class="container card">
+    <header class="bg-dark text-white">
+        <div class="container text-center">
+    
+          <h3 class=" display-4">Alternativas de envio</h3>
+          <hr>
+          <br>
+        </div>
+    </header>
+    <br>
+    <div class="container text-center table-responsive ">
+        <table class="table table-hover">
+            <thead class="table-dark">
+              <tr>
+                <th scope="col">Pais</th>
+                <th scope="col">Tipo de Envio</th>
+                <th scope="col">Recargo</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let env of alt_envio" >
+                <th scope="row">{{env.nombre_pais}}</th>
+                <td>{{env.tipo_envio}}</td>
+                <td>{{env.porc_contratado}} %</td>
+              </tr>
+            </tbody>
+          </table>
+    
+    </div>
+    <br><br>
+    <header class="bg-dark text-white">
+        <div class="container text-center">
+    
+          <h3 class=" display-4">Alternativas De pago</h3>
+          <hr>
+          <br>
+        </div>
+    </header>
+
+    <div class="container text-center ">
+
+              <tr *ngFor="let m of metodo_pago" >
+                <h3>{{m.metodo_pago}}</h3>
+              </tr>
+    </div>
+
+
+</div>

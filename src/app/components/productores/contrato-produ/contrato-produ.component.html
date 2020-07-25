@@ -22,6 +22,7 @@
           <th scope="row">{{prod.numero_contrato}}</th>
           <td>{{prod.id_prod}}</td>
           <td>{{prod.nombre_prod}}</td>
+          <button type="button" class="btn btn-success " [routerLink]="['/compras/contratos/detalle/',prod.id_prov,prov.numero_contrato]">Detalle</button>
           
         </tr>
       </tbody>
