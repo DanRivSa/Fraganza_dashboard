@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProducersService } from 'src/app/services/producers.service';
 import { DetPresentacionModel } from 'src/app/models/DetPresentacionModel';
+import { UserCompanyService } from 'src/app/services/global/user-company.service';
 
 @Component({
   selector: 'app-detalle-pedido',
@@ -12,14 +13,15 @@ import { DetPresentacionModel } from 'src/app/models/DetPresentacionModel';
 export class DetallePedidoComponent implements OnInit {
 
   id_pedido:number;
-  id_productr:number;
+  id_productor:number = UserCompanyService.userCompanyID;
   id_proveedor:number;
   metodo_envio:[any];
   metodo_pago:[any];
   id_pais:number;
   total:number;
   estatus:string;
-  DetPresentacion: any[];
+  DetPresentacionEsencias: any[];
+  DetPresentacionIngredientes: any[];
   InformacionPago:any[];
   numero_contrato:number;
 
@@ -30,12 +32,18 @@ export class DetallePedidoComponent implements OnInit {
         {
           this.id_pedido =+params.get('id_pedido');
           this.numero_contrato=+params.get('contrato');
-          this.id_productr=+params.get('id');
+          this.id_proveedor=+params.get('id');
         });
-      this.productores.PresentacionesEsenciaPedido(this.numero_contrato).subscribe(res=>{
-        this.DetPresentacion = res as any;
+
+      this.productores.PresentacionesIngredientesAdquiridasPedido(this.numero_contrato).subscribe(res=>{
+        this.DetPresentacionIngredientes = res as any[];
+      })
+
+
+      this.productores.PresentacionesEsenciasAdquiridasPedido(this.numero_contrato).subscribe(res=>{
+        this.DetPresentacionEsencias = res as any[];
       });
 
-  }
+    }
 
 }

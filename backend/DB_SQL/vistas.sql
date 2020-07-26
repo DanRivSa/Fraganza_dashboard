@@ -200,6 +200,16 @@ p.contenido_neto ||''|| p.unidad_medida AS contenido, p.cantidad_perpack
 from ada_presentacion_e p where cas_oi is null;
 
 
+		CREATE VIEW ESENCIAS_CONTRATADOS_PEDIDO AS
+		SELECT d.id_pedido,p.sku,p.cas,p.nombre,d.cantidad,to_char((p.precio*d.cantidad),'$99999.99') as precio, p.contenido, p.cantidad_perpack
+		from ADA_PRESENTACIONES_ESENCIAS_PEDIDO p
+		INNER JOIN ada_det_pedido d on d.sku = p.sku
+
+    CREATE VIEW INGREDIENTES_CONTRATADOS_PEDIDO AS
+		SELECT d.id_pedido,p.sku,p.cas_oi,p.nombre,d.cantidad,to_char((p.precio*d.cantidad),'$99999.99') as precio, p.contenido, p.cantidad_perpack
+		from ADA_PRESENTACIONES_INGREDIENTES_PEDIDO p
+		INNER JOIN ada_det_pedido d on d.sku = p.sku
+
 
 CREATE VIEW ada_contratos_en_regla AS
 SELECT distinct c.id_prov,c.id_prod,c.numero_contrato FROM ada_contrato c, ada_renueva r
@@ -213,3 +223,16 @@ where r.numero_contrato in (SELECT c.numero_contrato
 FROM ADA_CONTRATO c where (c.acuerdo is true and c.cancelado is not true
 and		(CURRENT_DATE) < (r.fecha + INTERVAL '365 day')
 AND r.id_prov IN (SELECT id_prov FROM ada_prov_mem_activa)));
+
+
+		--Metodo Envio Especifico de un Pedido
+		CREATE VIEW AS ME_PEDIDO
+		SELECT p.nombre_pais,
+		case t.tipo_envio
+		when 'm' then 'MARÍTIMO'
+		when 'a' then 'AÉREO'
+		when 't' then 'TERRESTRE'
+		end as metodo_envio, a.porc_contratado
+		from ada_pedido t
+		INNER JOIN ada_contratacion_me a on a.numero_contrato=t.numero_contrato1
+		INNER JOIN ada_pais p on p.id_pais=t.id_pais

@@ -39,9 +39,10 @@ class ProducersModel
         return db_res;
     }
 
-    async CancelarContrato(numero_contrato)
+    async CancelarContrato(numero_contrato,descripcion)
     {
-      const db_res= await db.query('UPDATE ADA_CONTRATO SET estatus =$2 where numero_contrato=$1')
+      const db_res= await db.query('select cancelar_contrato($1,$2::varchar)',[numero_contrato,descripcion]);
+      return db_res;
     }
 
 
@@ -187,7 +188,6 @@ class ProducersModel
      {
       const db_res = await db.query('select descuento from ada_contrato Where numero_contrato=$1',[numero_contrato]);
       return db_res;
-
      }
 
 
@@ -204,9 +204,9 @@ class ProducersModel
      }
 
     //resultado de evaluaciones
-    async GuardarResultadoInicial(id_prod,id_prov,resultado)
+    async GuardarResultado(id_prod,id_prov,resultado,tipo)
     {
-      const db_res = await db.query('INSERT INTO ada_resutado_eval (fecha,id_prov,id_prod,resultado,tipo_eval) VALUES (CURRENT_DATE,$1,$2,$3,$4)',[id_prov,id_prod,resultado,'i']);
+      const db_res = await db.query('INSERT INTO ada_resutado_eval (fecha,id_prov,id_prod,resultado,tipo_eval) VALUES (CURRENT_DATE,$1,$2,$3,$4)',[id_prov,id_prod,resultado,tipo]);
       return db_res;
     }
 
@@ -235,8 +235,6 @@ class ProducersModel
         return db_res;
      }
 
-     async
-
      async PresentacionesEsenciaPedido(numero_contrato)
      {
        const db_res = await db.query('SELECT * from ADA_PRESENTACIONES_ESENCIAS p INNER JOIN esencia_en_contrato e on e.cas=p.cas WHERE e.numero_contrato =$1',[numero_contrato]);
@@ -254,14 +252,40 @@ class ProducersModel
        return db_res;
      }
 
-     async PresentacionesAdquiridas(id_pedido)
+
+     //DetallePedido
+     async PresentacionesIngredientesAdquiridasPedido(id_pedido)
      {
-       const db_res = await db.query('',[id_pedido]);
+       const db_res = await db.query('select * from INGREDIENTES_CONTRATADOS_PEDIDO where id_pedido=$1',[id_pedido]);
+       return db_res;
+     }
+
+     async PresentacionesEsenciasAdquiridasPedido(id_pedido)
+     {
+       const db_res = await db.query('select * from ESENCIAS_CONTRATADOS_PEDIDO where id_pedido=$1',[id_pedido]);
+       return db_res;
+     }
+
+     async DetEnvioPedido (id_pedido){
+       const db_res = await db.query('select * from ADA_ME_PEDIDO where id_pedido=$1',[id_pedido]);
        return db_res;
      }
 
 
 
+     async RenovarContrato(id_prod,id_prov,num,fecha)
+     {
+       const db_res = await db.query('INSERT INTO ada_renueva (id_prov,id_prod,numero_contrato,fecha) VALUES ($1,$2,$3,$4)',[id_prov,id_prod,num,fecha]);
+       return db_res;
+     }
+
+     async ObtenerFechaParaRenovar(numero_contrato)
+     {
+       const db_res = await db.query('select fecha_emision from ada_contrato where numero_contrato = $1',[numero_contrato]);
+       return db_res;
+     }
+
+     
 }
 
 
