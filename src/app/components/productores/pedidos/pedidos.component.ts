@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProducersService } from 'src/app/services/producers.service';
+import { UserCompanyService } from 'src/app/services/global/user-company.service';
 
 @Component({
   selector: 'app-pedidos',
@@ -10,7 +11,7 @@ import { ProducersService } from 'src/app/services/producers.service';
 export class PedidosComponent implements OnInit {
   id_pedido:number;
   id_productor:number;
-  id_proveedor:number;
+  
   metodo_envio:[any];
   metodo_pago:[any];
   id_pais:number;
@@ -20,27 +21,16 @@ export class PedidosComponent implements OnInit {
   InformacionPago:any[];
   numero_contrato:number;
   pedido:any[];
-  id:number;
+  id_usuario:number = UserCompanyService.userCompanyID; //id de usuario 
 
 
-
-
-  constructor(private route:ActivatedRoute, private productores:ProducersService) { }
+  constructor( private productores:ProducersService) { }
 
   ngOnInit(): void {
 
-    this.route.paramMap.subscribe(params=>
-      {
-        this.id_proveedor=+params.get('id');
-        this.numero_contrato=+params.get('contrato');
-      });
 
-
-//   this.productores.PresentacionesEsenciaPedido(this.numero_contrato).subscribe(res=>{
-//    this.DetPresentacion = res as any;
-//  });
-    this.productores.ObtenerPedidos(this.id).subscribe(res=>{
-      this.DetPresentacion = res as any;
+    this.productores.ObtenerPedidos(this.id_usuario).subscribe(res=>{
+      this.pedido = res as any;
     });
 
 

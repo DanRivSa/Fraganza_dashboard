@@ -30,6 +30,8 @@ export class DetalleContratoComponent implements OnInit {
       {
         this.id_proveedor=+params.get('id');
         this.numero_contrato=+params.get('contrato');
+        
+        console.log(this.id_proveedor);
       });
 
     this.productor.GetEsenciasContratadas(this.id_proveedor,this.numero_contrato).subscribe(res=>{

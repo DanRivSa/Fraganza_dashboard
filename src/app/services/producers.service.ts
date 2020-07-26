@@ -159,7 +159,7 @@ export class ProducersService
 
   PresentacionesIgredientesPedido(numero_contrato:number)
   {
-    return this.httpClient.get(`${this.base_URL}producers/compras/contratos/detalle_contrato/pedido/generar_pedido/p_ingredientes/${numero_contrato}`);
+    return this.httpClient.get(`${this.base_URL}/producers/compras/contratos/detalle_contrato/pedido/generar_pedido/p_ingredientes/${numero_contrato}`);
   }
 
   ObtenerPedidos(id:number)
