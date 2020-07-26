@@ -69,7 +69,19 @@ class ProviderModel
         return db_res;
     }
 
-    
+
+    async ConfirmarPedido (id_pedido)
+    {
+      const db_res = await db.query('UPDATE ada_pedido SET estatus=$2 where id_pedido=$1',[id_pedido,'confirmado']);
+      return db_res;
+    }
+
+
+    async RechazarPedido (id_pedido)
+    {
+      const db_res = await db.query('UPDATE ada_pedido SET estatus=$2 where id_pedido=$1',[id_pedido,'rechazado']);
+      return db_res;
+    }
 
 }
 

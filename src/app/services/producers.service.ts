@@ -230,4 +230,14 @@ export class ProducersService
   {
     return this.httpClient.get(`${this.base_URL}/fecha_renovacion/${num_c}`);
   }
+
+  DetPagoPedido (id_pedido:number)
+  {
+    return this.httpClient.get(`${this.base_URL}/producers/compras/pedidos/detalle_pago/${id_pedido}`);
+  }
+
+  GetEstatusPedido(id_pedido:number)
+  {
+    return this.httpClient.get(`${this.base_URL}/producers/compras/pedidos/estatus/${id_pedido}`);
+  }
 }

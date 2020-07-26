@@ -150,7 +150,7 @@ class ProducersModel
 
 
      async GetContratosPorVencer(id){
-       const db_res = await db.query('SELECT days, numero_contrato, id_prov,nombre_prov from ada_contratos_por_renovar where id_prod = $1',[id]);
+       const db_res = await db.query('select * from ada_renovar_contratos where id_prod =$1',[id]);
        return db_res;
      }
      //Modulo compras
@@ -276,10 +276,6 @@ class ProducersModel
        return db_res;
      }
 
-
-
-
-
      async RenovarContrato(id_prod,id_prov,num,fecha)
      {
        const db_res = await db.query('INSERT INTO ada_renueva (id_prov,id_prod,numero_contrato,fecha) VALUES ($1,$2,$3,$4)',[id_prov,id_prod,num,fecha]);
@@ -291,6 +287,7 @@ class ProducersModel
        const db_res = await db.query('select fecha_emision from ada_contrato where numero_contrato = $1',[numero_contrato]);
        return db_res;
      }
+
 
 
 }
