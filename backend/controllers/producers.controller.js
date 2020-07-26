@@ -160,6 +160,14 @@ class ProducersController
       return res.json(db_res.rows);
     }
 
+    CancelarContrato = async (req,res)=>
+    {
+      let numero_contrato = req.params.numero_contrato;
+      const {descripcion} = req.body;
+      let db_res = await model.CancelarContrato(numero_contrato,descripcion);
+      return res.json(db_res.rows);
+    }
+
     //Métodos modulo de compras
     GetContratosVigentes = async (req,res)=>
     {
@@ -218,14 +226,14 @@ class ProducersController
     PresentacionesEsenciaPedido = async (req,res)=>
     {
       let numero_contrato = req.params.numero_contrato;
-      db_res = await model.PresentacionesEsenciaPedido(numero_contrato);
+      let db_res = await model.PresentacionesEsenciaPedido(numero_contrato);
       res.json(db_res);
     }
 
     PresentacionesIgredientesPedido = async (req,res)=>
     {
       let numero_contrato = req.params.numero_contrato;
-      db_res = await model.PresentacionesIgredientesPedido(numero_contrato);
+      let db_res = await model.PresentacionesIgredientesPedido(numero_contrato);
       res.json(db_res);
     }
 
@@ -238,9 +246,9 @@ class ProducersController
 
     DescuentoContrato = async (req,res)=>
     {
-      let numero_contrato = req.params.numero_contrato;
-      db_res = await model.ProducersController.DescuentoContrato(numero_contrato);
-      res.json(db_res);
+      let numero_contrato = req.params.contrato;
+      let db_res = await model.DescuentoContrato(numero_contrato);
+      res.json(db_res.rows);
     }
 
     GuardarResultadoInicial = async (req,res)=>
@@ -262,6 +270,30 @@ class ProducersController
         let db_res = await model.GuardarResultadoAnual(id_prod,id_prov,resultado);
         res.json(db_res.rows);
     }
+
+    DetEnvioPedido = async (req,res)=>
+    {
+      let id_pedido = req.params.id_pedido;
+      let db_res = await model.DetEnvioPedido(id_pedido);
+      res.json(db_res.rows);
+    }
+
+    PresentacionesIngredientesAdquiridasPedido = async (req,res)=>
+    {
+      let id_pedido = req.params.id_pedido;
+      let db_res = await model.PresentacionesIngredientesAdquiridasPedido(id_pedido);
+      res.json(db_res.rows);
+
+    }
+
+    PresentacionesEsenciasAdquiridasPedido = async (req,res)=>
+    {
+      let id_pedido = req.params.id_pedido;
+      let db_res = await model.PresentacionesEsenciasAdquiridasPedido(id_pedido);
+      res.json(db_res.rows);
+
+    }
+
 
   }
 

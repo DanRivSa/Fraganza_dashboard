@@ -39,9 +39,10 @@ class ProducersModel
         return db_res;
     }
 
-    async CancelarContrato(numero_contrato)
+    async CancelarContrato(numero_contrato,descripcion)
     {
-      const db_res= await db.query('UPDATE ADA_CONTRATO SET estatus =$2 where numero_contrato=$1')
+      const db_res= await db.query('select cancelar_contrato($1,$2::varchar)',[numero_contrato,descripcion]);
+      return db_res;
     }
 
 
@@ -187,10 +188,7 @@ class ProducersModel
      {
       const db_res = await db.query('select descuento from ada_contrato Where numero_contrato=$1',[numero_contrato]);
       return db_res;
-
      }
-
-
 
      async ObtenerPedidos(id_proveedor,id_productor)
      {
@@ -230,8 +228,6 @@ class ProducersModel
         return db_res;
      }
 
-     async
-
      async PresentacionesEsenciaPedido(numero_contrato)
      {
        const db_res = await db.query('SELECT * from ADA_PRESENTACIONES_ESENCIAS p INNER JOIN esencia_en_contrato e on e.cas=p.cas WHERE e.numero_contrato =$1',[numero_contrato]);
@@ -249,11 +245,26 @@ class ProducersModel
        return db_res;
      }
 
-     async PresentacionesAdquiridas(id_pedido)
+
+     //DetallePedido
+     async PresentacionesIngredientesAdquiridasPedido(id_pedido)
      {
-       const db_res = await db.query('',[id_pedido]);
+       const db_res = await db.query('select * from INGREDIENTES_CONTRATADOS_PEDIDO where id_pedido=$1',[id_pedido]);
        return db_res;
      }
+
+     async PresentacionesEsenciasAdquiridasPedido(id_pedido)
+     {
+       const db_res = await db.query('select * from ESENCIAS_CONTRATADOS_PEDIDO where id_pedido=$1',[id_pedido]);
+       return db_res;
+     }
+
+     async DetEnvioPedido (id_pedido){
+       const db_res = await db.query('select * from ADA_ME_PEDIDO where id_pedido=$1',[id_pedido]);
+       return db_res;
+     }
+
+
 
 
 

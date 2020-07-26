@@ -76,6 +76,7 @@ router.get('/producers/contratos/renovacion/:contrato',producersController.Obten
 //Obtener contratos vigentes
 router.get('/producers/contratos/:id',producersController.GetContratosVigentes);
 module.exports = router;
+router.patch('/producers/contratos/detalle_contrato/cancelar/:contrato',producersController.CancelarContrato);
 
 //Pedidos
 router.get('/producers/contratos/detalle_contrato/:id/esencias/:contrato',producersController.GetEsenciasContratadas);
@@ -94,4 +95,11 @@ router.get('/producers/compras/contratos/detalle_contrato/pedido/generar_pedido/
 
 router.post('/producers/compras/contratos/detalle_contrato/pedido/generar_pedido/det_pedido',producersController.PostDetPedido);
 
-router.get('/producers/compras/contratos/detalle_contrato/pedido/generar_pedido/det_pedido/:numero_contrato',producersController.DescuentoContrato);
+router.get('/producers/compras/contratos/detalle_contrato/:contrato',producersController.DescuentoContrato);
+
+router.get('/producers/compras/pedidos/ingredientes/:id_pedido',producersController.PresentacionesIngredientesAdquiridasPedido);
+
+router.get('/producers/compras/pedidos/esencias/:id_pedido',producersController.PresentacionesEsenciasAdquiridasPedido);
+
+router.get('/producers/compras/pedidos/detalle_envio/:id_pedido',producersController.DetEnvioPedido);
+

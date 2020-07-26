@@ -189,3 +189,14 @@ SELECT (((SELECT count(estatus)::float FROM ada_pedido where estatus ='enviado' 
 
  --Mostrar Detalle de tipo Pago
 
+
+
+--Cancelar contrato
+
+CREATE  FUNCTION cancelar_contrato(integer,varchar) returns void
+AS
+$$
+UPDATE  ada_contrato SET motivo_cancelac= $2, cancelado=true, fecha_cancelac=current_date
+where numero_contrato=$1;
+$$
+language sql

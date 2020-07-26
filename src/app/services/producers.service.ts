@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {EscalaModel} from '../models/EscalaModel';
 import {CriterioModel} from '../models/CriterioModel';
 import {PedidoModel} from '../models/PedidoModel';
+import {QuejaModel} from '../models/QuejaModel';
 import {DetPresentacionModel} from '../models/DetPresentacionModel';
 
 @Injectable({
@@ -170,6 +171,11 @@ export class ProducersService
     return this.httpClient.post(`${this.base_URL}/guardar_resultado/anual/${id_prod}`,{id_prov,resultado});
   }
 
+  CancelarContrato(numero_contrato:number,descripcion:QuejaModel)
+  {
+    return this.httpClient.put(`${this.base_URL}/producers/contratos/detalle_contrato/cancelar/${numero_contrato}`,descripcion);
+  }
+
   //PRUEBA
 
 
@@ -190,7 +196,22 @@ export class ProducersService
 
   DescuentoContrato (numero_contrato:number)
   {
-    return this.httpClient.get(`${this.base_URL}/producers/compras/contratos/detalle_contrato/pedido/generar_pedido/det_pedido/${numero_contrato}`);
+    return this.httpClient.get(`${this.base_URL}/producers/compras/contratos/detalle_contrato/${numero_contrato}`);
+  }
+
+  PresentacionesIngredientesAdquiridasPedido(id_pedido:number)
+  {
+    return this.httpClient.get(`${this.base_URL}/producers/compras/pedidos/ingredientes/${id_pedido}`);
+  }
+
+  PresentacionesEsenciasAdquiridasPedido (id_pedido:number)
+  {
+    return this.httpClient.get(`${this.base_URL}/producers/compras/pedidos/esencias/${id_pedido}`);
+  }
+
+  DetEnvioPedido (id_pedido:number)
+  {
+
   }
 
 
