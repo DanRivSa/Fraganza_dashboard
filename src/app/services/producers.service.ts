@@ -3,7 +3,9 @@ import {HttpClient} from '@angular/common/http';
 import {EscalaModel} from '../models/EscalaModel';
 import {CriterioModel} from '../models/CriterioModel';
 import {PedidoModel} from '../models/PedidoModel';
+import {RenovacionContratoModel} from '../models/RenovacionContratoModel';
 import {DetPresentacionModel} from '../models/DetPresentacionModel';
+import {ResultadoModel} from '../models/Resultado';
 
 @Injectable({
   providedIn: 'root'
@@ -165,9 +167,9 @@ export class ProducersService
     return this.httpClient.post(`${this.base_URL}/guardar_resultado/inicial/${id_prod}`,{id_prov,resultado});
   }
 
-  GuardarResultadoAnual(id_prod:number,id_prov:number,resultado:number)
+  GuardarResultado(id_prod:number,resultado:ResultadoModel)
   {
-    return this.httpClient.post(`${this.base_URL}/guardar_resultado/anual/${id_prod}`,{id_prov,resultado});
+    return this.httpClient.post(`${this.base_URL}/guardar_resultado/${id_prod}`,resultado);
   }
 
   //PRUEBA
@@ -193,5 +195,13 @@ export class ProducersService
     return this.httpClient.get(`${this.base_URL}/producers/compras/contratos/detalle_contrato/pedido/generar_pedido/det_pedido/${numero_contrato}`);
   }
 
+  RenovarContrato(id_prod:number,contrato:RenovacionContratoModel)
+  {
+    return this.httpClient.post(`${this.base_URL}/renovar/contrato/${id_prod}`,contrato);
+  }
 
+  FechaParaRenovacion(num_c:number)
+  {
+    return this.httpClient.get(`${this.base_URL}/fecha_renovacion/${num_c}`);
+  }
 }

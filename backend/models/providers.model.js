@@ -60,6 +60,9 @@ class ProviderModel
 
     }
 
+    /*select (select extract (day from  ((c.fecha_emision + INTERVAL '365 day') - CURRENT_DATE))) as days, c.numero_contrato, c.id_prov, t.nombre_prov from ada_contrato c FULL OUTER JOIN ada_renueva r on c.numero_contrato = r.numero_contrato INNER JOIN ada_proveedor t on t.id_prov = c.id_prov where (select extract (day from  ((c.fecha_emision + INTERVAL '365 day') - CURRENT_DATE))) between 1 and 90  and c.cancelado is not true and (r.numero_contrato is null) and c.id_prod =$1 (select extract (day from  ((r.fecha + INTERVAL '365 day') - CURRENT_DATE))) between 1 and 90 an id_prod=$1
+    NO SE PUEDE USAR INTERVAL AHI*/
+
     async GetContratosVigentes(id)
     {
         const db_res = await db.query ('SELECT * from ada_contratos_proveedor_vigente where id_prov =$1',[id]);

@@ -160,6 +160,17 @@ class ProducersController
       return res.json(db_res.rows);
     }
 
+    RenovarContrato = async (req,res)=>
+    {
+      let id_prod = req.params.id;
+      let id_prov = req.body.id_prov;
+      let fecha = req.body.fecha;
+      console.log(req.body);
+      let numero_contrato = req.body.numero_contrato;
+      let db_res = await model.RenovarContrato(id_prod,id_prov,numero_contrato,fecha);
+      res.json(db_res.rows);
+    }
+
     //Métodos modulo de compras
     GetContratosVigentes = async (req,res)=>
     {
@@ -242,17 +253,15 @@ class ProducersController
       db_res = await model.ProducersController.DescuentoContrato(numero_contrato);
       res.json(db_res);
     }
-<<<<<<< HEAD
-=======
 
->>>>>>> 6b1671d33dfb5d1fcc6ab56a5aa5aee96d885779
-    GuardarResultadoInicial = async (req,res)=>
+    GuardarResultado = async (req,res)=>
     {
+      console.log(req.body);
         let id_prod = req.params.id_prod;
-        console.log(id_prod);
         let id_prov = req.body.id_prov;
         let resultado = req.body.resultado;
-        let db_res = await model.GuardarResultadoInicial(id_prod,id_prov,resultado);
+        let tipo= req.body.tipo_eval;
+        let db_res = await model.GuardarResultado(id_prod,id_prov,resultado,tipo);
         res.json(db_res.rows);
     }
 
@@ -264,6 +273,13 @@ class ProducersController
         let resultado = req.body.resultado;
         let db_res = await model.GuardarResultadoAnual(id_prod,id_prov,resultado);
         res.json(db_res.rows);
+    }
+
+    ObtenerFechaParaRenovacion= async (req,res)=>
+    {
+      let numero_contrato = req.params.numero_contrato;
+      let db_res = await model.ObtenerFechaParaRenovar(numero_contrato);
+      res.json(db_res.rows);
     }
 
   }

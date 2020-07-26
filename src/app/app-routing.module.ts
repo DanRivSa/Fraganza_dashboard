@@ -30,7 +30,7 @@ const routes: Routes =
   {path:'formula_inicial', component:FormulaInicialComponent},
   {path: 'contrato/provider',component:ContratosProvComponent},
   {path: 'e_anual_prov',component:EvAnualProvComponent},
-  {path: 'evaluar_Anual/:id', component:EvaluacionAnualComponent},
+  {path: 'evaluar_Anual/:id/:num', component:EvaluacionAnualComponent},
   {path:'compras',component:ContratoComponent},
   {path:'compras/contratos/detalle/:contrato/generar_pedido/:id_proveedor', component: CrearPedidoComponent},
   {path:'compras/generar_pedido/:id/contrato/:contrato', component:CrearPedidoComponent},

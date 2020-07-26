@@ -48,7 +48,7 @@ class ProducersModel
 
     async ObtenerCriterioSucces(numero_contrato)
     {
-        const db_res = await db.query('SELECT (((SELECT count(estatus)::float FROM ada_pedido where estatus =$2 and numero_contrato1=$1)/(SELECT count(estatus)::float FROM ada_pedido where numero_contrato1=$1))*100)as resultado',[numero_contrato]);
+        const db_res = await db.query('SELECT (((SELECT count(estatus)::float FROM ada_pedido where estatus =$2 and numero_contrato1=$1)/(SELECT count(estatus)::float FROM ada_pedido where numero_contrato1=$1))*100)as resultado',[numero_contrato,'enviado']);
         return db_res;
     }
 
@@ -194,9 +194,9 @@ class ProducersModel
      }
 
     //resultado de evaluaciones
-    async GuardarResultadoInicial(id_prod,id_prov,resultado)
+    async GuardarResultado(id_prod,id_prov,resultado,tipo)
     {
-      const db_res = await db.query('INSERT INTO ada_resutado_eval (fecha,id_prov,id_prod,resultado,tipo_eval) VALUES (CURRENT_DATE,$1,$2,$3,$4)',[id_prov,id_prod,resultado,'i']);
+      const db_res = await db.query('INSERT INTO ada_resutado_eval (fecha,id_prov,id_prod,resultado,tipo_eval) VALUES (CURRENT_DATE,$1,$2,$3,$4)',[id_prov,id_prod,resultado,tipo]);
       return db_res;
     }
 
@@ -250,8 +250,19 @@ class ProducersModel
        return db_res;
      }
 
+     async RenovarContrato(id_prod,id_prov,num,fecha)
+     {
+       const db_res = await db.query('INSERT INTO ada_renueva (id_prov,id_prod,numero_contrato,fecha) VALUES ($1,$2,$3,$4)',[id_prov,id_prod,num,fecha]);
+       return db_res;
+     }
 
+     async ObtenerFechaParaRenovar(numero_contrato)
+     {
+       const db_res = await db.query('select fecha_emision from ada_contrato where numero_contrato = $1',[numero_contrato]);
+       return db_res;
+     }
 
+     
 }
 
 
