@@ -62,7 +62,7 @@ export class DetallePedidoComponent implements OnInit {
       })
     }
 
-
+/*
     CambiarEstatusPedido(opcion:number){
       switch (opcion) {
         case 1: //Enviado
@@ -84,6 +84,6 @@ export class DetallePedidoComponent implements OnInit {
       }
     };
 
-
+*/
 
 }
