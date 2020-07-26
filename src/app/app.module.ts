@@ -70,10 +70,7 @@ import { ContratoProvDetalleComponent } from './components/proveedores/contrato-
     CrearContratoComponent,
     PedidosComponent,
     ContratoProvDetalleComponent,
-<<<<<<< HEAD
-=======
     DetalleContratoComponent,
->>>>>>> 160dac060aa626a90218c2aa71210b64f4bbda39
 
 
 
