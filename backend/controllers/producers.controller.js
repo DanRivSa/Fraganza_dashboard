@@ -167,6 +167,7 @@ class ProducersController
       let db_res = await model.CancelarContrato(numero_contrato,descripcion);
       return res.json(db_res.rows);
     }
+
     RenovarContrato = async (req,res)=>
     {
       let id_prod = req.params.id;
@@ -311,6 +312,21 @@ class ProducersController
       let db_res = await model.ObtenerFechaParaRenovar(numero_contrato);
       res.json(db_res.rows);
     }
+
+    DetPagoPedido = async (req,res)=>
+    {
+      let id_pedido = req.params.id_pedido;
+      let db_res = await model.DetPagoPedido(id_pedido);
+      res.json(db_res.rows);
+    }
+
+    GetEstatusPedido = async (req,res)=>
+    {
+      let id_pedido = req.params.id_pedido;
+      let db_res = await model.GetEstatusPedido(id_pedido);
+      res.json(db_res);
+    }
+
 
   }
 

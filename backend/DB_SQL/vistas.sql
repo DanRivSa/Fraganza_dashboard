@@ -236,3 +236,19 @@ AND r.id_prov IN (SELECT id_prov FROM ada_prov_mem_activa)));
 		from ada_pedido t
 		INNER JOIN ada_contratacion_me a on a.numero_contrato=t.numero_contrato1
 		INNER JOIN ada_pais p on p.id_pais=t.id_pais
+
+-- Vista para contratos candidatos a renovacion
+
+create or replace view ada_renovar_contratos as
+select (select extract
+		  (day from  ((c.fecha_emision + INTERVAL '365 day') - CURRENT_DATE)))
+		  as days, c.numero_contrato, c.id_prov, t.nombre_prov,c.id_prod
+		  from ada_contrato c
+		  FULL OUTER JOIN ada_renueva r on c.numero_contrato = r.numero_contrato
+		  INNER JOIN ada_proveedor t on t.id_prov = c.id_prov
+		  where (select extract
+		  (day from  ((c.fecha_emision + INTERVAL '365 day') - CURRENT_DATE)))
+		  between 1 and 90  and c.cancelado is not true and c.acuerdo is true and (r.numero_contrato is null)
+		or (select extract
+		  (day from  ((r.fecha + INTERVAL '365 day') - CURRENT_DATE)))
+		  between 1 and 90

@@ -20,6 +20,7 @@ router.get('/providers/ingredientes/:id',providersController.ObtenerIngredientes
 router.get('/providers/alt_envio/:id',providersController.ObtenerAlternativasEnvio);
 router.get('/providers/alt_pago/:id',providersController.ObtenerAlternativasPago);
 router.get('/providers/cuotas/:id',providersController.ObtenerInfoPagoCuotas);
+router.put('/providers/pedidos/detalle_pedido/rechazar_pedido/:id_pedido',providersController.RechazarPedido);
 
 //presentaciones
 router.get('/providers/esencia/:id',providersController.ObtenerPresentacionesEsencia);
@@ -66,7 +67,7 @@ router.put('/producers/cerrar_inicial/:id',producersController.CerrarInicial);
 //Cerrar historicos tipo Anual
 router.put('/producers/cerrar_anual/:id',producersController.CerrarAnual);
 router.put('/producers/anual/:id',producersController.PutCriteriosAnual);
-router.get('/producers/renovar_contratos/:id',producersController.GetContratosPorVencer);
+router.get('/producers/renovar_contratos/candidatos/:id',producersController.GetContratosPorVencer);
 
 //rutas Daniel
 router.post('/guardar_resultado/:id_prod',producersController.GuardarResultadoAnual);
@@ -106,4 +107,8 @@ router.get('/producers/compras/pedidos/ingredientes/:id_pedido',producersControl
 router.get('/producers/compras/pedidos/esencias/:id_pedido',producersController.PresentacionesEsenciasAdquiridasPedido);
 
 router.get('/producers/compras/pedidos/detalle_envio/:id_pedido',producersController.DetEnvioPedido);
+
+router.get('/producers/compras/pedidos/detalle_pago/:id_pedido',producersController.DetPagoPedido);
+
+router.get('/producers/compras/pedidos/estatus/:id_pedido',producersController.GetEstatusPedido);
 
