@@ -253,7 +253,6 @@ class ProducersModel
        return db_res;
      }
 
-<<<<<<< HEAD
      async PresentacionesEsenciasAdquiridasPedido(id_pedido)
      {
        const db_res = await db.query('select * from ESENCIAS_CONTRATADOS_PEDIDO where id_pedido=$1',[id_pedido]);
@@ -267,13 +266,11 @@ class ProducersModel
 
 
 
-=======
      async RenovarContrato(id_prod,id_prov,num,fecha)
      {
        const db_res = await db.query('INSERT INTO ada_renueva (id_prov,id_prod,numero_contrato,fecha) VALUES ($1,$2,$3,$4)',[id_prov,id_prod,num,fecha]);
        return db_res;
      }
->>>>>>> ae3c4836c400af4392ca4b88dfa5c0539fba6472
 
      async ObtenerFechaParaRenovar(numero_contrato)
      {
@@ -281,7 +278,7 @@ class ProducersModel
        return db_res;
      }
 
-     
+
 }
 
 
