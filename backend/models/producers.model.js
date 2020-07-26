@@ -192,9 +192,14 @@ class ProducersModel
 
 
 
-     async ObtenerPedidos(id_proveedor,id_productor)
+     async ObtenerPedidosProvYProd(id_proveedor,id_productor)
      {
        const db_res = await db.query('select * from ada_pedido Where id_prod1 =$1 and id_prov1 =$2 ORDER BY estatus',[id_proveedor,id_productor]);
+       return db_res;
+     }
+     async ObtenerPedidos(id)
+     {
+       const db_res = await db.query('select * from ada_pedido where id_prod1= $1 ORDER BY estatus',[id]);
        return db_res;
      }
 
