@@ -3,8 +3,13 @@ import {HttpClient} from '@angular/common/http';
 import {EscalaModel} from '../models/EscalaModel';
 import {CriterioModel} from '../models/CriterioModel';
 import {PedidoModel} from '../models/PedidoModel';
+<<<<<<< HEAD
 import {QuejaModel} from '../models/QuejaModel';
+=======
+import {RenovacionContratoModel} from '../models/RenovacionContratoModel';
+>>>>>>> ae3c4836c400af4392ca4b88dfa5c0539fba6472
 import {DetPresentacionModel} from '../models/DetPresentacionModel';
+import {ResultadoModel} from '../models/Resultado';
 
 @Injectable({
   providedIn: 'root'
@@ -127,12 +132,12 @@ export class ProducersService
   //Pedidos
   GetEsenciasContratadas (id_proveedor:number, numero_contrato:number)
   {
-    return this.httpClient.get(`${this}/producers/contratos/detalle_contrato/${id_proveedor}/esencias/${numero_contrato}`);
+    return this.httpClient.get(`${this.base_URL}/producers/contratos/detalle_contrato/${id_proveedor}/esencias/${numero_contrato}`);
   }
 
   GetIngredientesContratados (id_proveedor:number, numero_contrato:number)
   {
-    return this.httpClient.get(`${this}/producers/contratos/detalle_contrato/${id_proveedor}/ingredientes/${numero_contrato}`);
+    return this.httpClient.get(`${this.base_URL}/producers/contratos/detalle_contrato/${id_proveedor}/ingredientes/${numero_contrato}`);
   }
 
   metodoPagoContratados (id_proveedor:number, numero_contrato:number)
@@ -166,9 +171,9 @@ export class ProducersService
     return this.httpClient.post(`${this.base_URL}/guardar_resultado/inicial/${id_prod}`,{id_prov,resultado});
   }
 
-  GuardarResultadoAnual(id_prod:number,id_prov:number,resultado:number)
+  GuardarResultado(id_prod:number,resultado:ResultadoModel)
   {
-    return this.httpClient.post(`${this.base_URL}/guardar_resultado/anual/${id_prod}`,{id_prov,resultado});
+    return this.httpClient.post(`${this.base_URL}/guardar_resultado/${id_prod}`,resultado);
   }
 
   CancelarContrato(numero_contrato:number,descripcion:QuejaModel)
@@ -214,5 +219,13 @@ export class ProducersService
 
   }
 
+  RenovarContrato(id_prod:number,contrato:RenovacionContratoModel)
+  {
+    return this.httpClient.post(`${this.base_URL}/renovar/contrato/${id_prod}`,contrato);
+  }
 
+  FechaParaRenovacion(num_c:number)
+  {
+    return this.httpClient.get(`${this.base_URL}/fecha_renovacion/${num_c}`);
+  }
 }

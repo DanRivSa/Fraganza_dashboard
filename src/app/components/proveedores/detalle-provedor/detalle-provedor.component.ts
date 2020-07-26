@@ -3,6 +3,7 @@ import {ProveedoresService} from '../../../services/proveedores.service';
 import {ActivatedRoute, RouterLink} from '@angular/router';
 import {ProducersService } from '../../../services/producers.service';
 import { UserCompanyService } from 'src/app/services/global/user-company.service';
+import { ResultadoModel } from 'src/app/models/Resultado';
 
 @Component({
   selector: 'app-detalle-provedor',
@@ -99,12 +100,21 @@ export class DetalleProvedorComponent implements OnInit {
     if(this.CalificacionFinal>=aprob)
     {
       this.aprobado = true;
-      this.servicioProductores.GuardarResultadoInicial(UserCompanyService.userCompanyID,this.id,this.CalificacionFinal).subscribe(res=>
-        {
-          console.log('resultado guardado');
-        });
       //guardar calificacion en la bd
     }
+    this.servicioProductores.GuardarResultado(UserCompanyService.userCompanyID,this.CrearResultado()).subscribe(res=>
+      {
+        console.log('resultado guardado');
+      });
+  }
+
+  CrearResultado():ResultadoModel
+  {
+    let r= new ResultadoModel();
+    r.id_prov = this.id;
+    r.resultado = Math.round(this.CalificacionFinal);
+    r.tipo_eval = 'i';
+    return r;
   }
 
 }

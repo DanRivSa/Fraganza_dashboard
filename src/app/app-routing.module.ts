@@ -30,18 +30,24 @@ const routes: Routes =
   {path:'formula_inicial', component:FormulaInicialComponent},
   {path: 'contrato/provider',component:ContratosProvComponent},
   {path: 'e_anual_prov',component:EvAnualProvComponent},
-  {path: 'evaluar_Anual/:id', component:EvaluacionAnualComponent},
+  {path: 'evaluar_Anual/:id/:num', component:EvaluacionAnualComponent},
   {path:'compras',component:ContratoComponent},
   {path:'compras/contratos/detalle/:contrato/generar_pedido/:id_proveedor', component: CrearPedidoComponent},
   {path:'compras/generar_pedido/:id/contrato/:contrato', component:CrearPedidoComponent},
   {path:'compras/contratos/:id/detalle/:contrato', component:DetalleContratoComponent},
   {path:'compras/contratos/:id/detalle/:contrato/generar_pedido', component: CrearPedidoComponent},
   {path:'compras/contratos/:id/detalle/:contrato/generar_pedido/id_pedido',component:DetallePedidoComponent},
+  {path:'compras/contratos/:id/detalle/:contrato/generar_pedido/id_pedido',component:DetallePedidoComponent},
   {path: 'contrato/producer', component:ContratoProduComponent},
   {path:'crear/contrato/con_proveedor/:id', component:CrearContratoComponent},
+<<<<<<< HEAD
+=======
+
+>>>>>>> ae3c4836c400af4392ca4b88dfa5c0539fba6472
   {path:'compras/contratos/detalle/:id/:contrato', component:DetalleContratoComponent},
   {path:'compras/contratos/:id/detalle/:contrato/generar_pedido', component: CrearPedidoComponent},
   {path: 'contrato/producer', component:ContratoProduComponent},
+
 ];
 
 @NgModule({

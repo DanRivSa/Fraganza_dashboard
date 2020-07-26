@@ -69,9 +69,10 @@ router.put('/producers/anual/:id',producersController.PutCriteriosAnual);
 router.get('/producers/renovar_contratos/:id',producersController.GetContratosPorVencer);
 
 //rutas Daniel
-router.post('/guardar_resultado/inicial/:id_prod',producersController.GuardarResultadoInicial);
-router.post('/guardar_resultado/anual/:id_prod',producersController.GuardarResultadoAnual);
+router.post('/guardar_resultado/:id_prod',producersController.GuardarResultadoAnual);
+router.post('/renovar/contrato/:id',producersController.RenovarContrato);
 router.get('/producers/contratos/renovacion/:contrato',producersController.ObtenerCriterioSucces);
+router.get('/fecha_renovacion/:numero_contrato',producersController.ObtenerFechaParaRenovacion);
 //RutasModuloCompras
 //Obtener contratos vigentes
 router.get('/producers/contratos/:id',producersController.GetContratosVigentes);
