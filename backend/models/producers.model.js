@@ -264,6 +264,13 @@ class ProducersModel
        return db_res;
      }
 
+     async DetPagoPedido (id_pedido){
+       const db_res = await db.query('select case metodo_pago when $1 then $2 when $3 then $4 end metodo_pago from ada_pedido where id_pedido=$5',['c','Pago por cuotas','p','Pago Parcial',id_pedido]);
+       return db_res;
+     }
+
+
+
 
 
      async RenovarContrato(id_prod,id_prov,num,fecha)

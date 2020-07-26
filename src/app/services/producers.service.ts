@@ -216,7 +216,7 @@ export class ProducersService
 
   DetEnvioPedido (id_pedido:number)
   {
-
+    return this.httpClient.get(`${this,this.base_URL}/producers/compras/pedidos/detalle_envio/${id_pedido}`);
   }
 
   RenovarContrato(id_prod:number,contrato:RenovacionContratoModel)

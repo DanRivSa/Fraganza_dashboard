@@ -104,3 +104,5 @@ router.get('/producers/compras/pedidos/esencias/:id_pedido',producersController.
 
 router.get('/producers/compras/pedidos/detalle_envio/:id_pedido',producersController.DetEnvioPedido);
 
+router.get('/producers/compras/pedidos/detalle_pago/:id_pedido',producersController.DetPagoPedido);
+
