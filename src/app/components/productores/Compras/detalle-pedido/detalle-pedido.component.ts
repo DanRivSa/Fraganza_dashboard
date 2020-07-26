@@ -15,8 +15,8 @@ export class DetallePedidoComponent implements OnInit {
   id_pedido:number;
   id_productor:number = UserCompanyService.userCompanyID;
   id_proveedor:number;
-  metodo_envio:[any];
-  metodo_pago:[any];
+  metodo_envio:any[]
+  metodo_pago:any[];
   id_pais:number;
   total:number;
   estatus:string;
@@ -44,6 +44,15 @@ export class DetallePedidoComponent implements OnInit {
         this.DetPresentacionEsencias = res as any[];
       });
 
+      this.productores.DetEnvioPedido(this.id_pedido).subscribe(res=>{
+        this.metodo_envio = res as any[];
+      })
+
+
     }
+
+
+
+
 
 }

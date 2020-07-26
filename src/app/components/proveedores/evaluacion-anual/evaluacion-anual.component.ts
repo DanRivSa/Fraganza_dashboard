@@ -92,7 +92,7 @@ export class EvaluacionAnualComponent implements OnInit
     this.servicio.RenovarContrato(UserCompanyService.userCompanyID,this.CrearRenovacion()).subscribe(res=>
       {
         alert(`Se Creo Renovacion del contrato: ${this.num_contrato}`);
-      });
+     });
   }
 
   CrearRenovacion():RenovacionContratoModel
