@@ -1,3 +1,5 @@
+<app-navbar></app-navbar>
+
 
 <header class="bg-dark text-white">
     <div class="container text-center">
@@ -8,9 +10,11 @@
       <br>
     </div>
   </header>
-<div class="card">
 
+  <br>
 
+<div class="row">
+<div class="col-md-6">
 
 <div class="container card">
     <header class="bg-dark text-white">
@@ -32,78 +36,109 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let m of metodoEnvioContratados" >
-                <th scope="row">{{m.nombre_pais}}</th>
-                <td>{{m.case}}</td>
-                <td>{{m.porc_contratado}} %</td>
+              <tr *ngFor="let e of metodoEnvioContratados" >
+                <th scope="row">{{e.nombre_pais}}</th>
+                <td>{{e.case}}</td>
+                <td>{{e.porc_contratado}} %</td>
               </tr>
             </tbody>
           </table>
     
     </div>
     <br><br>
-    <header class="bg-dark text-white">
-        <div class="container text-center">
-    
-          <h3 class=" display-4">Alternativas De pago</h3>
-          <hr>
-          <br>
-        </div>
-    </header>
 
-    <div class="container text-center ">
-
-              <tr *ngFor="let m of metodo_pago" >
-                <h3>{{m.metodo_pago}}</h3>
-              </tr>
-    </div>
-    <div *ngIf="esencias[0] != null ">
-        <h1 class="text-center">Esencias</h1>
-    <br>
-    <div class="container text-center table-responsive ">
+      <div class="container text-center table-responsive ">
         <table class="table table-hover ">
           <thead class="table-dark">
             <tr>
-              <th scope="col">CAS</th>
-              <th scope="col">Nombre comercial</th>
-              <th scope="col">Nombre quimico</th>
+              <th scope="col">Metodo De Pago</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let es of esencias">
-              <th scope="row"> {{es.cas}} </th>
-                <td>{{es.nombre_comercial}}</td>
-                <td>{{es.nombre_quimico}}</td>
+            <tr *ngFor="let p of metodoPagoContratados" >
+              <td>{{p.case}}</td>   
             </tr>
           </tbody>
         </table>
     
-      </div>
+    
+         <hr>
+        </div>       
+    </div>
+
+</div>
+<div class="col-md-6">
+<header class="bg-dark text-white">
+    <div class="container text-center">
+  
+      <h3 class=" display-4">Catálogo</h3>
       <hr>
+      <br>
     </div>
-    <div *ngIf="ingredientes[0] != null">
-        <h1 class="text-center">Ingredientes</h1>
-        <br>
-        <div class="container text-center table-responsive">
-            <table class="table table-hover">
-              <thead class="table-dark">
-                <tr>
-                  <th scope="col">CAS</th>
-                  <th scope="col">Nombre Comercial</th>
-                  <th scope="col">Nombre Químico</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let ing of ingredientes">
-                  <th scope="row">
-                      {{ing.cas_oi}}
-                  <td>{{ing.nombre_comercial}}</td>
-                  <td>{{ing.nombre_quimico}}</td>
-                </tr>
-              </tbody>
-            </table>
-    
-          </div>
-    
+  </header>
+  <br>
+  <div *ngIf="EsenciasContratadas[0] != null ">
+      <h1 class="text-center">Esencias</h1>
+  <br>
+  
+  <div class="container text-center table-responsive ">
+      <table class="table table-hover ">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">CAS</th>
+            <th scope="col">Nombre comercial</th>
+            <th scope="col">Nombre quimico</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let es of EsenciasContratadas">
+            <th scope="row">
+                  {{es.cas}}
+                
+              </th>
+              <td>{{es.nombre_comercial}}</td>
+              <td>{{es.nombre_quimico}}</td>
+          </tr>
+        </tbody>
+      </table>
+  
     </div>
+    <hr>
+  </div>
+  
+  
+  <div *ngIf="IngredientesContratados[0] != null">
+      <h1 class="text-center">Ingredientes</h1>
+      <br>
+      <div class="container text-center table-responsive">
+          <table class="table table-hover">
+            <thead class="table-dark">
+              <tr>
+                <th scope="col">CAS</th>
+                <th scope="col">Nombre Comercial</th>
+                <th scope="col">Nombre Químico</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let ing of IngredientesContratados">
+                <th scope="row">
+                    {{ing.cas_oi}}
+                  
+                </th>
+                <td>{{ing.nombre_comercial}}</td>
+                <td>{{ing.nombre_quimico}}</td>
+              </tr>
+            </tbody>
+          </table>
+  
+        </div>
+  
+  </div>
+  
+
+
+
+
+
+
 </div>
