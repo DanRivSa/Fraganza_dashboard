@@ -221,10 +221,10 @@ export class ProducersService
 
   }
 
- // RenovarContrato(id_prod:number,contrato:RenovacionContratoModel)
- //{
- //  return this.httpClient.post(`${this.base_URL}/renovar/contrato/${id_prod}`,contrato);
-// }
+  RenovarContrato(id_prod:number,contrato:RenovacionContratoModel)
+ {
+   return this.httpClient.post(`${this.base_URL}/renovar/contrato/${id_prod}`,contrato);
+}
 
   FechaParaRenovacion(num_c:number)
   {
