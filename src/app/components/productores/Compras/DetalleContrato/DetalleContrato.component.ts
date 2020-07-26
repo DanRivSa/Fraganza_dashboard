@@ -5,6 +5,8 @@ import {ProducersService} from '../../../../services/producers.service';
 import { UserCompanyService } from 'src/app/services/global/user-company.service';
 import {NgForm,NgModel} from '@angular/forms';
 import {CancelacionModel} from '../../../../models/CancelacionModel';
+import { stringify } from '@angular/compiler/src/util';
+import { QuejaModel } from 'src/app/models/QuejaModel';
 
 @Component({
   selector: 'app-detalle-contrato',
@@ -25,7 +27,7 @@ export class DetalleContratoComponent implements OnInit {
   //motivo de cancelacion
   motivo:string;
 
-  constructor(private productor:ProducersService, private route: ActivatedRoute) { }
+  constructor(private productor:ProducersService, private route: ActivatedRoute,private proveedor:ProveedoresService) { }
 
   ngOnInit(): void {
 
@@ -61,14 +63,41 @@ export class DetalleContratoComponent implements OnInit {
 
   CancelarContrato()
   {
-
+    this.productor.CancelarContratoDef(this.numero_contrato,this.CrearMotivo()).subscribe(res=>
+      {
+        console.log('motivo guardado');
+        alert('contrato cancelado');
+      });
   }
 
   CrearMotivo():CancelacionModel
   {
     let can = new CancelacionModel();
-    can.motivo = this.motivo;
+    can.motivo_cancelacion = this.motivo;
     return can;
   }
 
+  
+
+
+  ObtenerPresentaciones(codigo:number,opcion:number)
+  {
+    switch (opcion) {
+      case 1: //esencias
+        this.proveedor.ObtenerPresentacionesEsencia(codigo).subscribe(res=>
+          {
+            this.PresentacionesContratadas = res as any[];
+          });
+      break;
+      case 2: //ingredientes
+        this.proveedor.ObtenerPresentacionesingrediente(codigo).subscribe(res=>
+          {
+            this.PresentacionesContratadas = res as any[];
+          });
+       break;
+
+      default:
+        break;
+    }
+  }
 }

@@ -1,4 +1,4 @@
 export class CancelacionModel
 {
-    motivo:string;
+    motivo_cancelacion:string;
 }
