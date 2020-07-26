@@ -7,6 +7,7 @@
       <h3 class=" display-4">Contrato</h3>
       <h3 class=" display-6">{{numero_contrato}}</h3>
       <hr>     
+      <button class="btn btn-outline-danger" data-toggle="modal" data-target="#cancelar">Cancelar Contrato</button>
       <br>
     </div>
   </header>
@@ -141,4 +142,35 @@
 
 
 
+</div>
+
+
+<!--CANCELAR CONTRATO-->
+<div class="modal fade" id="cancelar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" *ngIf="aprobado == false">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-white bg-danger">
+        <h5 class="modal-title" id="exampleModalLongTitle">Cancelar Contrato</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body bg-dark">
+        <div class="container text-center">
+            <hr>
+            <form>
+              <div class="form-group">
+                <label for="exampleFormControlTextarea1">Indique motivo de cancelacion: </label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="4" placeholder="Motivo por el cual quiere cancelar el contrato..." name="zona" #zonaInput="ngModel" [(ngModel)] = "motivo"></textarea>
+              </div>
+            </form>
+        </div>
+      </div>
+      <div class="modal-footer bg-dark">
+        <div>
+          <button type="button" class="btn btn-danger" data-dismiss="modal" routerLink="/i_test_provider" (click)="">Procesar</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

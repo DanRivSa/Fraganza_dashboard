@@ -3,6 +3,8 @@ import {ActivatedRoute} from '@angular/router';
 import {ProveedoresService} from '../../../../services/proveedores.service';
 import {ProducersService} from '../../../../services/producers.service';
 import { UserCompanyService } from 'src/app/services/global/user-company.service';
+import {NgForm,NgModel} from '@angular/forms';
+import {CancelacionModel} from '../../../../models/CancelacionModel';
 
 @Component({
   selector: 'app-detalle-contrato',
@@ -19,6 +21,9 @@ export class DetalleContratoComponent implements OnInit {
   numero_contrato:number;
   id_productor:number = UserCompanyService.userCompanyID;
   PresentacionesContratadas: any[];
+
+  //motivo de cancelacion
+  motivo:string;
 
   constructor(private productor:ProducersService, private route: ActivatedRoute) { }
 
@@ -52,6 +57,18 @@ export class DetalleContratoComponent implements OnInit {
     })
 
 
+  }
+
+  CancelarContrato()
+  {
+
+  }
+
+  CrearMotivo():CancelacionModel
+  {
+    let can = new CancelacionModel();
+    can.motivo = this.motivo;
+    return can;
   }
 
 }
