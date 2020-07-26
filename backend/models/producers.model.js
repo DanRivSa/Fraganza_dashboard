@@ -39,6 +39,11 @@ class ProducersModel
         return db_res;
     }
 
+    async CancelarContrato(numero_contrato)
+    {
+      const db_res= await db.query('UPDATE ADA_CONTRATO SET estatus =$2 where numero_contrato=$1')
+    }
+
 
     async ObtenerPagoGeoVigente(id)
     {
@@ -48,7 +53,7 @@ class ProducersModel
 
     async ObtenerCriterioSucces(numero_contrato)
     {
-        const db_res = await db.query('SELECT (((SELECT count(estatus)::float FROM ada_pedido where estatus =$2 and numero_contrato1=$1)/(SELECT count(estatus)::float FROM ada_pedido where numero_contrato1=$1))*100)as resultado',[numero_contrato]);
+        const db_res = await db.query('SELECT (((SELECT count(estatus)::float FROM ada_pedido where estatus =$2 and numero_contrato1=$1)/(SELECT count(estatus)::float FROM ada_pedido where numero_contrato1=$1))*100)as resultado',[numero_contrato,'enviado']);
         return db_res;
     }
 

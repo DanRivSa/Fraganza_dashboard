@@ -18,6 +18,7 @@ export class DetalleContratoComponent implements OnInit {
   id_proveedor:number;
   numero_contrato:number;
   id_productor:number = UserCompanyService.userCompanyID;
+  PresentacionesContratadas: any[];
 
   constructor(private productor:ProducersService, private route: ActivatedRoute) { }
 
