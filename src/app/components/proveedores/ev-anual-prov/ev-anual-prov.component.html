@@ -19,18 +19,18 @@
   <table class="table table-hover ">
     <thead class="table-dark">
       <tr>
-        <th scope="col">#</th>
+        <th scope="col">#Contrato</th>
         <th scope="col">Nombre</th>
         <th scope="col">Operaciones</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let prov of proveedores">
-        <th scope="row">{{prov.id_prov}}</th>
+        <th scope="row">{{prov.numero_contrato}}</th>
         <td>{{prov.nombre_prov}}</td>
         <td>
           <div class="btn-group mr-2" role="group">
-            <button type="button" class="btn btn-success" [routerLink]="['/evaluar_Anual/',prov.id_prov]">Evaluar</button>
+            <button type="button" class="btn btn-success" [routerLink]="['/evaluar_Anual/',prov.id_prov,prov.numero_contrato]">Evaluar</button>
           </div>
         </td>
       </tr>
