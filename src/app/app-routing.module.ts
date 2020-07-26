@@ -44,6 +44,7 @@ const routes: Routes =
   {path:'compras/contratos/detalle/:id/:contrato', component:DetalleContratoComponent},
   {path:'compras/contratos/:id/detalle/:contrato/generar_pedido', component: CrearPedidoComponent},
   {path: 'contrato/producer', component:ContratoProduComponent},
+
 ];
 
 @NgModule({

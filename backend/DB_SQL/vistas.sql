@@ -20,18 +20,20 @@ SELECT m.id_prod, p.nombre_prod, m.fecha_inicio, m.fecha_fin
 FROM ada_membresia m, ada_productor p
 WHERE p.id_prod = m.id_prod;
 
+/*
 --VER CONTRATOS EN REGLA: vigentes, no cancelados
 CREATE VIEW ada_contratos_en_regla AS
 SELECT id_prov,id_prod,numero_contrato FROM ada_contrato
 WHERE (CURRENT_DATE) < (fecha_emision + INTERVAL '365 day')
 AND acuerdo IS TRUE
-AND (cancelado IS FALSE OR cancelado IS NULL)
+AND (cancelado IS NULL)
 AND id_prov IN (SELECT id_prov FROM ada_prov_mem_activa)
 UNION
 SELECT DISTINCT id_prov,id_prod,numero_contrato FROM ada_renueva
 WHERE (CURRENT_DATE) < (fecha + INTERVAL '365 day')
 AND id_prov IN (SELECT id_prov FROM ada_prov_mem_activa)
 ORDER BY id_prov, id_prod;
+*/
 
 --Vista bonita de las presentaciones de tipo ingrediente
 CREATE VIEW ada_pres_i_e AS
@@ -139,15 +141,6 @@ from ada_contratacion_prod p
 INNER JOIN ada_esencia e on e.cas = p.cas;
 
 
-CREATE VIEW ADA_PRESENTACIONES_ESENCIAS_PEDIDO AS
-SELECT p.sku, p.cas, p.nombre_etiqueta NOMBRE,p.precio,
-p.contenido_neto ||''|| p.unidad_medida AS contenido, p.cantidad_perpack
-from ada_presentacion_e p where cas_oi is null;
-
-
-
-
-
 CREATE VIEW ADA_PRESENTACIONES_INGREDIENTE AS
 SELECT p.sku, p.cas_oi, p.nombre_etiqueta NOMBRE,
 to_char(p.precio, '$99990.00') PRECIO,
@@ -161,21 +154,21 @@ from ada_contratacion_prod p
 INNER JOIN ADA_OTROS_ING e on e.cas_oi = p.cas_oi;
 
 
-CREATE OR REPLACE FUNCTION CERRAR_ANUAL (id_PROD integer) returns void
+CREATE OR REPLACE FUNCTION CERRAR_ANUAL (integer) returns void
 AS
 $$
-UPDATE ADA_ESCALA SET FECHA_FIN=CURRENT_DATE WHERE ID_PROD=ID_PROD AND TIPO_USO='a';
-UPDATE ADA_EVAL_CRITERIO SET FECHA_FIN=CURRENT_DATE WHERE ID_CRITERIO = 4 AND ID_PROD = ID_PROD;
+UPDATE ADA_ESCALA SET FECHA_FIN=CURRENT_DATE WHERE ID_PROD=$1 AND TIPO_USO='a';
+UPDATE ADA_EVAL_CRITERIO SET FECHA_FIN=CURRENT_DATE WHERE ID_CRITERIO = 4 AND ID_PROD = $1;
 $$
 language sql
 
 
 
-CREATE OR REPLACE FUNCTION CERRAR_INICIAL (id_PROD integer) returns void
+CREATE OR REPLACE FUNCTION CERRAR_INICIAL (integer) returns void
 AS
 $$
-UPDATE ADA_ESCALA SET FECHA_FIN=CURRENT_DATE WHERE ID_PROD=ID_PROD AND TIPO_USO='a';
-UPDATE ADA_EVAL_CRITERIO SET FECHA_FIN=CURRENT_DATE WHERE ID_CRITERIO IN(1,2,3) AND ID_PROD = ID_PROD;
+UPDATE ADA_ESCALA SET FECHA_FIN=CURRENT_DATE WHERE ID_PROD=$1 AND TIPO_USO='a';
+UPDATE ADA_EVAL_CRITERIO SET FECHA_FIN=CURRENT_DATE WHERE ID_CRITERIO IN(1,2,3) AND ID_PROD = $1;
 $$
 language sql
 
@@ -206,3 +199,17 @@ SELECT p.sku, p.cas, p.nombre_etiqueta NOMBRE,p.precio,
 p.contenido_neto ||''|| p.unidad_medida AS contenido, p.cantidad_perpack
 from ada_presentacion_e p where cas_oi is null;
 
+
+
+CREATE VIEW ada_contratos_en_regla AS
+SELECT distinct c.id_prov,c.id_prod,c.numero_contrato FROM ada_contrato c, ada_renueva r
+WHERE (CURRENT_DATE) < (fecha_emision + INTERVAL '365 day')
+AND acuerdo IS TRUE
+and ( cancelado is not true)
+AND c.id_prov IN (SELECT id_prov FROM ada_prov_mem_activa)
+UNION
+SELECT r.id_prov,r.id_prod,r.numero_contrato from ada_renueva r
+where r.numero_contrato in (SELECT c.numero_contrato
+FROM ADA_CONTRATO c where (c.acuerdo is true and c.cancelado is not true
+and		(CURRENT_DATE) < (r.fecha + INTERVAL '365 day')
+AND r.id_prov IN (SELECT id_prov FROM ada_prov_mem_activa)));

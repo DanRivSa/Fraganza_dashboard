@@ -18,6 +18,7 @@ export class DetalleContratoComponent implements OnInit {
   id_proveedor:number;
   numero_contrato:number;
   id_productor:number = UserCompanyService.userCompanyID;
+  PresentacionesContratadas: any[];
 
   constructor(private productor:ProducersService, private route: ActivatedRoute) { }
 
@@ -25,7 +26,7 @@ export class DetalleContratoComponent implements OnInit {
 
     this.route.paramMap.subscribe(params=>
       {
-        this.id_proveedor=+params.get('id_proveedor');
+        this.id_proveedor=+params.get('id');
         this.numero_contrato=+params.get('contrato');
       });
 

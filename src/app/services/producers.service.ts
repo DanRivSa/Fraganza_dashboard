@@ -128,12 +128,12 @@ export class ProducersService
   //Pedidos
   GetEsenciasContratadas (id_proveedor:number, numero_contrato:number)
   {
-    return this.httpClient.get(`${this}/producers/contratos/detalle_contrato/${id_proveedor}/esencias/${numero_contrato}`);
+    return this.httpClient.get(`${this.base_URL}/producers/contratos/detalle_contrato/${id_proveedor}/esencias/${numero_contrato}`);
   }
 
   GetIngredientesContratados (id_proveedor:number, numero_contrato:number)
   {
-    return this.httpClient.get(`${this}/producers/contratos/detalle_contrato/${id_proveedor}/ingredientes/${numero_contrato}`);
+    return this.httpClient.get(`${this.base_URL}/producers/contratos/detalle_contrato/${id_proveedor}/ingredientes/${numero_contrato}`);
   }
 
   metodoPagoContratados (id_proveedor:number, numero_contrato:number)

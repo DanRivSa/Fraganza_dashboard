@@ -81,7 +81,7 @@ module.exports = router;
 //Pedidos
 router.get('/producers/contratos/detalle_contrato/:id/esencias/:contrato',producersController.GetEsenciasContratadas);
 
-//router.get('/producers/contratos/detalle_contrato/:id/ingredientes/:contrato',producersController.GetIngredientesContratados);
+router.get('/producers/contratos/detalle_contrato/:id/ingredientes/:contrato',producersController.GetIngredientesContratados);
 
 router.get('/producers/contratos/detalle_contrato/:id/pagos/:contrato',producersController.metodoPagoContratados);
 

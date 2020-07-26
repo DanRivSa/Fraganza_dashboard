@@ -39,6 +39,11 @@ class ProducersModel
         return db_res;
     }
 
+    async CancelarContrato(numero_contrato)
+    {
+      const db_res= await db.query('UPDATE ADA_CONTRATO SET estatus =$2 where numero_contrato=$1')
+    }
+
 
     async ObtenerPagoGeoVigente(id)
     {
