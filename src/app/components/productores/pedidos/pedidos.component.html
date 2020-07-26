@@ -22,17 +22,13 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let p of pedidos">
-          <th scope="row">{{p.id_pedido}}</th>
-          <td>{{id_pedido}}</td>
-          <td>{{id_prov1}}</td>
+        <tr *ngFor="let p of pedido">
+          <th scope="row">{{id_pedido}}</th>
+          <td>{{p.id_prov1}}</td>
           <td>{{numero_contrato1}}</td>
-          <td>{{estatus}}</td>
+          <td>{{p.estatus}}</td>
           
-
-
-
-          <button type="button" class="btn btn-success " [routerLink]="['/compras/contratos/detalle/',prov.id_prov,prov.numero_contrato]">Detalle</button>
+          <button type="button" class="btn btn-success " >Detalle</button>
 
         </tr>
       </tbody>

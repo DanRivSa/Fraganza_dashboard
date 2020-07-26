@@ -19,7 +19,7 @@ export class PedidosComponent implements OnInit {
   DetPresentacion: any[];
   InformacionPago:any[];
   numero_contrato:number;
-  pedidos:any[];
+  pedido:any[];
   id:number;
 
 
@@ -29,15 +29,17 @@ export class PedidosComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.route.paramMap.subscribe(paramas=>
+    this.route.paramMap.subscribe(params=>
       {
-        this.id = +paramas.get('id');//id proveedor
+        this.id_proveedor=+params.get('id');
+        this.numero_contrato=+params.get('contrato');
       });
 
-    this.productores.PresentacionesEsenciaPedido(this.numero_contrato).subscribe(res=>{
-      this.DetPresentacion = res as any;
-    });
-    this.productores.ObtenerPedidos(this.id_productor).subscribe(res=>{
+
+//   this.productores.PresentacionesEsenciaPedido(this.numero_contrato).subscribe(res=>{
+//    this.DetPresentacion = res as any;
+//  });
+    this.productores.ObtenerPedidos(this.id).subscribe(res=>{
       this.DetPresentacion = res as any;
     });
 
