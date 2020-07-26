@@ -14,7 +14,7 @@
         </li>
         <!--LINKS FOR PROVIDERS-->
           <li class="nav-item" *ngIf="(userType == 2 && userID !=null)">
-            <a class="nav-link" >Productos</a>
+            <a class="nav-link"  >Productos</a>
           </li>
           <li class="nav-item" *ngIf="(userType == 2 && userID !=null)">
             <a class="nav-link" >Pedidos</a>
@@ -33,7 +33,7 @@
             <a class="nav-link " routerLink="/e_anual_prov">Ev. Anual</a>
           </li>
           <li class="nav-item" *ngIf="(userType == 1 && userID !=null)">
-            <a class="nav-link" >Pedidos</a>
+            <a class="nav-link" routerLink= "/compras/pedidos" >Pedidos</a>
           </li>
           <li class="nav-item" *ngIf="(userType == 1 && userID !=null)">
             <a class="nav-link" routerLink= "/contrato/provider" >Contratos</a>

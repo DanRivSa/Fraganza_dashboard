@@ -87,6 +87,8 @@ router.get('/producers/contratos/detalle_contrato/:id/ingredientes/:contrato',pr
 router.get('/producers/contratos/detalle_contrato/:id/pagos/:contrato',producersController.metodoPagoContratados);
 
 router.get('/producers/contratos/detalle_contrato/:id/envios/:contrato',producersController.metodoEnvioContratados);
+router.get('/producers/pedidos/:id',producersController.ObtenerPedidos);
+
 
 //generarPedido
 router.post('/producers/compras/contratos/detalle_contrato/pedido/generar_pedido',producersController.generarPedido);

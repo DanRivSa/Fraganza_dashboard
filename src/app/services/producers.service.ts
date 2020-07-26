@@ -3,11 +3,8 @@ import {HttpClient} from '@angular/common/http';
 import {EscalaModel} from '../models/EscalaModel';
 import {CriterioModel} from '../models/CriterioModel';
 import {PedidoModel} from '../models/PedidoModel';
-<<<<<<< HEAD
 import {QuejaModel} from '../models/QuejaModel';
-=======
 import {RenovacionContratoModel} from '../models/RenovacionContratoModel';
->>>>>>> ae3c4836c400af4392ca4b88dfa5c0539fba6472
 import {DetPresentacionModel} from '../models/DetPresentacionModel';
 import {ResultadoModel} from '../models/Resultado';
 
@@ -165,6 +162,11 @@ export class ProducersService
     return this.httpClient.get(`${this.base_URL}producers/compras/contratos/detalle_contrato/pedido/generar_pedido/p_ingredientes/${numero_contrato}`);
   }
 
+  ObtenerPedidos(id:number)
+  {
+    return this.httpClient.get(`${this.base_URL}/producers/pedidos/${id}`);
+  }
+
   //RESULTADO DE EVALUACIONES
   GuardarResultadoInicial(id_prod:number,id_prov:number,resultado:number)
   {
@@ -220,9 +222,9 @@ export class ProducersService
   }
 
   RenovarContrato(id_prod:number,contrato:RenovacionContratoModel)
-  {
-    return this.httpClient.post(`${this.base_URL}/renovar/contrato/${id_prod}`,contrato);
-  }
+ {
+   return this.httpClient.post(`${this.base_URL}/renovar/contrato/${id_prod}`,contrato);
+}
 
   FechaParaRenovacion(num_c:number)
   {
