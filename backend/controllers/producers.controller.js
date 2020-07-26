@@ -160,14 +160,12 @@ class ProducersController
       return res.json(db_res.rows);
     }
 
-<<<<<<< HEAD
     CancelarContrato = async (req,res)=>
     {
       let numero_contrato = req.params.numero_contrato;
       const {descripcion} = req.body;
       let db_res = await model.CancelarContrato(numero_contrato,descripcion);
       return res.json(db_res.rows);
-=======
     RenovarContrato = async (req,res)=>
     {
       let id_prod = req.params.id;
@@ -177,7 +175,6 @@ class ProducersController
       let numero_contrato = req.body.numero_contrato;
       let db_res = await model.RenovarContrato(id_prod,id_prov,numero_contrato,fecha);
       res.json(db_res.rows);
->>>>>>> ae3c4836c400af4392ca4b88dfa5c0539fba6472
     }
 
     //Métodos modulo de compras
@@ -284,7 +281,6 @@ class ProducersController
         res.json(db_res.rows);
     }
 
-<<<<<<< HEAD
     DetEnvioPedido = async (req,res)=>
     {
       let id_pedido = req.params.id_pedido;
@@ -309,7 +305,6 @@ class ProducersController
     }
 
 
-=======
     ObtenerFechaParaRenovacion= async (req,res)=>
     {
       let numero_contrato = req.params.numero_contrato;
@@ -317,7 +312,6 @@ class ProducersController
       res.json(db_res.rows);
     }
 
->>>>>>> ae3c4836c400af4392ca4b88dfa5c0539fba6472
   }
 
 
