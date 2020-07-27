@@ -34,12 +34,9 @@ import { ContratoProduComponent } from './components/productores/contrato-produ/
 import { CrearContratoComponent } from './components/productores/crear-contrato/crear-contrato.component';
 import { PedidosComponent } from './components/productores/pedidos/pedidos.component';
 import { ContratoProvDetalleComponent } from './components/proveedores/contrato-prov-detalle/contrato-prov-detalle.component';
-<<<<<<< HEAD
 import { DetallePedidoComponent } from './components/productores/Compras/detalle-pedido/detalle-pedido.component';
-=======
 import { DetallePedidoProveedorComponent } from './components/proveedores/detalle-pedido-proveedor/detalle-pedido-proveedor.component';
 import { ListaPedidosPagarComponent } from './components/productores/lista-pedidos-pagar/lista-pedidos-pagar.component';
->>>>>>> development
 
 
 
@@ -77,12 +74,9 @@ import { ListaPedidosPagarComponent } from './components/productores/lista-pedid
     PedidosComponent,
     ContratoProvDetalleComponent,
     DetalleContratoComponent,
-<<<<<<< HEAD
     DetallePedidoComponent,
-=======
     DetallePedidoProveedorComponent,
     ListaPedidosPagarComponent,
->>>>>>> development
 
 
 

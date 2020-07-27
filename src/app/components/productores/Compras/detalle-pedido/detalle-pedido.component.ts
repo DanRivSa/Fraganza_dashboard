@@ -15,8 +15,8 @@ import { ProveedoresService } from 'src/app/services/proveedores.service';
 export class DetallePedidoComponent implements OnInit {
 
   id_pedido:number;
-  usuario:number = UserCompanyService.userCompanyID;
-  id_proveedor:number;
+  usuario:number 
+  id_proveedor:number= UserCompanyService.userCompanyID;
   id_productor:number;
   metodo_envio:any[];
   metodo_pago:string;
@@ -42,7 +42,7 @@ export class DetallePedidoComponent implements OnInit {
         {
           this.id_pedido =+params.get('id_pedido');
           this.numero_contrato=+params.get('contrato');
-          this.id_proveedor=+params.get('id');
+          console.log('contrato',this.numero_contrato);
         });
 
       this.productores.PresentacionesIngredientesAdquiridasPedido(this.numero_contrato).subscribe(res=>{
@@ -53,6 +53,7 @@ export class DetallePedidoComponent implements OnInit {
         {
           let descuento:any[] = res as any[];
           this.PorcDescuento = descuento[0];
+          console.log('porc',this.PorcDescuento);
         })
 
 
@@ -62,6 +63,7 @@ export class DetallePedidoComponent implements OnInit {
 
       this.productores.DetEnvioPedido(this.id_pedido).subscribe(res=>{
         this.metodo_envio = res as any[];
+        console.log('idprov',this.metodo_envio);
       });
 
       this.productores.DetPagoPedido(this.id_pedido).subscribe(res=>{
@@ -76,9 +78,9 @@ export class DetallePedidoComponent implements OnInit {
 
       this.productores.GetEstatusPedido(this.id_pedido).subscribe(res=>{
         let estatus:any[] = res as any[];
-        this.metodo_pago = estatus[0].estatus;
+        this.estatus = estatus[0].estatus;
+        console.log('estatus',estatus);
       })
-<<<<<<< HEAD
     };
 
     //Cuando se le da click al precio total, se refleja en pantalla los detalles del mismo, es decir, un modal (como el que se usa con los CAS) El precio del pedido base es: {{subtotal}}, el precio % de recargo de envio es {{Porcdescuento}}% es: {{descuento}} y el descuento del contrato es del {{metodo_envio.porc_contratado}}% y el precio es: {{precio_envio}}
@@ -101,32 +103,5 @@ export class DetallePedidoComponent implements OnInit {
         }
 
 
-=======
-    }
-
-/*
-    CambiarEstatusPedido(opcion:number){
-      switch (opcion) {
-        case 1: //Enviado
-          this.servicio.ObtenerPresentacionesEsencia(codigo).subscribe(res=>
-            {
-              this.presentaciones = res as any[];
-            });
-        break;
-
-        case 2: //ingredientes
-          this.servicio.ObtenerPresentacionesingrediente(codigo).subscribe(res=>
-            {
-              this.presentaciones = res as any[];
-            });
-         break;
-
-        default:
-          break;
-      }
-    };
-
-*/
->>>>>>> d4f84c3fba547466cfb53438661bc63d3eb5a052
 
 }

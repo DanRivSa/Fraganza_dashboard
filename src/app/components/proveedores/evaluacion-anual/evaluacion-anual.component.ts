@@ -22,14 +22,11 @@ export class EvaluacionAnualComponent implements OnInit
   porcentajeAprob:number;
   total:number;
   fecha_renov:string;
-<<<<<<< HEAD
   pedido: any[];
   id_prod:number;
   porc_nota:number;
   
-=======
 
->>>>>>> development
   escalaAnualHolder:any[];
   calificacionFinal:number;
   aprobado:boolean = false;
@@ -80,12 +77,8 @@ export class EvaluacionAnualComponent implements OnInit
           console.log('nota',this.porc_nota);
           this.nota = ((this.total * this.porc_nota)/100);//el criterio siempre tiene un peso de 100% por tanto no hay que sacar mas  cuentas
           console.log('calificacion: ',this.nota);
-<<<<<<< HEAD
           console.log('Señor Total: ',this.total);
         }); 
-=======
-        });
->>>>>>> development
 
 
     

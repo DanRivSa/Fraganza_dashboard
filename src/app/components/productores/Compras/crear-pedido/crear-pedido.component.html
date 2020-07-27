@@ -1,1 +1,122 @@
-<p>crear-pedido works!</p>
+<app-navbar></app-navbar>
+
+<header class="bg-dark text-white">
+    <div class="container text-center">
+
+      <h3 class=" display-4">Realizar Pedido</h3>
+      <hr>
+
+    </div>
+</header>
+
+<div class="container jumbotron">
+<button type="submit" class="btn btn-dark "> cancelar</button> 
+<br>
+<form>
+    <br>
+    <h3 class=" display-6">Proveedores</h3>
+    <hr>
+    <select class="form-control">
+        <tr *ngFor="let prov of proveedor">
+        <option>{{prov.nombre_prov}}</option>
+        </tr>
+        
+      </select>
+    <br>
+
+    <h3 class=" display-6">Método de pago</h3>
+    <hr>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+        <label class="form-check-label" for="exampleRadios1">
+          Por Cuotas
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+        <label class="form-check-label" for="exampleRadios2">
+          Parcial
+        </label>
+      </div>
+    <br>
+    <h3 class=" display-6">Tipo de Envio</h3>
+    <hr>
+    <div class="container text-center table-responsive ">
+        <table class="table table-hover">
+            <thead class="table-dark">
+              <tr>
+                <th scope="col"></th> 
+                <th scope="col">Pais</th>
+                <th scope="col">Tipo de Envio</th>
+                <th scope="col">Recargo</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+                <th scope="row"><input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked></th>
+                <td>País</td>
+                <td>Envio</td>
+                <td>100%</td>
+              
+            </tbody>
+          </table>
+    
+    </div>
+    <h3 class=" display-6">Productos</h3>
+    <hr>
+    <h3 class=" display-6">Esencias</h3>
+    <div class="container text-center table-responsive ">
+        <table class="table table-hover">
+            <thead class="table-dark">
+              <tr>
+                <th scope="col"></th> 
+                <th scope="col">Tipo de Envio</th>
+                <th scope="col">Recargo</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+                <th scope="row"><input type="checkbox" class="form-check-input" id="exampleCheck1"></th>
+                <td>Esencia 1</td>
+                <td></td>
+              
+            </tbody>
+          </table>
+    
+    </div>
+    <br>
+    <h3 class=" display-6">Ingredientes</h3>
+    <div class="container text-center table-responsive ">
+        <table class="table table-hover">
+            <thead class="table-dark">
+              <tr>
+                <th scope="col"></th> 
+                <th scope="col">Tipo de Envio</th>
+                <th scope="col">Recargo</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+                <th scope="row"><input type="checkbox" class="form-check-input" id="exampleCheck1"></th>
+                <td>Esencia 1</td>
+                <td></td>
+              
+            </tbody>
+          </table>
+    
+    </div>
+    <br>
+    <h3 class=" display-6">Detalles</h3>
+    <hr>
+    <div class="form-group">
+        <label for="exampleFormControlTextarea1">Example textarea</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+      </div>
+
+
+
+
+      <button type="submit" class="btn btn-primary text-center">Realizar Pedido</button>
+</form>
+
+</div>

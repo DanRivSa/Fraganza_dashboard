@@ -23,6 +23,7 @@ export class CrearPedidoComponent implements OnInit {
   numero_contrato:number;
   precio_pedido:number;
   DescuentoContrato:number;
+  proveedor:any[];
 
   //Proceso de agregación al pedido
   EsenciasPedido:any[];
@@ -42,6 +43,7 @@ export class CrearPedidoComponent implements OnInit {
       this.numero_contrato=+params.get('contrato');
     });
 
+    
     this.productores.PresentacionesEsenciaPedido(this.numero_contrato).subscribe(res=>{
         this.ListaPresentacionesEsencias = res as any[];
     });
@@ -60,6 +62,12 @@ export class CrearPedidoComponent implements OnInit {
     this.productores.DescuentoContrato(this.numero_contrato).subscribe(res=>{
       this.DescuentoContrato = res as number;
     })
+    this.productores.GetContratosVigentes(this.id_productor).subscribe(res=>
+      {
+        this.proveedor = res as any[];
+        console.log(this.proveedor);
+      });
+  
   }
 
   ListarMetodoEnvio(id_pais:number, porc_contratado:number,tipo_envio:string){
@@ -124,5 +132,8 @@ export class CrearPedidoComponent implements OnInit {
     });
     this.DetallarPedido();
   }
+
+
+  
 }
 

@@ -5,21 +5,24 @@
       
       <h3 class=" display-4">Detalle de pedido</h3>
       <h5 class=" display-6" >Nro de Pedido: {{id_pedido}}</h5>
+      <h5 class=" display-6" >Estatus: {{estatus}}</h5>
       
-      <br>
+      
     </div>
+    <div class= "text-right"> <button type="button" class="btn btn-primary btn-lg" >Pagar pedido</button> </div>
+    <br>
   </header>
-<br><br><br>
+<br>
 
-
+<div class="container card">
 <div class="row">
-    <div class="col-md-6">
     
-    <div class="container card">
+    <div class= "col-md-6">
+    
         <header class="bg-dark text-white">
             <div class="container text-center">
         
-              <h3 class=" display-4">Alternativas de envio</h3>
+              <h3 class=" display-4">Información General</h3>
               <hr>
               <br>
             </div>
@@ -37,7 +40,7 @@
                 <tbody>
                   <tr *ngFor="let e of metodo_envio" >
                     <th scope="row">{{e.nombre_pais}}</th>
-                    <td>{{e.case}}</td>
+                    <td>{{e.metodo_envio}}</td>
                     <td>{{e.porc_contratado}} %</td>
                   </tr>
                 </tbody>
@@ -51,12 +54,12 @@
               <thead class="table-dark">
                 <tr>
                   <th scope="col">Metodo De Pago</th>
+                  
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let p of metodo_pago" >
-                  <td>{{p.case}}</td>   
-                </tr>
+                  <td>{{metodo_pago}}</td>   
+                
               </tbody>
             </table>
         
@@ -64,6 +67,17 @@
              <hr>
             </div>       
         </div>
+        
+        
+      
     
-    </div>
+          
+</div>
+</div>
+
+
+
+        
+    
+    
    
