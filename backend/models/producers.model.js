@@ -194,12 +194,12 @@ class ProducersModel
 
      async ObtenerPedidosProvYProd(id_proveedor,id_productor)
      {
-       const db_res = await db.query('SELECT ada_proveedor.nombre_prov, ada_pedido.numero_contrato1, ada_pedido.id_pedido, ada_pedido.estatus FROM ada_proveedor, ada_pedido where  ada_proveedor.id_prov=ada_pedido.id_prov1 and ada_pedido.id_prod1 = $1 and ada_pedido.id_prov1= $2  ORDER BY estatus',[id_proveedor,id_productor]);
+       const db_res = await db.query('SELECT ada_pedido.id_prod1,ada_pedido.id_prov1,ada_proveedor.nombre_prov, ada_pedido.numero_contrato1, ada_pedido.id_pedido, ada_pedido.estatus FROM ada_proveedor, ada_pedido where  ada_proveedor.id_prov=ada_pedido.id_prov1 and ada_pedido.id_prod1 = $1 and ada_pedido.id_prov1= $2  ORDER BY estatus',[id_proveedor,id_productor]);
        return db_res;
      }
      async ObtenerPedidos(id)
      {
-       const db_res = await db.query('SELECT ada_proveedor.nombre_prov, ada_pedido.numero_contrato1, ada_pedido.id_pedido, ada_pedido.estatus FROM ada_proveedor, ada_pedido where  ada_proveedor.id_prov=ada_pedido.id_prov1 and ada_pedido.id_prod1 = $1  ORDER BY estatus',[id]);
+       const db_res = await db.query('SELECT ada_pedido.id_prod1,ada_pedido.id_prov1,ada_proveedor.nombre_prov, ada_pedido.numero_contrato1, ada_pedido.id_pedido, ada_pedido.estatus FROM ada_proveedor, ada_pedido where  ada_proveedor.id_prov=ada_pedido.id_prov1 and ada_pedido.id_prod1 = $1  ORDER BY estatus',[id]);
        return db_res;
      }
 

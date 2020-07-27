@@ -24,7 +24,6 @@
         
               <h3 class=" display-4">Información General</h3>
               <hr>
-              <br>
             </div>
         </header>
         <br>
@@ -48,7 +47,6 @@
         
         </div>
         <br><br>
-    
           <div class="container text-center table-responsive ">
             <table class="table table-hover ">
               <thead class="table-dark">
@@ -59,15 +57,91 @@
               </thead>
               <tbody>
                   <td>{{metodo_pago}}</td>   
-                
               </tbody>
             </table>
-        
-        
              <hr>
-            </div>       
-        </div>
+            </div>
+            <div class="container text-center table-responsive ">
+              <table class="table table-hover ">
+                <thead class="table-dark">
+                  <tr>
+                    <th scope="col">Descuento por contrato</th>
+                    
+                  </tr>
+                </thead>
+                <tbody>                 
+                    <td>{{PorcDescuento}} %</td>                                    
+                </tbody>
+              </table>        
+               <hr>
+              </div>        
+        </div> 
+      <div class="col-md-6">
+        <header class="bg-dark text-white">
+          <div class="container text-center">
+      
+            <h3 class=" display-4">Productos Contratados</h3>
+            <hr>
+          </div>
+      </header>
+
+
+        <h3 class=" display-6">Ingredientes</h3>
+        <div class="container text-center table-responsive ">
+            <table class="table table-hover">
+                <thead class="table-dark">
+                  <tr>
+                    <th scope="col">Seleccionar</th> 
+                    <th scope="col">Cas</th>
+                    <th scope="col">nombre</th>
+                    <th scope="col">cantidad perpack</th>
+                    <th scope="col">contenido</th>
+                    <th scope="col">precio</th>                
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let i of DetPresentacionIngredientes" >
+                    <th scope="row"><input type="checkbox" class="form-check-input" id="exampleCheck1"></th>
+                    <td>{{i.cas}}</td>
+                    <td>{{i.nombre}}</td>
+                    <td>{{i.cantidad_perpack}}</td>
+                    <td>{{i.contenido}}</td>
+                    <td>{{i.precio}}</td>
+                    </tr>
+                </tbody>
+              </table>
         
+        </div>
+        <br>
+        <h3 class=" display-6">Esencias</h3>
+        <div class="container text-center table-responsive ">
+            <table class="table table-hover">
+                <thead class="table-dark">
+                  <tr>
+                    <th scope="col">Seleccionar</th>
+                    <th scope="col">Cas</th>
+                    <th scope="col">nombre</th>
+                    <th scope="col">cantidad perpack</th>
+                    <th scope="col">contenido</th>
+                    <th scope="col">precio</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let e of DetPresentacionEsencias" >
+                    <th scope="row"><input type="checkbox" class="form-check-input" id="exampleCheck1"></th>
+                    <td>{{e.cas_oi}}</td>
+                    <td>{{e.nombre}}</td>
+                    <td>{{e.cantidad_perpack}}</td>
+                    <td>{{e.contenido}}</td>
+                    <td>{{e.precio}}</td>
+                  </tr>
+                </tbody>
+              </table>
+        
+        </div>
+
+
+      </div>
         
       
     

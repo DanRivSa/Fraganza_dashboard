@@ -43,22 +43,25 @@ export class DetallePedidoComponent implements OnInit {
           this.id_pedido =+params.get('id_pedido');
           this.numero_contrato=+params.get('contrato');
           console.log('contrato',this.numero_contrato);
+          console.log('pedido',this.id_pedido);
         });
 
       this.productores.PresentacionesIngredientesAdquiridasPedido(this.numero_contrato).subscribe(res=>{
         this.DetPresentacionIngredientes = res as any[];
+        console.log('ingredientes',this.DetPresentacionIngredientes);
       });
 
       this.productores.DescuentoContrato(this.numero_contrato).subscribe(res=>
         {
           let descuento:any[] = res as any[];
-          this.PorcDescuento = descuento[0];
+          this.PorcDescuento = descuento[0].descuento;
           console.log('porc',this.PorcDescuento);
         })
 
 
       this.productores.PresentacionesEsenciasAdquiridasPedido(this.numero_contrato).subscribe(res=>{
         this.DetPresentacionEsencias = res as any[];
+        console.log('esencias',this.DetPresentacionEsencias);
       });
 
       this.productores.DetEnvioPedido(this.id_pedido).subscribe(res=>{
@@ -73,6 +76,7 @@ export class DetallePedidoComponent implements OnInit {
         }
          this.productores.CaracteristicasCuotaPedido(this.numero_contrato,this.id_pedido).subscribe(res=>{
            this.DetCuota = res as any[];
+           console.log('porc2',this.DetCuota);
          })
       })
 
@@ -83,7 +87,12 @@ export class DetallePedidoComponent implements OnInit {
       })
     };
 
-    //Cuando se le da click al precio total, se refleja en pantalla los detalles del mismo, es decir, un modal (como el que se usa con los CAS) El precio del pedido base es: {{subtotal}}, el precio % de recargo de envio es {{Porcdescuento}}% es: {{descuento}} y el descuento del contrato es del {{metodo_envio.porc_contratado}}% y el precio es: {{precio_envio}}
+    //Cuando se le da click al precio total, se refleja en pantalla los detalles del mismo, es decir,
+    //un modal (como el que se usa con los CAS) El precio del pedido base es: {{subtotal}}, el precio % 
+    //de recargo de envio es {{Porcdescuento}}% es: {{descuento}} y el descuento del contrato es del 
+    //{{metodo_envio.porc_contratado}}% y el precio es: {{precio_envio}}
+
+
     DetallePrecio(){
         if(this.DetPresentacionIngredientes.length > 0){
           for (let i = 0; i < this.DetPresentacionIngredientes.length; i++){
