@@ -230,28 +230,28 @@ class ProducersController
     {
       const {id_proveedor,id_productor,numero_contrato,metodo_pago,id_pais,metodo_envio} = req.body;
       let db_res = await model.generarPedido(id_proveedor,id_productor,numero_contrato,metodo_pago,id_pais,metodo_envio);
-      res.json(db_res);
+      res.json(db_res.rows);
     }
 
     PresentacionesEsenciaPedido = async (req,res)=>
     {
       let numero_contrato = req.params.numero_contrato;
       let db_res = await model.PresentacionesEsenciaPedido(numero_contrato);
-      res.json(db_res);
+      res.json(db_res.rows);
     }
 
     PresentacionesIgredientesPedido = async (req,res)=>
     {
       let numero_contrato = req.params.numero_contrato;
       let db_res = await model.PresentacionesIgredientesPedido(numero_contrato);
-      res.json(db_res);
+      res.json(db_res.rows);
     }
 
     PostDetPedido = async (req,res)=>
     {
       const {sku,cantidad} = req.body;
       let db_res = await model.PostDetPedido(sku,cantidad);
-      res.json(db_res);
+      res.json(db_res.rows);
     }
 
     DescuentoContrato = async (req,res)=>
@@ -324,9 +324,30 @@ class ProducersController
     {
       let id_pedido = req.params.id_pedido;
       let db_res = await model.GetEstatusPedido(id_pedido);
-      res.json(db_res);
+      res.json(db_res.rows);
     }
 
+    CaracteristicasCuotaPedido = async (req,res)=>
+    {
+      let id_pedido = req.params.id_pedido;
+      let numero_contrato = req.params.numero_contrato;
+      let db_res = await model.CaracteristicasCuotaPedido(numero_contrato,id_pedido);
+      res.json(db_res.rows);
+    }
+
+    GetPedidosPagarParcial = async (req,res)=>
+    {
+      let id_productor = req.params.id_productor;
+      let db_res = await model.GetPedidosPagarParcial(id_productor);
+      res.json(db_res.rows);
+    }
+
+    GetPedidosPagarCuotas = async (req,res)=>
+    {
+      let id_productor = req.params.id_productor;
+      let db_res = await model.GetPedidosPagarCuotas(id_productor);
+      res.json(db_res.rows);
+    }
 
   }
 

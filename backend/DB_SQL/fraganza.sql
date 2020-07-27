@@ -379,7 +379,9 @@ id_prov SMALLINT NOT NULL,
 numero_contrato SMALLINT NOT NULL,
 id_prov2 SMALLINT NOT NULL,
 metodo_pago CHAR(1) NOT NULL,
+porc_cuota numeric(3),
 CONSTRAINT CK_metodo_pago check (metodo_pago in ('p','c')),
+CONSTRAINT CK_porc_cuota_c CHECK (porc_cuota >= 0 and porc_cuota <= 100),
 CONSTRAINT PK_contrac_ap PRIMARY KEY (id_prod,id_prov,numero_contrato,id_prov2,metodo_pago)
 );
 

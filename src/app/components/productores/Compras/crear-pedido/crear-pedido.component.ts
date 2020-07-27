@@ -92,11 +92,11 @@ export class CrearPedidoComponent implements OnInit {
             let resultado = (this.DetPresentacion[i].cantidad*this.DetPresentacion[i].precio);
             this.precio_pedido=this.precio_pedido+resultado;
            }
-          let RecargoDescuento = this.precio_pedido*this.DescuentoContrato;
-          let RecargoEnvio = this.precio_pedido*this.MetodoEnvioPedido.porc_contratado;
-          this.precio_pedido=this.precio_pedido+RecargoDescuento+RecargoEnvio;
+          let Descuento = this.precio_pedido*this.DescuentoContrato/100;
+          let RecargoEnvio = this.precio_pedido*this.MetodoEnvioPedido.porc_contratado/100;
+          this.precio_pedido=this.precio_pedido-Descuento+RecargoEnvio;
       }
-      else console.log('No ha listado presentaciones');
+      alert('No ha listado presentaciones');
     }
   DetallarPedido()
   {

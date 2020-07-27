@@ -125,8 +125,7 @@ from ada_proveedor p
 INNER JOIN ada_contratos_en_regla r on r.id_prov=p.id_prov
 INNER JOIN ada_productor x on x.id_prod = r.id_prod;
 
-
-//Vistas utilices en generacion de pedidos
+--Vistas utilices en generacion de pedidos
 
 CREATE VIEW ADA_PRESENTACIONES_ESENCIAS AS
 SELECT p.sku, p.cas, p.nombre_etiqueta NOMBRE,
@@ -174,13 +173,13 @@ language sql
 
 
 
-CREATE  FUNCTION ada_pedido_new(integer,integer,char,char,integer,integer)
+CREATE  FUNCTION ada_pedido_new(integer,integer,char,char,integer,integer,bigint)
 returns BIGINT
 AS
 $$
 INSERT INTO ada_pedido
-(id_prov1,id_prod1,numero_contrato1,id_prov2,metodo_pago,id_prod3,id_prov3,numero_contrato2,id_prov4,id_pais,tipo_envio,fecha_emision)
-VALUES ($1,$2,$5,$1,$4,$2,$1,$5,$1,$6,$3,current_date);
+(id_prov1,id_prod1,numero_contrato1,id_prov2,metodo_pago,id_prod3,id_prov3,numero_contrato2,id_prov4,id_pais,tipo_envio,fecha_emision,total)
+VALUES ($1,$2,$5,$1,$4,$2,$1,$5,$1,$6,$3,current_date,$7);
 select last_value from ada_sec_id_pedido
 RETURN
 $$
@@ -205,8 +204,9 @@ from ada_presentacion_e p where cas_oi is null;
 		from ADA_PRESENTACIONES_ESENCIAS_PEDIDO p
 		INNER JOIN ada_det_pedido d on d.sku = p.sku
 
-    CREATE VIEW INGREDIENTES_CONTRATADOS_PEDIDO AS
-		SELECT d.id_pedido,p.sku,p.cas_oi,p.nombre,d.cantidad,to_char((p.precio*d.cantidad),'$99999.99') as precio, p.contenido, p.cantidad_perpack
+
+    CREATE OR REPLACE VIEW INGREDIENTES_CONTRATADOS_PEDIDO AS
+		SELECT d.id_pedido,p.sku,p.cas_oi,p.nombre,d.cantidad,(p.precio*d.cantidad) as precio, p.contenido, p.cantidad_perpack
 		from ADA_PRESENTACIONES_INGREDIENTES_PEDIDO p
 		INNER JOIN ada_det_pedido d on d.sku = p.sku
 
@@ -252,3 +252,42 @@ select (select extract
 		or (select extract
 		  (day from  ((r.fecha + INTERVAL '365 day') - CURRENT_DATE)))
 		  between 1 and 90
+
+
+		  CREATE OR REPLACE VIEW ada_detalle_cuota_pedido as
+		  select p.metodo_pago, u.porc_cuota, c.periodo_vigencia,p.id_prov2, p.numero_contrato1,p.id_pedido
+		  from ada_pedido P
+		  INNER JOIN ada_contratacion_ap u on u.numero_contrato = p.numero_contrato1
+		  INNER JOIN ada_cuota c ON  c.id_prov = p.id_prov2 WHERE u.porc_cuota = c.porc_cuota
+		  ID_PEDIDO =2
+		  and numero_contrato = 1005;
+
+
+
+
+--VISTA PARA PEDIDOS POR PAGAR TIPO PARCIAL
+
+--VISTA PARA PEDIDOS POR PAGAR TIPO PARCIAL
+CREATE or replace VIEW ada_pedidos_por_pagar_parcial as
+SELECT distinct p.id_pedido,p.id_prov4 as id_prov,p.id_prod3 as id_prod,p.numero_contrato1 as numero_contrato,v.nombre_prov,p.total,p.fecha_emision, p.estatus from ada_pedido p
+inner join ada_proveedor v on v.id_prov = p.id_prov4
+WHERE p.nro_factura is not null and p.metodo_pago='p'
+EXCEPT
+SELECT p.id_pedido,p.id_prov4,p.id_prod3,p.numero_contrato1,v.nombre_prov,p.total,p.fecha_emision,p.estatus from ada_pedido p
+inner join ada_proveedor v on v.id_prov = p.id_prov4
+inner join ada_pago f on f.id_pedido=p.id_pedido
+where f.id_pedido=p.id_pedido
+--VISTA PARA MOSTRAR LOS PEDIDOS PEDIENTES POR PAGAR EN CUOTAS
+
+CREATE VIEW ada_pedidos_por_pagar_cuotas as
+SELECT
+p.id_pedido,p.id_prov4 as id_prov,p.id_prod3 as id_prod,p.numero_contrato1 as numero_contrato,v.nombre_prov,
+p.fecha_emision,p.estatus, round(((100/c.porc_cuota)-count(x.id_pedido))) as cuotas
+from ada_pedido p
+inner join ada_contratacion_ap c on c.numero_contrato=p.numero_contrato1
+inner join ada_pago x on x.id_pedido=p.id_pedido
+inner join ada_proveedor v on v.id_prov=p.id_prov4
+where p.METODO_pago = 'c' and p.estatus='enviado'
+group by p.id_pedido,p.id_prov4,p.id_prod3,p.numero_contrato1,v.nombre_prov,
+p.fecha_emision,p.estatus, c.porc_cuota
+

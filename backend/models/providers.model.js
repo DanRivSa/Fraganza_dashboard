@@ -70,16 +70,16 @@ class ProviderModel
     }
 
 
-    async ConfirmarPedido (id_pedido)
+    async ConfirmarPedido (id_pedido,detalle)
     {
-      const db_res = await db.query('UPDATE ada_pedido SET estatus=$2 where id_pedido=$1',[id_pedido,'confirmado']);
+      const db_res = await db.query('UPDATE ada_pedido SET estatus=$2, nro_factura=nextval($3), fecha_confirmacion=current_Date, descripcion=$4 where id_pedido=$1',[id_pedido,'enviado','ada_sec_nro_factura',detalle]);
       return db_res;
     }
 
 
-    async RechazarPedido (id_pedido)
+    async RechazarPedido (id_pedido,detalle)
     {
-      const db_res = await db.query('UPDATE ada_pedido SET estatus=$2 where id_pedido=$1',[id_pedido,'rechazado']);
+      const db_res = await db.query('UPDATE ada_pedido SET estatus=$2, fecha_confirmacion=current_Date, descripcion=$4 where id_pedido=$1',[id_pedido,'rechazado','ada_sec_nro_factura',detalle]);
       return db_res;
     }
 
