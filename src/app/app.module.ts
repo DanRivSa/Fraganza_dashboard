@@ -34,6 +34,7 @@ import { ContratoProduComponent } from './components/productores/contrato-produ/
 import { CrearContratoComponent } from './components/productores/crear-contrato/crear-contrato.component';
 import { PedidosComponent } from './components/productores/pedidos/pedidos.component';
 import { ContratoProvDetalleComponent } from './components/proveedores/contrato-prov-detalle/contrato-prov-detalle.component';
+import { DetallePedidoComponent } from './components/productores/Compras/detalle-pedido/detalle-pedido.component';
 
 
 
@@ -71,6 +72,7 @@ import { ContratoProvDetalleComponent } from './components/proveedores/contrato-
     PedidosComponent,
     ContratoProvDetalleComponent,
     DetalleContratoComponent,
+    DetallePedidoComponent,
 
 
 

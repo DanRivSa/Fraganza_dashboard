@@ -13,7 +13,7 @@
 
 <div class= "container">
     <div class="card border-0 shadow">
-        <h3 class=" display-4 text-center">Criterio de Exito</h3>
+        <h3 class=" display-4 text-center">Criterio de Éxito</h3>
         <hr>
         <div class="row">
             <div class="container text-center">
@@ -46,37 +46,33 @@
 
 
 <div class="row">
-  <div class="col-lg-6">
         <br>
       
       
-      <div class="container text-center table-responsive ">
+        <div class="container text-center table-responsive ">
           <table class="table table-hover ">
             <thead class="table-dark">
               <tr>
-                <th scope="col">Fecha de emisión</th>
-                <th scope="col">Nro de factura</th>
-                <th scope="col">total</th>
-                <th scope="col">Status</th>
+                <th scope="col"># Id Pedido</th>
+                <th scope="col">Proveedor</th>
+                <th scope="col">Nro de Contrato</th>
+                <th scope="col">Estatus</th>
+                <th scope="col">Detalles</th>
               </tr>
             </thead>
             <tbody>
-              <tr >
-                <th scope="row">
-                  
-                      
-                 </th>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+              <tr *ngFor="let ped of pedido">
+                <th scope="row">{{ped.id_pedido}}</th>
+                <td>{{ped.nombre_prov}}</td>
+                <td>{{ped.numero_contrato1}}</td>
+                <td>{{ped.estatus}}</td>
               </tr>
             </tbody>
           </table>
       
         <hr>
-      </div> 
+      </div>
       
-  </div>
 </div>
 
     <!--TARJETAS DE INFORMACION-->

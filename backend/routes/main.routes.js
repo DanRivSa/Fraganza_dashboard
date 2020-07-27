@@ -90,7 +90,7 @@ router.get('/producers/contratos/detalle_contrato/:id/pagos/:contrato',producers
 
 router.get('/producers/contratos/detalle_contrato/:id/envios/:contrato',producersController.metodoEnvioContratados);
 router.get('/producers/pedidos/:id',producersController.ObtenerPedidos);
-
+router.get('/producers/pedidos/detalle/:id_prov/:id_prod',producersController.ObtenerPedidosProvYProd);
 
 //generarPedido
 router.post('/producers/compras/contratos/detalle_contrato/pedido/generar_pedido',producersController.generarPedido);

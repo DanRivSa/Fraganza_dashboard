@@ -1,1 +1,69 @@
+<app-navbar></app-navbar>
 
+<header class="bg-dark text-white">
+    <div class="container text-center">
+      
+      <h3 class=" display-4">Detalle de pedido</h3>
+      <h5 class=" display-6" >Nro de Pedido: {{id_pedido}}</h5>
+      
+      <br>
+    </div>
+  </header>
+<br><br><br>
+
+
+<div class="row">
+    <div class="col-md-6">
+    
+    <div class="container card">
+        <header class="bg-dark text-white">
+            <div class="container text-center">
+        
+              <h3 class=" display-4">Alternativas de envio</h3>
+              <hr>
+              <br>
+            </div>
+        </header>
+        <br>
+        <div class="container text-center table-responsive ">
+            <table class="table table-hover">
+                <thead class="table-dark">
+                  <tr>
+                    <th scope="col">Pais</th>
+                    <th scope="col">Tipo de Envio</th>
+                    <th scope="col">Recargo</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let e of metodo_envio" >
+                    <th scope="row">{{e.nombre_pais}}</th>
+                    <td>{{e.case}}</td>
+                    <td>{{e.porc_contratado}} %</td>
+                  </tr>
+                </tbody>
+              </table>
+        
+        </div>
+        <br><br>
+    
+          <div class="container text-center table-responsive ">
+            <table class="table table-hover ">
+              <thead class="table-dark">
+                <tr>
+                  <th scope="col">Metodo De Pago</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let p of metodo_pago" >
+                  <td>{{p.case}}</td>   
+                </tr>
+              </tbody>
+            </table>
+        
+        
+             <hr>
+            </div>       
+        </div>
+    
+    </div>
+   
