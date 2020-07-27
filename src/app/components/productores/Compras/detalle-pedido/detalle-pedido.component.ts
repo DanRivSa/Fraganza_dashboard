@@ -78,6 +78,7 @@ export class DetallePedidoComponent implements OnInit {
         let estatus:any[] = res as any[];
         this.metodo_pago = estatus[0].estatus;
       })
+<<<<<<< HEAD
     };
 
     //Cuando se le da click al precio total, se refleja en pantalla los detalles del mismo, es decir, un modal (como el que se usa con los CAS) El precio del pedido base es: {{subtotal}}, el precio % de recargo de envio es {{Porcdescuento}}% es: {{descuento}} y el descuento del contrato es del {{metodo_envio.porc_contratado}}% y el precio es: {{precio_envio}}
@@ -100,5 +101,32 @@ export class DetallePedidoComponent implements OnInit {
         }
 
 
+=======
+    }
+
+/*
+    CambiarEstatusPedido(opcion:number){
+      switch (opcion) {
+        case 1: //Enviado
+          this.servicio.ObtenerPresentacionesEsencia(codigo).subscribe(res=>
+            {
+              this.presentaciones = res as any[];
+            });
+        break;
+
+        case 2: //ingredientes
+          this.servicio.ObtenerPresentacionesingrediente(codigo).subscribe(res=>
+            {
+              this.presentaciones = res as any[];
+            });
+         break;
+
+        default:
+          break;
+      }
+    };
+
+*/
+>>>>>>> d4f84c3fba547466cfb53438661bc63d3eb5a052
 
 }

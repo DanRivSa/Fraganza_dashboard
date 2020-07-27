@@ -10,20 +10,16 @@ import { UserCompanyService } from 'src/app/services/global/user-company.service
 })
 export class PedidosComponent implements OnInit {
 
-  id_productor:number = UserCompanyService.userCompanyID;
-
-  PedidosParcial:any[];
-  PedidosCuotas:any[];
-
-  constructor(private productores:ProducersService) { }
+  Pedidos:any[];
+  pedido:any[];
+  id_usuario:number = UserCompanyService.userCompanyID; //id de usuario
+  constructor( private productores:ProducersService) { }
 
   ngOnInit(): void {
 
-    this.productores.GetPedidosPagarParcial(this.id_productor).subscribe(res=>{
-      this.PedidosParcial = res as any[];
-    });
-    this.productores.GetPedidosPagarCuotas(this.id_productor).subscribe(res=>{
-      this.PedidosCuotas = res as any[];
+
+    this.productores.ObtenerPedidos(this.id_usuario).subscribe(res=>{
+      this.pedido = res as any;
     });
   }
 
