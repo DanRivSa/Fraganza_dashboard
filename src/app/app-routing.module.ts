@@ -37,10 +37,13 @@ const routes: Routes =
   {path:'compras/generar_pedido/:id/contrato/:contrato', component:CrearPedidoComponent},
   {path:'compras/contratos/:id/detalle/:contrato', component:DetalleContratoComponent},
   {path:'compras/contratos/:id/detalle/:contrato/generar_pedido', component: CrearPedidoComponent},
+<<<<<<< HEAD
   {path:'compras/detalle_pedido/:id/:id_pedido',component:DetallePedidoComponent},
+=======
+  {path:'compras/contratos/:id/detalle/:contrato/generar_pedido/id_pedido',component:DetallePedidoComponent},
+>>>>>>> development
   {path: 'contrato/producer', component:ContratoProduComponent},
   {path:'crear/contrato/con_proveedor/:id', component:CrearContratoComponent},
-
   {path:'compras/contratos/detalle/:id/:contrato', component:DetalleContratoComponent},
   {path:'compras/contratos/:id/detalle/:contrato/generar_pedido', component: CrearPedidoComponent},
   {path: 'contrato/producer', component:ContratoProduComponent},

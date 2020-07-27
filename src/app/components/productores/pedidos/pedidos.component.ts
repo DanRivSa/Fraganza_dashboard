@@ -9,21 +9,10 @@ import { UserCompanyService } from 'src/app/services/global/user-company.service
   styleUrls: ['./pedidos.component.scss']
 })
 export class PedidosComponent implements OnInit {
-  id_pedido:number;
-  id_productor:number;
-  
-  metodo_envio:[any];
-  metodo_pago:[any];
-  id_pais:number;
-  total:number;
-  estatus:string;
-  DetPresentacion: any[];
-  InformacionPago:any[];
-  numero_contrato:number;
+
+  Pedidos:any[];
   pedido:any[];
-  id_usuario:number = UserCompanyService.userCompanyID; //id de usuario 
-
-
+  id_usuario:number = UserCompanyService.userCompanyID; //id de usuario
   constructor( private productores:ProducersService) { }
 
   ngOnInit(): void {
@@ -32,8 +21,6 @@ export class PedidosComponent implements OnInit {
     this.productores.ObtenerPedidos(this.id_usuario).subscribe(res=>{
       this.pedido = res as any;
     });
-
-
   }
 
 }

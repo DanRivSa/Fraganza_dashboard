@@ -183,6 +183,17 @@ ALTER TABLE ada_pedido
 ALTER COLUMN nro_factura SET DEFAULT nextval('ada_sec_nro_factura');
 
 
+
+CREATE SEQUENCE ada_sec_nro_recibo as SMALLINT
+INCREMENT 1
+MINVALUE 1000
+MAXVALUE 2500
+NO CYCLE
+OWNED BY ada_pago.nro_recibo;
+ALTER TABLE ada_pago
+ALTER COLUMN nro_recibo SET DEFAULT nextval('ada_sec_nro_recibo');
+
+
 CREATE SEQUENCE ada_sec_id_asoc as SMALLINT
 MINVALUE 1
 MAXVALUE 5

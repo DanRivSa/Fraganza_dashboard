@@ -21,7 +21,7 @@ router.get('/providers/alt_envio/:id',providersController.ObtenerAlternativasEnv
 router.get('/providers/alt_pago/:id',providersController.ObtenerAlternativasPago);
 router.get('/providers/cuotas/:id',providersController.ObtenerInfoPagoCuotas);
 router.put('/providers/pedidos/detalle_pedido/rechazar_pedido/:id_pedido',providersController.RechazarPedido);
-
+router.put('/providers/pedidos/detalle_pedido/confirmar_pedido/:id_pedido',providersController.ConfirmarPedido);
 //presentaciones
 router.get('/providers/esencia/:id',providersController.ObtenerPresentacionesEsencia);
 router.get('/providers/ingrediente/:id',providersController.ObtenerPresentacionesIngrediente);
@@ -112,3 +112,9 @@ router.get('/producers/compras/pedidos/detalle_pago/:id_pedido',producersControl
 
 router.get('/producers/compras/pedidos/estatus/:id_pedido',producersController.GetEstatusPedido);
 
+router.get('/producers/compras/pedidos/cuotas/:id_pedido/contrato/:numero_contrato',producersController.CaracteristicasCuotaPedido);
+
+//filtras pedidos para pagar
+router.get('/producers/pedidos/filtrados_parcial/:id_productor',producersController.GetPedidosPagarParcial);
+
+router.get('/producers/pedidos/filtrados_cuotas/:id_productor',producersController.GetPedidosPagarCuotas);

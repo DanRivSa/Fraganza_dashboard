@@ -11,7 +11,7 @@ import { ResultadoModel } from 'src/app/models/Resultado';
   templateUrl: './evaluacion-anual.component.html',
   styleUrls: ['./evaluacion-anual.component.scss']
 })
-export class EvaluacionAnualComponent implements OnInit 
+export class EvaluacionAnualComponent implements OnInit
 {
   id_prov:number;
   num_contrato:number;
@@ -22,21 +22,25 @@ export class EvaluacionAnualComponent implements OnInit
   porcentajeAprob:number;
   total:number;
   fecha_renov:string;
+<<<<<<< HEAD
   pedido: any[];
   id_prod:number;
   porc_nota:number;
   
+=======
+
+>>>>>>> development
   escalaAnualHolder:any[];
   calificacionFinal:number;
   aprobado:boolean = false;
   Id_prod:number = UserCompanyService.userCompanyID;
 
-  constructor(private servicio:ProducersService, private route:ActivatedRoute) 
+  constructor(private servicio:ProducersService, private route:ActivatedRoute)
   {
 
   }
 
-  ngOnInit(): void 
+  ngOnInit(): void
   {
 
     this.route.paramMap.subscribe(params=>
@@ -76,8 +80,12 @@ export class EvaluacionAnualComponent implements OnInit
           console.log('nota',this.porc_nota);
           this.nota = ((this.total * this.porc_nota)/100);//el criterio siempre tiene un peso de 100% por tanto no hay que sacar mas  cuentas
           console.log('calificacion: ',this.nota);
+<<<<<<< HEAD
           console.log('Señor Total: ',this.total);
         }); 
+=======
+        });
+>>>>>>> development
 
 
     

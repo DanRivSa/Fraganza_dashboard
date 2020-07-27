@@ -243,5 +243,22 @@ export class ProducersService
   GetEstatusPedido(id_pedido:number)
   {
     return this.httpClient.get(`${this.base_URL}/producers/compras/pedidos/estatus/${id_pedido}`);
+  };
+
+
+  CaracteristicasCuotaPedido(numero_contrato:number,id_pedido:number)
+  {
+    return this.httpClient.get(`${this.base_URL}/producers/compras/pedidos/cuotas/${id_pedido}/contrato/${numero_contrato}`);
+  };
+
+  GetPedidosPagarParcial(id_productor:number)
+  {
+    return this.httpClient.get(`${this.base_URL}/producers/pedidos/filtrados_parcial/${id_productor}`);
   }
+
+  GetPedidosPagarCuotas(id_productor:number)
+  {
+    return this.httpClient.get(`${this.base_URL}/producers/pedidos/filtrados_cuotas/${id_productor}`);
+  }
+
 }

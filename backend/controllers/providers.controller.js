@@ -82,15 +82,17 @@ class ProvidersController
 
     ConfirmarPedido = async (req,res)=>
     {
+      const {detalle} = req.body;
       let id_pedido = req.params.id_pedido;
-      let db_res = await model.ConfirmarPedido(id_pedido);
+      let db_res = await model.ConfirmarPedido(id_pedido,detalle);
       res.json(db_res.rows);
     }
 
     RechazarPedido = async (req,res)=>
     {
+      const {datalle} = req.body;
       let id_pedido = req.params.id_pedido;
-      let db_res = await model.ConfirmarPedido(id_pedido);
+      let db_res = await model.RechazarPedido(id_pedido,detalle);
       res.json(db_res.rows);
     }
 
