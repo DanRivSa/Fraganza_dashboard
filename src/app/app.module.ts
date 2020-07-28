@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 //modules
 import {LoginModule} from './modules/login/login.module';
@@ -82,15 +82,16 @@ import { RealizarPagosComponent } from './components/productores/realizar-pagos/
 
 
 
-    
-    
+
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     LoginModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [UserCompanyService,ProducersService,ProveedoresService],
   bootstrap: [AppComponent]

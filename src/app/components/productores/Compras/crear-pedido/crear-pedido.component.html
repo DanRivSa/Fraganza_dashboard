@@ -9,8 +9,23 @@
     </div>
 </header>
 
+
+<form [formGroup]="form" (ngSubmit)="submitForm()" novalidate>
+
+  <div *ngFor="let esencias of ListaPresentacionesIngredientes">
+    <label>
+  <input type="checkbox" [value]="esencias.cas_oi" (change)="onCheckboxChange($event)" />
+      {{esencias.nombre_comercial}}
+    </label>
+  </div>
+
+  <input type="submit" value="Submit">
+</form>
+
+
+
 <div class="container jumbotron">
-<button type="submit" class="btn btn-dark "> cancelar</button> 
+<button type="submit" class="btn btn-dark "> cancelar</button>
 <br>
 <form>
     <br>
@@ -18,12 +33,15 @@
     <hr>
     <select class="form-control">
           <option *ngFor="let prov of proveedor" value="{{proveedor.id_prov}}">{{prov.nombre_prov}}</option>
-        
+
       </select>
-  
+
     <br>
     <br>
     <br>
+
+
+
 
     <h3 class=" display-6">Método de pago</h3>
     <hr>
@@ -33,8 +51,8 @@
           {{mp.case}}
         </label>
       </div>
-      
-    
+
+
     <br>
     <br>
     <br>
@@ -44,7 +62,7 @@
         <table class="table table-hover">
             <thead class="table-dark">
               <tr>
-                <th scope="col"></th> 
+                <th scope="col"></th>
                 <th scope="col">Pais</th>
                 <th scope="col">Tipo de Envio</th>
                 <th scope="col">Recargo</th>
@@ -59,7 +77,7 @@
               </tr>
             </tbody>
           </table>
-    
+
     </div>
     <br>
     <br>
@@ -74,12 +92,12 @@
         <table class="table table-hover">
             <thead class="table-dark">
               <tr>
-                <th scope="col">Seleccionar</th> 
+                <th scope="col">Seleccionar</th>
                 <th scope="col">Cas</th>
                 <th scope="col">nombre</th>
                 <th scope="col">cantidad perpack</th>
                 <th scope="col">contenido</th>
-                <th scope="col">precio</th>                
+                <th scope="col">precio</th>
               </tr>
             </thead>
             <tbody>
@@ -93,7 +111,7 @@
                 </tr>
             </tbody>
           </table>
-    
+
     </div>
     <br>
     <h3 class=" display-6">Esencias</h3>
@@ -120,7 +138,7 @@
               </tr>
             </tbody>
           </table>
-    
+
     </div>
     <br>
     <h3 class=" display-6">Detalles</h3>

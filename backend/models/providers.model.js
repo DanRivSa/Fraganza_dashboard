@@ -79,7 +79,7 @@ class ProviderModel
 
     async RechazarPedido (id_pedido,detalle)
     {
-      const db_res = await db.query('UPDATE ada_pedido SET estatus=$2, fecha_confirmacion=current_Date, descripcion=$4 where id_pedido=$1',[id_pedido,'rechazado','ada_sec_nro_factura',detalle]);
+      const db_res = await db.query('UPDATE ada_pedido SET estatus=$2, fecha_confirmacion=current_date,nro_factura=null descripcion=$4 where id_pedido=$1',[id_pedido,'rechazado','ada_sec_nro_factura',detalle]);
       return db_res;
     }
 

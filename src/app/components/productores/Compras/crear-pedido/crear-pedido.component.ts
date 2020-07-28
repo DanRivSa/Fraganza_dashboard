@@ -5,6 +5,7 @@ import { ProducersService } from 'src/app/services/producers.service';
 import {DetPresentacionModel} from '../../../../models/DetPresentacionModel';
 import { PedidoModel } from 'src/app/models/PedidoModel';
 import { MetodoEnvio } from 'src/app/models/MetodoEnvio';
+import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-crear-pedido',
@@ -12,6 +13,7 @@ import { MetodoEnvio } from 'src/app/models/MetodoEnvio';
   styleUrls: ['./crear-pedido.component.scss']
 })
 export class CrearPedidoComponent implements OnInit {
+  form: FormGroup;
 
   id_pedido:number;
   id:number;
@@ -35,7 +37,11 @@ export class CrearPedidoComponent implements OnInit {
   PresentacionesIngredientes:number[];
   DetPresentacion:DetPresentacionModel[];
 
-  constructor(private route:ActivatedRoute, private productores:ProducersService) { }
+  constructor(private route:ActivatedRoute, private productores:ProducersService, private fb: FormBuilder) {
+    this.form = this.fb.group({
+      checkArray: this.fb.array([],[Validators.required])
+    })
+  }
 
   ngOnInit(): void {
 
@@ -46,7 +52,7 @@ export class CrearPedidoComponent implements OnInit {
       console.log('prov',this.id_proveedor);
     });
 
-    
+
     this.productores.PresentacionesEsenciaPedido(this.numero_contrato).subscribe(res=>{
         this.ListaPresentacionesIngredientes = res as any[];
         console.log('ingredientes',this.ListaPresentacionesIngredientes);
@@ -74,7 +80,7 @@ export class CrearPedidoComponent implements OnInit {
         this.proveedor = res as any[];
         console.log('prov',this.proveedor);
       });
-  
+
   }
 
   ListarMetodoEnvio(id_pais:number, porc_contratado:number,tipo_envio:string){
@@ -140,7 +146,26 @@ export class CrearPedidoComponent implements OnInit {
     this.DetallarPedido();
   }
 
+  onCheckboxChange(e) {
+    const checkArray: FormArray = this.form.get('checkArray') as FormArray;
 
-  
+    if (e.target.checked) {
+      checkArray.push(new FormControl(e.target.value));
+    } else {
+      let i: number = 0;
+      checkArray.controls.forEach((item: FormControl) => {
+        if (item.value == e.target.value) {
+          checkArray.removeAt(i);
+          return;
+        }
+        i++;
+      });
+    }
+  }
+  submitForm() {
+    console.log(this.form.value)
+  }
+
+
 }
 

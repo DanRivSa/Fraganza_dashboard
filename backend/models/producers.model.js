@@ -237,13 +237,13 @@ class ProducersModel
 
      async PresentacionesEsenciaPedido(numero_contrato)
      {
-       const db_res = await db.query('SELECT * from ADA_PRESENTACIONES_ESENCIAS p INNER JOIN esencia_en_contrato e on e.cas=p.cas WHERE e.numero_contrato =$1',[numero_contrato]);
+       const db_res = await db.query('SELECT * from ADA_PRESENTACIONES_ESENCIAS p INNER JOIN ada_esencia_en_contrato e on e.cas=p.cas WHERE e.numero_contrato =$1',[numero_contrato]);
        return db_res;
      }
 
      async PresentacionesIgredientesPedido(numero_contrato)
      {
-       const db_res = await db.query('SELECT * from ADA_PRESENTACIONES_INGREDIENTE p INNER JOIN ingrediente_en_contrato e on e.cas_oi=p.cas_oi WHERE e.numero_contrato =$1',[numero_contrato]);
+       const db_res = await db.query('SELECT * from ADA_PRESENTACIONES_INGREDIENTE p INNER JOIN ada_ingrediente_en_contrato e on e.cas_oi=p.cas_oi WHERE e.numero_contrato =$1',[numero_contrato]);
        return db_res;
      }
 
@@ -256,13 +256,13 @@ class ProducersModel
      //DetallePedido
      async PresentacionesIngredientesAdquiridasPedido(id_pedido)
      {
-       const db_res = await db.query('select * from INGREDIENTES_CONTRATADOS_PEDIDO where id_pedido=$1',[id_pedido]);
+       const db_res = await db.query('select * from ada_INGREDIENTES_CONTRATADOS_PEDIDO where id_pedido=$1',[id_pedido]);
        return db_res;
      }
 
      async PresentacionesEsenciasAdquiridasPedido(id_pedido)
      {
-       const db_res = await db.query('select * from ESENCIAS_CONTRATADOS_PEDIDO where id_pedido=$1',[id_pedido]);
+       const db_res = await db.query('select * from ada_ESENCIAS_CONTRATADOS_PEDIDO where id_pedido=$1',[id_pedido]);
        return db_res;
      }
 
@@ -314,7 +314,7 @@ class ProducersModel
 
      async GetContadorCuotas(id_pedido)
      {
-       const db_res = await db.query('select * from pagar_cuota where id_pedido = $1',[id_pedido]);
+       const db_res = await db.query('select * from ada_pagar_cuota where id_pedido = $1',[id_pedido]);
        return db_res;
      }
 
