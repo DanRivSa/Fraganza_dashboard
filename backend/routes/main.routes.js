@@ -118,3 +118,7 @@ router.get('/producers/compras/pedidos/cuotas/:id_pedido/contrato/:numero_contra
 router.get('/producers/pedidos/filtrados_parcial/:id_productor',producersController.GetPedidosPagarParcial);
 
 router.get('/producers/pedidos/filtrados_cuotas/:id_productor',producersController.GetPedidosPagarCuotas);
+
+router.get('/producers/pedidos/filtrados_parcial/:id_pedido/pagar',producersController.GetContadorCuotas);
+
+router.post('/producers/pedidos/ejecutar_pago/',producersController.Pagar);

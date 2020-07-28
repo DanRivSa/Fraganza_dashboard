@@ -166,7 +166,7 @@ language sql
 CREATE OR REPLACE FUNCTION CERRAR_INICIAL (integer) returns void
 AS
 $$
-UPDATE ADA_ESCALA SET FECHA_FIN=CURRENT_DATE WHERE ID_PROD=$1 AND TIPO_USO='a';
+UPDATE ADA_ESCALA SET FECHA_FIN=CURRENT_DATE WHERE ID_PROD=$1 AND TIPO_USO='i';
 UPDATE ADA_EVAL_CRITERIO SET FECHA_FIN=CURRENT_DATE WHERE ID_CRITERIO IN(1,2,3) AND ID_PROD = $1;
 $$
 language sql
@@ -291,3 +291,25 @@ where p.METODO_pago = 'c' and p.estatus='enviado'
 group by p.id_pedido,p.id_prov4,p.id_prod3,p.numero_contrato1,v.nombre_prov,
 p.fecha_emision,p.estatus, c.porc_cuota
 
+
+
+CREATE VIEW pagar_cuota as
+select e.id_pedido,e.porc_cuota, p.cuotas, p.total, e.porc_cuota*0.1*p.total as monto_cuota from ada_detalle_cuota_pedido e
+INNER Join ada_pedidos_por_pagar_cuotas p on p.id_pedido = e.id_pedido
+group by e.id_pedido,e.porc_cuota, p.cuotas, p.total;
+
+
+
+CREATE VIEW ADA_ME_PEDIDO AS
+ SELECT p.nombre_pais,
+    t.id_pedido, t.total,
+        CASE t.tipo_envio
+            WHEN 'm'::bpchar THEN 'MARÍTIMO'::text
+            WHEN 'a'::bpchar THEN 'AÉREO'::text
+            WHEN 't'::bpchar THEN 'TERRESTRE'::text
+            ELSE NULL::text
+        END AS metodo_envio,
+    a.porc_contratado
+   FROM ada_pedido t
+     JOIN ada_contratacion_me a ON a.numero_contrato = t.numero_contrato1
+     JOIN ada_pais p ON p.id_pais = t.id_pais;

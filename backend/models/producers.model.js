@@ -186,7 +186,7 @@ class ProducersModel
 
      async DescuentoContrato (numero_contrato)
      {
-      const db_res = await db.query('select descuento from ada_contrato Where numero_contrato=$1',[numero_contrato]);
+      const db_res = await db.query('select coalesce(descuento,0) as descuento from ada_contrato Where numero_contrato=$1',[numero_contrato]);
       return db_res;
      }
 
@@ -305,15 +305,24 @@ class ProducersModel
        const db_res = await db.query('select * from ada_pedidos_por_pagar_parcial where id_prod = $1',[id_pedido]);
        return db_res;
      }
-
-
      async GetPedidosPagarCuotas(id_pedido)
      {
-       const db_res = await db.query('select * from ada_pedidos_por_pagar_cuotas where id_prod = $1',[id_pedido]);
+       const db_res = await db.query('select * from ada_pedidos_por_pagar_cuotas where id_prod = $1 and cuotas > 0',[id_pedido]);
        return db_res;
      }
 
 
+     async GetContadorCuotas(id_pedido)
+     {
+       const db_res = await db.query('select * from pagar_cuota where id_pedido = $1',[id_pedido]);
+       return db_res;
+     }
+
+     async Pagar(id_pedido,monto_total)
+     {
+       const db_res = await db.query('INSERT INTO ADA_PAGO (id_pedido,monto_total,fecha_emision) VALUES($1,$2,current_date)',[id_pedido,monto_total]);
+       return db_res;
+     }
 
 }
 

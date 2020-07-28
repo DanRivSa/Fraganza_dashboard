@@ -36,6 +36,9 @@
             <a class="nav-link" routerLink= "/compras/pedidos" >Pedidos</a>
           </li>
           <li class="nav-item" *ngIf="(userType == 1 && userID !=null)">
+            <a class="nav-link" routerLink= "/pagos" >Pagos</a>
+          </li>
+          <li class="nav-item" *ngIf="(userType == 1 && userID !=null)">
             <a class="nav-link" routerLink= "/contrato/provider" >Contratos</a>
           </li>
           <!--USER PROFILE-->

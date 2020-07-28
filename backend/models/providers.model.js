@@ -72,7 +72,7 @@ class ProviderModel
 
     async ConfirmarPedido (id_pedido,detalle)
     {
-      const db_res = await db.query('UPDATE ada_pedido SET estatus=$2, nro_factura=nextval($3), fecha_confirmacion=current_Date, descripcion=$4 where id_pedido=$1',[id_pedido,'enviado','ada_sec_nro_factura',detalle]);
+      const db_res = await db.query('UPDATE ada_pedido SET estatus=$2, nro_factura=nextval($3), fecha_confirmacion=current_date, descripcion=$4 where id_pedido=$1',[id_pedido,'enviado','ada_sec_nro_factura',detalle]);
       return db_res;
     }
 

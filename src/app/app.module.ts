@@ -36,6 +36,7 @@ import { PedidosComponent } from './components/productores/pedidos/pedidos.compo
 import { ContratoProvDetalleComponent } from './components/proveedores/contrato-prov-detalle/contrato-prov-detalle.component';
 import { DetallePedidoProveedorComponent } from './components/proveedores/detalle-pedido-proveedor/detalle-pedido-proveedor.component';
 import { ListaPedidosPagarComponent } from './components/productores/lista-pedidos-pagar/lista-pedidos-pagar.component';
+import { RealizarPagosComponent } from './components/productores/realizar-pagos/realizar-pagos.component';
 
 
 
@@ -75,6 +76,7 @@ import { ListaPedidosPagarComponent } from './components/productores/lista-pedid
     DetalleContratoComponent,
     DetallePedidoProveedorComponent,
     ListaPedidosPagarComponent,
+    RealizarPagosComponent,
 
 
 

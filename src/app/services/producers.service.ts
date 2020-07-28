@@ -7,6 +7,7 @@ import {QuejaModel} from '../models/QuejaModel';
 import {RenovacionContratoModel} from '../models/RenovacionContratoModel';
 import {DetPresentacionModel} from '../models/DetPresentacionModel';
 import {ResultadoModel} from '../models/Resultado';
+import {PagoModel} from '../models/PagoModel';
 
 @Injectable({
   providedIn: 'root'
@@ -255,6 +256,16 @@ export class ProducersService
   GetPedidosPagarCuotas(id_productor:number)
   {
     return this.httpClient.get(`${this.base_URL}/producers/pedidos/filtrados_cuotas/${id_productor}`);
+  }
+
+  GetContadorCuotas(id_pedido:number)
+  {
+    return this.httpClient.get(`${this.base_URL}/producers/pedidos/filtrados_parcial/${id_pedido}/pagar`);
+  }
+
+  Pagar(pago : PagoModel)
+  {
+    return this.httpClient.post(`${this.base_URL}/producers/pedidos/ejecutar_pago/`,pago);
   }
 
 }
