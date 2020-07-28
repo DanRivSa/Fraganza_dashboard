@@ -1,12 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
-<<<<<<< HEAD
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-=======
-import {FormsModule} from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
->>>>>>> 6a9b5c1151914ac4715a544a7673b61b2d256316
 
 //modules
 import {LoginModule} from './modules/login/login.module';
@@ -85,14 +80,11 @@ import { DetalleContratoEnProvComponent } from './components/proveedores/detalle
     DetallePedidoComponent,
     DetallePedidoProveedorComponent,
     ListaPedidosPagarComponent,
-<<<<<<< HEAD
     RealizarPagosComponent,
 
 
-=======
     ContratoPendComponent,
     DetalleContratoEnProvComponent,
->>>>>>> 6a9b5c1151914ac4715a544a7673b61b2d256316
 
 
 
@@ -103,12 +95,7 @@ import { DetalleContratoEnProvComponent } from './components/proveedores/detalle
     HttpClientModule,
     LoginModule,
     FormsModule,
-<<<<<<< HEAD
     ReactiveFormsModule
-=======
-    ReactiveFormsModule,
-    FormsModule
->>>>>>> 6a9b5c1151914ac4715a544a7673b61b2d256316
   ],
   providers: [UserCompanyService,ProducersService,ProveedoresService],
   bootstrap: [AppComponent]
