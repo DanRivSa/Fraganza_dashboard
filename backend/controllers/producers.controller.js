@@ -231,8 +231,12 @@ class ProducersController
 
     generarPedido = async (req,res)=>
     {
-      const {id_proveedor,id_productor,numero_contrato,metodo_pago,id_pais,metodo_envio} = req.body;
-      let db_res = await model.generarPedido(id_proveedor,id_productor,numero_contrato,metodo_pago,id_pais,metodo_envio);
+
+      const {id_prov1,id_prod1,numero_contrato1,id_prov2,metodo_pago,id_prod3,id_prov3,numero_contrato2,id_prov4,id_pais,tipo_envio,fecha_emision,total} = req.body;
+
+
+      console.log('Pago: '+req.body);
+      let db_res = await model.generarPedido(id_prov1,id_prod1,numero_contrato1,id_prov2,metodo_pago,id_prod3,id_prov3,numero_contrato2,id_prov4,id_pais,tipo_envio,fecha_emision,total);
       res.json(db_res.rows);
     }
 
@@ -252,6 +256,7 @@ class ProducersController
 
     PostDetPedido = async (req,res)=>
     {
+
       const {sku,cantidad} = req.body;
       let db_res = await model.PostDetPedido(sku,cantidad);
       res.json(db_res.rows);

@@ -10,7 +10,7 @@ export class Pedido{
     estatus: string;
     descripcion: string;
     fecha_confirmacion: Date;
-    nro_factura: string;
+    nro_factura: number;
     total: number;
 
 }

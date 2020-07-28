@@ -5,7 +5,7 @@
 
       <h3 class=" display-4">Contratos</h3>
       <hr>
-      
+
       <br>
     </div>
     <button type="button" class="btn btn-success " routerLink= "/contratos/pendientes" >contratos pendientes</button>
@@ -21,6 +21,8 @@
           <th scope="col">Id productor</th>
           <th scope="col">Nombre productor</th>
           <th scope="col">Detalles</th>
+          <th scope="col">Pedido</th>
+
         </tr>
       </thead>
       <tbody>
@@ -29,7 +31,7 @@
           <td>{{prod.id_prod}}</td>
           <td>{{prod.nombre_prod}}</td>
           <button type="button" class="btn btn-success " [routerLink]="['/compras/contratos/detalle/prov/',prod.id_prod,prod.numero_contrato]">Detalle</button>
-
+          <button type="button" class="btn btn-primary " [routerLink]="['compras/contratos/detalle/generar_pedido/',prod.id_prod,prod.numero_contrato]">Pagar</button>
         </tr>
       </tbody>
     </table>

@@ -15,6 +15,7 @@ import { ContIngredienteMode } from '../models/ContIngredienteModel';
 import { ContMetdoEnvioModel } from '../models/ContMetodoEnvioModel';
 import { ContParcialModel } from '../models/ContParcialModel';
 import { ContCuotaModel } from '../models/ContCuotaModel';
+import { Pedido } from '../models/Pedido';
 
 @Injectable({
   providedIn: 'root'
@@ -155,9 +156,9 @@ export class ProducersService
     return this.httpClient.get(`${this.base_URL}/producers/contratos/detalle_contrato/${id_proveedor}/envios/${numero_contrato}`);
   }
 
-  generarPedido(Pedido:PedidoModel)
+  generarPedido(PedidoM:Pedido)
   {
-    return this.httpClient.post(`${this.base_URL}/producers/compras/contratos/detalle_contrato/pedido/generar_pedido`,Pedido);
+    return this.httpClient.post(`${this.base_URL}/producers/compras/contratos/detalle_contrato/pedido/generar_pedido`,PedidoM);
   }
 
   PresentacionesEsenciaPedido(numero_contrato:number)

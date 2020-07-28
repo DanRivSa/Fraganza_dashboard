@@ -50,8 +50,7 @@ const routes: Routes =
   {path: 'contrato/producer', component:ContratoProduComponent},
   {path: 'compras/pedidos', component:PedidosComponent},
   {path: 'pagos',component: ListaPedidosPagarComponent},
-  {path: 'pagos/:id_pedido/:numero_contrato',component: RealizarPagosComponent}
-
+  {path: 'pagos/:id_pedido/:numero_contrato',component: RealizarPagosComponent},
   {path: 'contratos/pendientes', component:ContratoPendComponent},
   {path: 'compras/contratos/detalle/prov/:id/:contrato', component:ContratoProvDetalleComponent}
 

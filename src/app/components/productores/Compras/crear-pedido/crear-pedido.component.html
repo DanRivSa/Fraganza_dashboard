@@ -9,183 +9,143 @@
     </div>
 </header>
 
+<h2 class="text-center">Seleccione Presentaciones contratar</h2>
+<hr>
+<h4 class="text-center">Esencias</h4>
+<table class="table table-hover ">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">CAS</th>
+        <th scope="col">NOMBRE COMERCIAL</th>
+        <th scope="col">PRECIO</th>
+        <th scope="col">CONENIDO NETO</th>
+        <th scope="col">UNIDADES EMPAQUE</th>
+        <th scope="col">LISTAR</th>
+        <th scope="col">CONTRATAR</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let es of ListaPresentacionesEsencias">
+        <th scope="row">
+            {{es.cas}}
+          </th>
+          <td>{{es.nombre}}</td>
+          <td>$ {{es.precio}}</td>
+          <td>{{es.contenido}}</td>
+          <td>{{es.cantidad_pack}}</td>
+          <td>
+            <input type="number" name="LGform1_pwd" class="form-control" placeholder=""  #cantidad="ngModel" [(ngModel)]="es.cantidad"/>
+          </td>
+          <td>
+              <button class="btn btn-primary" (click)="ContratarPresentacion(es.sku,es.cantidad,es.precio)">
+                  Comprar
+              </button>
+          </td>
+      </tr>
+    </tbody>
+  </table>
 
-<form [formGroup]="form" (ngSubmit)="submitForm()" novalidate>
+  <br>
+  <br>
+  <br>
+  <h4 class="text-center">INGREDIENTES</h4>
+  <table class="table table-hover ">
+      <thead class="table-dark">
+        <tr>
+          <th scope="col">CAS</th>
+          <th scope="col">NOMBRE COMERCIAL</th>
+          <th scope="col">PRECIO</th>
+          <th scope="col">CONENIDO NETO</th>
+          <th scope="col">UNIDADES EMPAQUE</th>
+          <th scope="col">LISTAR</th>
+          <th scope="col">CONTRATAR</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ing of ListaPresentacionesIngredientes">
+          <th scope="row">
+              {{ing.cas_oi}}
+            </th>
+            <td>{{ing.nombre}}</td>
+            <td>{{ing.precio}}</td>
+            <td>{{ing.contenido}}</td>
+            <td>{{ing.cantidad_pack}}</td>
+            <td>
+              <input type="number" name="LGform1_pwd" class="form-control" placeholder=""  #cantidad="ngModel" [(ngModel)]="ing.cantidad"/>
+            </td>
+            <td>
+                <button class="btn btn-primary" (click)="ContratarPresentacion(ing.sku,ing.cantidad,ing.precio)">
+                  Comprar
+                </button>
+            </td>
+        </tr>
+      </tbody>
+    </table>
+  <hr>
+<h2 class="text-center">Seleccione Metodos de envio</h2>
+<hr>
+<div class="container text-center table-responsive ">
+    <table class="table table-hover">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">Pais</th>
+            <th scope="col">Tipo de Envio</th>
+            <th scope="col">Recargo</th>
+            <th scope="col">Operacion</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let env of ListaMetodosEnvio" >
+            <th scope="row">{{env.nombre_pais}}</th>
+            <td>{{env.tipo_envio}}</td>
+            <td>{{env.porc_contratado}} %</td>
+            <td>
+                <button class="btn btn-primary" (click)="ListarMetodoEnvio(env.id_pais,env.porc_contratado,env.tipo_envio)">
+                    Utilizar Envio
+                </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
 
-  <div *ngFor="let esencias of ListaPresentacionesIngredientes">
-    <label>
-  <input type="checkbox" [value]="esencias.cas_oi" (change)="onCheckboxChange($event)" />
-      {{esencias.nombre_comercial}}
-    </label>
-  </div>
+</div>
+<hr>
+<h2 class="text-center">Seleccione Metodos de envio</h2>
+<hr>
+<div class="container text-center table-responsive ">
+    <table class="table table-hover">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">Modalidad</th>
+            <th scope="col">Operacion</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let pag of ListaMetodosPago" >
+            <th scope="row">{{pag.case}}</th>
+            <td>
+                <button class="btn btn-primary" (click)="ContratarPago(pag.metodo_pago)">
+                    Usar modalida
+                </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
 
-  <input type="submit" value="Submit">
-</form>
+</div>
 
+<hr>
+<div class="container">
+  <button class="btn btn-success btn-block" (click)="ArmarPedido()">
+    Procesar pedido
+  </button>
+</div>
+<hr>
+<hr>
+<div class="container">
+  <button class="btn btn-primary btn-block" (click)="CotizarPedido()">
+    Cotizar
+  </button>
+</div>
 
-
-<div class="container jumbotron">
-<button type="submit" class="btn btn-dark "> cancelar</button>
 <br>
-<form >
-    <br>
-    <h3 class=" display-6">Proveedores</h3>
-    <hr>
-    <select class="form-control">
-          <option *ngFor="let prov of proveedor" value="{{proveedor.id_prov}}">{{prov.nombre_prov}}</option>
-
-      </select>
-
-    <br>
-    <br>
-    <br>
-
-
-
-
-    <h3 class=" display-6">Método de pago</h3>
-    <hr>
-    <div class="form-check">
-        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-        <label *ngFor="let mp of ListaMetodosPago" class="form-check-label" for="exampleRadios1">
-          {{mp.case}}
-        </label>
-      </div>
-
-
-    <br>
-    <br>
-    <br>
-    <h3 class=" display-6">Tipo de Envio</h3>
-    <hr>
-    <div class="container text-center table-responsive ">
-        <table class="table table-hover">
-            <thead class="table-dark">
-              <tr>
-                <th scope="col"></th>
-                <th scope="col">Pais</th>
-                <th scope="col">Tipo de Envio</th>
-                <th scope="col">Recargo</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let e of ListaMetodosEnvio" >
-                <th scope="row"><input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked></th>
-                <td>{{e.nombre_pais}}</td>
-                <td>{{e.case}}</td>
-                <td>{{e.porccontratado}}</td>
-              </tr>
-            </tbody>
-          </table>
-
-    </div>
-    <br>
-    <br>
-    <br>
-    <h3 class=" display-6">Productos</h3>
-    <hr>
-    <br>
-    <br>
-
-    <h3 class=" display-6">Ingredientes</h3>
-    <div class="container text-center table-responsive ">
-        <table class="table table-hover">
-            <thead class="table-dark">
-              <tr>
-                <th scope="col">Seleccionar</th>
-                <th scope="col">Cas</th>
-                <th scope="col">nombre</th>
-                <th scope="col">cantidad perpack</th>
-                <th scope="col">contenido</th>
-<<<<<<< HEAD
-                <th scope="col">precio</th>
-=======
-                <th scope="col">precio</th> 
-                <th scope="col">Cant.</th>               
->>>>>>> 6a9b5c1151914ac4715a544a7673b61b2d256316
-              </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let i of ListaPresentacionesIngredientes" >
-                <th scope="row"><input type="checkbox" class="form-check-input" id="exampleCheck1"></th>
-                <td>{{i.cas}}</td>
-                <td>{{i.nombre}}</td>
-                <td>{{i.cantidad_perpack}}</td>
-                <td>{{i.contenido}}</td>
-                <td>{{i.precio}}</td>
-                <td><input type="text" class="form-control" id="validationCustom05" placeholder="Cant" required></td>
-                </tr>
-            </tbody>
-          </table>
-
-    </div>
-    <br>
-    <h3 class=" display-6">Esencias</h3>
-    <div class="container text-center table-responsive ">
-        <table class="table table-hover">
-            <thead class="table-dark">
-              <tr>
-                <th scope="col">Seleccionar</th>
-                <th scope="col">Cas</th>
-                <th scope="col">nombre</th>
-                <th scope="col">cantidad perpack</th>
-                <th scope="col">contenido</th>
-                <th scope="col">precio</th>
-                <th scope="col">Cant.</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let e of ListaPresentacionesEsencias" >
-                <th scope="row"><input type="checkbox" class="form-check-input" id="exampleCheck1"></th>
-                <td>{{e.cas_oi}}</td>
-                <td>{{e.nombre}}</td>
-                <td>{{e.cantidad_perpack}}</td>
-                <td>{{e.contenido}}</td>
-                <td>{{e.precio}}</td>
-                <td><input type="text" class="form-control" id="validationCustom05" placeholder="Cant" required></td>
-              </tr>
-            </tbody>
-          </table>
-
-    </div>
-    <br>
-    <h3 class=" display-6">Detalles</h3>
-    <hr>
-    <div class="form-group">
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3">Ingrese Detalles de pedido</textarea>
-      </div>
-
-
-
-
-      <button type="submit" class="btn btn-primary text-center">Realizar Pedido</button>
-</form>
-
-</div>
-<<<<<<< HEAD
-=======
-
-
-
-
-<div class="modal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Seguro Que quiere Cancelar la Operación</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>Modal body text goes here.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Aceptar </button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-      </div>
-    </div>
-  </div>
-</div>
-
->>>>>>> 6a9b5c1151914ac4715a544a7673b61b2d256316

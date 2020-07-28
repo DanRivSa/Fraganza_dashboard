@@ -174,13 +174,13 @@ class ProducersModel
     }
      async metodoPagoContratados(id_proveedor,numero_contrato)
      {
-       const db_res = await db.query('SELECT case metodo_pago when $3 then $4 when $5 then $6 end from ada_contratacion_ap where id_prov = $1 and numero_contrato=$2',[id_proveedor,numero_contrato,'c','Pago por Cuotas','p','Pago Parcial']);
+       const db_res = await db.query('SELECT metodo_pago,case metodo_pago when $3 then $4 when $5 then $6 end from ada_contratacion_ap where id_prov = $1 and numero_contrato=$2',[id_proveedor,numero_contrato,'c','Pago por Cuotas','p','Pago Parcial']);
        return db_res;
      }
 
      async metodoEnvioContratados(id_proveedor,numero_contrato)
      {
-       const db_res = await db.query('select p.nombre_pais,case m.tipo_envio when $3 then $4 when $5 then $6 when $7 then $8 end, m.porc_contratado from ada_contratacion_me m INNER JOIN ada_pais p on p.id_pais = m.id_pais WHERE m.id_prov=$1 and m.numero_contrato=$2',[id_proveedor,numero_contrato,'m','MARÍTIMO','a','AÉREO','t','TERRESTRE']);
+       const db_res = await db.query('select m.tipo_envio,p.id_pais,p.nombre_pais,case m.tipo_envio when $3 then $4 when $5 then $6 when $7 then $8 end, m.porc_contratado from ada_contratacion_me m INNER JOIN ada_pais p on p.id_pais = m.id_pais WHERE m.id_prov=$1 and m.numero_contrato=$2',[id_proveedor,numero_contrato,'m','MARÍTIMO','a','AÉREO','t','TERRESTRE']);
        return db_res;
      }
 
@@ -229,26 +229,27 @@ class ProducersModel
        return db_res;
      }
 
-     async generarPedido(id_proveedor,id_productor,numero_contrato,metodo_pago,id_pais,metodo_envio,precio)
+     async generarPedido(id_prov1,id_prod1,numero_contrato1,id_prov2,metodo_pago,id_prod3,id_prov3,numero_contrato2,id_prov4,id_pais,tipo_envio,total)
      {
-        const db_res = await db.query('ada_pedido_new($1,$2,$3::character,$4::character,$5,$6,$7::bigint)',[id_proveedor,id_productor,metodo_envio,metodo_pago,numero_contrato,id_pais,precio]);
+       console.log(metodo_pago);
+        const db_res = await db.query('INSERT INTO ada_pedido (id_prov1,id_prod1,numero_contrato1,id_prov2,metodo_pago,id_prod3,id_prov3,numero_contrato2,id_prov4,id_pais,tipo_envio,total,fecha_emision) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,current_date)',[id_prov1,id_prod1,numero_contrato1,id_prov2,metodo_pago,id_prod3,id_prov3,numero_contrato2,id_prov4,id_pais,tipo_envio,total]);
         return db_res;
      }
 
      async PresentacionesEsenciaPedido(numero_contrato)
      {
-       const db_res = await db.query('SELECT * from ADA_PRESENTACIONES_ESENCIAS p INNER JOIN ada_esencia_en_contrato e on e.cas=p.cas WHERE e.numero_contrato =$1',[numero_contrato]);
+       const db_res = await db.query('SELECT * from ADA_PRESENTACIONES_ESENCIAS_P p INNER JOIN ada_esencia_en_contrato e on e.cas=p.cas WHERE e.numero_contrato =$1',[numero_contrato]);
        return db_res;
      }
 
      async PresentacionesIgredientesPedido(numero_contrato)
      {
-       const db_res = await db.query('SELECT * from ADA_PRESENTACIONES_INGREDIENTE p INNER JOIN ada_ingrediente_en_contrato e on e.cas_oi=p.cas_oi WHERE e.numero_contrato =$1',[numero_contrato]);
+       const db_res = await db.query('SELECT * from ADA_PRESENTACIONES_INGREDIENTE_p p INNER JOIN ada_ingrediente_en_contrato e on e.cas_oi=p.cas_oi WHERE e.numero_contrato =$1',[numero_contrato]);
        return db_res;
      }
 
      async PostDetPedido(sku,cantidad){
-       const db_res = await db.query('INSERT INTO ada_det_pedido (id_pedido,sku,cantidad) VALUES (currval($2),$1,$3)',['ada_sec_id_pedido',sku,cantidad]);
+       const db_res = await db.query('INSERT INTO ada_det_pedido (id_pedido,sku,cantidad) VALUES ((select last_value from ada_sec_id_pedido),$1,$2)',[sku,cantidad]);
        return db_res;
      }
 
@@ -341,7 +342,7 @@ class ProducersModel
       const db_res = await db.query('INSERT INTO ada_contratacion_ap (id_prod,id_prov,numero_contrato,id_prov2,metodo_pago,porc_cuota) VALUES ($1,$2,$3,$4,$5,$6)',[id_prod,id_prov,numero_contrato,id_prov2,metodo_pago,porc_cuota]);
       return db_res;
     }
-     
+
      async GetEstatusPedido(id_pedido)
      {
        const db_res = await db.query('SELECT upper(estatus) as estatus from ada_pedido where id_pedido = $1',[id_pedido]);

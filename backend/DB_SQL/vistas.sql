@@ -305,3 +305,25 @@ CREATE VIEW ADA_pagar_cuota as SELECT e.id_pedido,
    FROM ada_detalle_cuota_pedido e
      JOIN ada_pedidos_por_pagar_cuotas p ON p.id_pedido = e.id_pedido
   GROUP BY e.id_pedido, e.porc_cuota, p.cuotas, p.total;
+
+
+ CREATE VIEW ada_presentaciones_esencias_p AS
+ SELECT p.sku,
+    p.cas,
+    p.nombre_etiqueta AS nombre,
+    p.precio,
+    (p.contenido_neto || ''::text) || p.unidad_medida::text AS contenido,
+    p.cantidad_perpack
+   FROM ada_presentacion_e p
+  WHERE p.cas_oi IS NULL;
+
+
+CREATE VIEW ADA_PRESENTACIONES_INGREDIENTE_p AS
+ SELECT p.sku,
+    p.cas_oi,
+    p.nombre_etiqueta AS nombre,  P.precio,
+    (p.contenido_neto || ''::text) || p.unidad_medida::text AS contenido,
+    p.cantidad_perpack
+   FROM ada_presentacion_e p
+  WHERE p.cas IS NULL;
+

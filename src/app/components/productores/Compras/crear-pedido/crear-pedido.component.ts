@@ -3,7 +3,7 @@ import { UserCompanyService } from 'src/app/services/global/user-company.service
 import { ActivatedRoute } from '@angular/router';
 import { ProducersService } from 'src/app/services/producers.service';
 import {DetPresentacionModel} from '../../../../models/DetPresentacionModel';
-import { PedidoModel } from 'src/app/models/PedidoModel';
+import { Pedido } from 'src/app/models/Pedido';
 import { MetodoEnvio } from 'src/app/models/MetodoEnvio';
 import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 
@@ -20,23 +20,18 @@ export class CrearPedidoComponent implements OnInit {
   id:number;
   id_proveedor:number;
   id_productor:number = UserCompanyService.userCompanyID;
-  ListaPresentacionesEsencias:any[];
-  ListaPresentacionesIngredientes:any[];
+  ListaPresentacionesEsencias:DetPresentacionModel[]=[];
+  ListaPresentacionesIngredientes:DetPresentacionModel[]=[];
   ListaMetodosEnvio:any[];
   ListaMetodosPago:any[];
   numero_contrato:number;
-  precio_pedido:number;
-  DescuentoContrato:number;
-  proveedor:any[];
+  precio_pedido:number=0;
+  porc_descuento:number;
 
   //Proceso de agregación al pedido
-  EsenciasPedido:any[];
-  IngredientesPedido:any[];
   MetodoEnvioPedido:MetodoEnvio;
   MetodoPagoPedido:string;
-  PresentacionesEsencias:number[];
-  PresentacionesIngredientes:number[];
-  DetPresentacion:DetPresentacionModel[];
+  DetPresentacion:DetPresentacionModel[]=[];
 
   constructor(private route:ActivatedRoute, private productores:ProducersService, private fb: FormBuilder) {
     this.form = this.fb.group({
@@ -49,19 +44,57 @@ export class CrearPedidoComponent implements OnInit {
     this.route.paramMap.subscribe(params=>{
       this.id_proveedor=+params.get('id');
       this.numero_contrato=+params.get('contrato');
-      console.log('prov',this.numero_contrato);
+      console.log('contrato',this.numero_contrato);
       console.log('prov',this.id_proveedor);
     });
 
 
     this.productores.PresentacionesEsenciaPedido(this.numero_contrato).subscribe(res=>{
-        this.ListaPresentacionesIngredientes = res as any[];
-        console.log('ingredientes',this.ListaPresentacionesIngredientes);
+
+       let  data:any[] = res as any[];
+      for(let i = 0; i < data.length; i++){
+        let aux = new DetPresentacionModel();
+        aux.sku=data[i].sku;
+        console.log('Esencias: '+data[i].sku);
+
+        aux.nombre=data[i].nombre;
+        console.log('Esencias: '+data[i].nombre);
+
+        aux.precio=data[i].precio;
+        console.log('Esencias: '+data[i].precio);
+        aux.cantidad_pack=data[i].cantidad_pack;
+        console.log('Esencias: '+data);
+        aux.cantidad_pack=data[i].cantidad_perpack;
+        aux.nombre_comercial=data[i].nombre_comercial;
+        aux.cantidad=0;
+        aux.cas=data[i].cas;
+        console.log('AUXXXXX: '+aux);
+
+        this.ListaPresentacionesEsencias.push(aux);
+      }
+
     });
 
     this.productores.PresentacionesIgredientesPedido(this.numero_contrato).subscribe(res=>{
-      this.ListaPresentacionesEsencias = res as any[];
-      console.log('esencias',this.ListaPresentacionesEsencias);
+     // this.ListaPresentacionesEsencias = res as any[];
+      let data:any[]= res as any[];
+      console.log('Esencias: '+data);
+      for(let i = 0; i < data.length; i++){
+        let aux = new DetPresentacionModel();
+        aux.sku=data[i].sku;
+        aux.nombre=data[i].nombre;
+        aux.precio=data[i].precio;
+        console.log('Esencias: '+data[i].precio);
+        aux.cantidad_pack=data[i].cantidad_pack;
+        console.log('Esencias: '+data);
+        aux.cantidad_pack=data[i].cantidad_perpack;
+        aux.nombre_comercial=data[i].nombre_comercial;
+        aux.cantidad=0;
+        aux.cas_oi=data[i].cas_oi;
+        console.log('AUXXXXX: '+aux);
+
+        this.ListaPresentacionesIngredientes.push(aux);
+      }
     });
 
     this.productores.metodoEnvioContratados(this.id_proveedor,this.numero_contrato).subscribe(res=>{
@@ -74,74 +107,91 @@ export class CrearPedidoComponent implements OnInit {
       console.log('pagos',this.ListaMetodosPago);
     });
     this.productores.DescuentoContrato(this.numero_contrato).subscribe(res=>{
-      this.DescuentoContrato = res as number;
+      let valor:any[] = res as any[];
+      console.log(valor);
+      this.porc_descuento = valor[0].descuento;
     })
-    this.productores.GetContratosVigentes(this.id_productor).subscribe(res=>
-      {
-        this.proveedor = res as any[];
-        console.log('prov',this.proveedor);
-      });
 
   }
+
+
+  ContratarPago(tipo:string)
+  {
+    this.MetodoPagoPedido = tipo;
+    console.log(this.MetodoPagoPedido);
+    alert('contratado');
+  }
+
 
   ListarMetodoEnvio(id_pais:number, porc_contratado:number,tipo_envio:string){
     let envio = new MetodoEnvio();
     envio.id_pais=id_pais;
     envio.tipo_envio=tipo_envio;
     envio.porc_contratado=porc_contratado
-    this.MetodoEnvioPedido=envio;
+    this.MetodoEnvioPedido=(envio);
+    console.log('id_pais: '+this.MetodoEnvioPedido.id_pais);
+    console.log('id_pais: '+this.MetodoEnvioPedido.tipo_envio);
+    console.log('id_pais: '+this.MetodoEnvioPedido.porc_contratado);
+
+    alert('Contratado');
   };
 
-  InsertarPago(tipo_pago:string){
-
-    this.MetodoPagoPedido=tipo_pago;
-  };
-
-  ArmarDetPresentacion(sku:number,cantidad:number,precio:number){
+  ContratarPresentacion(sku:number,cantidad:number,precio:number){
     let det = new DetPresentacionModel();
     det.sku = sku;
     det.cantidad = cantidad;
     det.precio = precio;
+    console.log('VER:'+det.cantidad)
+    console.log('VER 2'+det);
      this.DetPresentacion.push(det);
+     console.log('Insertado:'+this.DetPresentacion);
   }
 
-  CotizarPedio()
+  CotizarPedido()
   {
 
-    if(this.DetPresentacion.length > 0){
       for (let i = 0; i < this.DetPresentacion.length; i++){
 
             let resultado = (this.DetPresentacion[i].cantidad*this.DetPresentacion[i].precio);
+            console.log('Resultado: '+resultado);
             this.precio_pedido=this.precio_pedido+resultado;
            }
-          let Descuento = this.precio_pedido*this.DescuentoContrato/100;
+           console.log('Descuenco: '+this.porc_descuento);
+          let Descuento = this.precio_pedido*this.porc_descuento/100;
+          console.log('Descuenco2: '+Descuento);
           let RecargoEnvio = this.precio_pedido*this.MetodoEnvioPedido.porc_contratado/100;
+          console.log('Recargo: '+RecargoEnvio);
           this.precio_pedido=this.precio_pedido-Descuento+RecargoEnvio;
-      }
-      alert('No ha listado presentaciones');
+          console.log('Cotizar pago: '+this.precio_pedido);
+
     }
   DetallarPedido()
   {
-    if(this.DetPresentacion.length > 0){
       for (let i = 0; i < this.DetPresentacion.length; i++){
         this.productores.PostDetPedido(this.DetPresentacion[i]).subscribe(res=>{
           console.log('Detalle añadido satisfactoriamente');
         })
-      }
     }
   }
   ArmarPedido(){
 
-    let p = new PedidoModel();
-    p.id_prov=this.id_proveedor;
-    p.id_prod=this.id_productor;
-    p.numero_contrato=this.numero_contrato;
+    let p = new Pedido();
+    p.id_prov1=this.id_proveedor;
+    p.id_prod1=this.id_productor;
+    p.numero_contrato1=this.numero_contrato;
+    p.id_prov2=this.id_proveedor;
+    p.id_prod3=this.id_productor;
+    p.id_prov3=this.id_proveedor;
     p.metodo_pago=this.MetodoPagoPedido;
     p.tipo_envio=this.MetodoEnvioPedido.tipo_envio;
+    p.numero_contrato2=this.numero_contrato;
+    p.id_prov4=this.id_proveedor;
     p.id_pais=this.MetodoEnvioPedido.id_pais;
-    p.total=this.precio_pedido;
+    p.total =Math.round(this.precio_pedido);
+    console.log(p.total);
     this.productores.generarPedido(p).subscribe(res=>{
-      this.id_pedido = res as number;
+      console.log(res);
+
       console.log('Pedido creado de forma satisfactoria');
     });
     this.DetallarPedido();
