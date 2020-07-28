@@ -2,11 +2,13 @@
 
 <header class="bg-dark text-white">
     <div class="container text-center">
-
-      <h3 class=" display-4">Pedidos</h3>
-
-      <br>
+      
+      <h3 class=" display-4">Pedidos</h3>           
     </div>
+    <div class= "text-right"> <button type="button" class="btn btn-primary btn-lg" >Pagar pedidos</button> </div>
+      
+    <br>
+
   </header>
 <br><br><br>
 
@@ -28,21 +30,13 @@
           <td>{{ped.nombre_prov}}</td>
           <td>{{ped.numero_contrato1}}</td>
           <td>{{ped.estatus}}</td>
+          
+          <button type="button" class="btn btn-success " [routerLink]="['/compras/detalle_pedido/',ped.id_prov1,ped.id_pedido,ped.numero_contrato1]" >Detalle</button>
 
-          <button type="button" class="btn btn-success " >Detalle</button>
+
 
         </tr>
       </tbody>
     </table>
   <hr>
 </div>
-
-<header class="bg-dark text-white">
-  <div class="container text-center">
-
-    <h3 class=" display-4">Pedidos</h3>
-
-    <br>
-  </div>
-</header>
-<br><br><br>

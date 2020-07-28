@@ -14,8 +14,8 @@ import { ProveedoresService } from 'src/app/services/proveedores.service';
 export class DetallePedidoComponent implements OnInit {
 
   id_pedido:number;
-  usuario:number = UserCompanyService.userCompanyID;
-  id_proveedor:number;
+  usuario:number
+  id_proveedor:number= UserCompanyService.userCompanyID;
   id_productor:number;
   metodo_envio:any[];
   metodo_pago:string;
@@ -41,26 +41,31 @@ export class DetallePedidoComponent implements OnInit {
         {
           this.id_pedido =+params.get('id_pedido');
           this.numero_contrato=+params.get('contrato');
-          this.id_proveedor=+params.get('id');
+          console.log('contrato',this.numero_contrato);
+          console.log('pedido',this.id_pedido);
         });
 
       this.productores.PresentacionesIngredientesAdquiridasPedido(this.numero_contrato).subscribe(res=>{
         this.DetPresentacionIngredientes = res as any[];
+        console.log('ingredientes',this.DetPresentacionIngredientes);
       });
 
       this.productores.DescuentoContrato(this.numero_contrato).subscribe(res=>
         {
           let descuento:any[] = res as any[];
-          this.PorcDescuento = descuento[0];
+          this.PorcDescuento = descuento[0].descuento;
+          console.log('porc',this.PorcDescuento);
         })
 
 
       this.productores.PresentacionesEsenciasAdquiridasPedido(this.numero_contrato).subscribe(res=>{
         this.DetPresentacionEsencias = res as any[];
+        console.log('esencias',this.DetPresentacionEsencias);
       });
 
       this.productores.DetEnvioPedido(this.id_pedido).subscribe(res=>{
         this.metodo_envio = res as any[];
+        console.log('idprov',this.metodo_envio);
       });
 
       this.productores.DetPagoPedido(this.id_pedido).subscribe(res=>{
@@ -70,16 +75,23 @@ export class DetallePedidoComponent implements OnInit {
         }
          this.productores.CaracteristicasCuotaPedido(this.numero_contrato,this.id_pedido).subscribe(res=>{
            this.DetCuota = res as any[];
+           console.log('porc2',this.DetCuota);
          })
       })
 
       this.productores.GetEstatusPedido(this.id_pedido).subscribe(res=>{
         let estatus:any[] = res as any[];
-        this.metodo_pago = estatus[0].estatus;
+        this.estatus = estatus[0].estatus;
+        console.log('estatus',estatus);
       })
     };
 
-    //Cuando se le da click al precio total, se refleja en pantalla los detalles del mismo, es decir, un modal (como el que se usa con los CAS) El precio del pedido base es: {{subtotal}}, el precio % de recargo de envio es {{Porcdescuento}}% es: {{descuento}} y el descuento del contrato es del {{metodo_envio.porc_contratado}}% y el precio es: {{precio_envio}}
+    //Cuando se le da click al precio total, se refleja en pantalla los detalles del mismo, es decir,
+    //un modal (como el que se usa con los CAS) El precio del pedido base es: {{subtotal}}, el precio %
+    //de recargo de envio es {{Porcdescuento}}% es: {{descuento}} y el descuento del contrato es del
+    //{{metodo_envio.porc_contratado}}% y el precio es: {{precio_envio}}
+
+
     DetallePrecio(){
         if(this.DetPresentacionIngredientes.length > 0){
           for (let i = 0; i < this.DetPresentacionIngredientes.length; i++){

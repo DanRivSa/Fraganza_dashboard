@@ -313,6 +313,13 @@ class ProducersController
       let db_res = await model.ObtenerFechaParaRenovar(numero_contrato);
       res.json(db_res.rows);
     }
+    ObtenerPedidosProvYProd= async (req,res)=>
+    {
+      let id_prod = req.params.id_prod;
+      let id_prov = req.params.id_prov;
+      let db_res = await model.ObtenerPedidosProvYProd(id_prod,id_prov);
+      res.json(db_res.rows);
+    }
 
     DetPagoPedido = async (req,res)=>
     {

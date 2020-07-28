@@ -20,6 +20,7 @@ export class PedidosComponent implements OnInit {
 
     this.productores.ObtenerPedidos(this.id_usuario).subscribe(res=>{
       this.pedido = res as any;
+      console.log('ped',this.pedido);
     });
   }
 

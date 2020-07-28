@@ -167,6 +167,10 @@ export class ProducersService
   {
     return this.httpClient.get(`${this.base_URL}/producers/pedidos/${id}`);
   }
+  ObtenerPedidosProvYProd(id_proveedor:number, id_productor:number)
+  {
+    return this.httpClient.get(`${this.base_URL}/producers/pedidos/detalle/${id_proveedor}/${id_productor}`);
+  }
 
   //RESULTADO DE EVALUACIONES
   GuardarResultadoInicial(id_prod:number,id_prov:number,resultado:number)
