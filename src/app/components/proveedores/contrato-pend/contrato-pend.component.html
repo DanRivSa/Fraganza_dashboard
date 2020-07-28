@@ -20,11 +20,11 @@
       <tbody>
         <tr *ngFor="let cont of contratos_pendientes">
           <th scope="row">{{cont.numero_contrato}}</th>
-          <td>{{cont.nombre_cont}}</td>
+          <td>{{cont.nombre_prod}}</td>
           <td>
             <div class="btn-group mr-2" role="group">
-              <button type="button" class="btn btn-success " (click)="Aceptar(cont)" routerLink="contrato/producer">Aceptar</button>
-              <button type="button" class="btn btn-danger " (click)="Rechazar(cont)" routerLink="contrato/producer">Rechazar</button>
+              <button type="button" class="btn btn-success " (click)="Aceptar(cont)" routerLink="/contrato/producer">Aceptar</button>
+              <button type="button" class="btn btn-danger " (click)="Rechazar(cont)" routerLink="/contrato/producer">Rechazar</button>
             </div>  
           </td>
         </tr>
