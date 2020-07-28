@@ -1,6 +1,7 @@
 //import model
 const model = require('../models/producers.model');
 const { async } = require('@angular/core/testing');
+const { RSA_NO_PADDING } = require('constants');
 
 class ProducersController
 {
@@ -167,8 +168,8 @@ class ProducersController
       let db_res = await model.CancelarContrato(numero_contrato,descripcion);
       return res.json(db_res.rows);
      }
-      
-    
+
+
 
     RenovarContrato = async (req,res)=>
     {
@@ -358,6 +359,19 @@ class ProducersController
       res.json(db_res.rows);
     }
 
+    GetContadorCuotas = async (req, res)=>
+    {
+      let id_pedido = req.params.id_pedido;
+      let db_res = await model.GetContadorCuotas(id_pedido);
+      res.json(db_res.rows);
+    }
+
+    Pagar = async (req, res) =>
+      {
+        const {id_pedido,monto_total} = req.body;
+        let db_res = await model.Pagar(id_pedido,monto_total);
+        res.json(db_res.rows);
+      }
     CancelarContratoDef = async (req,res)=>
     {
       let numero = req.params.numero_contrato;

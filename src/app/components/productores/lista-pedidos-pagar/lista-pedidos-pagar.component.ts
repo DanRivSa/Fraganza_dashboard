@@ -12,10 +12,11 @@ export class ListaPedidosPagarComponent implements OnInit {
 
   id_productor:number = UserCompanyService.userCompanyID; //id de usuario
 
-  constructor(private productores:ProducersService) { }
-
   PedidosParcial:any[];
   PedidosCuotas:any[];
+
+
+  constructor(private productores:ProducersService) { }
 
   ngOnInit(): void {
 
@@ -24,7 +25,6 @@ export class ListaPedidosPagarComponent implements OnInit {
       });
         this.productores.GetPedidosPagarCuotas(this.id_productor).subscribe(res=>{
         this.PedidosCuotas = res as any[];
-
         });
 
   }

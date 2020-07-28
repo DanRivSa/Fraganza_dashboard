@@ -186,7 +186,7 @@ class ProducersModel
 
      async DescuentoContrato (numero_contrato)
      {
-      const db_res = await db.query('select descuento from ada_contrato Where numero_contrato=$1',[numero_contrato]);
+      const db_res = await db.query('select coalesce(descuento,0) as descuento from ada_contrato Where numero_contrato=$1',[numero_contrato]);
       return db_res;
      }
 
@@ -237,13 +237,13 @@ class ProducersModel
 
      async PresentacionesEsenciaPedido(numero_contrato)
      {
-       const db_res = await db.query('SELECT * from ADA_PRESENTACIONES_ESENCIAS p INNER JOIN esencia_en_contrato e on e.cas=p.cas WHERE e.numero_contrato =$1',[numero_contrato]);
+       const db_res = await db.query('SELECT * from ADA_PRESENTACIONES_ESENCIAS p INNER JOIN ada_esencia_en_contrato e on e.cas=p.cas WHERE e.numero_contrato =$1',[numero_contrato]);
        return db_res;
      }
 
      async PresentacionesIgredientesPedido(numero_contrato)
      {
-       const db_res = await db.query('SELECT * from ADA_PRESENTACIONES_INGREDIENTE p INNER JOIN ingrediente_en_contrato e on e.cas_oi=p.cas_oi WHERE e.numero_contrato =$1',[numero_contrato]);
+       const db_res = await db.query('SELECT * from ADA_PRESENTACIONES_INGREDIENTE p INNER JOIN ada_ingrediente_en_contrato e on e.cas_oi=p.cas_oi WHERE e.numero_contrato =$1',[numero_contrato]);
        return db_res;
      }
 
@@ -256,13 +256,13 @@ class ProducersModel
      //DetallePedido
      async PresentacionesIngredientesAdquiridasPedido(id_pedido)
      {
-       const db_res = await db.query('select * from INGREDIENTES_CONTRATADOS_PEDIDO where id_pedido=$1',[id_pedido]);
+       const db_res = await db.query('select * from ada_INGREDIENTES_CONTRATADOS_PEDIDO where id_pedido=$1',[id_pedido]);
        return db_res;
      }
 
      async PresentacionesEsenciasAdquiridasPedido(id_pedido)
      {
-       const db_res = await db.query('select * from ESENCIAS_CONTRATADOS_PEDIDO where id_pedido=$1',[id_pedido]);
+       const db_res = await db.query('select * from ada_ESENCIAS_CONTRATADOS_PEDIDO where id_pedido=$1',[id_pedido]);
        return db_res;
      }
 
@@ -353,15 +353,24 @@ class ProducersModel
        const db_res = await db.query('select * from ada_pedidos_por_pagar_parcial where id_prod = $1',[id_pedido]);
        return db_res;
      }
-
-
      async GetPedidosPagarCuotas(id_pedido)
      {
-       const db_res = await db.query('select * from ada_pedidos_por_pagar_cuotas where id_prod = $1',[id_pedido]);
+       const db_res = await db.query('select * from ada_pedidos_por_pagar_cuotas where id_prod = $1 and cuotas > 0',[id_pedido]);
        return db_res;
      }
 
 
+     async GetContadorCuotas(id_pedido)
+     {
+       const db_res = await db.query('select * from ada_pagar_cuota where id_pedido = $1',[id_pedido]);
+       return db_res;
+     }
+
+     async Pagar(id_pedido,monto_total)
+     {
+       const db_res = await db.query('INSERT INTO ADA_PAGO (id_pedido,monto_total,fecha_emision) VALUES($1,$2,current_date)',[id_pedido,monto_total]);
+       return db_res;
+     }
 
 }
 

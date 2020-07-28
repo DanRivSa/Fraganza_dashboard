@@ -69,6 +69,16 @@ OWNED BY ada_escala.id_escala;
 ALTER TABLE ada_escala
 ALTER COLUMN id_escala SET DEFAULT nextval('ada_sec_id_escala');
 
+
+CREATE SEQUENCE ada_sec_id_renglon AS SMALLINT
+MINVALUE 1
+MAXVALUE 55
+NO CYCLE
+OWNED BY ada_det_pedido.id_renglon;
+ALTER TABLE ada_det_pedido
+ALTER COLUMN id_renglon SET DEFAULT nextval('ada_sec_id_renglon');
+
+
 CREATE SEQUENCE ada_sec_id_productor as SMALLINT
  MINVALUE 1
  MAXVALUE 50
