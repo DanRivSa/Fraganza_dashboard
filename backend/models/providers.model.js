@@ -83,7 +83,7 @@ class ProviderModel
 
      async ObtenerContratosPendientes(id_prov)
      {
-         const db_res = await db.query('SELECT numero_contrato,nombre_prod FROM ada_contrato cont INNER JOIN ada_productor prod ON cont.id_prod = prod.id_prod WHERE acuerdo=false and id_prov = $1',[id_prov]);
+         const db_res = await db.query('SELECT numero_contrato,nombre_prod FROM ada_contrato cont INNER JOIN ada_productor prod ON cont.id_prod = prod.id_prod WHERE acuerdo=false and cancelado=false and id_prov = $1',[id_prov]);
          return db_res;
      }
 
@@ -95,7 +95,7 @@ class ProviderModel
     
      async RechazarContrato(numero)
      {
-         const db_res = await db.query('UPDATE ada_contrato SET acuerdo=false WHERE numero_contrato = $1',[numero]);
+         const db_res = await db.query('UPDATE ada_contrato SET acuerdo=false, cancelado=true, fecha_cancelac=CURRENT_DATE, motivo_cancelac = $2 WHERE numero_contrato = $1',[numero,'RECHAZADO']);
          return db_res;
      }
 

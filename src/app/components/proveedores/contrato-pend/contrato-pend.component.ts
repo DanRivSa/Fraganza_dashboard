@@ -11,7 +11,7 @@ import { ProducersService } from '../../../services/producers.service';
 export class ContratoPendComponent implements OnInit {
 
   constructor(private servicio:ProveedoresService) { }
-  productores:any[];
+  contratos_pendientes:any[];
 
   id_usuario:number = UserCompanyService.userCompanyID; //id de usuario 
 
@@ -20,14 +20,30 @@ export class ContratoPendComponent implements OnInit {
 
   
 
-    this.servicio.GetContratosVigentes(this.id_usuario).subscribe(res=>{
+    this.servicio.ObtenerContratosPendientes(this.id_usuario).subscribe(res=>{
 
-      this.productores = res as any[];
+      this.contratos_pendientes = res as any[];
 
     });
   
-
-
-
 }
+
+Aceptar(obj:any)
+{
+  let num:number = obj.numero_contrato;
+  this.servicio.AceptarContrato(num).subscribe(res=>
+    {
+      alert(`contrato ${num} aceptado`);
+    });
+}
+
+Rechazar(obj:any)
+{
+  let num:number= obj.numero_contrato;
+  this.servicio.RechazarContrato(num).subscribe(res=>
+    {
+      alert(`contrato ${num} cancelado`);
+    })
+}
+
 }

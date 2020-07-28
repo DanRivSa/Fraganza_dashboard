@@ -84,7 +84,7 @@ router.get('/alt_envio/contrato/:id_prod/:id_prov',providersController.ObtenerAl
 router.post('/contratar/pago/parcial/:id',producersController.ContratarPagoParcial);
 router.post('/contratar/pago/cuotas/:id',producersController.ContratarPagoPorCuotas);
 router.put('/providers/cancelar/contrato/:num',providersController.CancelarContrato);
-router.put('providers/aceptar/contrato/:num',providersController.AceptarContrato);
+router.put('/providers/aceptar/contrato/:num',providersController.AceptarContrato);
 router.get('/providers/contratos_pendientes/:id',providersController.ObtenerContratosPendientes);
 router.put('/providers/rechazar/contrato/:num',providersController.RechazarContrato);
 //RutasModuloCompras

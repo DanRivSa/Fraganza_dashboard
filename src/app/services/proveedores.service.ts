@@ -80,7 +80,7 @@ export class ProveedoresService
 
   AceptarContrato(numero:number)
   {
-    return this.cliente.put(`${this.url_base}providers/aceptar/contrato/${numero}`,{});
+    return this.cliente.put(`${this.url_base}/providers/aceptar/contrato/${numero}`,{});
   }
 
   RechazarContrato(numero:number)

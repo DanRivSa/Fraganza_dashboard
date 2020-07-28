@@ -13,19 +13,20 @@
       <thead class="table-dark">
         <tr>
           <th scope="col"># Contrato </th>
-          <th scope="col">Id productor</th>
           <th scope="col">Nombre productor</th>
-          <th scope="col">Detalles</th>
+          <th scope="col">Operaciones</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let prod of productores">
-          <th scope="row">{{prod.numero_contrato}}</th>
-          <td>{{prod.id_prod}}</td>
-          <td>{{prod.nombre_prod}}</td>
-          <button type="button" class="btn btn-success " >Aceptar</button>
-          <button type="button" class="btn btn-danger " >Cancelar</button>
-
+        <tr *ngFor="let cont of contratos_pendientes">
+          <th scope="row">{{cont.numero_contrato}}</th>
+          <td>{{cont.nombre_cont}}</td>
+          <td>
+            <div class="btn-group mr-2" role="group">
+              <button type="button" class="btn btn-success " (click)="Aceptar(cont)" routerLink="/">Aceptar</button>
+              <button type="button" class="btn btn-danger " (click)="Rechazar(cont)" routerLink="/">Rechazar</button>
+            </div>  
+          </td>
         </tr>
       </tbody>
     </table>
