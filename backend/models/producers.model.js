@@ -302,7 +302,7 @@ class ProducersModel
 
     async NumeroDeSecuenciaDeContrato()
     {
-      const db_res = await db.query('SELECT currval($1)',['ada_sec_numero_contrato']);
+      const db_res = await db.query('SELECT last_value FROM ada_sec_numero_contrato');
       return db_res;
     }
 
