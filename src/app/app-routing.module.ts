@@ -19,6 +19,7 @@ import { DetallePedidoComponent } from './components/productores/Compras/detalle
 import { ContratoProduComponent } from './components/productores/contrato-produ/contrato-produ.component';
 import {CrearContratoComponent} from './components/productores/crear-contrato/crear-contrato.component';
 import { PedidosComponent } from './components/productores/pedidos/pedidos.component';
+import { ContratoPendComponent } from './components/proveedores/contrato-pend/contrato-pend.component';
 
 const routes: Routes =
 [
@@ -44,7 +45,8 @@ const routes: Routes =
   {path:'compras/contratos/detalle/:id/:contrato', component:DetalleContratoComponent},
   {path:'compras/contratos/:id/detalle/:contrato/generar_pedido', component: CrearPedidoComponent},
   {path: 'contrato/producer', component:ContratoProduComponent},
-  {path: 'compras/pedidos', component:PedidosComponent}
+  {path: 'compras/pedidos', component:PedidosComponent},
+  {path: 'contratos/pendientes', component:ContratoPendComponent}
 
 
 ];
