@@ -107,12 +107,12 @@
   <h4 class="text-center">Alternativa de pago</h4>
   <div class="container text-center">
     <ul *ngFor="let alt of alt_pagos">
-      <li *ngIf="alt.metodo_pago = 'p'">
+      <li *ngIf="alt.metodo_pago == 'p'">
         <button class="btn btn-primary" (click)="ContratarParcialPago()">
           pago parcial (contratar)
       </button>
       </li>
-      <li *ngIf="alt.metodo_pago = 'c'">Cuotas</li>
+      <li *ngIf="alt.metodo_pago == 'c'">Cuotas</li>
     </ul>
   </div>
 
