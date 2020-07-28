@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 //modules
 import {LoginModule} from './modules/login/login.module';
@@ -88,6 +89,8 @@ import { ListaPedidosPagarComponent } from './components/productores/lista-pedid
     AppRoutingModule,
     HttpClientModule,
     LoginModule,
+    FormsModule,
+    ReactiveFormsModule,
     FormsModule
   ],
   providers: [UserCompanyService,ProducersService,ProveedoresService],
