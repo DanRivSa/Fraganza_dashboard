@@ -21,6 +21,8 @@ import {CrearContratoComponent} from './components/productores/crear-contrato/cr
 import { PedidosComponent } from './components/productores/pedidos/pedidos.component';
 import { ListaPedidosPagarComponent } from './components/productores/lista-pedidos-pagar/lista-pedidos-pagar.component';
 import { RealizarPagosComponent } from './components/productores/realizar-pagos/realizar-pagos.component';
+import { ContratoPendComponent } from './components/proveedores/contrato-pend/contrato-pend.component';
+import { ContratoProvDetalleComponent } from './components/proveedores/contrato-prov-detalle/contrato-prov-detalle.component';
 
 const routes: Routes =
 [
@@ -42,6 +44,7 @@ const routes: Routes =
   {path:'compras/detalle_pedido/:id/:id_pedido/:contrato',component:DetallePedidoComponent},
   {path: 'contrato/producer', component:ContratoProduComponent},
   {path:'crear/contrato/con_proveedor/:id', component:CrearContratoComponent},
+
   {path:'compras/contratos/detalle/:id/:contrato', component:DetalleContratoComponent},
   {path:'compras/contratos/:id/detalle/:contrato/generar_pedido', component: CrearPedidoComponent},
   {path: 'contrato/producer', component:ContratoProduComponent},
@@ -49,6 +52,8 @@ const routes: Routes =
   {path: 'pagos',component: ListaPedidosPagarComponent},
   {path: 'pagos/:id_pedido/:numero_contrato',component: RealizarPagosComponent}
 
+  {path: 'contratos/pendientes', component:ContratoPendComponent},
+  {path: 'compras/contratos/detalle/prov/:id/:contrato', component:ContratoProvDetalleComponent}
 
 
 ];

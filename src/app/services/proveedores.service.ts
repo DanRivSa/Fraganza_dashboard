@@ -62,6 +62,31 @@ export class ProveedoresService
     return this.cliente.get(`${this.url_base}/providers/contratos/${id_proveedor}`);
   }
 
+  ObtenerAtEnvioParaContrato(id_prod:number,id_prov:number)
+  {
+    return this.cliente.get(`${this.url_base}/alt_envio/contrato/${id_prod}/${id_prov}`);
+  }
+
+  ObtenerContratosPendientes(id_proveedor:number)
+  {
+    return this.cliente.get(`${this.url_base}/providers/contratos_pendientes/${id_proveedor}`);
+  }
+
+  CancelarContrato(numero:number)
+  {
+    return this.cliente.put(`${this.url_base}/providers/cancelar/contrato/${numero}`,{});
+
+  }
+
+  AceptarContrato(numero:number)
+  {
+    return this.cliente.put(`${this.url_base}/providers/aceptar/contrato/${numero}`,{});
+  }
+
+  RechazarContrato(numero:number)
+  {
+    return this.cliente.put(`${this.url_base}/providers/rechazar/contrato/${numero}`,{});
+  }
   ConfirmarPedido(id_pedido:number, detalle:DescripcionModel)
   {
     return this.cliente.put(`${this.url_base}/providers/pedidos/detalle_pedido/confirmar_pedido/${id_pedido}`,detalle);

@@ -26,7 +26,13 @@ class ProviderModel
 
     async ObtenerAlternativasEnvio(id)
     {
-        const db_res = await db.query('SELECT nombre_pais,tipo_envio,porc_base FROM ada_pais ps INNER JOIN ada_alternativa_envio env  ON ps.id_pais = env.id_pais WHERE env.id_prov = $1',[id]);
+        const db_res = await db.query('SELECT  ps.id_pais,nombre_pais,tipo_envio,porc_base FROM ada_pais ps INNER JOIN ada_alternativa_envio env  ON ps.id_pais = env.id_pais WHERE env.id_prov = $1',[id]);
+        return db_res;
+    }
+
+    async ObtenerAltEnvioParaContrato(id_prod,id_prov)
+    {
+        const db_res = await db.query('SELECT nombre_pais,ps.id_pais,tipo_envio,porc_base FROM ada_pais ps  INNER JOIN ada_alternativa_envio env  ON ps.id_pais = env.id_pais INNER JOIN ada_prod_pais pps ON pps.id_pais = ps.id_pais WHERE env.id_prov = $2 and pps.id_prod = $1',[id_prod,id_prov]);
         return db_res;
     }
 
@@ -69,6 +75,29 @@ class ProviderModel
         return db_res;
     }
 
+    async CancelarContrato(numero,motivo)
+     {
+       const db_res= await db.query('UPDATE ada_contrato SET  cancelado=true, fecha_cancelac = CURRENT_DATE, motivo_cancelac = $1 WHERE numero_contrato = $2',[motivo,numero] );
+       return db_res
+     }
+
+     async ObtenerContratosPendientes(id_prov)
+     {
+         const db_res = await db.query('SELECT numero_contrato,nombre_prod FROM ada_contrato cont INNER JOIN ada_productor prod ON cont.id_prod = prod.id_prod WHERE acuerdo=false and cancelado=false and id_prov = $1',[id_prov]);
+         return db_res;
+     }
+
+     async AceptarContrato(numero)
+     {
+         const db_res = await db.query('UPDATE ada_contrato SET acuerdo=true WHERE numero_contrato = $1',[numero]);
+         return db_res;
+     }
+    
+     async RechazarContrato(numero)
+     {
+         const db_res = await db.query('UPDATE ada_contrato SET acuerdo=false, cancelado=true, fecha_cancelac=CURRENT_DATE, motivo_cancelac = $2 WHERE numero_contrato = $1',[numero,'RECHAZADO']);
+         return db_res;
+     }
 
     async ConfirmarPedido (id_pedido,detalle)
     {

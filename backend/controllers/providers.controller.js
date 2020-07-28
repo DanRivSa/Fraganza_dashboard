@@ -79,7 +79,42 @@ class ProvidersController
         res.json(db_res.rows);
     }
 
+    ObtenerAltEnvioParaContrato = async (req,res)=>
+    {
+      let id_prod = req.params.id_prod;
+      let id_prov = req.params.id_prov;
+      const db_res = await model.ObtenerAltEnvioParaContrato(id_prod,id_prov);
+      res.json(db_res.rows);
+    }
 
+    CancelarContrato = async (req,res)=>
+    {
+        let numero = req.params.num;
+        let motivo = req.body.motivo;
+        const db_res = await model.CancelarContrato(numero,motivo);
+        res.json(db_res.rows);
+    }
+
+    AceptarContrato = async (req,res)=>
+    {
+        let numero = req.params.num;
+        const db_res = await model.AceptarContrato(numero);
+        res.json(db_res.rows);
+    }
+
+    RechazarContrato = async (req,res)=>
+    {
+        let numero = req.params.num;
+        const db_res = await model.RechazarContrato(numero);
+        res.json(db_res.rows);
+    }
+
+    ObtenerContratosPendientes = async (req,res)=>
+    {
+        let id = req.params.id;
+        const db_res = await model.ObtenerContratosPendientes(id);
+        res.json(db_res.rows);
+    }
     ConfirmarPedido = async (req,res)=>
     {
       const {detalle} = req.body;

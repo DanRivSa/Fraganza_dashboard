@@ -91,7 +91,7 @@
             <table class="table table-hover">
                 <thead class="table-dark">
                   <tr>
-                    <th scope="col">Seleccionar</th> 
+                    <th scope="col">   </th> 
                     <th scope="col">Cas</th>
                     <th scope="col">nombre</th>
                     <th scope="col">cantidad perpack</th>
@@ -101,8 +101,8 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let i of DetPresentacionIngredientes" >
-                    <th scope="row"><input type="checkbox" class="form-check-input" id="exampleCheck1"></th>
-                    <td>{{i.cas}}</td>
+                    <th scope="row"></th>
+                    <td>{{i.cas_oi}}</td>
                     <td>{{i.nombre}}</td>
                     <td>{{i.cantidad_perpack}}</td>
                     <td>{{i.contenido}}</td>
@@ -129,7 +129,7 @@
                 <tbody>
                   <tr *ngFor="let e of DetPresentacionEsencias" >
                     <th scope="row"><input type="checkbox" class="form-check-input" id="exampleCheck1"></th>
-                    <td>{{e.cas_oi}}</td>
+                    <td>{{e.cas}}</td>
                     <td>{{e.nombre}}</td>
                     <td>{{e.cantidad_perpack}}</td>
                     <td>{{e.contenido}}</td>
@@ -139,9 +139,11 @@
               </table>
         
         </div>
-
-
       </div>
+
+      <button class="btn btn-primary" data-toggle="modal" data-target="#subtotal" (click)="DetallePrecio()">
+        Precio total
+      </button>
         
       
     
@@ -149,6 +151,32 @@
 </div>
 </div>
 
+
+<!--modal presentaciones ingredientes-->
+<div class="modal fade" id="subtotal" tabindex="-1" role="dialog" aria-labelledby="subtotal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Total De pedido</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+              <br>
+              <h3>Precio base: {{resultado}} $</h3>
+              <br>
+              <h3> recargo de envio de {{porcenvio}} %  = {{descuento}} $</h3>
+              <br>         
+              <h3>Descuento por contrato {{PorcDescuento}} %  = {{RecargoEnvio}} $ </h3>
+              <br>
+              <br>
+
+              <h1>Total: {{total}} $</h1>
+      </div>
+    </div>
+  </div>
+</div>
 
 
         

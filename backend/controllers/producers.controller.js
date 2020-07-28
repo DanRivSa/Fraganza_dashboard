@@ -167,7 +167,9 @@ class ProducersController
       const {descripcion} = req.body;
       let db_res = await model.CancelarContrato(numero_contrato,descripcion);
       return res.json(db_res.rows);
-    }
+     }
+
+
 
     RenovarContrato = async (req,res)=>
     {
@@ -370,6 +372,90 @@ class ProducersController
         let db_res = await model.Pagar(id_pedido,monto_total);
         res.json(db_res.rows);
       }
+    CancelarContratoDef = async (req,res)=>
+    {
+      let numero = req.params.numero_contrato;
+      let motivo = req.body.motivo_cancelacion;
+      const db = await model.CancelarContratoDef(numero,motivo);
+      res.json(db.motivo);
+    }
+
+    NumeroDeSecuenciaDeContrato = async (req,res)=>
+    {
+      const db_res = await model.NumeroDeSecuenciaDeContrato();
+      res.json(db_res.rows);
+    }
+
+    InsertarContrato = async (req,res)=>
+    {
+      let prod = req.params.id;
+      let prov = req.body.id_prov;
+      let num = req.body.numero_contrato;
+      let exc = req.body.exclusivo;
+      let desc = req.body.descuento;
+      let ac = req.body.acuerdo;
+      let cancel = req.body.cancelado;
+      console.log(prod,prov,num,exc,desc,ac,cancel);
+      const db_res = await model.InsertarContrato(prod,prov,num,exc,desc,ac,cancel);
+      res.json(db_res.rows);
+    }
+
+    ContratarEsencia = async (req,res)=>
+    {
+      let id_prod = req.params.id;
+      let id_prov = req.body.id_prov;
+      let num_contrato = req.body.numero_contrato;
+      let cas = req.body.cas;
+      const db_res = await model.ContratarEsencia(id_prod,id_prov,num_contrato,cas);
+      res.json(db_res.rows);
+    }
+
+    ContratarIngrediente = async (req,res)=>
+    {
+      let id_prod = req.params.id;
+      let id_prov = req.body.id_prov;
+      let num_contrato = req.body.numero_contrato;
+      let cas_oi = req.body.cas_oi;
+      const db_res = await model.ContratarIngrediente(id_prod,id_prov,num_contrato,cas_oi);
+      res.json(db_res.rows);
+    }
+
+    ContratarMetodoEnvio = async (req,res)=>
+    {
+      let id_prod = req.params.id;
+      let id_prov = req.body.id_prov;
+      let id_prov2 = req.body.id_prov2;
+      let tipo_envio = req.body.tipo_envio;
+      let numero_contrato = req.body.numero_contrato;
+      let id_pais = req.body.id_pais;
+      let porc_contratado = req.body.porc_contratado;
+      const db_res = await model.ContratarMetodoEnvio(id_prod,id_prov,tipo_envio,numero_contrato,id_prov2,id_pais,porc_contratado);
+      res.json(db_res.rows);
+    }
+
+    ContratarPagoParcial = async (req,res)=>
+    {
+      let id_prod = req.params.id;
+      let id_prov = req.body.id_prov;
+      let id_prov2 = req.body.id_prov2;
+      let numero_contrato = req.body.numero_contrato;
+      let mp = req.body.metodo_pago;
+      const db_res = await model.ContratarPagoParcial(id_prod,id_prov,id_prov2,numero_contrato,mp);
+      res.json(db_res.rows);
+    }
+
+    ContratarPagoPorCuotas = async (req,res)=>
+    {
+      let id_prod = req.params.id;
+      let id_prov = req.body.id_prov;
+      let id_prov2 = req.body.id_prov2;
+      let numero_contrato = req.body.numero_contrato;
+      let mp = req.body.metodo_pago;
+      let porc = req.body.porc_cuota;
+      const db_res = await model.ContratarPagoPorCuotas(id_prod,id_prov,id_prov2,numero_contrato,mp,porc);
+      res.json(db_res.rows);
+    }
+
 
   }
 

@@ -8,6 +8,13 @@ import {RenovacionContratoModel} from '../models/RenovacionContratoModel';
 import {DetPresentacionModel} from '../models/DetPresentacionModel';
 import {ResultadoModel} from '../models/Resultado';
 import {PagoModel} from '../models/PagoModel';
+import { CancelacionModel } from '../models/CancelacionModel';
+import { ContratoModel } from '../models/ContratoModel';
+import { ContEsenciaModel } from '../models/ContEsenciaModel';
+import { ContIngredienteMode } from '../models/ContIngredienteModel';
+import { ContMetdoEnvioModel } from '../models/ContMetodoEnvioModel';
+import { ContParcialModel } from '../models/ContParcialModel';
+import { ContCuotaModel } from '../models/ContCuotaModel';
 
 @Injectable({
   providedIn: 'root'
@@ -235,6 +242,47 @@ export class ProducersService
   {
     return this.httpClient.get(`${this.base_URL}/fecha_renovacion/${num_c}`);
   }
+
+  CancelarContratoDef(numero_contrato:number,motivo:CancelacionModel)
+  {
+    return this.httpClient.put(`${this.base_URL}/cancelar/contrato/${numero_contrato}`,motivo);
+  }
+
+  NumeroDeSecuenciaDeContrato()
+  {
+    return this.httpClient.get(`${this.base_URL}/sec_contrato`);
+  }
+
+  InsertarContrato(id_prod:number,contrato:ContratoModel)
+  {
+    return this.httpClient.post(`${this.base_URL}/nuevo_contrato/${id_prod}`,contrato);
+  }
+
+  ContratarEsencia(id_prod:number,esencia:ContEsenciaModel)
+  {
+    return this.httpClient.post(`${this.base_URL}/contratar/esencia/${id_prod}`,esencia);
+  }
+
+  ContratarIngrediente(id_prod:number,ingrediente:ContIngredienteMode)
+  {
+    return this.httpClient.post(`${this.base_URL}/contratar/ingrediente/${id_prod}`,ingrediente);
+  }
+
+  ContratarMetodoEnvio(id_prod:number,metodoEnvio:ContMetdoEnvioModel)
+  {
+    return this.httpClient.post(`${this.base_URL}/contratar/metodo_envio/${id_prod}`,metodoEnvio);
+  }
+
+  ContratarPagoParcial(id_prod:number,parcial:ContParcialModel)
+  {
+    return this.httpClient.post(`${this.base_URL}/contratar/pago/parcial/${id_prod}`,parcial);
+  }
+
+  ContratarPagoPorCuotas(id_prod:number,cuota:ContCuotaModel)
+  {
+    return this.httpClient.post(`${this.base_URL}/contratar/pago/cuotas/${id_prod}`,cuota);
+  }
+
 
   DetPagoPedido (id_pedido:number)
   {

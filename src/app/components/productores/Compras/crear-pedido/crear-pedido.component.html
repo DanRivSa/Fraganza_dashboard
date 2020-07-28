@@ -27,7 +27,7 @@
 <div class="container jumbotron">
 <button type="submit" class="btn btn-dark "> cancelar</button>
 <br>
-<form>
+<form >
     <br>
     <h3 class=" display-6">Proveedores</h3>
     <hr>
@@ -97,7 +97,12 @@
                 <th scope="col">nombre</th>
                 <th scope="col">cantidad perpack</th>
                 <th scope="col">contenido</th>
+<<<<<<< HEAD
                 <th scope="col">precio</th>
+=======
+                <th scope="col">precio</th> 
+                <th scope="col">Cant.</th>               
+>>>>>>> 6a9b5c1151914ac4715a544a7673b61b2d256316
               </tr>
             </thead>
             <tbody>
@@ -108,6 +113,7 @@
                 <td>{{i.cantidad_perpack}}</td>
                 <td>{{i.contenido}}</td>
                 <td>{{i.precio}}</td>
+                <td><input type="text" class="form-control" id="validationCustom05" placeholder="Cant" required></td>
                 </tr>
             </tbody>
           </table>
@@ -125,6 +131,7 @@
                 <th scope="col">cantidad perpack</th>
                 <th scope="col">contenido</th>
                 <th scope="col">precio</th>
+                <th scope="col">Cant.</th>
               </tr>
             </thead>
             <tbody>
@@ -135,6 +142,7 @@
                 <td>{{e.cantidad_perpack}}</td>
                 <td>{{e.contenido}}</td>
                 <td>{{e.precio}}</td>
+                <td><input type="text" class="form-control" id="validationCustom05" placeholder="Cant" required></td>
               </tr>
             </tbody>
           </table>
@@ -144,7 +152,7 @@
     <h3 class=" display-6">Detalles</h3>
     <hr>
     <div class="form-group">
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3">Ingrese Detalles de pedido</textarea>
       </div>
 
 
@@ -154,3 +162,30 @@
 </form>
 
 </div>
+<<<<<<< HEAD
+=======
+
+
+
+
+<div class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Seguro Que quiere Cancelar la Operación</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Modal body text goes here.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Aceptar </button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+>>>>>>> 6a9b5c1151914ac4715a544a7673b61b2d256316
