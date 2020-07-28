@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 //modules
 import {LoginModule} from './modules/login/login.module';
@@ -34,6 +35,9 @@ import { ContratoProduComponent } from './components/productores/contrato-produ/
 import { CrearContratoComponent } from './components/productores/crear-contrato/crear-contrato.component';
 import { PedidosComponent } from './components/productores/pedidos/pedidos.component';
 import { ContratoProvDetalleComponent } from './components/proveedores/contrato-prov-detalle/contrato-prov-detalle.component';
+import { DetallePedidoComponent } from './components/productores/Compras/detalle-pedido/detalle-pedido.component';
+import { DetallePedidoProveedorComponent } from './components/proveedores/detalle-pedido-proveedor/detalle-pedido-proveedor.component';
+import { ListaPedidosPagarComponent } from './components/productores/lista-pedidos-pagar/lista-pedidos-pagar.component';
 
 
 
@@ -71,6 +75,9 @@ import { ContratoProvDetalleComponent } from './components/proveedores/contrato-
     PedidosComponent,
     ContratoProvDetalleComponent,
     DetalleContratoComponent,
+    DetallePedidoComponent,
+    DetallePedidoProveedorComponent,
+    ListaPedidosPagarComponent,
 
 
 
@@ -82,6 +89,8 @@ import { ContratoProvDetalleComponent } from './components/proveedores/contrato-
     AppRoutingModule,
     HttpClientModule,
     LoginModule,
+    FormsModule,
+    ReactiveFormsModule,
     FormsModule
   ],
   providers: [UserCompanyService,ProducersService,ProveedoresService],

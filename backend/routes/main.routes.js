@@ -20,7 +20,8 @@ router.get('/providers/ingredientes/:id',providersController.ObtenerIngredientes
 router.get('/providers/alt_envio/:id',providersController.ObtenerAlternativasEnvio);
 router.get('/providers/alt_pago/:id',providersController.ObtenerAlternativasPago);
 router.get('/providers/cuotas/:id',providersController.ObtenerInfoPagoCuotas);
-
+router.put('/providers/pedidos/detalle_pedido/rechazar_pedido/:id_pedido',providersController.RechazarPedido);
+router.put('/providers/pedidos/detalle_pedido/confirmar_pedido/:id_pedido',providersController.ConfirmarPedido);
 //presentaciones
 router.get('/providers/esencia/:id',providersController.ObtenerPresentacionesEsencia);
 router.get('/providers/ingrediente/:id',providersController.ObtenerPresentacionesIngrediente);
@@ -66,7 +67,7 @@ router.put('/producers/cerrar_inicial/:id',producersController.CerrarInicial);
 //Cerrar historicos tipo Anual
 router.put('/producers/cerrar_anual/:id',producersController.CerrarAnual);
 router.put('/producers/anual/:id',producersController.PutCriteriosAnual);
-router.get('/producers/renovar_contratos/:id',producersController.GetContratosPorVencer);
+router.get('/producers/renovar_contratos/candidatos/:id',producersController.GetContratosPorVencer);
 
 //rutas Daniel
 router.post('/guardar_resultado/:id_prod',producersController.GuardarResultadoAnual);
@@ -99,7 +100,10 @@ router.get('/producers/contratos/detalle_contrato/:id/ingredientes/:contrato',pr
 
 router.get('/producers/contratos/detalle_contrato/:id/pagos/:contrato',producersController.metodoPagoContratados);
 
+
 router.get('/producers/contratos/detalle_contrato/:id/envios/:contrato',producersController.metodoEnvioContratados);
+router.get('/producers/pedidos/:id',producersController.ObtenerPedidos);
+router.get('/producers/pedidos/detalle/:id_prov/:id_prod',producersController.ObtenerPedidosProvYProd);
 
 //generarPedido
 router.post('/producers/compras/contratos/detalle_contrato/pedido/generar_pedido',producersController.generarPedido);
@@ -117,3 +121,13 @@ router.get('/producers/compras/pedidos/esencias/:id_pedido',producersController.
 
 router.get('/producers/compras/pedidos/detalle_envio/:id_pedido',producersController.DetEnvioPedido);
 
+router.get('/producers/compras/pedidos/detalle_pago/:id_pedido',producersController.DetPagoPedido);
+
+router.get('/producers/compras/pedidos/estatus/:id_pedido',producersController.GetEstatusPedido);
+
+router.get('/producers/compras/pedidos/cuotas/:id_pedido/contrato/:numero_contrato',producersController.CaracteristicasCuotaPedido);
+
+//filtras pedidos para pagar
+router.get('/producers/pedidos/filtrados_parcial/:id_productor',producersController.GetPedidosPagarParcial);
+
+router.get('/producers/pedidos/filtrados_cuotas/:id_productor',producersController.GetPedidosPagarCuotas);

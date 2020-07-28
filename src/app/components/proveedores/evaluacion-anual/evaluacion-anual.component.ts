@@ -11,7 +11,7 @@ import { ResultadoModel } from 'src/app/models/Resultado';
   templateUrl: './evaluacion-anual.component.html',
   styleUrls: ['./evaluacion-anual.component.scss']
 })
-export class EvaluacionAnualComponent implements OnInit 
+export class EvaluacionAnualComponent implements OnInit
 {
   id_prov:number;
   num_contrato:number;
@@ -22,23 +22,34 @@ export class EvaluacionAnualComponent implements OnInit
   porcentajeAprob:number;
   total:number;
   fecha_renov:string;
+  pedido: any[];
+  id_prod:number;
+  porc_nota:number;
   
+
   escalaAnualHolder:any[];
   calificacionFinal:number;
   aprobado:boolean = false;
+  Id_prod:number = UserCompanyService.userCompanyID;
 
-  constructor(private servicio:ProducersService, private route:ActivatedRoute) 
+  constructor(private servicio:ProducersService, private route:ActivatedRoute)
   {
 
   }
 
-  ngOnInit(): void 
+  ngOnInit(): void
   {
 
     this.route.paramMap.subscribe(params=>
       {
         this.id_prov = +params.get('id');
         this.num_contrato = +params.get('num');
+        console.log(this.id_prod);
+      });
+
+
+      this.servicio.ObtenerPedidosProvYProd(this.id_prov,this.Id_prod).subscribe(res=>{
+        this.pedido = res as any[];
       });
 
       this.servicio.FechaParaRenovacion(this.num_contrato).subscribe(res=>
@@ -47,27 +58,30 @@ export class EvaluacionAnualComponent implements OnInit
           this.fecha_renov = data[0].fecha_emision;
         });
 
+        this.servicio.ObtenerEscalaAnualVigente(UserCompanyService.userCompanyID).subscribe(res=>
+          {
+            this.escalaAnualHolder=res as any[];
+            this.min_val = this.escalaAnualHolder[0].rango_inicial;
+            this.max_val = this.escalaAnualHolder[0].rango_final;
+            this.porcentajeAprob = this.escalaAnualHolder[0].rango_aprob;
+            this.total = this.max_val-this.min_val;
+            console.log('total: ',this.total);
+            console.log('porcentaje',this.porcentajeAprob);
+          });
+
       this.servicio.ObtenerCriterioSucces(this.num_contrato).subscribe(res=>
         {
           let data:any[] = res as any[];
-          console.log(data);
-          let porcentaje_nota = data[0].resultado;
-          console.log(porcentaje_nota);
-          this.nota = (this.total*porcentaje_nota)/100;//el criterio siempre tiene un peso de 100% por tanto no hay que sacar mas  cuentas
+          console.log('data',data);
+          this.porc_nota = data[0].resultado;
+          console.log('nota',this.porc_nota);
+          this.nota = ((this.total * this.porc_nota)/100);//el criterio siempre tiene un peso de 100% por tanto no hay que sacar mas  cuentas
           console.log('calificacion: ',this.nota);
+          console.log('Señor Total: ',this.total);
         }); 
 
-    this.servicio.ObtenerCriterioSucces
 
-    this.servicio.ObtenerEscalaAnualVigente(UserCompanyService.userCompanyID).subscribe(res=>
-      {
-        this.escalaAnualHolder=res as any[];
-        this.min_val = this.escalaAnualHolder[0].rango_inicial;
-        this.max_val = this.escalaAnualHolder[0].rango_final;
-        this.porcentajeAprob = this.escalaAnualHolder[0].rango_aprob;
-        this.total = this.max_val-this.min_val;
-        console.log('total: ',this.total);
-      });
+    
   }
 
   Calificar()
@@ -92,7 +106,7 @@ export class EvaluacionAnualComponent implements OnInit
     this.servicio.RenovarContrato(UserCompanyService.userCompanyID,this.CrearRenovacion()).subscribe(res=>
       {
         alert(`Se Creo Renovacion del contrato: ${this.num_contrato}`);
-      });
+     });
   }
 
   CrearRenovacion():RenovacionContratoModel

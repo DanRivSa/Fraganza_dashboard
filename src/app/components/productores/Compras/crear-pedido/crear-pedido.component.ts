@@ -6,6 +6,7 @@ import {DetPresentacionModel} from '../../../../models/DetPresentacionModel';
 import { PedidoModel } from 'src/app/models/PedidoModel';
 import { MetodoEnvio } from 'src/app/models/MetodoEnvio';
 
+
 @Component({
   selector: 'app-crear-pedido',
   templateUrl: './crear-pedido.component.html',
@@ -14,6 +15,7 @@ import { MetodoEnvio } from 'src/app/models/MetodoEnvio';
 export class CrearPedidoComponent implements OnInit {
 
   id_pedido:number;
+  id:number;
   id_proveedor:number;
   id_productor:number = UserCompanyService.userCompanyID;
   ListaPresentacionesEsencias:any[];
@@ -23,6 +25,7 @@ export class CrearPedidoComponent implements OnInit {
   numero_contrato:number;
   precio_pedido:number;
   DescuentoContrato:number;
+  proveedor:any[];
 
   //Proceso de agregación al pedido
   EsenciasPedido:any[];
@@ -38,28 +41,41 @@ export class CrearPedidoComponent implements OnInit {
   ngOnInit(): void {
 
     this.route.paramMap.subscribe(params=>{
-      this.id_proveedor =+params.get('id_proveedor');
+      this.id_proveedor=+params.get('id');
       this.numero_contrato=+params.get('contrato');
+      console.log('prov',this.numero_contrato);
+      console.log('prov',this.id_proveedor);
     });
 
+    
     this.productores.PresentacionesEsenciaPedido(this.numero_contrato).subscribe(res=>{
-        this.ListaPresentacionesEsencias = res as any[];
+        this.ListaPresentacionesIngredientes = res as any[];
+        console.log('ingredientes',this.ListaPresentacionesIngredientes);
     });
 
     this.productores.PresentacionesIgredientesPedido(this.numero_contrato).subscribe(res=>{
       this.ListaPresentacionesEsencias = res as any[];
+      console.log('esencias',this.ListaPresentacionesEsencias);
     });
 
     this.productores.metodoEnvioContratados(this.id_proveedor,this.numero_contrato).subscribe(res=>{
       this.ListaMetodosEnvio = res as any[];
+      console.log('envio',this.ListaMetodosEnvio);
     });
 
     this.productores.metodoPagoContratados(this.id_proveedor,this.numero_contrato).subscribe(res =>{
       this.ListaMetodosPago = res as any[];
+      console.log('pagos',this.ListaMetodosPago);
     });
     this.productores.DescuentoContrato(this.numero_contrato).subscribe(res=>{
       this.DescuentoContrato = res as number;
     })
+    this.productores.GetContratosVigentes(this.id_productor).subscribe(res=>
+      {
+        this.proveedor = res as any[];
+        console.log('prov',this.proveedor);
+      });
+  
   }
 
   ListarMetodoEnvio(id_pais:number, porc_contratado:number,tipo_envio:string){
@@ -92,11 +108,11 @@ export class CrearPedidoComponent implements OnInit {
             let resultado = (this.DetPresentacion[i].cantidad*this.DetPresentacion[i].precio);
             this.precio_pedido=this.precio_pedido+resultado;
            }
-          let RecargoDescuento = this.precio_pedido*this.DescuentoContrato;
-          let RecargoEnvio = this.precio_pedido*this.MetodoEnvioPedido.porc_contratado;
-          this.precio_pedido=this.precio_pedido+RecargoDescuento+RecargoEnvio;
+          let Descuento = this.precio_pedido*this.DescuentoContrato/100;
+          let RecargoEnvio = this.precio_pedido*this.MetodoEnvioPedido.porc_contratado/100;
+          this.precio_pedido=this.precio_pedido-Descuento+RecargoEnvio;
       }
-      else console.log('No ha listado presentaciones');
+      alert('No ha listado presentaciones');
     }
   DetallarPedido()
   {
@@ -124,5 +140,8 @@ export class CrearPedidoComponent implements OnInit {
     });
     this.DetallarPedido();
   }
+
+
+  
 }
 

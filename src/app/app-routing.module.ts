@@ -18,6 +18,7 @@ import { CrearPedidoComponent } from './components/productores/Compras/crear-ped
 import { DetallePedidoComponent } from './components/productores/Compras/detalle-pedido/detalle-pedido.component';
 import { ContratoProduComponent } from './components/productores/contrato-produ/contrato-produ.component';
 import {CrearContratoComponent} from './components/productores/crear-contrato/crear-contrato.component';
+import { PedidosComponent } from './components/productores/pedidos/pedidos.component';
 
 const routes: Routes =
 [
@@ -30,20 +31,21 @@ const routes: Routes =
   {path:'formula_inicial', component:FormulaInicialComponent},
   {path: 'contrato/provider',component:ContratosProvComponent},
   {path: 'e_anual_prov',component:EvAnualProvComponent},
-  {path: 'evaluar_Anual/:id/:num', component:EvaluacionAnualComponent},
+  {path: 'evaluar_Anual/:id/:num/:id_prod', component:EvaluacionAnualComponent},
   {path:'compras',component:ContratoComponent},
   {path:'compras/contratos/detalle/:contrato/generar_pedido/:id_proveedor', component: CrearPedidoComponent},
   {path:'compras/generar_pedido/:id/contrato/:contrato', component:CrearPedidoComponent},
   {path:'compras/contratos/:id/detalle/:contrato', component:DetalleContratoComponent},
-  {path:'compras/contratos/:id/detalle/:contrato/generar_pedido', component: CrearPedidoComponent},
-  {path:'compras/contratos/:id/detalle/:contrato/generar_pedido/id_pedido',component:DetallePedidoComponent},
-  {path:'compras/contratos/:id/detalle/:contrato/generar_pedido/id_pedido',component:DetallePedidoComponent},
+  {path:'compras/contratos/detalle/generar_pedido/:id/:contrato', component: CrearPedidoComponent},
+  {path:'compras/detalle_pedido/:id/:id_pedido/:contrato',component:DetallePedidoComponent},
   {path: 'contrato/producer', component:ContratoProduComponent},
   {path:'crear/contrato/con_proveedor/:id', component:CrearContratoComponent},
 
   {path:'compras/contratos/detalle/:id/:contrato', component:DetalleContratoComponent},
   {path:'compras/contratos/:id/detalle/:contrato/generar_pedido', component: CrearPedidoComponent},
   {path: 'contrato/producer', component:ContratoProduComponent},
+  {path: 'compras/pedidos', component:PedidosComponent}
+
 
 ];
 

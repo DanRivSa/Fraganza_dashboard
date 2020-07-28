@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import { QuejaModel } from '../models/QuejaModel';
+import { DescripcionModel } from '../models/Descripciones';
 
 @Injectable({
   providedIn: 'root'
@@ -85,4 +87,14 @@ export class ProveedoresService
   {
     return this.cliente.put(`${this.url_base}/providers/rechazar/contrato/${numero}`,{});
   }
+  ConfirmarPedido(id_pedido:number, detalle:DescripcionModel)
+  {
+    return this.cliente.put(`${this.url_base}/providers/pedidos/detalle_pedido/confirmar_pedido/${id_pedido}`,detalle);
+  }
+
+  RechazarPedido(id_pedido:number, detalle:DescripcionModel)
+  {
+    return this.cliente.put(`${this.url_base}/providers/pedidos/detalle_pedido/rechazar_pedido/${id_pedido}`,detalle);
+  }
+
 }

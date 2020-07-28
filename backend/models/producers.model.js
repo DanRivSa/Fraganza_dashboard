@@ -150,7 +150,7 @@ class ProducersModel
 
 
      async GetContratosPorVencer(id){
-       const db_res = await db.query('SELECT days, numero_contrato, id_prov,nombre_prov from ada_contratos_por_renovar where id_prod = $1',[id]);
+       const db_res = await db.query('select * from ada_renovar_contratos where id_prod =$1',[id,'365']);
        return db_res;
      }
      //Modulo compras
@@ -190,9 +190,16 @@ class ProducersModel
       return db_res;
      }
 
-     async ObtenerPedidos(id_proveedor,id_productor)
+
+
+     async ObtenerPedidosProvYProd(id_proveedor,id_productor)
      {
-       const db_res = await db.query('select * from ada_pedido Where id_prod1 =$1 and id_prov1 =$2 ORDER BY estatus',[id_proveedor,id_productor]);
+       const db_res = await db.query('SELECT ada_pedido.id_prod1,ada_pedido.id_prov1,ada_proveedor.nombre_prov, ada_pedido.numero_contrato1, ada_pedido.id_pedido, ada_pedido.estatus FROM ada_proveedor, ada_pedido where  ada_proveedor.id_prov=ada_pedido.id_prov1 and ada_pedido.id_prod1 = $1 and ada_pedido.id_prov1= $2  ORDER BY estatus',[id_proveedor,id_productor]);
+       return db_res;
+     }
+     async ObtenerPedidos(id)
+     {
+       const db_res = await db.query('SELECT ada_pedido.id_prod1,ada_pedido.id_prov1,ada_proveedor.nombre_prov, ada_pedido.numero_contrato1, ada_pedido.id_pedido, ada_pedido.estatus FROM ada_proveedor, ada_pedido where  ada_proveedor.id_prov=ada_pedido.id_prov1 and ada_pedido.id_prod1 = $1  ORDER BY estatus',[id]);
        return db_res;
      }
 
@@ -224,7 +231,7 @@ class ProducersModel
 
      async generarPedido(id_proveedor,id_productor,numero_contrato,metodo_pago,id_pais,metodo_envio,precio)
      {
-        const db_res = await db.query('ada_pedido_new($1,$2,$3,$4,$5,$6,$7) ',[id_proveedor,id_productor,metodo_envio,metodo_pago,numero_contrato,id_pais,precio]);
+        const db_res = await db.query('ada_pedido_new($1,$2,$3::character,$4::character,$5,$6,$7::bigint)',[id_proveedor,id_productor,metodo_envio,metodo_pago,numero_contrato,id_pais,precio]);
         return db_res;
      }
 
@@ -236,7 +243,7 @@ class ProducersModel
 
      async PresentacionesIgredientesPedido(numero_contrato)
      {
-       const db_res = await db.query('SELECT * from ADA_PRESENTACIONES_INGREDIENTE p INNER JOIN ingrediente_en_contrato e on e.cas_oi=p.cas_oi WHERE e.numero_contrato =$1;',[numero_contrato]);
+       const db_res = await db.query('SELECT * from ADA_PRESENTACIONES_INGREDIENTE p INNER JOIN ingrediente_en_contrato e on e.cas_oi=p.cas_oi WHERE e.numero_contrato =$1',[numero_contrato]);
        return db_res;
      }
 
@@ -264,7 +271,16 @@ class ProducersModel
        return db_res;
      }
 
+     async DetPagoPedido (id_pedido){
+       const db_res = await db.query('select case metodo_pago when $1 then $2 when $3 then $4 end metodo_pago from ada_pedido where id_pedido=$5',['c','Pago por cuotas','p','Pago Parcial',id_pedido]);
+       return db_res;
+     }
 
+     async CaracteristicasCuotaPedido(numero_contrato,id_pedido)
+     {
+       const db_res = await db.query('SELECT * from ada_detalle_cuota_pedido where id_pedido=$1 and numero_contrato1=$2',[id_pedido,numero_contrato]);
+       return db_res;
+     }
 
      async RenovarContrato(id_prod,id_prov,num,fecha)
      {
@@ -326,6 +342,27 @@ class ProducersModel
       return db_res;
     }
      
+     async GetEstatusPedido(id_pedido)
+     {
+       const db_res = await db.query('SELECT upper(estatus) as estatus from ada_pedido where id_pedido = $1',[id_pedido]);
+       return db_res;
+     }
+
+     async GetPedidosPagarParcial(id_pedido)
+     {
+       const db_res = await db.query('select * from ada_pedidos_por_pagar_parcial where id_prod = $1',[id_pedido]);
+       return db_res;
+     }
+
+
+     async GetPedidosPagarCuotas(id_pedido)
+     {
+       const db_res = await db.query('select * from ada_pedidos_por_pagar_cuotas where id_prod = $1',[id_pedido]);
+       return db_res;
+     }
+
+
+
 }
 
 
