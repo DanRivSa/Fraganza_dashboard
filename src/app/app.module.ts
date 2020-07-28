@@ -39,6 +39,7 @@ import { DetallePedidoComponent } from './components/productores/Compras/detalle
 import { DetallePedidoProveedorComponent } from './components/proveedores/detalle-pedido-proveedor/detalle-pedido-proveedor.component';
 import { ListaPedidosPagarComponent } from './components/productores/lista-pedidos-pagar/lista-pedidos-pagar.component';
 import { ContratoPendComponent } from './components/proveedores/contrato-pend/contrato-pend.component';
+import { DetalleContratoEnProvComponent } from './components/proveedores/detalle-contrato-en-prov/detalle-contrato-en-prov.component';
 
 
 
@@ -80,6 +81,7 @@ import { ContratoPendComponent } from './components/proveedores/contrato-pend/co
     DetallePedidoProveedorComponent,
     ListaPedidosPagarComponent,
     ContratoPendComponent,
+    DetalleContratoEnProvComponent,
 
 
 
