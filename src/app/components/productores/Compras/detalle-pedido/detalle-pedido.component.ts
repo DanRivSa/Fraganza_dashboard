@@ -28,11 +28,14 @@ export class DetallePedidoComponent implements OnInit {
   numero_contrato:number;
   DetCuota:any[];
   PorcDescuento:number;
+  resultado:number;
 
   //DetallePrecioTotal
   subtotal:number;
   precio_envio:number;
   descuento:number;
+  RecargoEnvio:number;
+  porcenvio:number;
 
 
   constructor(private route:ActivatedRoute, private productores:ProducersService, private proveedores:ProveedoresService) { }
@@ -46,7 +49,7 @@ export class DetallePedidoComponent implements OnInit {
           console.log('pedido',this.id_pedido);
         });
 
-      this.productores.PresentacionesIngredientesAdquiridasPedido(this.numero_contrato).subscribe(res=>{
+      this.productores.PresentacionesIngredientesAdquiridasPedido(this.id_pedido).subscribe(res=>{
         this.DetPresentacionIngredientes = res as any[];
         console.log('ingredientes',this.DetPresentacionIngredientes);
       });
@@ -59,7 +62,7 @@ export class DetallePedidoComponent implements OnInit {
         })
 
 
-      this.productores.PresentacionesEsenciasAdquiridasPedido(this.numero_contrato).subscribe(res=>{
+      this.productores.PresentacionesEsenciasAdquiridasPedido(this.id_pedido).subscribe(res=>{
         this.DetPresentacionEsencias = res as any[];
         console.log('esencias',this.DetPresentacionEsencias);
       });
@@ -95,20 +98,27 @@ export class DetallePedidoComponent implements OnInit {
 
     DetallePrecio(){
         if(this.DetPresentacionIngredientes.length > 0){
+          console.log('i1',this.DetPresentacionIngredientes[1].cantidad);
           for (let i = 0; i < this.DetPresentacionIngredientes.length; i++){
-                let resultado = (this.DetPresentacionIngredientes[i].cantidad*this.DetPresentacionIngredientes[i].precio);
-                this.subtotal=this.subtotal+resultado;
+                this.resultado = (this.DetPresentacionIngredientes[i].cantidad * this.DetPresentacionIngredientes[i].precio);
+
+                
                }
+
           }
          if(this.DetPresentacionEsencias.length > 0){
           for (let i = 0; i < this.DetPresentacionEsencias.length; i++){
-                let resultado = (this.DetPresentacionEsencias[i].cantidad*this.DetPresentacionEsencias[i].precio);
-                this.subtotal=this.subtotal+resultado;
+            this.resultado = (this.DetPresentacionEsencias[i].cantidad*this.DetPresentacionEsencias[i].precio);
               }
-              this.descuento = this.subtotal*this.PorcDescuento/100;
-              let RecargoEnvio = this.subtotal*this.metodo_envio[0].porc_contratado/100;
-              this.total=this.subtotal-this.descuento+RecargoEnvio;
+              
           }
+              this.descuento = ((this.resultado*this.PorcDescuento)/100);
+              this.RecargoEnvio = ((this.resultado*this.metodo_envio[0].porc_contratado)/100);
+              this. porcenvio=this.metodo_envio[0].porc_contratado
+              this.total=(this.resultado-this.descuento+this.RecargoEnvio);
+              console.log('envio',this.metodo_envio[0].porc_contratado);
+              console.log('descuen',this.PorcDescuento);
+
         }
 
 
