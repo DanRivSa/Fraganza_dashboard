@@ -1,0 +1,42 @@
+
+<header class="bg-dark text-white">
+    <div class="container text-center">
+
+      <h3 class=" display-4">Alt. De pago</h3>
+      <hr>
+      <br>
+    </div>
+</header>
+
+
+  <div *ngIf="cuotas[0] == null" class ="card">
+    <h1 class="text-left">- Pago Parcial </h1>
+    <br>
+  </div>
+
+<div *ngIf="cuotas[0] != null " class ="card" >
+        <h1 class="text-left">- Pago por cuotas </h1>
+        <br>
+
+
+  <div class="container text-center table-responsive ">
+    <table class="table table-hover ">
+      <thead class="table-dark">
+        <tr>
+          <th scope="col">Periodo de pago</th>
+          <th scope="col">Porcentaje</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let c of cuotas" >
+          <td> {{c.periodo_vigencia}} Días</td>
+            <td>{{c.porc_cuota}} %</td>
+            
+        </tr>
+      </tbody>
+    </table>
+
+
+    <hr>
+    </div>
+</div>

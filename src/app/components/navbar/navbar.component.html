@@ -14,13 +14,13 @@
         </li>
         <!--LINKS FOR PROVIDERS-->
           <li class="nav-item" *ngIf="(userType == 2 && userID !=null)">
-            <a class="nav-link" >Productos</a>
+            <a class="nav-link"  >Productos</a>
           </li>
           <li class="nav-item" *ngIf="(userType == 2 && userID !=null)">
             <a class="nav-link" >Pedidos</a>
           </li>
           <li class="nav-item" *ngIf="(userType == 2 && userID !=null)">
-            <a class="nav-link" >Contratos</a>
+            <a class="nav-link" routerLink= "/contrato/producer" >Contratos</a>
           </li>
           <!--LINKS FOR PRODUCERS-->
           <li class="nav-item" *ngIf = "(userType == 1 && userID !=null)">
@@ -30,13 +30,16 @@
             <a class="nav-link" routerLink="/i_test_provider" >Ev. Inicial</a>
           </li>
           <li class="nav-item" *ngIf = "(userType == 1 && userID !=null)">
-            <a class="nav-link">Ev. Anual</a>
+            <a class="nav-link " routerLink="/e_anual_prov">Ev. Anual</a>
           </li>
           <li class="nav-item" *ngIf="(userType == 1 && userID !=null)">
-            <a class="nav-link" >Pedidos</a>
+            <a class="nav-link" routerLink= "/compras/pedidos" >Pedidos</a>
           </li>
           <li class="nav-item" *ngIf="(userType == 1 && userID !=null)">
-            <a class="nav-link" >Contratos</a>
+            <a class="nav-link" routerLink= "/pagos" >Pagos</a>
+          </li>
+          <li class="nav-item" *ngIf="(userType == 1 && userID !=null)">
+            <a class="nav-link" routerLink= "/contrato/provider" >Contratos</a>
           </li>
           <!--USER PROFILE-->
           <li class="nav-item" *ngIf = "(userType != null && userID !=null)">

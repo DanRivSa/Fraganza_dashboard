@@ -26,7 +26,13 @@ class ProviderModel
 
     async ObtenerAlternativasEnvio(id)
     {
-        const db_res = await db.query('SELECT nombre_pais,tipo_envio,porc_base FROM ada_pais ps INNER JOIN ada_alternativa_envio env  ON ps.id_pais = env.id_pais WHERE env.id_prov = $1',[id]);
+        const db_res = await db.query('SELECT  ps.id_pais,nombre_pais,tipo_envio,porc_base FROM ada_pais ps INNER JOIN ada_alternativa_envio env  ON ps.id_pais = env.id_pais WHERE env.id_prov = $1',[id]);
+        return db_res;
+    }
+
+    async ObtenerAltEnvioParaContrato(id_prod,id_prov)
+    {
+        const db_res = await db.query('SELECT nombre_pais,ps.id_pais,tipo_envio,porc_base FROM ada_pais ps  INNER JOIN ada_alternativa_envio env  ON ps.id_pais = env.id_pais INNER JOIN ada_prod_pais pps ON pps.id_pais = ps.id_pais WHERE env.id_prov = $2 and pps.id_prod = $1',[id_prod,id_prov]);
         return db_res;
     }
 
@@ -53,6 +59,59 @@ class ProviderModel
         const db_res = await db.query('SELECT sku,nombre_etiqueta,precio,cantidad_perpack,unidad_medida,contenido_neto,tipo_empaque FROM ada_presentacion_e WHERE cas IS NULL AND cas_oi=$1',[cas_oi]);
         return db_res;
     }
+
+    async ObtenerInfoPagoCuotas(id){
+        const db_res = await db.query('SELECT porc_cuota,periodo_vigencia,metodo_pago from ada_cuota where id_prov = $1',[id]);
+        return db_res;
+
+    }
+
+    /*select (select extract (day from  ((c.fecha_emision + INTERVAL '365 day') - CURRENT_DATE))) as days, c.numero_contrato, c.id_prov, t.nombre_prov from ada_contrato c FULL OUTER JOIN ada_renueva r on c.numero_contrato = r.numero_contrato INNER JOIN ada_proveedor t on t.id_prov = c.id_prov where (select extract (day from  ((c.fecha_emision + INTERVAL '365 day') - CURRENT_DATE))) between 1 and 90  and c.cancelado is not true and (r.numero_contrato is null) and c.id_prod =$1 (select extract (day from  ((r.fecha + INTERVAL '365 day') - CURRENT_DATE))) between 1 and 90 an id_prod=$1
+    NO SE PUEDE USAR INTERVAL AHI*/
+
+    async GetContratosVigentes(id)
+    {
+        const db_res = await db.query ('SELECT * from ada_contratos_proveedor_vigente where id_prov =$1',[id]);
+        return db_res;
+    }
+
+    async CancelarContrato(numero,motivo)
+     {
+       const db_res= await db.query('UPDATE ada_contrato SET  cancelado=true, fecha_cancelac = CURRENT_DATE, motivo_cancelac = $1 WHERE numero_contrato = $2',[motivo,numero] );
+       return db_res
+     }
+
+     async ObtenerContratosPendientes(id_prov)
+     {
+         const db_res = await db.query('SELECT numero_contrato,nombre_prod FROM ada_contrato cont INNER JOIN ada_productor prod ON cont.id_prod = prod.id_prod WHERE acuerdo=false and cancelado=false and id_prov = $1',[id_prov]);
+         return db_res;
+     }
+
+     async AceptarContrato(numero)
+     {
+         const db_res = await db.query('UPDATE ada_contrato SET acuerdo=true WHERE numero_contrato = $1',[numero]);
+         return db_res;
+     }
+    
+     async RechazarContrato(numero)
+     {
+         const db_res = await db.query('UPDATE ada_contrato SET acuerdo=false, cancelado=true, fecha_cancelac=CURRENT_DATE, motivo_cancelac = $2 WHERE numero_contrato = $1',[numero,'RECHAZADO']);
+         return db_res;
+     }
+
+    async ConfirmarPedido (id_pedido,detalle)
+    {
+      const db_res = await db.query('UPDATE ada_pedido SET estatus=$2, nro_factura=nextval($3), fecha_confirmacion=current_date, descripcion=$4 where id_pedido=$1',[id_pedido,'enviado','ada_sec_nro_factura',detalle]);
+      return db_res;
+    }
+
+
+    async RechazarPedido (id_pedido,detalle)
+    {
+      const db_res = await db.query('UPDATE ada_pedido SET estatus=$2, fecha_confirmacion=current_date,nro_factura=null descripcion=$4 where id_pedido=$1',[id_pedido,'rechazado','ada_sec_nro_factura',detalle]);
+      return db_res;
+    }
+
 }
 
 const model = new ProviderModel() //create instance

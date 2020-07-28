@@ -1,0 +1,185 @@
+<app-navbar></app-navbar>
+
+<header class="bg-dark text-white">
+    <div class="container text-center">
+      
+      <h3 class=" display-4">Detalle de pedido</h3>
+      <h5 class=" display-6" >Nro de Pedido: {{id_pedido}}</h5>
+      <h5 class=" display-6" >Estatus: {{estatus}}</h5>
+      
+      
+    </div>
+    <div class= "text-right"> <button type="button" class="btn btn-primary btn-lg" >Pagar pedido</button> </div>
+    <br>
+  </header>
+<br>
+
+<div class="container card">
+<div class="row">
+    
+    <div class= "col-md-6">
+    
+        <header class="bg-dark text-white">
+            <div class="container text-center">
+        
+              <h3 class=" display-4">Información General</h3>
+              <hr>
+            </div>
+        </header>
+        <br>
+        <div class="container text-center table-responsive ">
+            <table class="table table-hover">
+                <thead class="table-dark">
+                  <tr>
+                    <th scope="col">Pais</th>
+                    <th scope="col">Tipo de Envio</th>
+                    <th scope="col">Recargo</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let e of metodo_envio" >
+                    <th scope="row">{{e.nombre_pais}}</th>
+                    <td>{{e.metodo_envio}}</td>
+                    <td>{{e.porc_contratado}} %</td>
+                  </tr>
+                </tbody>
+              </table>
+        
+        </div>
+        <br><br>
+          <div class="container text-center table-responsive ">
+            <table class="table table-hover ">
+              <thead class="table-dark">
+                <tr>
+                  <th scope="col">Metodo De Pago</th>
+                  
+                </tr>
+              </thead>
+              <tbody>
+                  <td>{{metodo_pago}}</td>   
+              </tbody>
+            </table>
+             <hr>
+            </div>
+            <div class="container text-center table-responsive ">
+              <table class="table table-hover ">
+                <thead class="table-dark">
+                  <tr>
+                    <th scope="col">Descuento por contrato</th>
+                    
+                  </tr>
+                </thead>
+                <tbody>                 
+                    <td>{{PorcDescuento}} %</td>                                    
+                </tbody>
+              </table>        
+               <hr>
+              </div>        
+        </div> 
+      <div class="col-md-6">
+        <header class="bg-dark text-white">
+          <div class="container text-center">
+      
+            <h3 class=" display-4">Productos Contratados</h3>
+            <hr>
+          </div>
+      </header>
+
+
+        <h3 class=" display-6">Ingredientes</h3>
+        <div class="container text-center table-responsive ">
+            <table class="table table-hover">
+                <thead class="table-dark">
+                  <tr>
+                    <th scope="col">   </th> 
+                    <th scope="col">Cas</th>
+                    <th scope="col">nombre</th>
+                    <th scope="col">cantidad perpack</th>
+                    <th scope="col">contenido</th>
+                    <th scope="col">precio</th>                
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let i of DetPresentacionIngredientes" >
+                    <th scope="row"></th>
+                    <td>{{i.cas_oi}}</td>
+                    <td>{{i.nombre}}</td>
+                    <td>{{i.cantidad_perpack}}</td>
+                    <td>{{i.contenido}}</td>
+                    <td>{{i.precio}}</td>
+                    </tr>
+                </tbody>
+              </table>
+        
+        </div>
+        <br>
+        <h3 class=" display-6">Esencias</h3>
+        <div class="container text-center table-responsive ">
+            <table class="table table-hover">
+                <thead class="table-dark">
+                  <tr>
+                    <th scope="col">Seleccionar</th>
+                    <th scope="col">Cas</th>
+                    <th scope="col">nombre</th>
+                    <th scope="col">cantidad perpack</th>
+                    <th scope="col">contenido</th>
+                    <th scope="col">precio</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let e of DetPresentacionEsencias" >
+                    <th scope="row"><input type="checkbox" class="form-check-input" id="exampleCheck1"></th>
+                    <td>{{e.cas}}</td>
+                    <td>{{e.nombre}}</td>
+                    <td>{{e.cantidad_perpack}}</td>
+                    <td>{{e.contenido}}</td>
+                    <td>{{e.precio}}</td>
+                  </tr>
+                </tbody>
+              </table>
+        
+        </div>
+      </div>
+
+      <button class="btn btn-primary" data-toggle="modal" data-target="#subtotal" (click)="DetallePrecio()">
+        Precio total
+      </button>
+        
+      
+    
+          
+</div>
+</div>
+
+
+<!--modal presentaciones ingredientes-->
+<div class="modal fade" id="subtotal" tabindex="-1" role="dialog" aria-labelledby="subtotal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Total De pedido</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+              <br>
+              <h3>Precio base: {{resultado}} $</h3>
+              <br>
+              <h3> recargo de envio de {{porcenvio}} %  = {{descuento}} $</h3>
+              <br>         
+              <h3>Descuento por contrato {{PorcDescuento}} %  = {{RecargoEnvio}} $ </h3>
+              <br>
+              <br>
+
+              <h1>Total: {{total}} $</h1>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+        
+    
+    
+   

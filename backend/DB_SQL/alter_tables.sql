@@ -53,6 +53,32 @@ CREATE SEQUENCE ada_sec_id_pais as SMALLINT
 ALTER TABLE ada_pais
 ALTER COLUMN id_pais SET DEFAULT nextval('ada_sec_id_pais');
 
+CREATE SEQUENCE ada_sec_id_eval_criterio AS SMALLINT
+MINVALUE 1
+MAXVALUE 55
+NO CYCLE
+OWNED BY ada_eval_criterio.id_eval;
+ALTER TABLE ada_eval_criterio
+ALTER COLUMN id_eval SET DEFAULT nextval('ada_sec_id_eval_criterio');
+
+CREATE SEQUENCE ada_sec_id_escala AS SMALLINT
+MINVALUE 1
+MAXVALUE 55
+NO CYCLE
+OWNED BY ada_escala.id_escala;
+ALTER TABLE ada_escala
+ALTER COLUMN id_escala SET DEFAULT nextval('ada_sec_id_escala');
+
+
+CREATE SEQUENCE ada_sec_id_renglon AS SMALLINT
+MINVALUE 1
+MAXVALUE 55
+NO CYCLE
+OWNED BY ada_det_pedido.id_renglon;
+ALTER TABLE ada_det_pedido
+ALTER COLUMN id_renglon SET DEFAULT nextval('ada_sec_id_renglon');
+
+
 CREATE SEQUENCE ada_sec_id_productor as SMALLINT
  MINVALUE 1
  MAXVALUE 50
@@ -165,6 +191,17 @@ NO CYCLE
 OWNED BY ada_pedido.nro_factura;
 ALTER TABLE ada_pedido
 ALTER COLUMN nro_factura SET DEFAULT nextval('ada_sec_nro_factura');
+
+
+
+CREATE SEQUENCE ada_sec_nro_recibo as SMALLINT
+INCREMENT 1
+MINVALUE 1000
+MAXVALUE 2500
+NO CYCLE
+OWNED BY ada_pago.nro_recibo;
+ALTER TABLE ada_pago
+ALTER COLUMN nro_recibo SET DEFAULT nextval('ada_sec_nro_recibo');
 
 
 CREATE SEQUENCE ada_sec_id_asoc as SMALLINT

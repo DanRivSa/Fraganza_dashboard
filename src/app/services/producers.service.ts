@@ -2,6 +2,19 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {EscalaModel} from '../models/EscalaModel';
 import {CriterioModel} from '../models/CriterioModel';
+import {PedidoModel} from '../models/PedidoModel';
+import {QuejaModel} from '../models/QuejaModel';
+import {RenovacionContratoModel} from '../models/RenovacionContratoModel';
+import {DetPresentacionModel} from '../models/DetPresentacionModel';
+import {ResultadoModel} from '../models/Resultado';
+import {PagoModel} from '../models/PagoModel';
+import { CancelacionModel } from '../models/CancelacionModel';
+import { ContratoModel } from '../models/ContratoModel';
+import { ContEsenciaModel } from '../models/ContEsenciaModel';
+import { ContIngredienteMode } from '../models/ContIngredienteModel';
+import { ContMetdoEnvioModel } from '../models/ContMetodoEnvioModel';
+import { ContParcialModel } from '../models/ContParcialModel';
+import { ContCuotaModel } from '../models/ContCuotaModel';
 
 @Injectable({
   providedIn: 'root'
@@ -28,10 +41,32 @@ export class ProducersService
   {
     return this.httpClient.get(`${this.base_URL}/producers/escala_anual/${id_usuario_productor}`);
   }
+  ObtenerCriteriosEvaluacionInicial(id_usuario_productor:number)
+  {
+    return this.httpClient.get(`${this.base_URL}/producers/criterios_iniciales/${id_usuario_productor}`);
+  }
+
+  ObtenerUbicacionGeoVigente (id_usuario_productor:number)
+  {
+    return this.httpClient.get(`${this.base_URL}/producers/escala_anual/renovacion/ubicacion/${id_usuario_productor}`);
+  }
+  ObtenerPagoGeoVigente (id_usuario_productor:number)
+  {
+    return this.httpClient.get(`${this.base_URL}/producers/escala_anual/renovacion/pagos/${id_usuario_productor}`);
+  }
+  ObtenerAltEnvioVigente (id_usuario_productor:number)
+  {
+    return this.httpClient.get(`${this.base_URL}/producers/escala_anual/renovacion/envios/${id_usuario_productor}`);
+  }
 
   PostEscalaInicial (escala:EscalaModel)
   {
     return this.httpClient.post(`${this.base_URL}/producers/escala_inicial`,escala);
+  }
+
+  PostEscalaAnual (escala:EscalaModel)
+  {
+    return this.httpClient.post(`${this.base_URL}/producers/escala_anual`,escala);
   }
 
   PostUbicacion (criterio:CriterioModel)
@@ -48,4 +83,241 @@ export class ProducersService
   {
     return this.httpClient.post(`${this.base_URL}/producers/met_pago`,criterio);
   }
+
+  PostCriteriosAnual (criterio: CriterioModel)
+  {
+    return this.httpClient.post(`${this.base_URL}/producers/renovacion`,criterio);
+  }
+
+  //peticiones daniel
+  CerrarEscalaAnual(id:number,modelo:EscalaModel)
+  {
+    return this.httpClient.put(`${this.base_URL}/cerrar/escala_anual/${id}`,modelo);
+  }
+
+  CerrarCriterioAnual(id:number,modelo:CriterioModel)
+  {
+    return this.httpClient.put(`${this.base_URL}/cerrar/criterio_anual/${id}`,modelo);
+  }
+
+
+  PutCerrarEscalaInicial (id_productor:number,escala:EscalaModel)
+  {
+    return this.httpClient.put(`${this.base_URL}/producers/escala_inicial/${id_productor}`,escala);
+  }
+  PutCerrarEscalaAnual (id_productor:number,escala:EscalaModel)
+  {
+    return this.httpClient.put(`${this.base_URL}/producers/escala_anual/${id_productor}`,escala);
+  }
+  PutCerrarCriteriosInicial (id_productor:number,criterio:CriterioModel)
+  {
+    return this.httpClient.put(`${this.base_URL}/producers/inicial/${id_productor}`,criterio);
+  }
+
+  PutCerrarCriteriosAnual (id_productor:number,criterio:CriterioModel)
+  {
+    return this.httpClient.put(`${this.base_URL}/producers/anual/${id_productor}`,criterio);
+  }
+
+  GetContratosPorVencer (id_productor:number)
+  {
+    return this.httpClient.get(`${this.base_URL}/producers/renovar_contratos/${id_productor}`);
+  }
+
+  ObtenerCriterioSucces(numero_contrato:number)
+  {
+    return this.httpClient.get(`${this.base_URL}/producers/contratos/renovacion/${numero_contrato}`)
+  }
+
+  //Modulo Compras
+  GetContratosVigentes (id_productor:number)
+  {
+    return this.httpClient.get(`${this.base_URL}/producers/contratos/${id_productor}`);
+  }
+  //Pedidos
+  GetEsenciasContratadas (id_proveedor:number, numero_contrato:number)
+  {
+    return this.httpClient.get(`${this.base_URL}/producers/contratos/detalle_contrato/${id_proveedor}/esencias/${numero_contrato}`);
+  }
+
+  GetIngredientesContratados (id_proveedor:number, numero_contrato:number)
+  {
+    return this.httpClient.get(`${this.base_URL}/producers/contratos/detalle_contrato/${id_proveedor}/ingredientes/${numero_contrato}`);
+  }
+
+  metodoPagoContratados (id_proveedor:number, numero_contrato:number)
+  {
+    return this.httpClient.get(`${this.base_URL}/producers/contratos/detalle_contrato/${id_proveedor}/pagos/${numero_contrato}`);
+  }
+
+  metodoEnvioContratados (id_proveedor:number, numero_contrato:number)
+  {
+    return this.httpClient.get(`${this.base_URL}/producers/contratos/detalle_contrato/${id_proveedor}/envios/${numero_contrato}`);
+  }
+
+  generarPedido(Pedido:PedidoModel)
+  {
+    return this.httpClient.post(`${this.base_URL}/producers/compras/contratos/detalle_contrato/pedido/generar_pedido`,Pedido);
+  }
+
+  PresentacionesEsenciaPedido(numero_contrato:number)
+  {
+    return this.httpClient.get(`${this.base_URL}/producers/compras/contratos/detalle_contrato/pedido/generar_pedido/p_esencias/${numero_contrato}`);
+  }
+
+  PresentacionesIgredientesPedido(numero_contrato:number)
+  {
+    return this.httpClient.get(`${this.base_URL}/producers/compras/contratos/detalle_contrato/pedido/generar_pedido/p_ingredientes/${numero_contrato}`);
+  }
+
+  ObtenerPedidos(id:number)
+  {
+    return this.httpClient.get(`${this.base_URL}/producers/pedidos/${id}`);
+  }
+  ObtenerPedidosProvYProd(id_proveedor:number, id_productor:number)
+  {
+    return this.httpClient.get(`${this.base_URL}/producers/pedidos/detalle/${id_proveedor}/${id_productor}`);
+  }
+
+  //RESULTADO DE EVALUACIONES
+  GuardarResultadoInicial(id_prod:number,id_prov:number,resultado:number)
+  {
+    return this.httpClient.post(`${this.base_URL}/guardar_resultado/inicial/${id_prod}`,{id_prov,resultado});
+  }
+
+  GuardarResultado(id_prod:number,resultado:ResultadoModel)
+  {
+    return this.httpClient.post(`${this.base_URL}/guardar_resultado/${id_prod}`,resultado);
+  }
+
+  CancelarContrato(numero_contrato:number,descripcion:QuejaModel)
+  {
+    return this.httpClient.put(`${this.base_URL}/producers/contratos/detalle_contrato/cancelar/${numero_contrato}`,descripcion);
+  }
+
+  //PRUEBA
+
+
+  CerrarAnual(id:number,escala:EscalaModel)
+  {
+    return this.httpClient.put(`${this.base_URL}/producers/cerrar_anual/${id}`,escala);
+  }
+
+  CerrarInicial(id:number,escala:EscalaModel)
+  {
+    return this.httpClient.put(`${this.base_URL}/producers/cerrar_inicial/${id}`,escala);
+  }
+
+  PostDetPedido (DetPedido:DetPresentacionModel)
+  {
+    return this.httpClient.post(`${this.base_URL}/producers/compras/contratos/detalle_contrato/pedido/generar_pedido/det_pedido`,DetPedido);
+  }
+
+  DescuentoContrato (numero_contrato:number)
+  {
+    return this.httpClient.get(`${this.base_URL}/producers/compras/contratos/detalle_contrato/${numero_contrato}`);
+  }
+
+  PresentacionesIngredientesAdquiridasPedido(id_pedido:number)
+  {
+    return this.httpClient.get(`${this.base_URL}/producers/compras/pedidos/ingredientes/${id_pedido}`);
+  }
+
+  PresentacionesEsenciasAdquiridasPedido (id_pedido:number)
+  {
+    return this.httpClient.get(`${this.base_URL}/producers/compras/pedidos/esencias/${id_pedido}`);
+  }
+
+  DetEnvioPedido (id_pedido:number)
+  {
+    return this.httpClient.get(`${this,this.base_URL}/producers/compras/pedidos/detalle_envio/${id_pedido}`);
+  }
+
+  RenovarContrato(id_prod:number,contrato:RenovacionContratoModel)
+ {
+   return this.httpClient.post(`${this.base_URL}/renovar/contrato/${id_prod}`,contrato);
+}
+
+  FechaParaRenovacion(num_c:number)
+  {
+    return this.httpClient.get(`${this.base_URL}/fecha_renovacion/${num_c}`);
+  }
+
+  CancelarContratoDef(numero_contrato:number,motivo:CancelacionModel)
+  {
+    return this.httpClient.put(`${this.base_URL}/cancelar/contrato/${numero_contrato}`,motivo);
+  }
+
+  NumeroDeSecuenciaDeContrato()
+  {
+    return this.httpClient.get(`${this.base_URL}/sec_contrato`);
+  }
+
+  InsertarContrato(id_prod:number,contrato:ContratoModel)
+  {
+    return this.httpClient.post(`${this.base_URL}/nuevo_contrato/${id_prod}`,contrato);
+  }
+
+  ContratarEsencia(id_prod:number,esencia:ContEsenciaModel)
+  {
+    return this.httpClient.post(`${this.base_URL}/contratar/esencia/${id_prod}`,esencia);
+  }
+
+  ContratarIngrediente(id_prod:number,ingrediente:ContIngredienteMode)
+  {
+    return this.httpClient.post(`${this.base_URL}/contratar/ingrediente/${id_prod}`,ingrediente);
+  }
+
+  ContratarMetodoEnvio(id_prod:number,metodoEnvio:ContMetdoEnvioModel)
+  {
+    return this.httpClient.post(`${this.base_URL}/contratar/metodo_envio/${id_prod}`,metodoEnvio);
+  }
+
+  ContratarPagoParcial(id_prod:number,parcial:ContParcialModel)
+  {
+    return this.httpClient.post(`${this.base_URL}/contratar/pago/parcial/${id_prod}`,parcial);
+  }
+
+  ContratarPagoPorCuotas(id_prod:number,cuota:ContCuotaModel)
+  {
+    return this.httpClient.post(`${this.base_URL}/contratar/pago/cuotas/${id_prod}`,cuota);
+  }
+
+
+  DetPagoPedido (id_pedido:number)
+  {
+    return this.httpClient.get(`${this.base_URL}/producers/compras/pedidos/detalle_pago/${id_pedido}`);
+  }
+
+  GetEstatusPedido(id_pedido:number)
+  {
+    return this.httpClient.get(`${this.base_URL}/producers/compras/pedidos/estatus/${id_pedido}`);
+  };
+
+
+  CaracteristicasCuotaPedido(numero_contrato:number,id_pedido:number)
+  {
+    return this.httpClient.get(`${this.base_URL}/producers/compras/pedidos/cuotas/${id_pedido}/contrato/${numero_contrato}`);
+  };
+
+  GetPedidosPagarParcial(id_productor:number)
+  {
+    return this.httpClient.get(`${this.base_URL}/producers/pedidos/filtrados_parcial/${id_productor}`);
+  }
+
+  GetPedidosPagarCuotas(id_productor:number)
+  {
+    return this.httpClient.get(`${this.base_URL}/producers/pedidos/filtrados_cuotas/${id_productor}`);
+  }
+
+  GetContadorCuotas(id_pedido:number)
+  {
+    return this.httpClient.get(`${this.base_URL}/producers/pedidos/filtrados_parcial/${id_pedido}/pagar`);
+  }
+
+  Pagar(pago : PagoModel)
+  {
+    return this.httpClient.post(`${this.base_URL}/producers/pedidos/ejecutar_pago/`,pago);
+  }
+
 }

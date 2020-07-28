@@ -1,0 +1,152 @@
+<app-navbar></app-navbar>
+
+<div *ngIf="this.escalaAnualHolder[0] != null">
+  <header class="bg-dark text-white">
+    <div class="container text-center">
+      
+      <h3 class=" display-4">Evaluación anual</h3>
+      <hr>
+      <h3></h3>
+      <br>
+    </div>
+</header>
+
+<div class= "container">
+    <div class="card border-0 shadow">
+        <h3 class=" display-4 text-center">Criterio de Éxito</h3>
+        <hr>
+        <div class="row">
+            <div class="container text-center">
+              <h5 class="text-center">Evaluar proveedor</h5>
+            </div>
+        </div>
+        <br>
+        <div class="form-group text-center">
+            <button class="btnContactSubmit" (click)="Calificar()" data-toggle="modal" data-target="#resultado">Ver Calificacion</button>     
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+</div>
+
+
+<header class="bg-dark text-white">
+  <div class="container text-center">
+
+    <h3 class=" display-4">Pedidos</h3>
+    <hr>
+    <br>
+  </div>
+</header>
+<br>
+
+
+
+
+<div class="row">
+        <br>
+      
+      
+        <div class="container text-center table-responsive ">
+          <table class="table table-hover ">
+            <thead class="table-dark">
+              <tr>
+                <th scope="col"># Id Pedido</th>
+                <th scope="col">Proveedor</th>
+                <th scope="col">Nro de Contrato</th>
+                <th scope="col">Estatus</th>
+                <th scope="col">Detalles</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let ped of pedido">
+                <th scope="row">{{ped.id_pedido}}</th>
+                <td>{{ped.nombre_prov}}</td>
+                <td>{{ped.numero_contrato1}}</td>
+                <td>{{ped.estatus}}</td>
+              </tr>
+            </tbody>
+          </table>
+      
+        <hr>
+      </div>
+      
+</div>
+
+    <!--TARJETAS DE INFORMACION-->
+      <!-- NO APRUEBA -->
+
+      <div class="modal fade" id="resultado" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" *ngIf="aprobado == false">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header text-white bg-danger">
+              <h5 class="modal-title" id="exampleModalLongTitle">REPROBADO</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body bg-dark">
+              <div class="container text-center">
+                  <div class="container text-center text-white">
+                    <h4 class="h4">Calificacion: {{nota}}</h4>
+                  </div>
+                  <hr>
+                <p class="text-white text-center">proveedor no apto para contratar</p>
+              </div>
+            </div>
+            <div class="modal-footer bg-dark">
+              <div>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" routerLink="/e_anual_prov">Regresar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+       <!-- APRUEBA --> <!---->
+       <div class="modal fade" id="resultado" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" *ngIf="aprobado == true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header text-white bg-success">
+              <h5 class="modal-title" id="exampleModalLongTitle">APROBADO</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body bg-dark">
+              <div class="container text-center">
+                  <div class="container text-center text-white">
+                    <h4 class="h4">Calificacion: {{nota}}</h4>
+                  </div>
+                  <hr>
+                <p class="text-white text-center">proveedor apto para renovar</p>
+              </div>
+            </div>
+            <div class="modal-footer bg-dark">
+              <div>
+                  <button type="button" class="btn btn-primary" data-dismiss="modal" [routerLink]="['/crear/contrato/con_proveedor',id_prov]">Crear nuevo contrato</button> <!--SE LE PASA ID DEL PRODUCTOR-->
+              </div>
+              <div>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="RenovarContrato()">Renovar contrato</button> <!--SE LE PASA ID DEL PRODUCTOR-->
+            </div>
+              <div>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" routerLink="/e_anual_prov">Cancelar operacion</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+</div>
+
+<div class="text-center" *ngIf="escalaAnualHolder[0] == null">
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      <strong>ERROR</strong> Usuario no posee fomula de evaluacion anual.
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+</div>
+

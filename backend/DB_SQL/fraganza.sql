@@ -379,7 +379,9 @@ id_prov SMALLINT NOT NULL,
 numero_contrato SMALLINT NOT NULL,
 id_prov2 SMALLINT NOT NULL,
 metodo_pago CHAR(1) NOT NULL,
+porc_cuota numeric(3),
 CONSTRAINT CK_metodo_pago check (metodo_pago in ('p','c')),
+CONSTRAINT CK_porc_cuota_c CHECK (porc_cuota >= 0 and porc_cuota <= 100),
 CONSTRAINT PK_contrac_ap PRIMARY KEY (id_prod,id_prov,numero_contrato,id_prov2,metodo_pago)
 );
 
@@ -399,6 +401,7 @@ CONSTRAINT CK_porc_contrac CHECK (porc_contratado > 0)
 
 
 CREATE TABLE ada_escala(
+id_escala SMALLINT,
 fecha_inicio DATE NOT NULL DEFAULT CURRENT_DATE,
 id_prod SMALLINT NOT NULL,
 rango_inicial decimal(3) NOT NULL,
@@ -406,22 +409,22 @@ rango_final decimal(3) NOT NULL,
 fecha_fin DATE,
 tipo_uso CHAR(1),
 rango_aprob SMALLINT NOT NULL,
-CONSTRAINT pk_escala PRIMARY KEY (fecha_inicio,id_prod),
+CONSTRAINT pk_escala PRIMARY KEY (id_escala,fecha_inicio,id_prod),
 CONSTRAINT CK_rangoi CHECK (rango_inicial >= 0),
 CONSTRAINT CK_tipo_uso_escala CHECK (tipo_uso in ('a','i')),
 CONSTRAINT CK_rango_aprob CHECK (rango_aprob > 0 and rango_aprob <=100),
 CONSTRAINT CK_rangof CHECK (rango_final > rango_inicial)
 );
 
-
 CREATE TABLE ada_eval_criterio(
+id_eval SMALLINT,
 fecha_inicio DATE NOT NULL DEFAULT CURRENT_DATE,
 id_prod SMALLINT NOT NULL,
 id_criterio SMALLINT NOT NULL,
 tipo_uso CHAR(1) NOT NULL,
 peso decimal(3) NOT NULL,
 fecha_fin DATE,
-CONSTRAINT PK_eval_criterio PRIMARY KEY (fecha_inicio,id_prod,id_criterio),
+CONSTRAINT PK_eval_criterio PRIMARY KEY (id_eval,fecha_inicio,id_prod,id_criterio),
 CONSTRAINT CK_peso CHECK (peso >= 0 and peso <=100),
 CONSTRAINT CK_tipo_uso CHECK (tipo_uso in ('a','i'))
 );
@@ -444,11 +447,11 @@ id_pais SMALLINT NOT NULL,
 tipo_envio CHAR(1) NOT NULL,
 --Atributos propios de pedido
 fecha_emision DATE NOT NULL,
-estatus VARCHAR(10) NOT NULL,
+estatus VARCHAR(10) NOT NULL DEFAULT ('pendiente'),
 descripcion VARCHAR(255),
 fecha_confirmacion DATE,
 nro_factura SMALLINT,
-total decimal(7,2),
+total BIGINT,
 CONSTRAINT PK_pedido PRIMARY KEY (id_pedido),
 CONSTRAINT CK_estatus_p
 CHECK (estatus in ('pendiente','rechazado','enviado','recibido')),

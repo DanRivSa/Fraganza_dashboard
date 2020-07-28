@@ -30,11 +30,86 @@
         <td>{{prov.email}}</td>
         <td>{{prov.telefono}}</td>
         <td>
-          <button type="button" class="btn btn-grape" [routerLink]="['/i_test_provider/detalle',prov.id_prov]">Ver más</button>
+          <div class="btn-group mr-2" role="group">
+            <button type="button" class="btn btn-grape" [routerLink]="['/i_test_provider/detalle',prov.id_prov]">Ver más</button>
+            <button type="button" class="btn btn-success" [routerLink]="['/i_test_provider/detalle',prov.id_prov]">Evaluar</button>
+          </div>
         </td>
       </tr>
     </tbody>
   </table>
   
 </div>
+
+<br>
+<br>
+
+<header class="bg-dark text-white">
+  <div class="container text-center">
+    
+    <h3 class=" display-4">Formula de Evaluación Inicial</h3>
+  </div>
+</header>
+
+<hr>
+<br>
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-6">
+
+      <header class="bg-dark text-white">
+        <div class="container text-center">
+            <h3 class=" display-6">Escala y Rango</h3>
+        </div>
+      </header>
+
+      <table class="table table-hover ">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">Escala Inicial</th>
+            <th scope="col">Escala Final</th>
+            <th scope="col">Rango de aprobación</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let e of escala">
+            <td>{{e.rango_inicial}}</td>
+            <td>{{e.rango_final}}</td>
+            <td>{{e.rango_aprob}} %</td>
+          </tr>
+        </tbody>
+      </table>
+  
+    </div>
+ 
+    <div class="col-md-6">
+      <header class="bg-dark text-white">
+        <div class="container text-center">
+            <h3 class=" display-6">Criterios de Ev.</h3>
+        </div>
+      </header>
+
+      <table class="table table-hover ">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col"># </th>
+            <th scope="col">Nombre</th>
+            <th scope="col">peso</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let c of criterios">
+            <td>{{c.tipo_uso}}</td>
+            <td>{{c.nombre_criterio}}</td>
+            <td>{{c.peso}}</td>
+          </tr>
+        </tbody>
+      </table>
+  
+    </div>
+  </div>
+
+</div>
+
 

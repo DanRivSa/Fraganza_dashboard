@@ -1,0 +1,158 @@
+<app-navbar></app-navbar>
+<br>
+<hr>
+<h2 class="text-center">detalles especiales</h2>
+<div class="container ">
+  <div class="jumbotron">
+    <form>
+      <div class="form-group">
+        <label class="text-center" for="exampleInputPassword1">Descuento</label>
+        <input type="number" class="form-control" id="exampleInputPassword1" placeholder="ingrese descuento" name="desc" #desc = "ngModel" [(ngModel)]="descuento">
+      </div>
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="exampleCheck1" (change)="Exclusivo($event)">
+        <label class="form-check-label" for="exampleCheck1">Exclusividad</label>
+      </div>
+    </form>
+  </div>
+</div>
+<hr>
+<h2 class="text-center">Seleccione Productos a contratar</h2>
+<hr>
+<h4 class="text-center">Esencias</h4>
+<table class="table table-hover ">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">CAS</th>
+        <th scope="col">Nombre comercial</th>
+        <th scope="col">Nombre quimico</th>
+        <th scope="col">Operacion</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let es of esencias">
+        <th scope="row">
+            {{es.cas}}
+          </th>
+          <td>{{es.nombre_comercial}}</td>
+          <td>{{es.nombre_quimico}}</td>
+          <td>
+              <button class="btn btn-primary" (click)="ContratarEsencia(es)">
+                  Contratar Producto
+              </button>
+          </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <br>
+
+  <h4 class="text-center">Ingredientes</h4>
+  <table class="table table-hover ">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">CAS</th>
+        <th scope="col">Nombre comercial</th>
+        <th scope="col">Nombre quimico</th>
+        <th scope="col">Operacion</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let ing of ingredientes">
+        <th scope="row">
+            {{ing.cas_oi}}
+          </th>
+          <td>{{ing.nombre_comercial}}</td>
+          <td>{{ing.nombre_quimico}}</td>
+          <td>
+            <button class="btn btn-primary" (click)="ContratarIngrediente(ing)">
+                Contratar Producto
+            </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+<hr>
+<h2 class="text-center">Seleccione Metodos de envio</h2>
+<hr>
+<div class="container text-center table-responsive ">
+    <table class="table table-hover">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">Pais</th>
+            <th scope="col">Tipo de Envio</th>
+            <th scope="col">Recargo</th>
+            <th scope="col">Operacion</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let env of alt_envio" >
+            <th scope="row">{{env.nombre_pais}}</th>
+            <td>{{env.tipo_envio}}</td>
+            <td>{{env.porc_base}} %</td>
+            <td>
+                <button class="btn btn-primary" (click)="ContratarMetodoEnvio(env)">
+                    Contratar Envio
+                </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+</div>
+<hr>
+<h2 class="text-center">Seleccione Alternativas de pago</h2>
+<hr>
+<div class="container text-center table-responsive ">
+  <h4 class="text-center">Alternativa de pago</h4>
+  <table class="table table-hover ">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">Meotodo pago</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let alt of alt_pagos" >
+        <td>
+          <div class="jumbotron text-center" *ngIf="alt.case == 'PARCIAL'">
+           <h3>Pago parcial</h3>
+            <hr>
+            <button class="btn btn-primary" (click)="ContratarParcialPago()">
+              Establecer pago parcial
+            </button>
+          </div>          
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="container text-center table-responsive " *ngIf="cuotas[0] != null ">
+    <h4 class="text-center">Cuotas</h4>
+    <table class="table table-hover ">
+      <thead class="table-dark">
+        <tr>
+          <th scope="col">Periodo de pago</th>
+          <th scope="col">Porcentaje</th>
+          <th scope="col">Operacion</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let c of cuotas" >
+          <td> {{c.periodo_vigencia}} Días</td>
+            <td>{{c.porc_cuota}} %</td>
+            <td>
+                <button class="btn btn-primary" (click)="ContratarCuota(env)">
+                    Contratar Cuota
+                </button>
+            </td>
+        </tr>
+      </tbody>
+    </table>
+</div>
+<hr>
+<div class="container">
+  <button class="btn btn-primary btn-block" (click)="ProcesarContrato()">
+    Procesar Contrato
+  </button>
+</div>
+<br>

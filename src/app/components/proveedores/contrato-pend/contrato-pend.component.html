@@ -1,0 +1,36 @@
+<app-navbar></app-navbar>
+
+<header class="bg-dark text-white">
+    <div class="container text-center">
+
+      <h3 class=" display-4">Contratos Pendientes</h3>
+      <hr>
+    </div>
+</header>
+<br>
+<div class="container text-center table-responsive ">
+    <table class="table table-hover ">
+      <thead class="table-dark">
+        <tr>
+          <th scope="col"># Contrato </th>
+          <th scope="col">Nombre productor</th>
+          <th scope="col">Operaciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cont of contratos_pendientes">
+          <th scope="row">{{cont.numero_contrato}}</th>
+          <td>{{cont.nombre_prod}}</td>
+          <td>
+            <div class="btn-group mr-2" role="group">
+              <button type="button" class="btn btn-success " (click)="Aceptar(cont)" routerLink="/contrato/producer">Aceptar</button>
+              <button type="button" class="btn btn-danger " (click)="Rechazar(cont)" routerLink="/contrato/producer">Rechazar</button>
+            </div>  
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  <hr>
+</div>
+

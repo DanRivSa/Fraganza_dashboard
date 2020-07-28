@@ -1,0 +1,42 @@
+<app-navbar></app-navbar>
+
+<header class="bg-dark text-white">
+    <div class="container text-center">
+      
+      <h3 class=" display-4">Pedidos</h3>           
+    </div>
+    <div class= "text-right"> <button type="button" class="btn btn-primary btn-lg" >Pagar pedidos</button> </div>
+      
+    <br>
+
+  </header>
+<br><br><br>
+
+  <div class="container text-center table-responsive ">
+    <table class="table table-hover ">
+      <thead class="table-dark">
+        <tr>
+          <th scope="col">#Id Pedido</th>
+          <th scope="col">Proveedor</th>
+          <th scope="col">Nro de Contrato</th>
+          <th scope="col">Estatus</th>
+          <th scope="col">Fecha de Emisión</th>
+          <th scope="col">Total (USD)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ped of pedido">
+          <th scope="row">{{ped.id_pedido}}</th>
+          <td>{{ped.nombre_prov}}</td>
+          <td>{{ped.numero_contrato1}}</td>
+          <td>{{ped.estatus}}</td>
+          
+          <button type="button" class="btn btn-success " [routerLink]="['/compras/detalle_pedido/',ped.id_prov1,ped.id_pedido,ped.numero_contrato1]" >Detalle</button>
+
+
+
+        </tr>
+      </tbody>
+    </table>
+  <hr>
+</div>

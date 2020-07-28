@@ -13,7 +13,11 @@ export class InitialTestComponent implements OnInit {
 
   id_usuario:number = UserCompanyService.userCompanyID; //id de usuario 
 
-  constructor(private producersService:ProducersService) { }
+  criterios:any[];
+  escala:any[];
+
+
+  constructor(private producersService:ProducersService){}
 
   ngOnInit(): void
   {
@@ -21,6 +25,21 @@ export class InitialTestComponent implements OnInit {
       {
         this.proveedores = res as any[];
       });
-  }
+      
+      this.producersService.ObtenerCriteriosEvaluacionInicial(this.id_usuario).subscribe(res=>
+        {
+          this.criterios = res as any[];
+        });
+
+        this.producersService.ObtenerEscalaInicialVigente(this.id_usuario).subscribe(res=>
+          {
+            this.escala = res as any[];
+          });
+
+
+  
+  
+  
+    }
 
 }

@@ -1,0 +1,85 @@
+<app-navbar></app-navbar>
+<!--mostrar lista de proveedores potenciales a ser evaluados inicialmente-->
+<header class="bg-dark text-white">
+  <div class="container text-center">
+    
+    <h3 class=" display-4">Lista de proveedores</h3>
+    <hr>
+    <h5 class=" silence text-info  display-5 ">Evaluación Anual</h5>
+    
+    
+    <br>
+  </div>
+</header>
+<hr>
+
+
+
+<div class="container text-center table-responsive ">
+  <table class="table table-hover ">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">#Contrato</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Operaciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let prov of proveedores">
+        <th scope="row">{{prov.numero_contrato}}</th>
+        <td>{{prov.nombre_prov}}</td>
+        <td>
+          <div class="btn-group mr-2" role="group">
+            <button type="button" class="btn btn-success" [routerLink]="['/evaluar_Anual/',prov.id_prov,prov.numero_contrato,id_prod]">Evaluar</button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
+</div>
+
+<br>
+<br>
+
+<header class="bg-dark text-white">
+  <div class="container text-center">
+    
+    <h3 class=" display-4">Fórmula de Evaluación Anual</h3>
+
+
+  </div>
+</header>
+<br>
+<div >
+  <div class="container text-center table-responsive ">
+
+
+    <table class="table table-hover ">
+      <thead class="table-dark">
+        <tr>
+          <th scope="col">Escala Inicial</th>
+          <th scope="col">Escala Final</th>
+          <th scope="col">Rango de aprobación</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let e of escala">
+          <td>{{e.rango_inicial}}</td>
+          <td>{{e.rango_final}}</td>
+          <td>{{e.rango_aprob}} %</td>
+        </tr>
+      </tbody>
+    </table>
+
+
+  </div>
+
+
+</div>
+
+<br>
+
+
+
+

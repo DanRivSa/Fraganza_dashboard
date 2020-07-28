@@ -39,6 +39,12 @@ class ProducersModel
         return db_res;
     }
 
+    async CancelarContrato(numero_contrato,descripcion)
+    {
+      const db_res= await db.query('select cancelar_contrato($1,$2::varchar)',[numero_contrato,descripcion]);
+      return db_res;
+    }
+
 
     async ObtenerPagoGeoVigente(id)
     {
@@ -46,52 +52,324 @@ class ProducersModel
         return db_res;
     }
 
+    async ObtenerCriterioSucces(numero_contrato)
+    {
+        const db_res = await db.query('SELECT (((SELECT count(estatus)::float FROM ada_pedido where estatus =$2 and numero_contrato1=$1)/(SELECT count(estatus)::float FROM ada_pedido where numero_contrato1=$1))*100)as resultado',[numero_contrato,'enviado']);
+        return db_res;
+    }
+
+    async ObtenerCriteriosEvaluacionInicial(id)
+    {
+        const db_res = await db.query('SELECT ada_criterio_eval.nombre_criterio,ada_criterio_eval.tipo_uso,ada_eval_criterio.peso FROM ada_eval_criterio INNER JOIN ada_criterio_eval ON ada_eval_criterio.id_criterio = ada_criterio_eval.id_criterio  WHERE ada_eval_criterio.id_prod= $1 and ada_criterio_eval.tipo_uso= $2 and ada_eval_criterio.fecha_fin is null ',[id,'i']);
+        return db_res;
+    }
+
+
     async ObtenerEscalaAnualVigente(id)
     {
-        const db_res = await db.query('SELECT e.fecha_inicio,p.id_prod, e.rango_inicial,e.rango_final, e.rango_aprob from ada_escala e where e.id_prod=$1 and e.fecha_fin is null and e.tipo_uso =$2',[id,'a']);
+        const db_res = await db.query('SELECT e.fecha_inicio,e.id_prod, e.rango_inicial,e.rango_final, e.rango_aprob from ada_escala e where e.id_prod=$1 and e.fecha_fin is null and e.tipo_uso =$2',[id,'a']);
         return db_res;
     }
 
-    async PostEscalaInicial(id,rango_min,rango_max,rango_aprob,tipo_uso){
+    async PostEscalaInicial(id,rango_min,rango_max,rango_aprob){
 
-        const db_res = await db.query('INSERT INTO ada_escala (id_prod,rango_inicial,rango_final,rango_aprob,tipo_uso)  VALUES ($1,$2,$3,$4,$5)',[rango_min,rango_max,rango_aprob,tipo_uso,id]);
+        const db_res = await db.query('INSERT INTO ada_escala (id_prod,rango_inicial,rango_final,rango_aprob,tipo_uso)  VALUES ($1,$2,$3,$4,$5)',[id,rango_min,rango_max,rango_aprob,'i']);
         return db_res;
     }
 
 
-    async PostUbicacion(id,id_criterio,peso,tipo_uso){
+    async PostEscalaAnual(id,rango_min,rango_max,rango_aprob){
 
-        const db_res = await db.query('INSERT INTO ada_eval_criterio (id_prod,id_criterio,peso,tipo_uso)  VALUES ($1,$2,$3,$4)',[id,id_criterio,peso,tipo_uso,id]);
+      const db_res = await db.query('INSERT INTO ada_escala (id_prod,rango_inicial,rango_final,rango_aprob,tipo_uso)  VALUES ($1,$2,$3,$4,$5)',[id,rango_min,rango_max,rango_aprob,'a']);
+      return db_res;
+  }
+
+
+
+
+    async PostUbicacion(id,id_criterio,peso){
+
+        const db_res = await db.query('INSERT INTO ada_eval_criterio (id_prod,id_criterio,peso,tipo_uso)  VALUES ($1,$2,$3,$4)',[id,id_criterio,peso,'i']);
         return db_res;
     }
 
-    async PostEnvio(id,id_criterio,peso,tipo_uso){
+    async PostEnvio(id,id_criterio,peso){
 
-        const db_res = await db.query('INSERT INTO ada_eval_criterio (id_prod,id_criterio,peso,tipo_uso)  VALUES ($1,$2,$3,$4)',[id,id_criterio,peso,tipo_uso,id]);
+        const db_res = await db.query('INSERT INTO ada_eval_criterio (id_prod,id_criterio,peso,tipo_uso)  VALUES ($1,$2,$3,$4)',[id,id_criterio,peso,'i']);
         return db_res;
     }
 
-    async PostPago(id,id_criterio,peso,tipo_uso)
+    async PostPago(id,id_criterio,peso)
     {
 
-        const db_res = await db.query('INSERT INTO ada_eval_criterio (id_prod,id_criterio,peso,tipo_uso)  VALUES ($1,$2,$3,$4)',[id,id_criterio,peso,tipo_uso,id]);
+        const db_res = await db.query('INSERT INTO ada_eval_criterio (id_prod,id_criterio,peso,tipo_uso)  VALUES ($1,$2,$3,$4)',[id,id_criterio,peso,'i']);
         return db_res;
      }
+
+
+     async PostCriterioAnual(id,id_criterio,peso)
+     {
+
+         const db_res = await db.query('INSERT INTO ada_eval_criterio (id_prod,id_criterio,peso,tipo_uso)  VALUES ($1,$2,$3,$4)',[id,id_criterio,peso,'a']);
+         return db_res;
+      }
+
     //Cerrar los historicos que constituyen la formula (escala y criterios)
-    async PutFormulaInicialVigencia(id){
-        const db_res = await db.query('UPDATE ada_escala SET fecha_fin=CURRENT_DATE where id_prod = $1 and tipo_uso=$2',[id,'i']);
+    async PutEscalaInicialVigencia(id){
+        const db_res = await db.query('UPDATE ada_escala SET fecha_fin=CURRENT_DATE where id_prod = $1 and tipo_uso=$2 and fecha_fin is null',[id,'i']);
+        return db_res;
     }
 
-    async PutMetodoUbicacionVigente(id){
-        const db_res = await db.query('UPDATE ada_eval_criterio SET fecha_fin=CURRENT_DATE where id_prod = $1 and tipo_uso=$2 and id_criterio=1',[id,'i']);
+     async PutEscalaAnualVigencia(id)
+     {
+      const db_res = await db.query('UPDATE ada_escala SET fecha_fin=CURRENT_DATE where id_prod = $1 and tipo_uso=$2',[id,'a']);
+      return db_res;
+     }
+
+    async PutCriteriosInicial(id){
+        const db_res = await db.query('UPDATE ada_eval_criterio SET fecha_fin=CURRENT_DATE where id_criterio in(1,2,3) and id_prod=$1 and fecha_fin is null',[id]);
+        return db_res;
     }
 
-    async PutMetodoEnvioVigente(id){
-        const db_res = await db.query('UPDATE ada_eval_criterio SET fecha_fin=CURRENT_DATE where id_prod = $1 and tipo_uso=$2 and id_criterio=2',[id,'i']);
+    async PutCriteriosAnual(id){
+        const db_res = await db.query('UPDATE ada_eval_criterio SET fecha_fin=CURRENT_DATE where id_prod = $1 and id_criterio=4 and fecha_fin is null',[id]);
+        return db_res;
+     }
+
+     async CerrarCriterioAnual(id)
+     {
+      const db_res = await db.query('UPDATE ada_eval_criterio SET fecha_fin = CURRENT_DATE WHERE id_criterio = 4 AND id_prod = $1 and fecha_fin is null',[id]);
+      return db_res;
+     }
+
+     async CerrarEscalaAnual(id)
+     {
+      const db_res = await db.query('UPDATE ada_escala SET fecha_fin = CURRENT_DATE WHERE tipo_uso=$2 AND id_prod= $1 and fecha_fin is null',['a',id]);
+      return db_res;
+     }
+
+
+     async GetContratosPorVencer(id){
+       const db_res = await db.query('select * from ada_renovar_contratos where id_prod =$1',[id,'365']);
+       return db_res;
+     }
+     //Modulo compras
+
+    async GetContratosVigentes(id)
+    {
+      const db_res = await db.query('select * from ada_contratos_productor_vigente where id_prod=$1',[id]);
+      return db_res;
     }
 
-    async PutMetodoPagoVigente(id){
-        const db_res = await db.query('UPDATE ada_eval_criterio SET fecha_fin=CURRENT_DATE where id_prod = $1 and tipo_uso=$2 and id_criterio=3',[id,'i']);
+    async GetEsenciasContratadas(id_proveedor,numero_contrato)
+    {
+      const db_res = await db.query('SELECT e.nombre_comercial, e.nombre_quimico, p.cas from ada_contratacion_prod p INNER JOIN ada_esencia e on e.cas = p.cas where p.id_prov=$1 and p.numero_contrato=$2 and p.cas_oi is null',[id_proveedor,numero_contrato]);
+      return db_res;
+    }
+
+    async GetIngredientesContratados(id_proveedor,numero_contrato)
+    {
+      const db_res = await db.query('SELECT e.nombre_comercial, e.nombre_quimico, p.cas_oi from ada_contratacion_prod p INNER JOIN ada_otros_ing e on e.cas_oi = p.cas_oi where p.id_prov=$1 and p.numero_contrato=$2 and p.cas is null',[id_proveedor,numero_contrato]);
+      return db_res;
+    }
+     async metodoPagoContratados(id_proveedor,numero_contrato)
+     {
+       const db_res = await db.query('SELECT case metodo_pago when $3 then $4 when $5 then $6 end from ada_contratacion_ap where id_prov = $1 and numero_contrato=$2',[id_proveedor,numero_contrato,'c','Pago por Cuotas','p','Pago Parcial']);
+       return db_res;
+     }
+
+     async metodoEnvioContratados(id_proveedor,numero_contrato)
+     {
+       const db_res = await db.query('select p.nombre_pais,case m.tipo_envio when $3 then $4 when $5 then $6 when $7 then $8 end, m.porc_contratado from ada_contratacion_me m INNER JOIN ada_pais p on p.id_pais = m.id_pais WHERE m.id_prov=$1 and m.numero_contrato=$2',[id_proveedor,numero_contrato,'m','MARÍTIMO','a','AÉREO','t','TERRESTRE']);
+       return db_res;
+     }
+
+     async DescuentoContrato (numero_contrato)
+     {
+      const db_res = await db.query('select coalesce(descuento,0) as descuento from ada_contrato Where numero_contrato=$1',[numero_contrato]);
+      return db_res;
+     }
+
+
+
+     async ObtenerPedidosProvYProd(id_proveedor,id_productor)
+     {
+       const db_res = await db.query('SELECT ada_pedido.id_prod1,ada_pedido.id_prov1,ada_proveedor.nombre_prov, ada_pedido.numero_contrato1, ada_pedido.id_pedido, ada_pedido.estatus FROM ada_proveedor, ada_pedido where  ada_proveedor.id_prov=ada_pedido.id_prov1 and ada_pedido.id_prod1 = $1 and ada_pedido.id_prov1= $2  ORDER BY estatus',[id_proveedor,id_productor]);
+       return db_res;
+     }
+     async ObtenerPedidos(id)
+     {
+       const db_res = await db.query('SELECT ada_pedido.id_prod1,ada_pedido.id_prov1,ada_proveedor.nombre_prov, ada_pedido.numero_contrato1, ada_pedido.id_pedido, ada_pedido.estatus FROM ada_proveedor, ada_pedido where  ada_proveedor.id_prov=ada_pedido.id_prov1 and ada_pedido.id_prod1 = $1  ORDER BY estatus',[id]);
+       return db_res;
+     }
+
+    //resultado de evaluaciones
+    async GuardarResultado(id_prod,id_prov,resultado,tipo)
+    {
+      const db_res = await db.query('INSERT INTO ada_resutado_eval (fecha,id_prov,id_prod,resultado,tipo_eval) VALUES (CURRENT_DATE,$1,$2,$3,$4)',[id_prov,id_prod,resultado,tipo]);
+      return db_res;
+    }
+
+    async GuardarResultadoAnual(id_prod,id_prov,resultado)
+    {
+      const db_res = await db.query('INSERT INTO ada_resutado_eval (fecha,id_prov,id_prod,resultado,tipo_eval) VALUES (CURRENT_DATE,$1,$2,$3,$4)',[id_prov,id_prod,resultado,'a']);
+      return db_res;
+    }
+
+     //FUNCIONES DE PRUEBA
+     async CerrarInicial(id)
+     {
+      const db_res = await db.query('select CERRAR_INICIAL($1)',[id]);
+      return db_res;
+     }
+
+     async CerrarAnual(id)
+     {
+       const db_res= await db.query('select cerrar_anual($1)',[id]);
+       return db_res;
+     }
+
+     async generarPedido(id_proveedor,id_productor,numero_contrato,metodo_pago,id_pais,metodo_envio,precio)
+     {
+        const db_res = await db.query('ada_pedido_new($1,$2,$3::character,$4::character,$5,$6,$7::bigint)',[id_proveedor,id_productor,metodo_envio,metodo_pago,numero_contrato,id_pais,precio]);
+        return db_res;
+     }
+
+     async PresentacionesEsenciaPedido(numero_contrato)
+     {
+       const db_res = await db.query('SELECT * from ADA_PRESENTACIONES_ESENCIAS p INNER JOIN ada_esencia_en_contrato e on e.cas=p.cas WHERE e.numero_contrato =$1',[numero_contrato]);
+       return db_res;
+     }
+
+     async PresentacionesIgredientesPedido(numero_contrato)
+     {
+       const db_res = await db.query('SELECT * from ADA_PRESENTACIONES_INGREDIENTE p INNER JOIN ada_ingrediente_en_contrato e on e.cas_oi=p.cas_oi WHERE e.numero_contrato =$1',[numero_contrato]);
+       return db_res;
+     }
+
+     async PostDetPedido(sku,cantidad){
+       const db_res = await db.query('INSERT INTO ada_det_pedido (id_pedido,sku,cantidad) VALUES (currval($2),$1,$3)',['ada_sec_id_pedido',sku,cantidad]);
+       return db_res;
+     }
+
+
+     //DetallePedido
+     async PresentacionesIngredientesAdquiridasPedido(id_pedido)
+     {
+       const db_res = await db.query('select * from ada_INGREDIENTES_CONTRATADOS_PEDIDO where id_pedido=$1',[id_pedido]);
+       return db_res;
+     }
+
+     async PresentacionesEsenciasAdquiridasPedido(id_pedido)
+     {
+       const db_res = await db.query('select * from ada_ESENCIAS_CONTRATADOS_PEDIDO where id_pedido=$1',[id_pedido]);
+       return db_res;
+     }
+
+     async DetEnvioPedido (id_pedido){
+       const db_res = await db.query('select * from ADA_ME_PEDIDO where id_pedido=$1',[id_pedido]);
+       return db_res;
+     }
+
+     async DetPagoPedido (id_pedido){
+       const db_res = await db.query('select case metodo_pago when $1 then $2 when $3 then $4 end metodo_pago from ada_pedido where id_pedido=$5',['c','Pago por cuotas','p','Pago Parcial',id_pedido]);
+       return db_res;
+     }
+
+     async CaracteristicasCuotaPedido(numero_contrato,id_pedido)
+     {
+       const db_res = await db.query('SELECT * from ada_detalle_cuota_pedido where id_pedido=$1 and numero_contrato1=$2',[id_pedido,numero_contrato]);
+       return db_res;
+     }
+
+     async RenovarContrato(id_prod,id_prov,num,fecha)
+     {
+       const db_res = await db.query('INSERT INTO ada_renueva (id_prov,id_prod,numero_contrato,fecha) VALUES ($1,$2,$3,$4)',[id_prov,id_prod,num,fecha]);
+       return db_res;
+     }
+
+     async ObtenerFechaParaRenovar(numero_contrato)
+     {
+       const db_res = await db.query('select fecha_emision from ada_contrato where numero_contrato = $1',[numero_contrato]);
+       return db_res;
+     }
+
+     async CancelarContratoDef(numero,motivo)
+     {
+       const db_res= await db.query('UPDATE ada_contrato SET  cancelado=true, fecha_cancelac = CURRENT_DATE, motivo_cancelac = $1 WHERE numero_contrato = $2',[motivo,numero] );
+       return db_res
+     }
+
+    async NumeroDeSecuenciaDeContrato()
+    {
+      const db_res = await db.query('SELECT last_value FROM ada_sec_numero_contrato');
+      return db_res;
+    }
+
+    async InsertarContrato(prod,prov,num,exc,desc,ac,cancel)
+    {
+      const db_res = await db.query('INSERT INTO ada_contrato (id_prod,id_prov,fecha_emision,exclusivo,descuento,acuerdo,cancelado) VALUES($1,$2,CURRENT_DATE,$3,$4,$5,$6)',[prod,prov,exc,desc,ac,cancel]);
+      return db_res;
+    }
+
+    async ContratarEsencia(id_prod,id_prov,numero_contrato,cas)
+    {
+      const db_res = await db.query('INSERT INTO ada_contratacion_prod (id_prod,id_prov,numero_contrato,cas) VALUES ($1,$2,$3,$4)',[id_prod,id_prov,numero_contrato,cas]);
+      return db_res;
+    }
+
+    async ContratarIngrediente(id_prod,id_prov,numero_contrato,cas_oi)
+    {
+      const db_res = await db.query('INSERT INTO ada_contratacion_prod (id_prod,id_prov,numero_contrato,cas_oi) VALUES ($1,$2,$3,$4)',[id_prod,id_prov,numero_contrato,cas_oi]);
+      return db_res;
+    }
+
+    async ContratarMetodoEnvio(id_prod,id_prov,tipo_envio,numero_contrato,id_prov2,id_pais,porc_contratado)
+    {
+      const db_res = await db.query('INSERT INTO ada_contratacion_me (id_prod,id_prov,tipo_envio,numero_contrato,id_prov2,id_pais,porc_contratado) VALUES ($1,$2,$3,$4,$5,$6,$7)',[id_prod,id_prov,tipo_envio,numero_contrato,id_prov2,id_pais,porc_contratado]);
+      return db_res;
+    }
+
+    async ContratarPagoParcial(id_prod,id_prov,id_prov2,numero_contrato,metodo_pago)
+    {
+      const db_res = await db.query('INSERT INTO ada_contratacion_ap (id_prod,id_prov,numero_contrato,id_prov2,metodo_pago) VALUES ($1,$2,$3,$4,$5)',[id_prod,id_prov,numero_contrato,id_prov2,metodo_pago]);
+      return db_res;
+    }
+
+    async ContratarPagoPorCuotas(id_prod,id_prov,id_prov2,numero_contrato,metodo_pago,porc_cuota)
+    {
+      const db_res = await db.query('INSERT INTO ada_contratacion_ap (id_prod,id_prov,numero_contrato,id_prov2,metodo_pago,porc_cuota) VALUES ($1,$2,$3,$4,$5,$6)',[id_prod,id_prov,numero_contrato,id_prov2,metodo_pago,porc_cuota]);
+      return db_res;
+    }
+     
+     async GetEstatusPedido(id_pedido)
+     {
+       const db_res = await db.query('SELECT upper(estatus) as estatus from ada_pedido where id_pedido = $1',[id_pedido]);
+       return db_res;
+     }
+
+     async GetPedidosPagarParcial(id_pedido)
+     {
+       const db_res = await db.query('select * from ada_pedidos_por_pagar_parcial where id_prod = $1',[id_pedido]);
+       return db_res;
+     }
+     async GetPedidosPagarCuotas(id_pedido)
+     {
+       const db_res = await db.query('select * from ada_pedidos_por_pagar_cuotas where id_prod = $1 and cuotas > 0',[id_pedido]);
+       return db_res;
+     }
+
+
+     async GetContadorCuotas(id_pedido)
+     {
+       const db_res = await db.query('select * from ada_pagar_cuota where id_pedido = $1',[id_pedido]);
+       return db_res;
+     }
+
+     async Pagar(id_pedido,monto_total)
+     {
+       const db_res = await db.query('INSERT INTO ADA_PAGO (id_pedido,monto_total,fecha_emision) VALUES($1,$2,current_date)',[id_pedido,monto_total]);
+       return db_res;
      }
 
 }

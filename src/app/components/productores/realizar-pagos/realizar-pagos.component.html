@@ -1,0 +1,51 @@
+<app-navbar></app-navbar>
+
+<div class="container-fluid" >
+  <div class="card text-center">
+    <div class="card-header btn-primary">
+      Factura
+    </div>
+    <div class="card-body">
+      <h5 class="card-title btn-primary">{{MetodoPago}}</h5>
+      <p class="card-text">Descuento en el contrato {{porc_descuento}}%: $ {{precio_descuento}}</p>
+      <p class="card-text">Recargo de envio {{porc_envio}}%: $ {{precio_envio}}</p>
+      <p class="card-text">Precio Base Pedido: ${{total - precio_envio - precio_descuento}}</p>
+      <p class="card-text">Total: ${{total}}</p>
+      <p class="card-text" *ngIf="Cuota">Precio de cuota a pagar: ${{precio_cuota}}</p>
+
+    </div>
+    <div class="card-footer">
+      <a href="#" class="btn btn-primary"
+      data-toggle="modal" data-target="#pagar" >Pagar Ahora</a>
+    </div>
+  </div>
+</div>
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="pagar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header text-white bg-danger">
+          <h5 class="modal-title" id="exampleModalLongTitle">Confirmación de pago</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body bg-dark">
+          <div class="container text-center">
+            <p class="text-white text-center">¿Desea pagar ahora mismo?</p>
+          </div>
+        </div>
+        <div class="modal-footer bg-dark">
+          <div>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+          </div>
+          <div>
+            <button  type="button" class="btn btn-success " (click)="Pagar()" [routerLink]="['/pagos/',id_pedido,numero_contrato]" >Pagar ahora</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+

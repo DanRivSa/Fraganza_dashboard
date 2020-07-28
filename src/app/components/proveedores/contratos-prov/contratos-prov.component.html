@@ -1,0 +1,39 @@
+<app-navbar></app-navbar>
+
+<header class="bg-dark text-white">
+    <div class="container text-center">
+
+      <h3 class=" display-4">Contratos</h3>
+      <hr>
+
+    </div>
+</header>
+<br>
+<br>
+<br>
+<div class="container text-center table-responsive ">
+    <table class="table table-hover ">
+      <thead class="table-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Id Proveedor</th>
+          <th scope="col">Nombre Proveedor</th>
+          <th scope="col">Detalle</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let prov of proveedores">
+          <th scope="row">{{prov.numero_contrato}}</th>
+          <td>{{prov.id_prov}}</td>
+          <td>{{prov.nombre_prov}}</td>
+
+
+          <button type="button" class="btn btn-success " [routerLink]="['/compras/contratos/detalle/',prov.id_prov,prov.numero_contrato]">Detalle</button>
+          <button type="button" class="btn btn-primary "  [routerLink]="['/compras/contratos/detalle/generar_pedido/',prov.id_prov,prov.numero_contrato]">Realizar Pedido</button>
+
+        </tr>
+      </tbody>
+    </table>
+
+  <hr>
+</div>

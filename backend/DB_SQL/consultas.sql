@@ -38,6 +38,13 @@ WHERE prov.id_prov = $1
 
 
 
+--CONSULTA PARA PRESENTACIONES GENERACION DE PEDIDOS
+SELECT * from ADA_PRESENTACIONES_ESENCIAS p
+INNER JOIN esencia_en_contrato e on e.cas=p.cas
+WHERE e.numero_contrato =1010
+
+
+
 
 --filtro para proveedores disponibles para evaluacion inicial
 SELECT DISTINCT p.id_prov,nombre_prov,telefono,email from ada_alternativa_envio p
@@ -105,10 +112,11 @@ from ada_alternativa_envio t,ada_pais p
 where p.id_pais=t.id_pais and t.id_prov= $1  ORDER BY p.nombre_pais;
 
 
---CONSULTA PARA CONOCER LOS CLIENTES ACTIVOS DE UN PROVEEDORESSELECT p.nombre_prod, c.fecha_emision, p.email from ada_productor p
+--CONSULTA PARA CONOCER LOS CLIENTES ACTIVOS DE UN PROVEEDORE
+SSELECT p.nombre_prod, c.fecha_emision, p.email from ada_productor p
 INNER JOIN ada_contrato c on c.id_prod = p.id_prod
 where (CURRENT_DATE) < (c.fecha_emision + INTERVAL '365 day')
-										  and c.id_prov=1
+										  and c.id_prov=$1
 AND acuerdo IS TRUE
 AND (cancelado IS FALSE OR cancelado IS NULL)
 
@@ -116,3 +124,79 @@ AND (cancelado IS FALSE OR cancelado IS NULL)
  select p.nombre_prod,r.fecha,p.email from ada_productor p
 INNER JOIN ada_renueva r on r.id_prod = p.id_prod
 where (CURRENT_DATE) < (r.fecha + INTERVAL '365 day') and r.id_prov=1;
+
+--CONSULTA CONTRATOS EN REGLA DE UN PROVEEDOR
+SELECT p.id_prov,r.id_prod,x.nombre_prod, r.numero_contrato from ada_proveedor p
+INNER JOIN ada_contratos_en_regla r on r.id_prov=p.id_prov
+INNER JOIN ada_productor x on x.id_prod = r.id_prod
+where p.id_prov =$1;
+
+
+
+--CONSULTA CONTRATOS CANDIDATOS A RENOVAR
+select (select extract
+		  (day from  ((c.fecha_emision + INTERVAL '365 day') - CURRENT_DATE)))
+		  as days, c.numero_contrato, c.id_prov, t.nombre_prov
+		  from ada_contrato c
+		  FULL OUTER JOIN ada_renueva r on c.numero_contrato = r.numero_contrato
+		  INNER JOIN ada_proveedor t on t.id_prov = c.id_prov
+		  where (select extract
+		  (day from  ((c.fecha_emision + INTERVAL '365 day') - CURRENT_DATE)))
+		  between 1 and 90  and c.cancelado is not true and (r.numero_contrato is null)
+		or (select extract
+		  (day from  ((r.fecha + INTERVAL '365 day') - CURRENT_DATE)))
+		  between 1 and 90
+
+
+--CONSULTA CONTRATOS EN REGLA DE UN PRODUCTOR
+SELECT p.id_prod,r.id_prov,x.nombre_prov, r.numero_contrato from ada_productor p
+INNER JOIN ada_contratos_en_regla r on r.id_prod=p.id_prod
+INNER JOIN ada_proveedor x on x.id_prov = r.id_prov
+where p.id_prod =$1;
+
+
+--CONSULTA PRESENTACIONES PARA GENERAR PEDIDO TIPO INGREDIENTE:
+SELECT * from ADA_PRESENTACIONES_INGREDIENTE p
+INNER JOIN ingrediente_en_contrato e on e.cas_oi=p.cas_oi
+WHERE e.numero_contrato =$1;
+
+--CONSULTA PRESENTACIONES PARA GENERAR PEDIDO TIPO ESENCIA:
+SELECT * from ADA_PRESENTACIONES_ESENCIAS p
+INNER JOIN esencia_en_contrato e on e.cas=p.cas
+WHERE e.numero_contrato =$1
+
+
+
+SELECT (((SELECT count(estatus)::float FROM ada_pedido where estatus ='enviado' and numero_contrato1=1005)/(SELECT count(estatus)::float FROM ada_pedido where estatus='$2' or estatus='$3' and numero_contrato1=$1))*100)as resultado
+
+
+--Mostrar presentaciones de tipo esencia presentes en un pedido.
+		SELECT d.id_pedido,p.sku,p.cas,p.nombre,d.cantidad,to_char((p.precio*d.cantidad),'$99999.99') as precio, p.contenido, p.cantidad_perpack
+		from ADA_PRESENTACIONES_ESENCIAS_PEDIDO p
+		INNER JOIN ada_det_pedido d on d.sku = p.sku where d.id_pedido=$1;
+
+--Mostrar presentaciones de tipo ingrediente presentes en un pedido
+
+		SELECT d.id_pedido,p.sku,p.cas_oi,p.nombre,d.cantidad,to_char((p.precio*d.cantidad),'$99999.99') as precio, p.contenido, p.cantidad_perpack
+		from ADA_PRESENTACIONES_INGREDIENTES_PEDIDO p
+		INNER JOIN ada_det_pedido d on d.sku = p.sku where d.id_pedido=$1;
+
+ --Mostrar detalle de tipo envio
+
+		SELECT d.id_pedido,p.sku,p.cas_oi,p.nombre,d.cantidad,to_char((p.precio*d.cantidad),'$99999.99') as precio, p.contenido, p.cantidad_perpack
+		from ADA_PRESENTACIONES_INGREDIENTES_PEDIDO p
+		INNER JOIN ada_det_pedido d on d.sku = p.sku where d.id_pedido=$1;
+
+ --Mostrar Detalle de tipo Pago
+
+
+
+--Cancelar contrato
+
+CREATE  FUNCTION cancelar_contrato(integer,varchar) returns void
+AS
+$$
+UPDATE  ada_contrato SET motivo_cancelac= $2, cancelado=true, fecha_cancelac=current_date
+where numero_contrato=$1;
+$$
+language sql
