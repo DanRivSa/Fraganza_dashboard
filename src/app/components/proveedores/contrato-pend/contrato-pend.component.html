@@ -3,14 +3,9 @@
 <header class="bg-dark text-white">
     <div class="container text-center">
 
-      <h3 class=" display-4">Contratos</h3>
+      <h3 class=" display-4">Contratos Pendientes</h3>
       <hr>
-      
-      <br>
     </div>
-    <button type="button" class="btn btn-success " routerLink= "/contratos/pendientes" >contratos pendientes</button>
-    <br>
-    <br>
 </header>
 <br>
 <div class="container text-center table-responsive ">
@@ -28,7 +23,8 @@
           <th scope="row">{{prod.numero_contrato}}</th>
           <td>{{prod.id_prod}}</td>
           <td>{{prod.nombre_prod}}</td>
-          <button type="button" class="btn btn-success " >Detalle</button>
+          <button type="button" class="btn btn-success " >Aceptar</button>
+          <button type="button" class="btn btn-danger " >Cancelar</button>
 
         </tr>
       </tbody>
@@ -36,3 +32,4 @@
 
   <hr>
 </div>
+
