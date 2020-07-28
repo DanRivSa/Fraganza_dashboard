@@ -4,7 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 import { ProducersService } from 'src/app/services/producers.service';
 import { DetPresentacionModel } from 'src/app/models/DetPresentacionModel';
 import { UserCompanyService } from 'src/app/services/global/user-company.service';
-import { DescripcionModel } from 'src/app/models/Descripciones';
 import { ProveedoresService } from 'src/app/services/proveedores.service';
 
 @Component({
@@ -15,7 +14,7 @@ import { ProveedoresService } from 'src/app/services/proveedores.service';
 export class DetallePedidoComponent implements OnInit {
 
   id_pedido:number;
-  usuario:number 
+  usuario:number
   id_proveedor:number= UserCompanyService.userCompanyID;
   id_productor:number;
   metodo_envio:any[];
@@ -91,8 +90,8 @@ export class DetallePedidoComponent implements OnInit {
     };
 
     //Cuando se le da click al precio total, se refleja en pantalla los detalles del mismo, es decir,
-    //un modal (como el que se usa con los CAS) El precio del pedido base es: {{subtotal}}, el precio % 
-    //de recargo de envio es {{Porcdescuento}}% es: {{descuento}} y el descuento del contrato es del 
+    //un modal (como el que se usa con los CAS) El precio del pedido base es: {{subtotal}}, el precio %
+    //de recargo de envio es {{Porcdescuento}}% es: {{descuento}} y el descuento del contrato es del
     //{{metodo_envio.porc_contratado}}% y el precio es: {{precio_envio}}
 
 
@@ -120,7 +119,4 @@ export class DetallePedidoComponent implements OnInit {
               console.log('descuen',this.PorcDescuento);
 
         }
-
-
-
 }

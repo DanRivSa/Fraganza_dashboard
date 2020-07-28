@@ -6,7 +6,7 @@
         <br>
       <h3 class=" display-4">Contrato</h3>
       <h3 class=" display-6">{{numero_contrato}}</h3>
-      <hr>     
+      <hr>
       <button class="btn btn-outline-danger" data-toggle="modal" data-target="#cancelar">Cancelar Contrato</button>
       <hr>
       <br>
@@ -21,7 +21,7 @@
 <div class="container card">
     <header class="bg-dark text-white">
         <div class="container text-center">
-    
+
           <h3 class=" display-4">Alternativas de envio</h3>
           <hr>
           <br>
@@ -45,7 +45,7 @@
               </tr>
             </tbody>
           </table>
-    
+
     </div>
     <br><br>
 
@@ -58,91 +58,137 @@
           </thead>
           <tbody>
             <tr *ngFor="let p of metodoPagoContratados" >
-              <td>{{p.case}}</td>   
+              <td>{{p.case}}</td>
             </tr>
           </tbody>
         </table>
-    
-    
+
+
          <hr>
-        </div>       
+        </div>
     </div>
 
 </div>
 <div class="col-md-6">
 <header class="bg-dark text-white">
     <div class="container text-center">
-  
-      <h3 class=" display-4">Catálogo</h3>
-      <hr>
-      <br>
-    </div>
-  </header>
-  <br>
-  <div *ngIf="EsenciasContratadas[0] != null ">
-      <h1 class="text-center">Esencias</h1>
-  <br>
-  
-  <div class="container text-center table-responsive ">
-      <table class="table table-hover ">
-        <thead class="table-dark">
-          <tr>
-            <th scope="col">CAS</th>
-            <th scope="col">Nombre comercial</th>
-            <th scope="col">Nombre quimico</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let es of EsenciasContratadas">
-            <th scope="row">
-                  {{es.cas}}
-                
-              </th>
-              <td>{{es.nombre_comercial}}</td>
-              <td>{{es.nombre_quimico}}</td>
-          </tr>
-        </tbody>
-      </table>
-  
-    </div>
+
+
+    <h3 class=" display-4">Catálogo</h3>
     <hr>
+    <br>
   </div>
-  
-  
-  <div *ngIf="IngredientesContratados[0] != null">
-      <h1 class="text-center">Ingredientes</h1>
-      <br>
-      <div class="container text-center table-responsive">
-          <table class="table table-hover">
-            <thead class="table-dark">
-              <tr>
-                <th scope="col">CAS</th>
-                <th scope="col">Nombre Comercial</th>
-                <th scope="col">Nombre Químico</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let ing of IngredientesContratados">
-                <th scope="row">
-                    {{ing.cas_oi}}
-                  
+</header>
+<br>
+<div *ngIf="EsenciasContratadas[0] != null ">
+    <h1 class="text-center">Esencias</h1>
+<br>
+
+<div class="container text-center table-responsive ">
+    <table class="table table-hover ">
+      <thead class="table-dark">
+        <tr>
+          <th scope="col">CAS</th>
+          <th scope="col">Nombre comercial</th>
+          <th scope="col">Nombre quimico</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let es of EsenciasContratadas">
+          <th scope="row">
+              <button class="btn btn-primary" data-toggle="modal" data-target="#esencias" (click)="ObtenerPresentaciones(es.cas,1)">
+                {{es.cas}}
+              </button>
+            </th>
+            <td>{{es.nombre_comercial}}</td>
+            <td>{{es.nombre_quimico}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+  <hr>
+</div>
+
+<!-- Modal presentaciones esencias-->
+<div class="modal fade" id="esencias" tabindex="-1" role="dialog" aria-labelledby="esencias" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Presentaciones</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-striped">
+          <thead class="table-dark">
+            <tr>
+              <th scope="col">SKU</th>
+              <th scope="col">Nombre etiqueta</th>
+              <th scope="col">Unidades</th>
+              <th scope="col">Contenido Neto</th>
+              <th scope="col">Precio USD</th>
+              <th scope="col">Tipo de Empaque</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let es of PresentacionesContratadas">
+              <th scope="row">
+                  <span class="badge badge-pill badge-grape">
+                    {{es.sku}}
+                  </span>
                 </th>
-                <td>{{ing.nombre_comercial}}</td>
-                <td>{{ing.nombre_quimico}}</td>
-              </tr>
-            </tbody>
-          </table>
-  
-        </div>
-  
+                <td>{{es.nombre_etiqueta}}</td>
+                <td>{{es.cantidad_perpack}}</td>
+                <td>{{es.contenido_neto}} {{es.unidad_medida}}</td>
+                <td>$ {{es.precio}} </td>
+                <td>{{es.tipo_empaque}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
-  
+</div>
+
+<div *ngIf="IngredientesContratados[0] != null">
+    <h1 class="text-center">Ingredientes</h1>
+    <br>
+    <div class="container text-center table-responsive">
+        <table class="table table-hover">
+          <thead class="table-dark">
+            <tr>
+              <th scope="col">CAS</th>
+              <th scope="col">Nombre Comercial</th>
+              <th scope="col">Nombre Químico</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let ing of IngredientesContratados">
+              <th scope="row">
+                <button class="btn btn-primary" data-toggle="modal" data-target="#ingredientes" (click)="ObtenerPresentaciones(ing.cas_oi,2)">
+                  {{ing.cas_oi}}
+                </button>
+              </th>
+              <td>{{ing.nombre_comercial}}</td>
+              <td>{{ing.nombre_quimico}}</td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+
+</div>
 
 
 
-
-
-
+<!--modal presentaciones ingredientes-->
+<div class="modal fade" id="ingredientes" tabindex="-1" role="dialog" aria-labelledby="Ingredientes" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Presentaciones</h5>
 </div>
 
 
@@ -156,6 +202,33 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+      <div class="modal-body">
+        <table class="table table-striped">
+          <thead class="table-dark">
+            <tr>
+              <th scope="col">SKU</th>
+              <th scope="col">Nombre Etiqueta</th>
+              <th scope="col">Unidades</th>
+              <th scope="col">Contenido Neto</th>
+              <th scope="col">Precio USD</th>
+              <th scope="col">Tipo de Empaque</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let es of PresentacionesContratadas">
+              <th scope="row">
+                  <span class="badge badge-pill badge-grape">
+                    {{es.sku}}
+                  </span>
+                </th>
+                <td>{{es.nombre_etiqueta}}</td>
+                <td>{{es.cantidad_perpack}}</td>
+                <td>{{es.contenido_neto}} {{es.unidad_medida}}</td>
+                <td>$ {{es.precio}}</td>
+                <td>{{es.tipo_empaque}}</td>
+            </tr>
+          </tbody>
+        </table>
       <div class="modal-body bg-dark">
         <div class="container text-center">
             <hr>

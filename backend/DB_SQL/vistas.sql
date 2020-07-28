@@ -111,6 +111,21 @@ INNER JOIN ada_pais p on p.id_pais = e.id_pais
 INNER JOIN ada_membresia m on m.id_prov = e.id_prov;
 
 
+CREATE VIEW ada_contratos_en_regla AS
+SELECT distinct c.id_prov,c.id_prod,c.numero_contrato FROM ada_contrato c, ada_renueva r
+WHERE (CURRENT_DATE) < (fecha_emision + INTERVAL '365 day')
+AND acuerdo IS TRUE
+and ( cancelado is not true)
+AND c.id_prov IN (SELECT id_prov FROM ada_prov_mem_activa)
+UNION
+SELECT r.id_prov,r.id_prod,r.numero_contrato from ada_renueva r
+where r.numero_contrato in (SELECT c.numero_contrato
+FROM ADA_CONTRATO c where (c.acuerdo is true and c.cancelado is not true
+and		(CURRENT_DATE) < (r.fecha + INTERVAL '365 day')
+AND r.id_prov IN (SELECT id_prov FROM ada_prov_mem_activa)));
+
+
+
 --vista para contratos vigentes de un productor
 CREATE VIEW ada_contratos_productor_vigente AS
 SELECT p.id_prod,r.id_prov,x.nombre_prov, r.numero_contrato
@@ -134,7 +149,7 @@ p.contenido_neto ||''|| p.unidad_medida AS contenido, p.cantidad_perpack
 from ada_presentacion_e p where cas_oi is null;
 
 
-create view esencia_en_contrato as
+create view ADA_esencia_en_contrato as
 SELECT e.nombre_comercial, e.nombre_quimico, p.cas, p.numero_contrato
 from ada_contratacion_prod p
 INNER JOIN ada_esencia e on e.cas = p.cas;
@@ -147,7 +162,7 @@ p.contenido_neto ||''|| p.unidad_medida AS contenido, p.cantidad_perpack
 from ada_presentacion_e p where cas is null;
 
 
-create view ingrediente_en_contrato as
+create view ADA_ingrediente_en_contrato as
 SELECT e.nombre_comercial, e.nombre_quimico, p.cas_oi, p.numero_contrato
 from ada_contratacion_prod p
 INNER JOIN ADA_OTROS_ING e on e.cas_oi = p.cas_oi;
@@ -159,17 +174,15 @@ $$
 UPDATE ADA_ESCALA SET FECHA_FIN=CURRENT_DATE WHERE ID_PROD=$1 AND TIPO_USO='a';
 UPDATE ADA_EVAL_CRITERIO SET FECHA_FIN=CURRENT_DATE WHERE ID_CRITERIO = 4 AND ID_PROD = $1;
 $$
-language sql
-
-
-
-CREATE OR REPLACE FUNCTION CERRAR_INICIAL (integer) returns void
+language sql;
+--
+CREATE FUNCTION CERRAR_INICIAL (integer) returns void
 AS
 $$
-UPDATE ADA_ESCALA SET FECHA_FIN=CURRENT_DATE WHERE ID_PROD=$1 AND TIPO_USO='a';
+UPDATE ADA_ESCALA SET FECHA_FIN=CURRENT_DATE WHERE ID_PROD=$1 AND TIPO_USO='i';
 UPDATE ADA_EVAL_CRITERIO SET FECHA_FIN=CURRENT_DATE WHERE ID_CRITERIO IN(1,2,3) AND ID_PROD = $1;
 $$
-language sql
+language sql;
 
 
 
@@ -183,7 +196,7 @@ VALUES ($1,$2,$5,$1,$4,$2,$1,$5,$1,$6,$3,current_date,$7);
 select last_value from ada_sec_id_pedido
 RETURN
 $$
-language sql
+language sql;
 
 
 --Se utiliza en detalle pedido
@@ -199,44 +212,33 @@ p.contenido_neto ||''|| p.unidad_medida AS contenido, p.cantidad_perpack
 from ada_presentacion_e p where cas_oi is null;
 
 
-		CREATE VIEW ESENCIAS_CONTRATADOS_PEDIDO AS
+		CREATE VIEW ADA_ESENCIAS_CONTRATADOS_PEDIDO AS
 		SELECT d.id_pedido,p.sku,p.cas,p.nombre,d.cantidad,to_char((p.precio*d.cantidad),'$99999.99') as precio, p.contenido, p.cantidad_perpack
 		from ADA_PRESENTACIONES_ESENCIAS_PEDIDO p
-		INNER JOIN ada_det_pedido d on d.sku = p.sku
+		INNER JOIN ada_det_pedido d on d.sku = p.sku;
 
 
-    CREATE OR REPLACE VIEW INGREDIENTES_CONTRATADOS_PEDIDO AS
+    CREATE OR REPLACE VIEW ADA_INGREDIENTES_CONTRATADOS_PEDIDO AS
 		SELECT d.id_pedido,p.sku,p.cas_oi,p.nombre,d.cantidad,(p.precio*d.cantidad) as precio, p.contenido, p.cantidad_perpack
 		from ADA_PRESENTACIONES_INGREDIENTES_PEDIDO p
-		INNER JOIN ada_det_pedido d on d.sku = p.sku
-
-
-CREATE VIEW ada_contratos_en_regla AS
-SELECT distinct c.id_prov,c.id_prod,c.numero_contrato FROM ada_contrato c, ada_renueva r
-WHERE (CURRENT_DATE) < (fecha_emision + INTERVAL '365 day')
-AND acuerdo IS TRUE
-and ( cancelado is not true)
-AND c.id_prov IN (SELECT id_prov FROM ada_prov_mem_activa)
-UNION
-SELECT r.id_prov,r.id_prod,r.numero_contrato from ada_renueva r
-where r.numero_contrato in (SELECT c.numero_contrato
-FROM ADA_CONTRATO c where (c.acuerdo is true and c.cancelado is not true
-and		(CURRENT_DATE) < (r.fecha + INTERVAL '365 day')
-AND r.id_prov IN (SELECT id_prov FROM ada_prov_mem_activa)));
+		INNER JOIN ada_det_pedido d on d.sku = p.sku;
 
 
 		--Metodo Envio Especifico de un Pedido
-		CREATE VIEW AS ME_PEDIDO
-		SELECT p.nombre_pais,
-		case t.tipo_envio
-		when 'm' then 'MARÍTIMO'
-		when 'a' then 'AÉREO'
-		when 't' then 'TERRESTRE'
-		end as metodo_envio, a.porc_contratado
-		from ada_pedido t
-		INNER JOIN ada_contratacion_me a on a.numero_contrato=t.numero_contrato1
-		INNER JOIN ada_pais p on p.id_pais=t.id_pais
-
+		CREATE VIEW ada_me_pedido as
+		 SELECT p.nombre_pais,
+    t.id_pedido,
+    t.total,
+        CASE t.tipo_envio
+            WHEN 'm'::bpchar THEN 'MARÍTIMO'::text
+            WHEN 'a'::bpchar THEN 'AÉREO'::text
+            WHEN 't'::bpchar THEN 'TERRESTRE'::text
+            ELSE NULL::text
+        END AS metodo_envio,
+    a.porc_contratado
+   FROM ada_pedido t
+     JOIN ada_contratacion_me a ON a.numero_contrato = t.numero_contrato1
+     JOIN ada_pais p ON p.id_pais = t.id_pais;
 -- Vista para contratos candidatos a renovacion
 
 create or replace view ada_renovar_contratos as
@@ -251,16 +253,15 @@ select (select extract
 		  between 1 and 90  and c.cancelado is not true and c.acuerdo is true and (r.numero_contrato is null)
 		or (select extract
 		  (day from  ((r.fecha + INTERVAL '365 day') - CURRENT_DATE)))
-		  between 1 and 90
+		  between 1 and 90;
 
 
 		  CREATE OR REPLACE VIEW ada_detalle_cuota_pedido as
 		  select p.metodo_pago, u.porc_cuota, c.periodo_vigencia,p.id_prov2, p.numero_contrato1,p.id_pedido
 		  from ada_pedido P
 		  INNER JOIN ada_contratacion_ap u on u.numero_contrato = p.numero_contrato1
-		  INNER JOIN ada_cuota c ON  c.id_prov = p.id_prov2 WHERE u.porc_cuota = c.porc_cuota
-		  ID_PEDIDO =2
-		  and numero_contrato = 1005;
+		  INNER JOIN ada_cuota c ON  c.id_prov = p.id_prov2 WHERE u.porc_cuota = c.porc_cuota;
+
 
 
 
@@ -276,18 +277,31 @@ EXCEPT
 SELECT p.id_pedido,p.id_prov4,p.id_prod3,p.numero_contrato1,v.nombre_prov,p.total,p.fecha_emision,p.estatus from ada_pedido p
 inner join ada_proveedor v on v.id_prov = p.id_prov4
 inner join ada_pago f on f.id_pedido=p.id_pedido
-where f.id_pedido=p.id_pedido
+where f.id_pedido=p.id_pedido;
 --VISTA PARA MOSTRAR LOS PEDIDOS PEDIENTES POR PAGAR EN CUOTAS
 
-CREATE VIEW ada_pedidos_por_pagar_cuotas as
-SELECT
-p.id_pedido,p.id_prov4 as id_prov,p.id_prod3 as id_prod,p.numero_contrato1 as numero_contrato,v.nombre_prov,
-p.fecha_emision,p.estatus, round(((100/c.porc_cuota)-count(x.id_pedido))) as cuotas
-from ada_pedido p
-inner join ada_contratacion_ap c on c.numero_contrato=p.numero_contrato1
-inner join ada_pago x on x.id_pedido=p.id_pedido
-inner join ada_proveedor v on v.id_prov=p.id_prov4
-where p.METODO_pago = 'c' and p.estatus='enviado'
-group by p.id_pedido,p.id_prov4,p.id_prod3,p.numero_contrato1,v.nombre_prov,
-p.fecha_emision,p.estatus, c.porc_cuota
+CREATE VIEW ada_pedidos_por_pagar_cuotas as SELECT p.id_pedido,
+    p.id_prov4 AS id_prov,
+    p.id_prod3 AS id_prod,
+    p.numero_contrato1 AS numero_contrato,
+    v.nombre_prov,
+    p.fecha_emision,
+    p.total,
+    p.estatus,
+    round(100::numeric / c.porc_cuota - count(x.id_pedido)::numeric) AS cuotas
+   FROM ada_pedido p
+     JOIN ada_contratacion_ap c ON c.numero_contrato = p.numero_contrato1
+     JOIN ada_pago x ON x.id_pedido = p.id_pedido
+     JOIN ada_proveedor v ON v.id_prov = p.id_prov4
+  WHERE p.metodo_pago = 'c'::bpchar AND p.estatus::text = 'enviado'::text
+  GROUP BY p.id_pedido, p.id_prov4, p.id_prod3, p.numero_contrato1, v.nombre_prov, p.fecha_emision, p.estatus, c.porc_cuota;
 
+
+CREATE VIEW ADA_pagar_cuota as SELECT e.id_pedido,
+    e.porc_cuota,
+    p.cuotas,
+    p.total,
+    e.porc_cuota * 0.1 * p.total::numeric AS monto_cuota
+   FROM ada_detalle_cuota_pedido e
+     JOIN ada_pedidos_por_pagar_cuotas p ON p.id_pedido = e.id_pedido
+  GROUP BY e.id_pedido, e.porc_cuota, p.cuotas, p.total;

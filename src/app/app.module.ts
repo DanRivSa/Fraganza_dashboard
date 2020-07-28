@@ -1,8 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
-import {FormsModule} from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 //modules
 import {LoginModule} from './modules/login/login.module';
@@ -38,6 +37,7 @@ import { ContratoProvDetalleComponent } from './components/proveedores/contrato-
 import { DetallePedidoComponent } from './components/productores/Compras/detalle-pedido/detalle-pedido.component';
 import { DetallePedidoProveedorComponent } from './components/proveedores/detalle-pedido-proveedor/detalle-pedido-proveedor.component';
 import { ListaPedidosPagarComponent } from './components/productores/lista-pedidos-pagar/lista-pedidos-pagar.component';
+import { RealizarPagosComponent } from './components/productores/realizar-pagos/realizar-pagos.component';
 import { ContratoPendComponent } from './components/proveedores/contrato-pend/contrato-pend.component';
 import { DetalleContratoEnProvComponent } from './components/proveedores/detalle-contrato-en-prov/detalle-contrato-en-prov.component';
 
@@ -80,13 +80,14 @@ import { DetalleContratoEnProvComponent } from './components/proveedores/detalle
     DetallePedidoComponent,
     DetallePedidoProveedorComponent,
     ListaPedidosPagarComponent,
+    RealizarPagosComponent,
+
+
     ContratoPendComponent,
     DetalleContratoEnProvComponent,
 
 
 
-    
-    
   ],
   imports: [
     BrowserModule,
@@ -94,8 +95,7 @@ import { DetalleContratoEnProvComponent } from './components/proveedores/detalle
     HttpClientModule,
     LoginModule,
     FormsModule,
-    ReactiveFormsModule,
-    FormsModule
+    ReactiveFormsModule
   ],
   providers: [UserCompanyService,ProducersService,ProveedoresService],
   bootstrap: [AppComponent]

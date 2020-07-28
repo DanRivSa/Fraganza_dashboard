@@ -401,7 +401,7 @@ CONSTRAINT CK_porc_contrac CHECK (porc_contratado > 0)
 
 
 CREATE TABLE ada_escala(
-id_escala SMALLINT
+id_escala SMALLINT,
 fecha_inicio DATE NOT NULL DEFAULT CURRENT_DATE,
 id_prod SMALLINT NOT NULL,
 rango_inicial decimal(3) NOT NULL,
@@ -451,7 +451,7 @@ estatus VARCHAR(10) NOT NULL DEFAULT ('pendiente'),
 descripcion VARCHAR(255),
 fecha_confirmacion DATE,
 nro_factura SMALLINT,
-total decimal(7,2),
+total BIGINT,
 CONSTRAINT PK_pedido PRIMARY KEY (id_pedido),
 CONSTRAINT CK_estatus_p
 CHECK (estatus in ('pendiente','rechazado','enviado','recibido')),
