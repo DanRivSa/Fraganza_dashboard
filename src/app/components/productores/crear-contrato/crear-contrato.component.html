@@ -105,26 +105,17 @@
 <hr>
 <div class="container text-center table-responsive ">
   <h4 class="text-center">Alternativa de pago</h4>
-  <table class="table table-hover ">
-    <thead class="table-dark">
-      <tr>
-        <th scope="col">Periodo de pago</th>
-        <th scope="col">Porcentaje</th>
-        <th scope="col">Operacion</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let alt of alt_pagos" >
-        <td *ngIf="alt.metodo_pago == p">Pago Parcial</td>
-          <td *ngIf = "alt.metodo_pago == c">Pago Por Cuotas</td>
-          <td *ngIf="alt.metodo_pago == p">
-              <button class="btn btn-primary" (click)="ContratarParcialPago()">
-                  Establecer pago parcial
-              </button>
-          </td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="container text-center">
+    <ul *ngFor="let alt of alt_pagos">
+      <li *ngIf="alt.metodo_pago = 'p'">
+        <button class="btn btn-primary" (click)="ContratarParcialPago()">
+          pago parcial (contratar)
+      </button>
+      </li>
+      <li *ngIf="alt.metodo_pago = 'c'">Cuotas</li>
+    </ul>
+  </div>
+
 </div>
 
 <div class="container text-center table-responsive " *ngIf="cuotas[0] != null">
