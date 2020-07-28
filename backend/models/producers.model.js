@@ -284,6 +284,47 @@ class ProducersModel
        return db_res
      }
 
+    async NumeroDeSecuenciaDeContrato()
+    {
+      const db_res = await db.query('SELECT currval($1)',['ada_sec_numero_contrato']);
+      return db_res;
+    }
+
+    async InsertarContrato(prod,prov,num,exc,desc,ac,cancel)
+    {
+      const db_res = await db.query('INSERT INTO ada_contrato (id_prod,id_prov,fecha_emision,exclusivo,descuento,acuerdo,cancelado) VALUES($1,$2,CURRENT_DATE,$3,$4,$5,$6)',[prod,prov,exc,desc,ac,cancel]);
+      return db_res;
+    }
+
+    async ContratarEsencia(id_prod,id_prov,numero_contrato,cas)
+    {
+      const db_res = await db.query('INSERT INTO ada_contratacion_prod (id_prod,id_prov,numero_contrato,cas) VALUES ($1,$2,$3,$4)',[id_prod,id_prov,numero_contrato,cas]);
+      return db_res;
+    }
+
+    async ContratarIngrediente(id_prod,id_prov,numero_contrato,cas_oi)
+    {
+      const db_res = await db.query('INSERT INTO ada_contratacion_prod (id_prod,id_prov,numero_contrato,cas_oi) VALUES ($1,$2,$3,$4)',[id_prod,id_prov,numero_contrato,cas_oi]);
+      return db_res;
+    }
+
+    async ContratarMetodoEnvio(id_prod,id_prov,tipo_envio,numero_contrato,id_prov2,id_pais,porc_contratado)
+    {
+      const db_res = await db.query('INSERT INTO ada_contratacion_me (id_prod,id_prov,tipo_envio,numero_contrato,id_prov2,id_pais,porc_contratado) VALUES ($1,$2,$3,$4,$5,$6,$7)',[id_prod,id_prov,tipo_envio,numero_contrato,id_prov2,id_pais,porc_contratado]);
+      return db_res;
+    }
+
+    async ContratarPagoParcial(id_prod,id_prov,id_prov2,numero_contrato,metodo_pago)
+    {
+      const db_res = await db.query('INSERT INTO ada_contratacion_ap (id_prod,id_prov,numero_contrato,id_prov2,metodo_pago) VALUES ($1,$2,$3,$4,$5)',[id_prod,id_prov,numero_contrato,id_prov2,metodo_pago]);
+      return db_res;
+    }
+
+    async ContratarPagoPorCuotas(id_prod,id_prov,id_prov2,numero_contrato,metodo_pago,porc_cuota)
+    {
+      const db_res = await db.query('INSERT INTO ada_contratacion_ap (id_prod,id_prov,numero_contrato,id_prov2,metodo_pago,porc_cuota) VALUES ($1,$2,$3,$4,$5,$6)',[id_prod,id_prov,numero_contrato,id_prov2,metodo_pago,porc_cuota]);
+      return db_res;
+    }
      
 }
 

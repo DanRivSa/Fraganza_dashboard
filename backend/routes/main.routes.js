@@ -74,6 +74,18 @@ router.post('/renovar/contrato/:id',producersController.RenovarContrato);
 router.get('/producers/contratos/renovacion/:contrato',producersController.ObtenerCriterioSucces);
 router.get('/fecha_renovacion/:numero_contrato',producersController.ObtenerFechaParaRenovacion);
 router.put('/cancelar/contrato/:numero_contrato',producersController.CancelarContratoDef); //cancelar contrato def
+router.get('/sec_contrato',producersController.NumeroDeSecuenciaDeContrato);
+router.post('/nuevo_contrato/:id',producersController.InsertarContrato);
+router.post('/contratar/esencia/:id',producersController.ContratarEsencia);
+router.post('/contratar/ingrediente/:id',producersController.ContratarIngrediente);
+router.post('/contratar/metodo_envio/:id',producersController.ContratarMetodoEnvio);
+router.get('/alt_envio/contrato/:id_prod/:id_prov',providersController.ObtenerAltEnvioParaContrato);
+router.post('/contratar/pago/parcial/:id',producersController.ContratarPagoParcial);
+router.post('/contratar/pago/cuotas/:id',producersController.ContratarPagoPorCuotas);
+router.put('/providers/cancelar/contrato/:num',providersController.CancelarContrato);
+router.put('providers/aceptar/contrato/:num',providersController.AceptarContrato);
+router.get('/providers/contratos_pendientes/:id',providersController.ObtenerContratosPendientes);
+router.put('/providers/rechazar/contrato/:num',providersController.RechazarContrato);
 //RutasModuloCompras
 //Obtener contratos vigentes
 router.get('/producers/contratos/:id',producersController.GetContratosVigentes);
