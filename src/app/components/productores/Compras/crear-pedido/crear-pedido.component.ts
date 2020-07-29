@@ -119,7 +119,7 @@ export class CrearPedidoComponent implements OnInit {
   {
     this.MetodoPagoPedido = tipo;
     console.log(this.MetodoPagoPedido);
-    alert('contratado');
+    alert('Contratado');
   }
 
 
@@ -145,6 +145,7 @@ export class CrearPedidoComponent implements OnInit {
     console.log('VER 2'+det);
      this.DetPresentacion.push(det);
      console.log('Insertado:'+this.DetPresentacion);
+     alert('Contratado');
   }
 
   CotizarPedido()
@@ -163,6 +164,7 @@ export class CrearPedidoComponent implements OnInit {
           console.log('Recargo: '+RecargoEnvio);
           this.precio_pedido=this.precio_pedido-Descuento+RecargoEnvio;
           console.log('Cotizar pago: '+this.precio_pedido);
+          alert('El precio total es:'+this.precio_pedido);
 
     }
   DetallarPedido()
@@ -192,6 +194,7 @@ export class CrearPedidoComponent implements OnInit {
     this.productores.generarPedido(p).subscribe(res=>{
       console.log(res);
 
+      alert('Pedido creado de manera satisfactoria');
       console.log('Pedido creado de forma satisfactoria');
     });
     this.DetallarPedido();
